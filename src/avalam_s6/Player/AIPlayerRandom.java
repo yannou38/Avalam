@@ -6,21 +6,27 @@
 package avalam_s6.Player;
 
 import avalam_s6.Core.Coordinate;
+import avalam_s6.Core.Grid;
+import java.util.ArrayList;
 
 /**
  *
- * @author TheDoctor
+ * @author Seawolf
  */
-public class ControlledPlayer implements Player{
-
-    @Override
-    public boolean isAI() {
-        return false;
+public class AIPlayerRandom extends AIPlayer{
+    
+    public AIPlayerRandom(Grid grid) {
+        super(grid);
     }
 
     @Override
     public Coordinate[] play() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Coordinate[]> mesCoups = new ArrayList<>();
+        //TODO : finir
+        return null;
     }
-
+    
+    
+    
+    
 }

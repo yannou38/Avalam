@@ -5,12 +5,14 @@
  */
 package avalam_s6.Player;
 
+import avalam_s6.Core.Coordinate;
+
 /**
  *
  * @author TheDoctor
  */
 public interface Player {
-    //public Coordinate[] play();
+    public Coordinate[] play();
 
     /**
      * Tells if the player is a bot.
