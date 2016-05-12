@@ -15,22 +15,23 @@ import java.awt.Color;
  *
  * @author sazeratj
  */
-public class LAG_GUI implements GUI, Runnable{
-    private Game game;
+public class LAG_GUI implements GUI_INTERFACE, Runnable{
+    private Game_INTERFACE game;
     
     public LAG_GUI() {
     }
     
     @Override
     public void render() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("rendered");
     }
 
      @Override
     public void run() {
         Player p1 = new ControlledPlayer("Jon Doe",Color.WHITE);
         Player p2 = new AIPlayerRandom("Bot_Frank",Color.BLACK);
-        Grid g = new Grid("");
-        this.game = new Local_Avalam_Game(g, p1, p2);
+        Grid g = new Grid("000023000023232000232323200323232300032313230003232323002323232000232320000320000");
+        this.game = new Local_Avalam_Game(g, p1, p2, this);
+        this.game.getTimer().start();
     }
 }

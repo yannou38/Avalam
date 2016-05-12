@@ -12,7 +12,7 @@ import java.awt.Color;
  *
  * @author TheDoctor
  */
-public abstract class Player {
+public abstract class Player implements Player_INTERFACE {
     private String name;
     private Color color;
     
@@ -21,16 +21,10 @@ public abstract class Player {
         this.color = color;
     }
     
-    /**
-     * Player play on a coordinate
-     * @return the coordinate chose 
-     */
+    @Override
     public abstract Coordinate play();
-
-    /**
-     * Tells if the player is a bot.
-     * @return true if the player is an AI, false otherwise.
-     */
+    
+    @Override
     public abstract boolean isAI();
     
 }

@@ -12,7 +12,7 @@ import javax.swing.Timer;
  *
  * @author TheDoctor
  */
-public interface Game {        
+public interface Game_INTERFACE {        
     
     /**
      * Undo the last move. You can undo plural times.

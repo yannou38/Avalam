@@ -6,27 +6,40 @@
 package avalam_s6.Core;
 
 import avalam_s6.Player.Player;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Stack;
 import javax.swing.Timer;
+import avalam_s6.GUI.GUI_INTERFACE;
 
 /**
  *
  * @author sazeratj
  */
-public class Local_Avalam_Game implements Game {
+public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
+    private static final int NB_PLAYERS = 2;
     private Grid grid;
     private Player[] players;
     private Stack<Move> history;
     private Stack<Move> cancelled_moves;
     private int current_player;
+    private boolean isTurnFinished;
+    private Timer t;
+    private GUI_INTERFACE gui;
+    private int nbTurns;
     
-    public Local_Avalam_Game(Grid gr, Player p1, Player p2) {
+    
+    public Local_Avalam_Game(Grid gr, Player p1, Player p2, GUI_INTERFACE gui) {
         this.grid = gr;
         this.players[0] = p1;
         this.players[1] = p2;
         this.history = new Stack<>();
         this.cancelled_moves = new Stack<>();
         this.current_player = 0;
+        this.isTurnFinished = false;
+        this.gui = gui;
+        this.nbTurns = 0;
+        t = new Timer(100, (ActionListener) this);
     }
     
     //TODO: Check user is able to undo (GUI check if history is empty and call or not this function)
@@ -55,7 +68,7 @@ public class Local_Avalam_Game implements Game {
 
     @Override
     public Timer getTimer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.t;
     }
 
     @Override
@@ -73,7 +86,7 @@ public class Local_Avalam_Game implements Game {
      * @return history
      */
     public Stack<Move> getHistory() {
-        return history;
+        return this.history;
     }
     
     /**
@@ -81,7 +94,43 @@ public class Local_Avalam_Game implements Game {
      * @return cqncelled_moves
      */
     public Stack<Move> getCancelled_moves() {
-        return cancelled_moves;
+        return this.cancelled_moves;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        this.playATurn();
+    }
+
+    private void playATurn() {
+        if(this.isTurnFinished){
+            this.nbTurns++;
+            this.current_player = this.nbTurns%NB_PLAYERS;
+            switch (winCheck()) {
+                case 1:
+                    this.winningProcedure(this.nbTurns%NB_PLAYERS);
+                    t.stop();
+                    break;
+                case 2:
+                    this.winningProcedure((this.nbTurns+1)%NB_PLAYERS);
+                    t.stop();
+                    break;
+                default:
+                    this.isTurnFinished = false;
+                    break;
+            }
+        } else {
+            
+            this.gui.render();
+        }
+    }
+
+    private int winCheck() {
+        return 0;
+    }
+
+    private void winningProcedure(int i) {
+        System.out.println("player "+ i +" won !");
     }
     
     

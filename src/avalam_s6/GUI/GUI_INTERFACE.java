@@ -10,7 +10,7 @@ package avalam_s6.GUI;
  *
  * @author TheDoctor
  */
-public interface GUI {            
+public interface GUI_INTERFACE {            
 
     /**
      *  render the content of the current window.
