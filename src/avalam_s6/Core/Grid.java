@@ -10,35 +10,57 @@ package avalam_s6.Core;
  * @author TheDoctor
  */
 public class Grid {
-    private Cell[][] grille;
+    private Cell[][] grille;    
     
-    private final int width;
-    private final int height;
-    
-    
-    //TODO/ Check length before calling constructor
+    //TODO: Check length before calling constructor
     
     /**
      * Constructor
-     * @param textgrid the text version of the grid. Size nust be 81.
+     * @param textGrid the text version of the grid. SIZE MUST BE 81.
      */
     public Grid(String textGrid) {
-        this.width = 9;
-        this.height = 9;
         for(int i = 0; i < 9; i++){
             for(int j = 0; j < 9; j++){
                 this.grille[j][i] = new Cell(Integer.parseInt(""+textGrid.charAt(i*9+j)));
             }
         }
     }
-
+    
+    /**
+     * Getter
+     * @return width 
+     */
     public int getWidth() {
-        return width;
+        return this.grille.length;
     }
 
+    /**
+     * Getter 
+     * @return height 
+     */
     public int getHeight() {
-        return height;
+        return this.grille[0].length;
     }
     
+    /**
+     * Get the cell at a coordinate
+     * @param c coordiante of the cell
+     * @return cell at coordinate c
+     */
+    public Cell getCellAt(Coordinate c) {
+        return this.grille[c.getX()][c.getY()];
+    }
+    
+    //TODO: Check src is able to move on dst
+    /**
+     * Move cell src to cell dst. SRC MUST BE ABLE TO MOVE ON DST
+     * @param src source cell
+     * @param dst destination cell
+     */
+    public void moveCell(Coordinate src, Coordinate dst) {
+        while(getCellAt(src).getState() != State.EMPTY) {
+            getCellAt(dst).add(getCellAt(dst).remove());
+        }
+    }
     
 }

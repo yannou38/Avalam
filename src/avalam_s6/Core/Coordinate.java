@@ -31,7 +31,7 @@ public class Coordinate {
      * Getter x
      * @return x
      */
-    public float getX(){
+    public int getX(){
         return this.x;
     }
     
@@ -39,7 +39,7 @@ public class Coordinate {
      * Getter y
      * @return y
      */
-    public float getY(){
+    public int getY(){
         return this.y;
     }
     

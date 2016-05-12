@@ -40,7 +40,7 @@ class Cell {
      * Add a pawn on top of the tower
      * @param p the pawn added to the top of tower
      */
-    public void ajouter(Pawn p) {
+    public void add(Pawn p) {
         this.contenu.add(p);
         if (this.contenu.size() == 5)
             this.etat = State.FULL;
@@ -50,7 +50,7 @@ class Cell {
      * Remove last pawn of tower. Modify the state adequately.
      * @return the pawn removed
      */
-    public Pawn enlever() {
+    public Pawn remove() {
         if(this.contenu.size() == 1) 
             this.etat = State.EMPTY;
         return this.contenu.remove(this.contenu.size()-1);
@@ -72,5 +72,13 @@ class Cell {
         if (! this.contenu.isEmpty())
             return this.contenu.get(getTaille()-1);
         return Pawn.NO_OWNER;
+    }
+    
+    /**
+     * Getter
+     * @return state 
+     */
+    public State getState() {
+        return etat;
     }
 }
