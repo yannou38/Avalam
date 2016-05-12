@@ -3,17 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package avalam_s6.GUI;
-
+package avalam_s6.Core;
 
 /**
  *
  * @author TheDoctor
  */
-public interface GUI {            
-
-    /**
-     *  render the content of the current window.
-     */
-    public void render();
+public enum Pawn {
+    PLAYER_1,
+    PLAYER_2,
+    NO_OWNER;
 }

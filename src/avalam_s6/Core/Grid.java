@@ -3,19 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package avalam_s6.Player;
+package avalam_s6.Core;
 
 /**
  *
  * @author TheDoctor
  */
-public interface Player {
-    //public Coordinate[] play();
-
-    /**
-     * Tells if the player is a bot.
-     * @return true if the player is an AI, false otherwise.
-     */
-    public boolean isAI();
+public class Grid {
+    private Cell[][] grille;
     
+    Grid() {
+        
+    }
 }
