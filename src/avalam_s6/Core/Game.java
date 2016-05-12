@@ -5,7 +5,6 @@
  */
 package avalam_s6.Core;
 
-import avalam_s6.GUI.GUI;
 import avalam_s6.Player.Player;
 import javax.swing.Timer;
 
@@ -16,12 +15,12 @@ import javax.swing.Timer;
 public interface Game {        
     
     /**
-     * cancels the last move. You can cancel plural times.
+     * Undo the last move. You can undo plural times.
      */
-    public void cancel();
+    public void undo();
     
     /**
-     * redo the last canceled move. You can redo plural times, but not if you played a new move after a cancel.
+     * Redo the last canceled move. You can redo plural times, but not if you played a new move after a cancel.
      */
     public void redo();
     
@@ -41,7 +40,7 @@ public interface Game {
      * Get the game's timer.
      * @return the game's timer.
      */
-    public Timer getT();
+    public Timer getTimer();
     
     /**
      * Get the game's grid.

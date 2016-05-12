@@ -6,18 +6,31 @@
 package avalam_s6.Player;
 
 import avalam_s6.Core.Coordinate;
+import java.awt.Color;
 
 /**
  *
  * @author TheDoctor
  */
-public interface Player {
-    public Coordinate[] play();
+public abstract class Player {
+    private String name;
+    private Color color;
+    
+    public Player(String name, Color color) {
+        this.name = name;
+        this.color = color;
+    }
+    
+    /**
+     * Player play on a coordinate
+     * @return the coordinate chose 
+     */
+    public abstract Coordinate play();
 
     /**
      * Tells if the player is a bot.
      * @return true if the player is an AI, false otherwise.
      */
-    public boolean isAI();
+    public abstract boolean isAI();
     
 }

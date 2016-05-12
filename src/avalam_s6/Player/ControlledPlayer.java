@@ -6,20 +6,25 @@
 package avalam_s6.Player;
 
 import avalam_s6.Core.Coordinate;
+import java.awt.Color;
 
 /**
  *
  * @author TheDoctor
  */
-public class ControlledPlayer implements Player{
+public class ControlledPlayer extends Player{
 
+    public ControlledPlayer(String n, Color c) {
+        super(n,c);
+    }
+    
     @Override
     public boolean isAI() {
         return false;
     }
 
     @Override
-    public Coordinate[] play() {
+    public Coordinate play() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

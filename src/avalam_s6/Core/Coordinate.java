@@ -69,10 +69,10 @@ public class Coordinate {
     }
     
     /**
-     * Test if a Coordinate is valid
+     * Test if the coordinate is valid on the grid
      * @return true if the coordinate is valid, false otherwise
      */
     public boolean isValid(){
-        return !(this.x < 0 || this.y < 0 || this.x > 8 || this.y > 9);
+        return !(this.x < 0 || this.y < 0 || this.x > 8 || this.y > 8);
     }
 }

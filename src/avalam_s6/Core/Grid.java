@@ -62,5 +62,15 @@ public class Grid {
             getCellAt(dst).add(getCellAt(dst).remove());
         }
     }
+    /**
+     * Undo the move M
+     * @param m the move to cancel
+     */
+    public void undoMove(Move m) {
+        while(getCellAt(m.getC_src()).getSize() != m.getH_src()) { // While current src size is not old src size
+            getCellAt(m.getC_src()).add(getCellAt(m.getC_dst()).removeAt(m.getH_dst()));
+            /* As Current DST = Old DST + Old SRC we can not remove pawn from the top of the tower. */
+        }
+    }
     
 }

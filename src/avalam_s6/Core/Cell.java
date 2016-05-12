@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author TheDoctor
  */
-class Cell {
+public class Cell {
     private ArrayList<Pawn> contenu;
     private State etat;
     
@@ -43,7 +43,9 @@ class Cell {
     public void add(Pawn p) {
         this.contenu.add(p);
         if (this.contenu.size() == 5)
-            this.etat = State.FULL;
+            this.etat = State.FULL; // NORMAL
+        if (this.contenu.size() == 1)
+            this.etat = State.TOWER; // UNDO
     }
     
     /**
@@ -52,15 +54,27 @@ class Cell {
      */
     public Pawn remove() {
         if(this.contenu.size() == 1) 
-            this.etat = State.EMPTY;
+            this.etat = State.EMPTY; 
         return this.contenu.remove(this.contenu.size()-1);
+    }
+    
+    /**
+     * Remove an element at I (Undo function can undo in the right order)
+     * Towers are not shuffled by undoing.
+     * @param i
+     * @return 
+     */
+    public Pawn removeAt(int i) {
+        if(this.contenu.size() == 5)
+            this.etat = State.TOWER; 
+        return this.contenu.remove(i);
     }
     
     /**
      * Get the height of the tower
      * @return height of the tower
      */
-    public int getTaille() {
+    public int getSize() {
         return this.contenu.size();
     } 
     
@@ -70,7 +84,7 @@ class Cell {
      */
     public Pawn getOwner() {
         if (! this.contenu.isEmpty())
-            return this.contenu.get(getTaille()-1);
+            return this.contenu.get(getSize()-1);
         return Pawn.NO_OWNER;
     }
     

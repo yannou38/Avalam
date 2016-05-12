@@ -7,6 +7,7 @@ package avalam_s6.Player;
 
 import avalam_s6.Core.Coordinate;
 import avalam_s6.Core.Grid;
+import java.awt.Color;
 import java.util.ArrayList;
 
 /**
@@ -15,12 +16,12 @@ import java.util.ArrayList;
  */
 public class AIPlayerRandom extends AIPlayer{
     
-    public AIPlayerRandom(Grid grid) {
-        super(grid);
+    public AIPlayerRandom(String name, Color color) {
+        super(name,color);
     }
 
     @Override
-    public Coordinate[] play() {
+    public Coordinate play() {
         ArrayList<Coordinate[]> mesCoups = new ArrayList<>();
         //TODO : finir
         return null;
