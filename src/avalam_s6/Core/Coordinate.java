@@ -27,27 +27,52 @@ public class Coordinate {
         return "("+this.x+" "+this.y+")";
     }
     
+    /**
+     * Getter x
+     * @return x
+     */
     public float getX(){
         return this.x;
     }
     
+    /**
+     * Getter y
+     * @return y
+     */
     public float getY(){
         return this.y;
     }
     
+    /**
+     * Setter x
+     * @param x 
+     */
     public void setX(int x){
         this.x = x;
     }
     
+    /**
+     * Setter y
+     * @param y 
+     */
     public void setY(int y){
         this.y = y;
     }
     
+    /**
+     * Compare two Coordinates
+     * @param r coordinate to compare
+     * @return true if it's equal to r, false otherwise
+     */
     public boolean equals(Coordinate r){
         return(this.x == r.getX() && this.y == r.getY());
     }
     
+    /**
+     * Test if a Coordinate is valid
+     * @return true if the coordinate is valid, false otherwise
+     */
     public boolean isValid(){
-        return !(this.x < 0 || this.y < 0);
+        return !(this.x < 0 || this.y < 0 || this.x > 8 || this.y > 9);
     }
 }

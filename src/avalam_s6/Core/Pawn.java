@@ -9,9 +9,8 @@ package avalam_s6.Core;
  *
  * @author TheDoctor
  */
-public enum State {
-    TOWER, // Tower 1-4
-    EMPTY, // Empty Cell
-    RESTRICTED, // Game Board
-    FULL; // Tower 5
+public enum Pawn {
+    PLAYER_1,
+    PLAYER_2,
+    NO_OWNER;
 }

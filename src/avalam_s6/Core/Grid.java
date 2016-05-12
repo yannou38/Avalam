@@ -10,5 +10,9 @@ package avalam_s6.Core;
  * @author TheDoctor
  */
 public class Grid {
+    private Cell[][] grille;
     
+    Grid() {
+        
+    }
 }
