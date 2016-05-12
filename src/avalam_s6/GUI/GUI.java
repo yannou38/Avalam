@@ -5,20 +5,15 @@
  */
 package avalam_s6.GUI;
 
-import avalam_s6.Core.Game;
 
 /**
  *
  * @author TheDoctor
  */
-public interface GUI {        
-    //public void setGrid(Grid grid);
-    public boolean isCloseRequested();
-    public void input();
+public interface GUI {            
 
-    public void render(Game game);
-
-    public void dispose();
-    public void close();
-    public void afficheJoueur(int playerId);
+    /**
+     *  render the content of the current window.
+     */
+    public void render();
 }

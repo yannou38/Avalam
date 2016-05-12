@@ -11,5 +11,11 @@ package avalam_s6.Player;
  */
 public interface Player {
     //public Coordinate[] play();
+
+    /**
+     * Tells if the player is a bot.
+     * @return true if the player is an AI, false otherwise.
+     */
     public boolean isAI();
+    
 }
