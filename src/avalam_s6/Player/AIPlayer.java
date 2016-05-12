@@ -5,12 +5,19 @@
  */
 package avalam_s6.Player;
 
+import avalam_s6.Core.Grid;
+
 /**
  *
  * @author TheDoctor
  */
 public class AIPlayer implements Player{
-
+    private Grid grid;
+    
+    public AIPlayer(Grid g) {
+        this.grid = g;
+    }
+    
     @Override
     public boolean isAI() {
         return true;

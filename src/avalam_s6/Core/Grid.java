@@ -12,7 +12,17 @@ package avalam_s6.Core;
 public class Grid {
     private Cell[][] grille;
     
-    Grid() {
-        
+    //TODO/ Check length before calling constructor
+    
+    /**
+     * Constructor
+     * @param textgrid the text version of the grid. Size nust be 81.
+     */
+    public Grid(String textGrid) {
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 9; j++){
+                this.grille[j][i] = new Cell(Integer.parseInt(""+textGrid.charAt(i*9+j)));
+            }
+        }
     }
 }

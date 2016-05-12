@@ -16,22 +16,22 @@ class Cell {
     private ArrayList<Pawn> contenu;
     private State etat;
     
-    Cell(int owner) {
-        contenu = new ArrayList<>();
+    public Cell(int owner) {
+        this.contenu = new ArrayList<>();
         switch(owner) {
             case -1:
-                etat = State.RESTRICTED;
+                this.etat = State.RESTRICTED;
                 break;
             case 0:
-                etat = State.EMPTY;
+                this.etat = State.EMPTY;
                 break;
             case 1:
-                contenu.add(Pawn.PLAYER_1);
-                etat = State.TOWER;
+                this.contenu.add(Pawn.PLAYER_1);
+                this.etat = State.TOWER;
                 break;
             case 2:
-                contenu.add(Pawn.PLAYER_2);
-                etat = State.TOWER;                
+                this.contenu.add(Pawn.PLAYER_2);
+                this.etat = State.TOWER;                
                 break;
         }
     }
@@ -41,9 +41,9 @@ class Cell {
      * @param p the pawn added to the top of tower
      */
     public void ajouter(Pawn p) {
-        contenu.add(p);
-        if (contenu.size() == 5)
-            etat = State.FULL;
+        this.contenu.add(p);
+        if (this.contenu.size() == 5)
+            this.etat = State.FULL;
     }
     
     /**
@@ -51,9 +51,9 @@ class Cell {
      * @return the pawn removed
      */
     public Pawn enlever() {
-        if(contenu.size() == 1) 
-            etat = State.EMPTY;
-        return contenu.remove(contenu.size()-1);
+        if(this.contenu.size() == 1) 
+            this.etat = State.EMPTY;
+        return this.contenu.remove(this.contenu.size()-1);
     }
     
     /**
@@ -61,7 +61,7 @@ class Cell {
      * @return height of the tower
      */
     public int getTaille() {
-        return contenu.size();
+        return this.contenu.size();
     } 
     
     /**
@@ -69,8 +69,8 @@ class Cell {
      * @return peek of tower 
      */
     public Pawn getOwner() {
-        if (! contenu.isEmpty())
-            return contenu.get(getTaille()-1);
+        if (! this.contenu.isEmpty())
+            return this.contenu.get(getTaille()-1);
         return Pawn.NO_OWNER;
     }
 }
