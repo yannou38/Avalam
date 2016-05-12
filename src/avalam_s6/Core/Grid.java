@@ -21,7 +21,7 @@ public class Grid {
     public Grid(String textGrid) {
         for(int i = 0; i < 9; i++){
             for(int j = 0; j < 9; j++){
-                this.grille[j][i] = new Cell(Integer.parseInt(""+textGrid.charAt(i*9+j)));
+                this.grille[j][i] = new Cell(Integer.parseInt(""+textGrid.charAt(i*9+j))-1);
             }
         }
     }
@@ -59,11 +59,11 @@ public class Grid {
      */
     public void moveCell(Coordinate src, Coordinate dst) {
         while(getCellAt(src).getState() != State.EMPTY) {
-            getCellAt(dst).add(getCellAt(dst).remove());
+            getCellAt(dst).add(getCellAt(src).removeAt(0));        // YOU KIDDING ME Y U USE STACK ?!!
         }
     }
     /**
-     * Undo the move M
+     * Undo the move m.
      * @param m the move to cancel
      */
     public void undoMove(Move m) {
@@ -71,6 +71,5 @@ public class Grid {
             getCellAt(m.getC_src()).add(getCellAt(m.getC_dst()).removeAt(m.getH_dst()));
             /* As Current DST = Old DST + Old SRC we can not remove pawn from the top of the tower. */
         }
-    }
-    
+    }    
 }

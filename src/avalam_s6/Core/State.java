@@ -6,7 +6,7 @@
 package avalam_s6.Core;
 
 /**
- * Define state of the cell
+ * Define the state of the cell.
  * @author TheDoctor
  */
 public enum State {

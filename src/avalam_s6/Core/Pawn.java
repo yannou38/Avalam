@@ -6,7 +6,7 @@
 package avalam_s6.Core;
 
 /**
- * Define Owner of the Pawn
+ * Define the owner of the Pawn.
  * @author TheDoctor
  */
 public enum Pawn {

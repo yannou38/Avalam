@@ -48,16 +48,7 @@ public class Cell {
             this.etat = State.TOWER; // UNDO
     }
     
-    /**
-     * Remove last pawn of tower. Modify the state adequately.
-     * @return the pawn removed
-     */
-    public Pawn remove() {
-        if(this.contenu.size() == 1) 
-            this.etat = State.EMPTY; 
-        return this.contenu.remove(this.contenu.size()-1);
-    }
-    
+
     /**
      * Remove an element at I (Undo function can undo in the right order)
      * Towers are not shuffled by undoing.
@@ -67,6 +58,8 @@ public class Cell {
     public Pawn removeAt(int i) {
         if(this.contenu.size() == 5)
             this.etat = State.TOWER; 
+        if(this.contenu.size() == 1)
+            this.etat = State.EMPTY;
         return this.contenu.remove(i);
     }
     

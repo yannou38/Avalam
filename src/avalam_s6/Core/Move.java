@@ -31,7 +31,7 @@ public class Move {
      * @return Source Coordinate
      */
     public Coordinate getC_src() {
-        return c_src;
+        return this.c_src;
     }
     
     /**
@@ -39,7 +39,7 @@ public class Move {
      * @return Destination Coordinate 
      */
     public Coordinate getC_dst() {
-        return c_dst;
+        return this.c_dst;
     }
     
     /**
@@ -47,7 +47,7 @@ public class Move {
      * @return Source height 
      */
     public int getH_src() {
-        return h_src;
+        return this.h_src;
     }
     
     /**
@@ -55,7 +55,7 @@ public class Move {
      * @return Destination height
      */
     public int getH_dst() {
-        return h_dst;
+        return this.h_dst;
     }
     
     /**
@@ -63,7 +63,7 @@ public class Move {
      * @return Player which played the move 
      */
     public Player getPlayedBy() {
-        return playedBy;
+        return this.playedBy;
     }
     
     
