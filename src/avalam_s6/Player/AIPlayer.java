@@ -11,8 +11,8 @@ import avalam_s6.Core.Grid;
  *
  * @author TheDoctor
  */
-public class AIPlayer implements Player{
-    private Grid grid;
+public abstract class AIPlayer implements Player{
+    protected Grid grid;
     
     public AIPlayer(Grid g) {
         this.grid = g;
