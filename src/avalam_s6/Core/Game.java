@@ -5,25 +5,53 @@
  */
 package avalam_s6.Core;
 
+import avalam_s6.GUI.GUI;
+import avalam_s6.Player.Player;
 import javax.swing.Timer;
 
 /**
  *
  * @author TheDoctor
  */
-public interface Game {
-    //public void init(Grid g, Player[] p,IHM ih,GUI wdow);
-    public void input();
+public interface Game {        
+    
+    /**
+     * cancels the last move. You can cancel plural times.
+     */
     public void cancel();
+    
+    /**
+     * redo the last canceled move. You can redo plural times, but not if you played a new move after a cancel.
+     */
     public void redo();
-    public void save(String filePath);
+    
+    /**
+     * Saves the current state of the game in a given file.
+     * @param filePath the path of the file in which the game will be saved.
+     */
+    public void save(String filePath);    
+    
+    /**
+     * Load a game from a given file.
+     * @param filePath the path of the saved game which will be loaded.
+     */
     public void load(String filePath);
-    public void play();
+
+    /**
+     * Get the game's timer.
+     * @return the game's timer.
+     */
     public Timer getT();
-
-
-    public void update();
-    //public Grid getGrid();
-    public boolean isPlayerTurn();
-    public boolean isInit();
+    
+    /**
+     * Get the game's grid.
+     * @return the game's grid.
+     */
+    public Grid getGrid();
+    
+    /**
+     * Get the current Player.
+     * @return the current player.
+     */
+    public Player getCurrentPlayer();
 }
