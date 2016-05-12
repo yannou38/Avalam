@@ -12,6 +12,10 @@ package avalam_s6.Core;
 public class Grid {
     private Cell[][] grille;
     
+    private final int width;
+    private final int height;
+    
+    
     //TODO/ Check length before calling constructor
     
     /**
@@ -19,10 +23,22 @@ public class Grid {
      * @param textgrid the text version of the grid. Size nust be 81.
      */
     public Grid(String textGrid) {
+        this.width = 9;
+        this.height = 9;
         for(int i = 0; i < 9; i++){
             for(int j = 0; j < 9; j++){
                 this.grille[j][i] = new Cell(Integer.parseInt(""+textGrid.charAt(i*9+j)));
             }
         }
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+    
+    
 }
