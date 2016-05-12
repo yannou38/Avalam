@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author TheDoctor
  */
-class Cell {
+public class Cell {
     private ArrayList<Pawn> contenu;
     private State etat;
     
