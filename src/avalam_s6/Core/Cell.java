@@ -20,18 +20,19 @@ class Cell {
         contenu = new ArrayList<>();
         switch(owner) {
             case -1:
-               etat = State.RESTRICTED;
-               break;
-            default:
+                etat = State.RESTRICTED;
+                break;
             case 0:
                 etat = State.EMPTY;
                 break;
             case 1:
                 contenu.add(Pawn.PLAYER_1);
                 etat = State.TOWER;
+                break;
             case 2:
                 contenu.add(Pawn.PLAYER_2);
                 etat = State.TOWER;                
+                break;
         }
     }
     
@@ -46,7 +47,7 @@ class Cell {
     }
     
     /**
-     * Remove last paww of tower. Modify the state adequately.
+     * Remove last pawn of tower. Modify the state adequately.
      * @return the pawn removed
      */
     public Pawn enlever() {
