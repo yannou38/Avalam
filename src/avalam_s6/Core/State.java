@@ -12,6 +12,6 @@ package avalam_s6.Core;
 public enum State {
     TOWER,
     EMPTY,
-    NONE,
+    RESTRICTED,
     FULL;
 }
