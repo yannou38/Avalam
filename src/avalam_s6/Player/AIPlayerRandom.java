@@ -57,7 +57,11 @@ public class AIPlayerRandom extends AIPlayer{
                     {
                         if (tabCoord[k].isValid() && grid.getCellAt(tabCoord[k]).getState() == State.TOWER)
                         {
-                            //TODO
+                            if(grid.canStack(grid.getCellAt(c0),grid.getCellAt(tabCoord[k])))
+                            {
+                                Move m = new Move(c0,grid.getCellAt(c0).getSize(),tabCoord[k],grid.getCellAt(tabCoord[k]).getSize(),this);
+                                mesCoups.add(m);
+                            }
                         }
                     }
                 }

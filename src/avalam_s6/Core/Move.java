@@ -14,8 +14,8 @@ import avalam_s6.Player.Player;
 public class Move {
     private final Coordinate c_src; //Coordinate
     private final Coordinate c_dst;
-    private final int h_src; //Height
-    private final int h_dst;
+    private final int h_src; //Height of the tower a
+    private final int h_dst;//Height of the tower b
     private final Player playedBy; //Move played by ...
     
     public Move(Coordinate a, int b, Coordinate c, int d, Player e) {
