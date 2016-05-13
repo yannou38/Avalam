@@ -12,10 +12,7 @@ import javax.swing.*;
  * @author ducruyy
  */
 public class GUI_testing_shouldberemovedaftertests implements Runnable{
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new GUI_testing_shouldberemovedaftertests());
-    }
-
+    
     @Override
     public void run() {
         // Creation d'une fenetre

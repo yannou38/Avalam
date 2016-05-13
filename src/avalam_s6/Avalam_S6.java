@@ -5,6 +5,7 @@
  */
 package avalam_s6;
 
+import avalam_s6.GUI.GUI_testing_shouldberemovedaftertests;
 import avalam_s6.GUI.LAG_GUI;
 import javax.swing.SwingUtilities;
 /**
@@ -17,6 +18,6 @@ public class Avalam_S6{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new LAG_GUI());        
+        SwingUtilities.invokeLater(new GUI_testing_shouldberemovedaftertests());        
     }
 }
