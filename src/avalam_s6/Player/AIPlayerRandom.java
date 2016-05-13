@@ -57,7 +57,7 @@ public class AIPlayerRandom extends AIPlayer{
                     {
                         if (tabCoord[k].isValid() && grid.getCellAt(tabCoord[k]).getState() == State.TOWER)
                         {
-                            if(grid.moveCell(c8, c8))
+                            //TODO
                         }
                     }
                 }
