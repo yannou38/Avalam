@@ -16,16 +16,4 @@ public interface GUI_INTERFACE {
      *  render the content of the current window.
      */
     public void render();
-
-    /**
-     * set the usability of the cancel button.
-     * @param b tells if the cancel button should be usable.
-     */
-    public void enableUndo(boolean b);
-
-    /**
-     * set the usability of the redo button.
-     * @param b tells if the redo button should be usable.
-     */
-    public void enableRedo(boolean b);
 }

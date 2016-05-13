@@ -10,12 +10,12 @@ package avalam_s6.GUI;
  * @author ducruyy
  */
 public enum WindowState {
-    HOME, //page d'accueil, avec accès aux autres fenetres
-    PLAYERSELECT, //page choix des joueurs, pour lancer la partie
-    RULES, //pages règles
-    TUTORIAL, //page tutoriel
-    SETTINGS, //page options
-    ABOUT, //page crédits
-    BOARD; //page du jeu ou se déroule la partie 
+    HOME, // Homepage with access to other windows
+    PLAYERSELECT, //New Custom Game or Load Game
+    RULES, //Rules Page
+    TUTORIAL, //Tutorial window
+    SETTINGS, //Setting window
+    ABOUT, //Credits
+    BOARD; //Game window
     
 }

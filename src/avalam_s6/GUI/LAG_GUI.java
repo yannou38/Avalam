@@ -37,14 +37,4 @@ public class LAG_GUI implements GUI_INTERFACE, Runnable{
         this.game = new Local_Avalam_Game(g, p1, p2, this);
         this.game.getTimer().start();
     }
-
-    @Override
-    public void enableUndo(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-     @Override
-    public void enableRedo(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

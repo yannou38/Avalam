@@ -46,10 +46,6 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     public void undo() {
         this.cancelled_moves.add(this.history.pop());
         this.grid.undoMove(this.cancelled_moves.lastElement());
-        if (this.history.isEmpty()) {
-            this.gui.enableUndo(false);
-        }
-        this.gui.enableRedo(true);
     }
         
     //TODO: Check user is able to redo (GUI check if cancelled_moves is empty and call or not this function)
@@ -57,10 +53,6 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     public void redo() {
         this.history.add(this.cancelled_moves.pop());
         this.grid.moveCell(this.history.lastElement().getC_src(), this.history.lastElement().getC_src());
-        if (this.history.isEmpty()) {
-            this.gui.enableRedo(false);            
-        }
-        this.gui.enableUndo(true);
     }
 
     @Override
@@ -109,7 +101,6 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         this.playATurn();
     }
 
-    //TODO: EGALITE
     private void playATurn() {
         if(this.isTurnFinished){
             this.nbTurns++;
@@ -134,7 +125,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
 
     
     /**
-     * tells if a game has been won.
+     * Tells if a game has been won.
      * @return 1 or 2 if player 1 or 2 won, 3 in case of a null match, 0 if game isn't finished.
      */
     private int winCheck() {
@@ -179,7 +170,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     }
 
     /**
-     * takes care of what happens when someone wins.
+     * Takes care of what happens when someone wins.
      * @param i the id of the winner (3 if null match).
      */
     private void winningProcedure(int i) {
