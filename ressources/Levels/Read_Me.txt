@@ -20,5 +20,6 @@ Avalam Level Editor
 - If you write any space or character before, behind or in your grid, the grid won't be playable and the game may raise an exception (and crash).
 \*                                                        */
 
+If you try to edit levels like "default" and the game raise errors, remove the file and it will be generated automaticcaly
 
 Team 7

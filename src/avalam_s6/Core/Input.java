@@ -18,7 +18,7 @@ public class Input
     private static Coordinate c_dest = new Coordinate(Integer.MAX_VALUE, Integer.MAX_VALUE);	
 	
     /**
-     * tells if button has been clicked.
+     * Tells if button has been clicked.
      * @return true if button has been clicked.
      */
     public static boolean isButtonClicked()
@@ -27,7 +27,7 @@ public class Input
     }
     
     /**
-     * tells if button has clicked AND released.
+     * Tells if button has clicked AND released.
      * @return true if button has been clicked and released.
      */
     public static boolean hasClicked(){
@@ -35,14 +35,14 @@ public class Input
     }
 
     /**
-     * tells the Input class that the button has been clicked.
+     * Tells the Input class that the button has been clicked.
      */
     public static void setButtonClicked(){
         Input.mouseClicked = true;
     }
     
     /**
-     * tells the Input class that the button has been released.
+     * Tells the Input class that the button has been released.
      */
     public static void setButtonReleased(){        
         Input.mouseClicked = false;
@@ -50,7 +50,7 @@ public class Input
     }    
 
     /**
-     * get the position of the click.
+     * Get the position of the click.
      * @return the position of the click.
      */
     public static Coordinate getMouseSrcPosition()
@@ -59,7 +59,7 @@ public class Input
     }
 
     /**
-     * set the position of the click.
+     * Set the position of the click.
      * @param pos the position of the click.
      */
     public static void updateMouseSrcPosition(Coordinate pos)
@@ -68,7 +68,7 @@ public class Input
     }
         
     /**
-     * get the position of the release.
+     * Get the position of the release.
      * @return the position of the release.
      */
     public static Coordinate getMouseDestPosition()
@@ -77,7 +77,7 @@ public class Input
     }
 
     /**
-     * set the position of the release.
+     * Set the position of the release.
      * @param pos the position of the release.
      */
     public static void updateMouseDestPosition(Coordinate pos)

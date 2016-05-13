@@ -68,7 +68,7 @@ public class Grid {
      */
     public void moveCell(Coordinate src, Coordinate dst) {
         while(getCellAt(src).getState() != State.EMPTY) {
-            getCellAt(dst).add(getCellAt(src).removeAt(0));        // YOU KIDDING ME Y U USE STACK ?!!
+            getCellAt(dst).add(getCellAt(src).removeAt(0));
         }
     }
     /**
