@@ -5,8 +5,7 @@
  */
 package avalam_s6.Player;
 
-import avalam_s6.Core.Grid;
-import avalam_s6.Core.Owner;
+import avalam_s6.Core.*;
 import java.awt.Color;
 
 /**
@@ -14,7 +13,7 @@ import java.awt.Color;
  * @author TheDoctor
  */
 public abstract class AIPlayer extends Player{
-    protected Grid grid;
+    protected Game_INTERFACE game;
     
     /**
      * Constructor.
@@ -30,8 +29,8 @@ public abstract class AIPlayer extends Player{
         return true;
     }
 
-    public void setGrid(Grid grid) {
-        this.grid = grid;
+    public void setGame(Game_INTERFACE game) {
+        this.game = game;
     }
        
 }

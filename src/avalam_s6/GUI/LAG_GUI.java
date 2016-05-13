@@ -40,9 +40,9 @@ public class LAG_GUI implements GUI_INTERFACE, Runnable{
         Player p2 = new AIPlayerRandom("Bot_Frank",Color.BLACK,Owner.PLAYER_2);
         try {
             Level_Parser myParser = new Level_Parser("default");
-            Grid g = new Grid(myParser.readLevel()); // IOException | GridSizeException
+            Grid g = new Grid(myParser.readLevel()); // IOException | GridSizeException | NumberFormatException
             this.game = new Local_Avalam_Game(g, p1, p2, this); // GridSizeException
-        } catch (IOException|GridSizeException ex) {
+        } catch (IOException|GridSizeException|NumberFormatException ex) {
             Logger.getLogger(LAG_GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.game.getTimer().start();
