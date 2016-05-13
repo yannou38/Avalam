@@ -89,8 +89,8 @@ public class AIPlayerEasy extends AIPlayer {
         tabCoord[6] = c7;
         tabCoord[7] = c8;
         for (int k = 0; k < 8; k++) {
-            if (tabCoord[k].isValid() && grid.getCellAt(tabCoord[k]).getState() == State.TOWER) {
-                if(grid.canStack(grid.getCellAt(c0),grid.getCellAt(tabCoord[k]))){
+            if (tabCoord[k].isValid() && game.getGrid().getCellAt(tabCoord[k]).getState() == State.TOWER) {
+                if(game.getGrid().canStack(game.getGrid().getCellAt(c0),game.getGrid().getCellAt(tabCoord[k]))){
                     return false;
                 }
             }
