@@ -103,7 +103,10 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.playATurn();
     }
-
+    
+    /**
+     * Turn Logic
+     */
     private void playATurn() {
         if(this.isTurnFinished){
             this.nbTurns++;
@@ -117,6 +120,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
                     this.winningProcedure(w);
                     this.gui.render(); // we don't need to play after winning.
                     return;
+                case 0:
                 default:
                     this.isTurnFinished = false;
                     break;

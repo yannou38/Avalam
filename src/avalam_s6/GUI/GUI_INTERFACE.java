@@ -13,7 +13,7 @@ package avalam_s6.GUI;
 public interface GUI_INTERFACE {            
 
     /**
-     *  render the content of the current window.
+     *  Render the content of the current window.
      */
     public void render();
 }
