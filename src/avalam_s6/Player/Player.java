@@ -6,6 +6,7 @@
 package avalam_s6.Player;
 
 import avalam_s6.Core.Coordinate;
+import avalam_s6.Core.Move;
 import java.awt.Color;
 
 /**
@@ -22,7 +23,7 @@ public abstract class Player implements Player_INTERFACE {
     }
     
     @Override
-    public abstract Coordinate play();
+    public abstract Move play();
     
     @Override
     public abstract boolean isAI();

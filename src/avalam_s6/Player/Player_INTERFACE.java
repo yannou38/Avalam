@@ -6,6 +6,7 @@
 package avalam_s6.Player;
 
 import avalam_s6.Core.Coordinate;
+import avalam_s6.Core.Move;
 
 /**
  *
@@ -17,7 +18,7 @@ public interface Player_INTERFACE {
      * Player play on a coordinate
      * @return the coordinate chose 
      */
-    public Coordinate play();
+    public Move play();
     
     /**
      * Tells if the player is a bot.

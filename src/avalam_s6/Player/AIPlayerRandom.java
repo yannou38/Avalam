@@ -22,7 +22,7 @@ public class AIPlayerRandom extends AIPlayer{
     }
 
     @Override
-    public Coordinate play() {
+    public Move play() {
         ArrayList<Coordinate> mesCoups = new ArrayList<>();
         for (int i = 0; i < grid.getWidth(); i++)
         {
@@ -49,14 +49,15 @@ public class AIPlayerRandom extends AIPlayer{
                         if (c1.isValid() && grid.getCellAt(c0).getState() == State.TOWER)
                         {
                             
-                             //TODO : finir
+                             //TODO : finir, transformer le return en Move.
                         }
                     }
                 }
             }
         }
         Random r = new Random();
-        return mesCoups.get(r.nextInt(mesCoups.size()));
+        //return mesCoups.get(r.nextInt(mesCoups.size()));
+        return null;
     }
     
     

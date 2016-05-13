@@ -6,6 +6,7 @@
 package avalam_s6.Player;
 
 import avalam_s6.Core.Coordinate;
+import avalam_s6.Core.Move;
 import java.awt.Color;
 
 /**
@@ -24,7 +25,7 @@ public class ControlledPlayer extends Player{
     }
 
     @Override
-    public Coordinate play() {
+    public Move play() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
