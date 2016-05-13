@@ -5,13 +5,24 @@
  */
 package avalam_s6.GUI;
 
+import javax.swing.*;
+
 /**
  *
  * @author ducruyy
  */
-public class GUI_testing_shouldberemovedaftertests {
+public class GUI_testing_shouldberemovedaftertests implements Runnable{
     public static void main(String[] args) {
-        HomeGUI test = new HomeGUI();
-        System.out.println("works");
+        SwingUtilities.invokeLater(new GUI_testing_shouldberemovedaftertests());
+    }
+
+    @Override
+    public void run() {
+        // Creation d'une fenetre
+        GUIFrame_testing_shouldprobberemoved frame = new GUIFrame_testing_shouldprobberemoved();
+        // On fixe la taille de la fenetre au minimum pour contenir tous les
+        // composants
+        frame.pack();
+        frame.setVisible(true);
     }
 }
