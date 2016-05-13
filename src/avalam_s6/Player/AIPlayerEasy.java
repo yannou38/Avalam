@@ -219,6 +219,7 @@ public class AIPlayerEasy extends AIPlayer {
             game.getGrid().moveCell(c0, dest);
             if (tabCoord[k].isValid() && game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER
                     && this.owner == game.getGrid().getCellAt(tabCoord[k]).getOwner() && alone(tabCoord[k])){
+                    game.undo();
                     return true;
                 }
             game.undo();
@@ -256,7 +257,8 @@ public class AIPlayerEasy extends AIPlayer {
         for (int k = 0; k < 8; k++) {
             game.getGrid().moveCell(c0, dest);
             if (tabCoord[k].isValid() && game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER
-                    && this.owner != game.getGrid().getCellAt(tabCoord[k]).getOwner() && alone(tabCoord[k])){
+                    && this.owner != game.getGrid().getCellAt(tabCoord[k]).getOwner() && alone(tabCoord[k])){ 
+                    game.undo();
                     return true;
                 }
             game.undo();
