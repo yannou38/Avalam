@@ -5,11 +5,16 @@
  */
 package avalam_s6.GUI;
 
+import avalam_s6.Core.File_IO.Level_Parser;
 import avalam_s6.Core.*;
+import avalam_s6.Exceptions.GridSizeException;
 import avalam_s6.Player.AIPlayerRandom;
 import avalam_s6.Player.ControlledPlayer;
 import avalam_s6.Player.Player;
 import java.awt.Color;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -33,8 +38,13 @@ public class LAG_GUI implements GUI_INTERFACE, Runnable{
     public void run() {
         Player p1 = new ControlledPlayer("Jon Doe",Color.WHITE);
         Player p2 = new AIPlayerRandom("Bot_Frank",Color.BLACK);
-        Grid g = new Grid("000023000023232000232323200323232300032313230003232323002323232000232320000320000");
-        this.game = new Local_Avalam_Game(g, p1, p2, this);
+        try {
+            Level_Parser myParser = new Level_Parser("default");
+            Grid g = new Grid(myParser.readLevel()); // IOException | GridSizeException
+            this.game = new Local_Avalam_Game(g, p1, p2, this); // GridSizeException
+        } catch (IOException|GridSizeException ex) {
+            Logger.getLogger(LAG_GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.game.getTimer().start();
     }
 }

@@ -19,10 +19,18 @@ public class Grid {
      * @param textGrid the text version of the grid. SIZE MUST BE 81.
      */
     public Grid(String textGrid) {
-        for(int i = 0; i < 9; i++){
-            for(int j = 0; j < 9; j++){
-                this.grille[j][i] = new Cell(Integer.parseInt(""+textGrid.charAt(i*9+j))-1);
+        if(textGrid.length() == 81) {
+            for(int i = 0; i < 9; i++){
+                for(int j = 0; j < 9; j++){
+                    this.grille[j][i] = new Cell(Integer.parseInt(""+textGrid.charAt(i*9+j))-1);
+                }
             }
+        } else if (textGrid.length() == 9) {
+           for(int i = 0; i < 3; i++){
+                for(int j = 0; j < 3; j++){
+                    this.grille[j][i] = new Cell(Integer.parseInt(""+textGrid.charAt(i*3+j))-1);
+                }
+            } 
         }
     }
     

@@ -5,6 +5,7 @@
  */
 package avalam_s6.Core;
 
+import avalam_s6.Exceptions.GridSizeException;
 import avalam_s6.Player.Player;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,7 +29,9 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     private boolean isTurnFinished;
     private int nbTurns;
     
-    public Local_Avalam_Game(Grid gr, Player p1, Player p2, GUI_INTERFACE gui) {
+    public Local_Avalam_Game(Grid gr, Player p1, Player p2, GUI_INTERFACE gui) throws GridSizeException {
+        if(gr.getWidth() == 3) 
+            throw new GridSizeException(1);
         this.grid = gr;
         this.players[0] = p1;
         this.players[1] = p2;
@@ -174,6 +177,6 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
      * @param i the id of the winner (3 if null match).
      */
     private void winningProcedure(int i) {
-        System.out.println("player "+ i +" won !");
+        /* Appel à GUI */
     }
 }
