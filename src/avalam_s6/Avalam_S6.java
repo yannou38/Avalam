@@ -5,8 +5,7 @@
  */
 package avalam_s6;
 
-import avalam_s6.GUI.GUI_testing_shouldberemovedaftertests;
-import avalam_s6.GUI.LAG_GUI;
+import avalam_s6.GUI.*;
 import javax.swing.SwingUtilities;
 /**
  *
