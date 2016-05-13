@@ -68,7 +68,7 @@ public class Grid {
      * @param dst destination cell
      */
     public void moveCell(Coordinate src, Coordinate dst) {
-        while(getCellAt(src).getState() != State.EMPTY) {
+        while(getCellAt(src).getState() != CellState.EMPTY) {
             getCellAt(dst).add(getCellAt(src).removeAt(0));
         }
     }
@@ -90,6 +90,6 @@ public class Grid {
      * @return true if it is possible to add src on top of dst.
      */
     public boolean canStack(Cell src, Cell dst) {
-        return (src.getSize()+dst.getSize() <= 5) && (src.getState() == State.TOWER) && ((dst.getState() == State.TOWER)|| dst.getState() == State.EMPTY);
+        return (src.getSize()+dst.getSize() <= 5) && (src.getState() == CellState.TOWER) && ((dst.getState() == CellState.TOWER)|| dst.getState() == CellState.EMPTY);
     }
 }

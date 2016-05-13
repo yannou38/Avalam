@@ -9,7 +9,7 @@ package avalam_s6.Core;
  * Define the state of the cell.
  * @author TheDoctor
  */
-public enum State {
+public enum CellState {
     TOWER, // Tower 1-4
     EMPTY, // Empty Cell
     RESTRICTED, // Game Board

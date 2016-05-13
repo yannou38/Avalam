@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package avalam_s6.GUI;
+package avalam_s6.GUI.HomePage;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -25,8 +25,8 @@ public class HomePageListener implements MouseListener {
     public HomePageListener(String buttonname, String theme) {
         this.name = buttonname;
         try {
-            icon = ImageIO.read(new File("./ressources/GUI/" + theme + "/main/" + name + "_h.png"));
-            iconbase = ImageIO.read(new File("./ressources/GUI/" + theme + "/main/" + name + ".png"));
+            icon = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/" + name + "_h.png"));
+            iconbase = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/" + name + ".png"));
         } catch (Exception e) {
             System.out.println(e);
         }

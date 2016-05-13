@@ -35,7 +35,7 @@ public class AIPlayerRandom extends AIPlayer{
             for (int j = 0; j < game.getGrid().getHeight(); j++)
             {
                 Coordinate c0 = new Coordinate(j,i);
-                if (c0.isValid() && game.getGrid().getCellAt(c0).getState() == State.TOWER)
+                if (c0.isValid() && game.getGrid().getCellAt(c0).getState() == CellState.TOWER)
                 {
                     Coordinate c1 = new Coordinate(j-1,i-1);
                     Coordinate c2 = new Coordinate(j,i-1);
@@ -55,7 +55,7 @@ public class AIPlayerRandom extends AIPlayer{
                     tabCoord[7] = c8;
                     for (int k = 0; k <8;k++)
                     {
-                        if (tabCoord[k].isValid() && game.getGrid().getCellAt(tabCoord[k]).getState() == State.TOWER)
+                        if (tabCoord[k].isValid() && game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER)
                         {
                             if(game.getGrid().canStack(game.getGrid().getCellAt(c0),game.getGrid().getCellAt(tabCoord[k])))
                             {

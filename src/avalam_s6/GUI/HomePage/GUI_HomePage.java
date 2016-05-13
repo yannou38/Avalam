@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package avalam_s6.GUI;
+package avalam_s6.GUI.HomePage;
 
 import java.awt.*;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -18,18 +20,17 @@ import javax.swing.*;
  * This class contain the home page with the avalam logo, and the diverse buttons to create a game,*
  * access options, check rules & tutorial, etc
  */
-public class HomePage_GUI extends JPanel {
+public class GUI_HomePage extends JPanel {
 
     JButton quick, play, settings, rules, tuto, exit;
     private Image background, quickI, playI, settingsI, rulesI, tutoI, exitI;
     String theme;
 
-    public HomePage_GUI() {
-        
+    public GUI_HomePage() {
         this("Default");
     }
 
-    public HomePage_GUI(String theme) {
+    public GUI_HomePage(String theme) {
         this.theme = theme;
         initComponents();
     }
@@ -37,15 +38,15 @@ public class HomePage_GUI extends JPanel {
     private void initComponents() {
 
         try {
-            background = ImageIO.read(new File("./ressources/GUI/" + theme + "/main/main_bg.png"));
-            playI = ImageIO.read(new File("./ressources/GUI/" + theme + "/main/customgame.png"));
-            tutoI = ImageIO.read(new File("./ressources/GUI/" + theme + "/main/tuto.png"));
-            quickI = ImageIO.read(new File("./ressources/GUI/" + theme + "/main/quickgame.png"));
-            settingsI = ImageIO.read(new File("./ressources/GUI/" + theme + "/main/options.png"));
-            rulesI = ImageIO.read(new File("./ressources/GUI/" + theme + "/main/rules.png"));
-            exitI = ImageIO.read(new File("./ressources/GUI/" + theme + "/main/quit.png"));
-        } catch (Exception e) {
-            System.out.println(e);
+            background = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/main_bg.png"));
+            playI = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/customgame.png"));
+            tutoI = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/tuto.png"));
+            quickI = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/quickgame.png"));
+            settingsI = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/options.png"));
+            rulesI = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/rules.png"));
+            exitI = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/quit.png"));
+        } catch (Exception ex) {
+            Logger.getLogger(GUI_HomePage.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         quick = new JButton(new ImageIcon(quickI));

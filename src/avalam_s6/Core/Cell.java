@@ -14,24 +14,24 @@ import java.util.ArrayList;
  */
 public class Cell {
     private ArrayList<Owner> contenu;
-    private State etat;
+    private CellState etat;
     
     public Cell(int owner) {
         this.contenu = new ArrayList<>();
         switch(owner) {
             case -1:
-                this.etat = State.RESTRICTED;
+                this.etat = CellState.RESTRICTED;
                 break;
             case 0:
-                this.etat = State.EMPTY;
+                this.etat = CellState.EMPTY;
                 break;
             case 1:
                 this.contenu.add(Owner.PLAYER_1);
-                this.etat = State.TOWER;
+                this.etat = CellState.TOWER;
                 break;
             case 2:
                 this.contenu.add(Owner.PLAYER_2);
-                this.etat = State.TOWER;                
+                this.etat = CellState.TOWER;                
                 break;
         }
     }
@@ -43,9 +43,9 @@ public class Cell {
     public void add(Owner p) {
         this.contenu.add(p);
         if (this.contenu.size() == 5)
-            this.etat = State.FULL; // NORMAL
+            this.etat = CellState.FULL; // NORMAL
         if (this.contenu.size() == 1)
-            this.etat = State.TOWER; // UNDO
+            this.etat = CellState.TOWER; // UNDO
     }
     
 
@@ -57,9 +57,9 @@ public class Cell {
      */
     public Owner removeAt(int i) {
         if(this.contenu.size() == 5)
-            this.etat = State.TOWER; 
+            this.etat = CellState.TOWER; 
         if(this.contenu.size() == 1)
-            this.etat = State.EMPTY;
+            this.etat = CellState.EMPTY;
         return this.contenu.remove(i);
     }
     
@@ -85,7 +85,7 @@ public class Cell {
      * Getter
      * @return state 
      */
-    public State getState() {
+    public CellState getState() {
         return etat;
     }
 }

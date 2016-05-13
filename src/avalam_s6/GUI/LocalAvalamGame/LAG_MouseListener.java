@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package avalam_s6.GUI;
+package avalam_s6.GUI.LocalAvalamGame;
 
 import avalam_s6.Core.Coordinate;
 import avalam_s6.Core.Input;
