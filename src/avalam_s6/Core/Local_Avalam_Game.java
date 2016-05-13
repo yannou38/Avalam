@@ -102,39 +102,77 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         this.playATurn();
     }
 
+    //TODO: EGALITE
     private void playATurn() {
         if(this.isTurnFinished){
             this.nbTurns++;
             this.current_player = this.nbTurns%NB_PLAYERS;
-            switch (winCheck()) {
+            int w = winCheck();
+            switch (w) {
                 case 1:
-                    this.winningProcedure(this.nbTurns%NB_PLAYERS);
-                    t.stop();
-                    break;
                 case 2:
-                    this.winningProcedure((this.nbTurns+1)%NB_PLAYERS);
                     t.stop();
+                    this.winningProcedure(w);
+                    return;
+                case 3:
+                    t.stop();
+                    //EGALITE
                     break;
                 default:
                     this.isTurnFinished = false;
                     break;
             }
-        } else {
-            
-            this.gui.render();
         }
+        //Turns logic here
+        this.gui.render();
     }
 
+    private boolean isStackable(Cell src, Cell dst) {
+        return (src.getSize()+dst.getSize() <= 5) && (src.getState() == State.TOWER) && (dst.getState() == State.TOWER);
+    }
+    
     private int winCheck() {
-        return 0;
+        Coordinate[] c = new Coordinate[9];
+        for(int i=0;i<9;i++) {
+            c[i] = new Coordinate();
+        }
+        int score_p1 = 0;
+        
+        for(int x=0;x<9;x++) {
+            for(int y=0;y<9;y++) {
+                c[0].setX(x);c[0].setY(y);
+                c[1].setX(x-1);c[1].setY(y-1);
+                c[2].setX(x-1);c[2].setY(y);
+                c[3].setX(x-1);c[3].setY(y+1);
+                c[4].setX(x);c[4].setY(y-1);
+                c[5].setX(x);c[5].setY(y+1);
+                c[6].setX(x+1);c[6].setY(y-1);
+                c[7].setX(x+1);c[7].setY(y);
+                c[8].setX(x+1);c[8].setY(y+1);
+                for (int i=1;i<9;i++) {
+                    if(c[i].isValid()) {
+                        if(isStackable(this.grid.getCellAt(c[0]),this.grid.getCellAt(c[i]))) {
+                          return 0; 
+                        }
+                    }                     
+                }
+                if(this.grid.getCellAt(c[0]).getOwner() == Pawn.PLAYER_1) {
+                    score_p1++;
+                } else if(this.grid.getCellAt(c[0]).getOwner() == Pawn.PLAYER_2) {
+                    score_p1--;
+                }
+            }
+        }
+        if (score_p1 > 0) {
+            return 1;
+        } else if (score_p1 == 0) {
+            return 3;
+        } else {
+            return 2;
+        }
     }
 
     private void winningProcedure(int i) {
         System.out.println("player "+ i +" won !");
-    }
-    
-    
-    
-    
-    
+    }    
 }
