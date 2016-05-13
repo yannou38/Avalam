@@ -5,10 +5,7 @@
  */
 package avalam_s6;
 
-import avalam_s6.Core.*;
 import avalam_s6.GUI.LAG_GUI;
-import avalam_s6.Player.*;
-import java.awt.Color;
 import javax.swing.SwingUtilities;
 /**
  *
@@ -22,9 +19,4 @@ public class Avalam_S6{
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new LAG_GUI());        
     }
-
-   
-    
-    
-    
 }

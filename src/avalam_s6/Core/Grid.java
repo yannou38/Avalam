@@ -26,6 +26,7 @@ public class Grid {
         }
     }
     
+    
     /**
      * Getter
      * @return width 
@@ -71,5 +72,15 @@ public class Grid {
             getCellAt(m.getC_src()).add(getCellAt(m.getC_dst()).removeAt(m.getH_dst()));
             /* As Current DST = Old DST + Old SRC we can not remove pawn from the top of the tower. */
         }
-    }    
+    }
+
+    /**
+     * tells if two cells can be merged in one.
+     * @param src the source cell
+     * @param dst the destination cell
+     * @return true if it is possible to add src on top of dst.
+     */
+    public boolean canStack(Cell src, Cell dst) {
+        return (src.getSize()+dst.getSize() <= 5) && (src.getState() == State.TOWER) && ((dst.getState() == State.TOWER)|| dst.getState() == State.EMPTY);
+    }
 }

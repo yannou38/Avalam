@@ -18,16 +18,15 @@ import avalam_s6.GUI.GUI_INTERFACE;
  */
 public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     private static final int NB_PLAYERS = 2;
+    private final GUI_INTERFACE gui;
+    private final Timer t;    
     private Grid grid;
     private Player[] players;
     private Stack<Move> history;
     private Stack<Move> cancelled_moves;
     private int current_player;
     private boolean isTurnFinished;
-    private Timer t;
-    private GUI_INTERFACE gui;
     private int nbTurns;
-    
     
     public Local_Avalam_Game(Grid gr, Player p1, Player p2, GUI_INTERFACE gui) {
         this.grid = gr;
@@ -47,13 +46,21 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     public void undo() {
         this.cancelled_moves.add(this.history.pop());
         this.grid.undoMove(this.cancelled_moves.lastElement());
+        if (this.history.isEmpty()) {
+            this.gui.enableUndo(false);
+        }
+        this.gui.enableRedo(true);
     }
-    
+        
     //TODO: Check user is able to redo (GUI check if cancelled_moves is empty and call or not this function)
     @Override
     public void redo() {
         this.history.add(this.cancelled_moves.pop());
         this.grid.moveCell(this.history.lastElement().getC_src(), this.history.lastElement().getC_src());
+        if (this.history.isEmpty()) {
+            this.gui.enableRedo(false);            
+        }
+        this.gui.enableUndo(true);
     }
 
     @Override
@@ -91,7 +98,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     
     /**
      * Getter
-     * @return cqncelled_moves
+     * @return cancelled_moves
      */
     public Stack<Move> getCancelled_moves() {
         return this.cancelled_moves;
@@ -111,26 +118,25 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
             switch (w) {
                 case 1:
                 case 2:
-                    t.stop();
-                    this.winningProcedure(w);
-                    return;
                 case 3:
                     t.stop();
-                    //EGALITE
-                    break;
+                    this.winningProcedure(w);
+                    this.gui.render(); // we don't need to play after winning.
+                    return;
                 default:
                     this.isTurnFinished = false;
                     break;
             }
         }
-        //Turns logic here
+        //TODO : turns logic goes here
         this.gui.render();
     }
 
-    private boolean isStackable(Cell src, Cell dst) {
-        return (src.getSize()+dst.getSize() <= 5) && (src.getState() == State.TOWER) && (dst.getState() == State.TOWER);
-    }
     
+    /**
+     * tells if a game has been won.
+     * @return 1 or 2 if player 1 or 2 won, 3 in case of a null match, 0 if game isn't finished.
+     */
     private int winCheck() {
         Coordinate[] c = new Coordinate[9];
         for(int i=0;i<9;i++) {
@@ -151,7 +157,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
                 c[8].setX(x+1);c[8].setY(y+1);
                 for (int i=1;i<9;i++) {
                     if(c[i].isValid()) {
-                        if(isStackable(this.grid.getCellAt(c[0]),this.grid.getCellAt(c[i]))) {
+                        if(this.grid.canStack(this.grid.getCellAt(c[0]),this.grid.getCellAt(c[i]))) {                      
                           return 0; 
                         }
                     }                     
@@ -172,7 +178,11 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         }
     }
 
+    /**
+     * takes care of what happens when someone wins.
+     * @param i the id of the winner (3 if null match).
+     */
     private void winningProcedure(int i) {
         System.out.println("player "+ i +" won !");
-    }    
+    }
 }
