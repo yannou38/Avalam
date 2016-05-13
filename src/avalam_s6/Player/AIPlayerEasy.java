@@ -93,7 +93,7 @@ public class AIPlayerEasy extends AIPlayer {
             return mesCoupsHighValue.get(r.nextInt(mesCoups.size()));
         }
         if(!mesCoupsOkValue.isEmpty()){
-            return mesCoupsHighValue.get(r.nextInt(mesCoups.size()));
+            return mesCoupsOkValue.get(r.nextInt(mesCoups.size()));
         }
         if(!mesCoups.isEmpty()){
                 return mesCoups.get(r.nextInt(mesCoups.size()));
