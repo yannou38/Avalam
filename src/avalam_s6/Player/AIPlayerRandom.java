@@ -38,12 +38,12 @@ public class AIPlayerRandom extends AIPlayer{
                 if (c0.isValid() && grid.getCellAt(c0).getState() == State.TOWER)
                 {
                     Coordinate c1 = new Coordinate(j-1,i-1);
-                    Coordinate c2 = new Coordinate(j-1,i);
-                    Coordinate c3 = new Coordinate(j-1,i+1);
-                    Coordinate c4 = new Coordinate(j,i-1);
-                    Coordinate c5 = new Coordinate(j,i+1);
-                    Coordinate c6 = new Coordinate(j+1,i-1);
-                    Coordinate c7 = new Coordinate(j+1,i);
+                    Coordinate c2 = new Coordinate(j,i-1);
+                    Coordinate c3 = new Coordinate(j+1,i-1);
+                    Coordinate c4 = new Coordinate(j-1,i);
+                    Coordinate c5 = new Coordinate(j+1,i);
+                    Coordinate c6 = new Coordinate(j-1,i+1);
+                    Coordinate c7 = new Coordinate(j,i+1);
                     Coordinate c8 = new Coordinate(j+1,i+1);
                     tabCoord[0] = c1;
                     tabCoord[1] = c2;
