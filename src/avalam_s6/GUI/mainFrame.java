@@ -6,25 +6,45 @@
 package avalam_s6.GUI;
 
 import avalam_s6.GUI.HomePage.GUI_HomePage;
+import java.awt.Dimension;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 /**
  *
  * @author sazeratj
  */
 public class mainFrame extends JFrame implements GUI_INTERFACE, Runnable{
     WindowState wState;
-
+    JPanel[] panelList;
+    
     public mainFrame() {
-        GUI_HomePage h = new GUI_HomePage();
-        this.add(h);
+        this("Default");
+    }
+    
+    public mainFrame(String theme) {
+        this.panelList = new JPanel[1]; // TODO : add more JPanels.
+        this.initFrame(theme);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1280, 720));
+        setMinimumSize(new Dimension(1280, 720));
         setResizable(false);
-    }    
-
+    }
+    
+    public void initFrame(String theme) {
+        this.panelList[0] = new GUI_HomePage(theme);
+        for (JPanel pElement : this.panelList) {
+            this.add(pElement);
+        }
+    }
+    
+    public void setwState(WindowState wState) {
+        this.panelList[this.wState.getValue()].setVisible(false);
+        this.wState = wState;
+        this.panelList[this.wState.getValue()].setVisible(true);
+    }
+    
     @Override
     public void render() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.repaint();
     }
 
     @Override
