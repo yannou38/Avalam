@@ -13,7 +13,7 @@ import javax.swing.JFrame;
  */
 public class GUIFrame_testing_shouldprobberemoved extends JFrame{
     public GUIFrame_testing_shouldprobberemoved(){
-        HomeGUI h = new HomeGUI();
+        HomePage_GUI h = new HomePage_GUI();
         this.add(h);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1280, 720));

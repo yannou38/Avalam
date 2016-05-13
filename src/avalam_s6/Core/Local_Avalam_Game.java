@@ -30,6 +30,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     private int nbTurns;
     
     public Local_Avalam_Game(Grid gr, Player p1, Player p2, GUI_INTERFACE gui) throws GridSizeException {
+        players = new Player[2];
         if(gr.getWidth() == 3) 
             throw new GridSizeException(1);
         this.grid = gr;

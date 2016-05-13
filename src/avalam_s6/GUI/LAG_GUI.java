@@ -36,9 +36,9 @@ public class LAG_GUI implements GUI_INTERFACE, Runnable{
 
      @Override
     public void run() {
-        Player p1 = new ControlledPlayer("Jon Doe",Color.WHITE,Owner.PLAYER_1);
-        Player p2 = new AIPlayerRandom("Bot_Frank",Color.BLACK,Owner.PLAYER_2);
         try {
+            Player p1 = new ControlledPlayer("Jon Doe",Color.WHITE,Owner.PLAYER_1);
+            Player p2 = new AIPlayerRandom("Bot_Frank",Color.BLACK,Owner.PLAYER_2);
             Level_Parser myParser = new Level_Parser("default");
             Grid g = new Grid(myParser.readLevel()); // IOException | GridSizeException | NumberFormatException
             this.game = new Local_Avalam_Game(g, p1, p2, this); // GridSizeException

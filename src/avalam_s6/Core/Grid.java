@@ -19,14 +19,12 @@ public class Grid {
      * @param textGrid the text version of the grid. SIZE MUST BE 81.
      */
     public Grid(String textGrid) throws NumberFormatException {
+        grille = new Cell[9][9];
         if(textGrid.length() == 81) {
             for(int i = 0; i < 9; i++){
                 for(int j = 0; j < 9; j++){
-                    int x = Integer.parseInt(""+textGrid.charAt(i*9+j))-1;
                     this.grille[j][i] = new Cell(Integer.parseInt(""+textGrid.charAt(i*9+j))-1);
-                    if(x > 3) // A character > 4
-                        x = 0;
-                    this.grille[j][i] = new Cell(Integer.parseInt(""+textGrid.charAt(i*9+j))-1);
+                    System.out.println(this.grille[j][i].getSize());
                 }
             }
         } else if (textGrid.length() == 9) {

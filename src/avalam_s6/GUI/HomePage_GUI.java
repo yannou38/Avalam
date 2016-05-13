@@ -18,17 +18,18 @@ import javax.swing.*;
  * This class contain the home page with the avalam logo, and the diverse buttons to create a game,*
  * access options, check rules & tutorial, etc
  */
-public class HomeGUI extends JPanel {
+public class HomePage_GUI extends JPanel {
 
     JButton quick, play, settings, rules, tuto, exit;
     private Image background, quickI, playI, settingsI, rulesI, tutoI, exitI;
     String theme;
 
-    public HomeGUI() {
+    public HomePage_GUI() {
+        
         this("Default");
     }
 
-    public HomeGUI(String theme) {
+    public HomePage_GUI(String theme) {
         this.theme = theme;
         initComponents();
     }
