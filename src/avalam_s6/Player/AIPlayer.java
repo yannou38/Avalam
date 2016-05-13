@@ -15,6 +15,11 @@ import java.awt.Color;
 public abstract class AIPlayer extends Player{
     protected Grid grid;
     
+    /**
+     * Constructor.
+     * @param name The name of the player.
+     * @param color The color of the player's pawns.
+     */
     public AIPlayer(String name, Color color) {
         super(name,color);
     }

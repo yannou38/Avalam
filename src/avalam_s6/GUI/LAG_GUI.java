@@ -18,6 +18,9 @@ import java.awt.Color;
 public class LAG_GUI implements GUI_INTERFACE, Runnable{
     private Game_INTERFACE game;
     
+    /**
+     * Constructor.
+     */
     public LAG_GUI() {
     }
     
@@ -33,5 +36,15 @@ public class LAG_GUI implements GUI_INTERFACE, Runnable{
         Grid g = new Grid("000023000023232000232323200323232300032313230003232323002323232000232320000320000");
         this.game = new Local_Avalam_Game(g, p1, p2, this);
         this.game.getTimer().start();
+    }
+
+    @Override
+    public void enableUndo(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+     @Override
+    public void enableRedo(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

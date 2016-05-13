@@ -16,11 +16,11 @@ import java.util.Random;
  * @author Seawolf
  */
 public class AIPlayerRandom extends AIPlayer{
-    
-    public AIPlayerRandom(String name, Color color) {
-        super(name,color);
-    }
 
+    public AIPlayerRandom(String name, Color color) {
+        super(name, color);
+    }
+    
     @Override
     public Move play() {
         ArrayList<Coordinate> mesCoups = new ArrayList<>();
