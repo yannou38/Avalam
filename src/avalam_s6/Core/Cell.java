@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @author TheDoctor
  */
 public class Cell {
-    private ArrayList<Pawn> contenu;
+    private ArrayList<Owner> contenu;
     private State etat;
     
     public Cell(int owner) {
@@ -26,11 +26,11 @@ public class Cell {
                 this.etat = State.EMPTY;
                 break;
             case 1:
-                this.contenu.add(Pawn.PLAYER_1);
+                this.contenu.add(Owner.PLAYER_1);
                 this.etat = State.TOWER;
                 break;
             case 2:
-                this.contenu.add(Pawn.PLAYER_2);
+                this.contenu.add(Owner.PLAYER_2);
                 this.etat = State.TOWER;                
                 break;
         }
@@ -40,7 +40,7 @@ public class Cell {
      * Add a pawn on top of the tower
      * @param p the pawn added to the top of tower
      */
-    public void add(Pawn p) {
+    public void add(Owner p) {
         this.contenu.add(p);
         if (this.contenu.size() == 5)
             this.etat = State.FULL; // NORMAL
@@ -55,7 +55,7 @@ public class Cell {
      * @param i
      * @return 
      */
-    public Pawn removeAt(int i) {
+    public Owner removeAt(int i) {
         if(this.contenu.size() == 5)
             this.etat = State.TOWER; 
         if(this.contenu.size() == 1)
@@ -75,10 +75,10 @@ public class Cell {
      * Get the peek of the tower 
      * @return peek of tower 
      */
-    public Pawn getOwner() {
+    public Owner getOwner() {
         if (! this.contenu.isEmpty())
             return this.contenu.get(getSize()-1);
-        return Pawn.NO_OWNER;
+        return Owner.NO_OWNER;
     }
     
     /**

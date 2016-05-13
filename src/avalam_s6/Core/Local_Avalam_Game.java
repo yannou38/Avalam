@@ -160,9 +160,9 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
                         }
                     }                     
                 }
-                if(this.grid.getCellAt(c[0]).getOwner() == Pawn.PLAYER_1) {
+                if(this.grid.getCellAt(c[0]).getOwner() == Owner.PLAYER_1) {
                     score_p1++;
-                } else if(this.grid.getCellAt(c[0]).getOwner() == Pawn.PLAYER_2) {
+                } else if(this.grid.getCellAt(c[0]).getOwner() == Owner.PLAYER_2) {
                     score_p1--;
                 }
             }

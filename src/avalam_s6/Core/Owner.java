@@ -9,7 +9,7 @@ package avalam_s6.Core;
  * Define the owner of the Pawn.
  * @author TheDoctor
  */
-public enum Pawn {
+public enum Owner {
     PLAYER_1, //P1
     PLAYER_2, //P2
     NO_OWNER; //No Owner

@@ -17,8 +17,8 @@ import java.util.Random;
  */
 public class AIPlayerRandom extends AIPlayer{
 
-    public AIPlayerRandom(String name, Color color) {
-        super(name, color);
+    public AIPlayerRandom(String name, Color color, Owner owner) {
+        super(name, color,owner);
     }
     
     @Override

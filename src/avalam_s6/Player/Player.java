@@ -7,6 +7,7 @@ package avalam_s6.Player;
 
 import avalam_s6.Core.Coordinate;
 import avalam_s6.Core.Move;
+import avalam_s6.Core.Owner;
 import java.awt.Color;
 
 /**
@@ -14,10 +15,11 @@ import java.awt.Color;
  * @author TheDoctor
  */
 public abstract class Player implements Player_INTERFACE {
-    private String name;
-    private Color color;
+    protected String name;
+    protected Color color;
+    protected Owner owner;
     
-    public Player(String name, Color color) {
+    public Player(String name, Color color, Owner owner) {
         this.name = name;
         this.color = color;
     }
@@ -27,5 +29,11 @@ public abstract class Player implements Player_INTERFACE {
     
     @Override
     public abstract boolean isAI();
+
+    public Color getColor() {
+        return color;
+    }
+    
+    
     
 }
