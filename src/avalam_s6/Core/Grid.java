@@ -24,7 +24,6 @@ public class Grid {
             for(int i = 0; i < 9; i++){
                 for(int j = 0; j < 9; j++){
                     this.grille[j][i] = new Cell(Integer.parseInt(""+textGrid.charAt(i*9+j))-1);
-                    System.out.println(this.grille[j][i].getSize());
                 }
             }
         } else if (textGrid.length() == 9) {
