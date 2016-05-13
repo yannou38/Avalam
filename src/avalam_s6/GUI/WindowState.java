@@ -10,7 +10,7 @@ package avalam_s6.GUI;
  * @author ducruyy
  */
 public enum WindowState {
-    HOME, // Homepage with access to other windows
+    MAIN, // Homepage with access to other windows
     PLAYERSELECT, //New Custom Game or Load Game
     RULES, //Rules Page
     TUTORIAL, //Tutorial window
