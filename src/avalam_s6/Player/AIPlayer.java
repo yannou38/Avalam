@@ -6,6 +6,7 @@
 package avalam_s6.Player;
 
 import avalam_s6.Core.Grid;
+import avalam_s6.Core.Owner;
 import java.awt.Color;
 
 /**
@@ -20,8 +21,8 @@ public abstract class AIPlayer extends Player{
      * @param name The name of the player.
      * @param color The color of the player's pawns.
      */
-    public AIPlayer(String name, Color color) {
-        super(name,color);
+    public AIPlayer(String name, Color color, Owner owner) {
+        super(name,color,owner);
     }
     
     @Override

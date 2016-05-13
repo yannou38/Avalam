@@ -7,6 +7,7 @@ package avalam_s6.Player;
 
 import avalam_s6.Core.Coordinate;
 import avalam_s6.Core.Move;
+import avalam_s6.Core.Owner;
 import java.awt.Color;
 
 /**
@@ -15,8 +16,8 @@ import java.awt.Color;
  */
 public class ControlledPlayer extends Player{
 
-    public ControlledPlayer(String n, Color c) {
-        super(n,c);
+    public ControlledPlayer(String n, Color c, Owner owner) {
+        super(n,c,owner);
     }
     
     @Override
