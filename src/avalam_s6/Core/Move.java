@@ -65,6 +65,19 @@ public class Move {
     public Player getPlayedBy() {
         return this.playedBy;
     }
+
+    public boolean isValid(Grid grid) {
+        if(this.c_src.isValid()&&this.c_dst.isValid()){
+            if((Math.abs(this.c_src.getX() - this.c_dst.getX()) <=1 ) && (Math.abs(this.c_src.getY() - this.c_dst.getY()) <= 1)) { //adjacence d'une case
+                return(grid.canStack(grid.getCellAt(this.c_src),grid.getCellAt(this.c_dst)));
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        
+    }
     
     
 }

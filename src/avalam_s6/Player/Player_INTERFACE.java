@@ -6,6 +6,7 @@
 package avalam_s6.Player;
 
 import avalam_s6.Core.Coordinate;
+import avalam_s6.Core.Game_INTERFACE;
 import avalam_s6.Core.Move;
 
 /**
@@ -25,4 +26,6 @@ public interface Player_INTERFACE {
      * @return true if the player is an AI, false otherwise.
      */
     public boolean isAI();
+    
+    public void setGame(Game_INTERFACE game);
 }
