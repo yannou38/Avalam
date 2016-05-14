@@ -28,13 +28,12 @@ public class GUI_HomePage extends JPanel {
     private Image background, quickI, playI, settingsI, rulesI, tutoI, exitI;
     String theme;
 
-    public GUI_HomePage(MainFrame f) {
-        this("Default", f);        // passage du mainFrame par référence car la fonction getParent() renverrait null : l'objet n'est pas encore ajouté à la MainFrame.
+    public GUI_HomePage() {
+        this("Default");
     }
 
-    public GUI_HomePage(String theme, MainFrame f) {
+    public GUI_HomePage(String theme) {
         this.theme = theme;
-        this.parent = f;
         initComponents();
     }
 
