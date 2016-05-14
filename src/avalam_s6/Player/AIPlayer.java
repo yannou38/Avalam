@@ -28,6 +28,9 @@ public abstract class AIPlayer extends Player{
     public boolean isAI() {
         return true;
     }
-    
+
+    public void setGame(Game_INTERFACE game) {
+        this.game = game;
+    }
        
 }

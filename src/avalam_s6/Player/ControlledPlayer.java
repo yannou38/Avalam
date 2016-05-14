@@ -6,7 +6,6 @@
 package avalam_s6.Player;
 
 import avalam_s6.Core.Coordinate;
-import avalam_s6.Core.Input;
 import avalam_s6.Core.Move;
 import avalam_s6.Core.Owner;
 import java.awt.Color;
@@ -28,18 +27,7 @@ public class ControlledPlayer extends Player{
 
     @Override
     public Move play() {
-        if(Input.hasClicked()){
-            Move m;
-            Coordinate src = Input.getMouseSrcPosition();
-            Coordinate dest = Input.getMouseDestPosition();
-            m = new Move(src,this.game.getGrid().getCellAt(src).getSize(), Input.getMouseDestPosition(), this.game.getGrid().getCellAt(dest).getSize(),this);
-            if(m.isValid(this.game.getGrid()));
-            return m;
-        } else{
-            return null;
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
 
 }
