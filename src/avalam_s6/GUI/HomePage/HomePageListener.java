@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI.HomePage;
 
+import avalam_s6.GUI.MainFrame;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -34,6 +35,13 @@ public class HomePageListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        switch (this.name){
+            case "quit" :
+                JButton source = (JButton) e.getSource();
+                GUI_HomePage homePage = ((GUI_HomePage)source.getParent());
+                ((MainFrame)homePage.getParent().getParent().getParent().getParent()).dispose();
+                break;
+        }
     }
 
     @Override
@@ -47,8 +55,7 @@ public class HomePageListener implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(icon));
-        
+        ((JButton)e.getSource()).setIcon(new ImageIcon(icon));        
     }
 
     @Override

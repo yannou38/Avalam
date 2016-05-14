@@ -81,7 +81,6 @@ public class GUI_HomePage extends JPanel {
         exit.setBorder(BorderFactory.createEmptyBorder());
         exit.setContentAreaFilled(false);
         exit.addMouseListener(new HomePageListener("quit",theme));
-        exit.addActionListener(new ExitListener(this.parent));
 
         this.setLayout(null);
         Insets insets = this.getInsets();
