@@ -29,8 +29,5 @@ public abstract class AIPlayer extends Player{
         return true;
     }
 
-    public void setGame(Game_INTERFACE game) {
-        this.game = game;
-    }
        
 }

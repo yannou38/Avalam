@@ -32,17 +32,17 @@ public class AIPlayerEasy extends AIPlayer {
         ArrayList<Move> mesCoupsOkValue = new ArrayList<>();
         ArrayList<Move> mesCoupsBadValue = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];
-        for (int i = 0; i < game.getGrid().getWidth(); i++)
+        for (int i = 0; i < this.game.getGrid().getWidth(); i++)
         {
             /**
              *    1 2 3
              *    4 0 5
              *    6 7 8
              */   
-            for (int j = 0; j < game.getGrid().getHeight(); j++)
+            for (int j = 0; j < this.game.getGrid().getHeight(); j++)
             {
                 Coordinate c0 = new Coordinate(j,i);
-                if (c0.isValid() && game.getGrid().getCellAt(c0).getState() == CellState.TOWER)
+                if (c0.isValid() && this.game.getGrid().getCellAt(c0).getState() == CellState.TOWER)
                 {
                     Coordinate c1 = new Coordinate(j-1,i-1);
                     Coordinate c2 = new Coordinate(j,i-1);
@@ -62,21 +62,21 @@ public class AIPlayerEasy extends AIPlayer {
                     tabCoord[7] = c8;
                     for (int k = 0; k <8;k++)
                     {
-                        if (tabCoord[k].isValid() && game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER)
+                        if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER)
                         {
-                            if(game.getGrid().canStack(game.getGrid().getCellAt(c0),game.getGrid().getCellAt(tabCoord[k])))
+                            if(this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k])))
                             {
-                                Move m = new Move(c0,game.getGrid().getCellAt(c0).getSize(),tabCoord[k],game.getGrid().getCellAt(tabCoord[k]).getSize(),this);
+                                Move m = new Move(c0,this.game.getGrid().getCellAt(c0).getSize(),tabCoord[k],this.game.getGrid().getCellAt(tabCoord[k]).getSize(),this);
                                 //we gain a point for free, great !
-                                if (completeTourUsVsOp(game.getGrid().getCellAt(c0),game.getGrid().getCellAt(tabCoord[k])) || createAloneUs(c0,tabCoord[k] )){
+                                if (completeTourUsVsOp(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k])) || createAloneUs(c0,tabCoord[k] )){
                                     mesCoupsHighValue.add(m);
                                 }
                                 //we can secure a point
-                                else if (completeTourUs(game.getGrid().getCellAt(c0),game.getGrid().getCellAt(tabCoord[k]))){
+                                else if (completeTourUs(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k]))){
                                      mesCoupsOkValue.add(m);
                                 }
                                 //whatever 
-                                else if(completeTourOp(game.getGrid().getCellAt(c0),game.getGrid().getCellAt(tabCoord[k])) || createAloneOp(c0,tabCoord[k] )){
+                                else if(completeTourOp(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k])) || createAloneOp(c0,tabCoord[k] )){
                                      mesCoupsBadValue.add(m);
                                 }
                                 else{
@@ -180,8 +180,8 @@ public class AIPlayerEasy extends AIPlayer {
         tabCoord[6] = c7;
         tabCoord[7] = c8;
         for (int k = 0; k < 8; k++) {
-            if (tabCoord[k].isValid() && game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER) {
-                if(game.getGrid().canStack(game.getGrid().getCellAt(c0),game.getGrid().getCellAt(tabCoord[k]))){
+            if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER) {
+                if(this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k]))){
                     return false;
                 }
             }
@@ -216,13 +216,13 @@ public class AIPlayerEasy extends AIPlayer {
         tabCoord[6] = c7;
         tabCoord[7] = c8;
         for (int k = 0; k < 8; k++) {
-            game.getGrid().moveCell(c0, dest);
-            if (tabCoord[k].isValid() && game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER
-                    && this.owner == game.getGrid().getCellAt(tabCoord[k]).getOwner() && alone(tabCoord[k])){
-                    game.undo();
+            this.game.getGrid().moveCell(c0, dest);
+            if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER
+                    && this.owner == this.game.getGrid().getCellAt(tabCoord[k]).getOwner() && alone(tabCoord[k])){
+                    this.game.undo();
                     return true;
                 }
-            game.undo();
+            this.game.undo();
         }
         
         return false;
@@ -255,13 +255,13 @@ public class AIPlayerEasy extends AIPlayer {
         tabCoord[6] = c7;
         tabCoord[7] = c8;
         for (int k = 0; k < 8; k++) {
-            game.getGrid().moveCell(c0, dest);
-            if (tabCoord[k].isValid() && game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER
-                    && this.owner != game.getGrid().getCellAt(tabCoord[k]).getOwner() && alone(tabCoord[k])){ 
-                    game.undo();
+            this.game.getGrid().moveCell(c0, dest);
+            if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER
+                    && this.owner != this.game.getGrid().getCellAt(tabCoord[k]).getOwner() && alone(tabCoord[k])){ 
+                    this.game.undo();
                     return true;
                 }
-            game.undo();
+            this.game.undo();
         }
         
         return false;
