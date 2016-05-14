@@ -6,7 +6,7 @@
 package avalam_s6;
 
 
-import avalam_s6.GUI.mainFrame;
+import avalam_s6.GUI.MainFrame;
 import javax.swing.SwingUtilities;
 /**
  *
@@ -18,6 +18,6 @@ public class Avalam_S6{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new mainFrame());        
+        SwingUtilities.invokeLater(new MainFrame());        
     }
 }

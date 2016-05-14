@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI.HomePage;
 
+import avalam_s6.GUI.MainFrame;
 import java.awt.*;
 import java.io.File;
 import java.util.logging.Level;
@@ -22,16 +23,18 @@ import javax.swing.*;
  */
 public class GUI_HomePage extends JPanel {
 
+    MainFrame parent;
     JButton quick, play, settings, rules, tuto, exit;
     private Image background, quickI, playI, settingsI, rulesI, tutoI, exitI;
     String theme;
 
-    public GUI_HomePage() {
-        this("Default");
+    public GUI_HomePage(MainFrame f) {
+        this("Default", f);        // passage du mainFrame par référence car la fonction getParent() renverrait null : l'objet n'est pas encore ajouté à la MainFrame.
     }
 
-    public GUI_HomePage(String theme) {
+    public GUI_HomePage(String theme, MainFrame f) {
         this.theme = theme;
+        this.parent = f;
         initComponents();
     }
 
@@ -78,6 +81,7 @@ public class GUI_HomePage extends JPanel {
         exit.setBorder(BorderFactory.createEmptyBorder());
         exit.setContentAreaFilled(false);
         exit.addMouseListener(new HomePageListener("quit",theme));
+        exit.addActionListener(new ExitListener(this.parent));
 
         this.setLayout(null);
         Insets insets = this.getInsets();
