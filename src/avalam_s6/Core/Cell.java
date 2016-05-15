@@ -41,11 +41,14 @@ public class Cell {
      * @param p the pawn added to the top of tower
      */
     public void add(Owner p) {
-        this.contenu.add(p);
-        if (this.contenu.size() == 5)
-            this.etat = CellState.FULL; // NORMAL
-        if (this.contenu.size() == 1)
-            this.etat = CellState.TOWER; // UNDO
+        if (this.contenu.size() < 5)
+        {
+            this.contenu.add(p);
+            if (this.contenu.size() == 5)
+                this.etat = CellState.FULL; // NORMAL
+            if (this.contenu.size() == 1)
+                this.etat = CellState.TOWER; // UNDO
+        }
     }
     
 
@@ -56,11 +59,15 @@ public class Cell {
      * @return 
      */
     public Owner removeAt(int i) {
-        if(this.contenu.size() == 5)
-            this.etat = CellState.TOWER; 
-        if(this.contenu.size() == 1)
-            this.etat = CellState.EMPTY;
-        return this.contenu.remove(i);
+        if (this.contenu.size() > 0)
+        {
+            if(this.contenu.size() == 5)
+                this.etat = CellState.TOWER; 
+            if(this.contenu.size() == 1)
+                this.etat = CellState.EMPTY;
+            return this.contenu.remove(i);
+        }
+        return null;
     }
     
     /**
