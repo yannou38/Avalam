@@ -8,14 +8,17 @@ package avalam_s6.GUI;
 import avalam_s6.GUI.HomePage.GUI_HomePage;
 import avalam_s6.GUI.LocalAvalamGame.GUI_LAG;
 import java.awt.Dimension;
+import java.awt.GraphicsEnvironment;
+import static java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 /**
  *
  * @author sazeratj
  */
-public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable{
+public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
     WindowState wState;
+    WindowRenderMode wrm;
     JPanel[] panelList;
     
     public Main_Frame() {
@@ -23,20 +26,38 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable{
     }
     
     public Main_Frame(String theme, WindowRenderMode renderMode) {
+        /* UPDATE VARIABLES */
         this.panelList = new JPanel[2]; // TODO : add more JPanels.
         this.wState = WindowState.MAIN;
-        this.initFrame(theme);
-        this.setRenderMode(renderMode);  
-        System.out.println(this.wState.getValue());
+        wrm = renderMode;
+        /* FUNCTION CALL */
+        this.initFrame(theme);        
+        this.setRenderMode(); 
+        //System.out.println(this.wState.getValue());
+        /* ADD KB DISPATCHER */
+        getCurrentKeyboardFocusManager().addKeyEventDispatcher(new RenderKeyboardDispatcher());
     }
     
-    public void setRenderMode(WindowRenderMode r) {
-        if (r == WindowRenderMode.FULLSCREEN)
-            this.setUndecorated(true);
-        else
+    public void setRenderMode() {
+        GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
+        if (this.wrm == WindowRenderMode.FULLSCREEN) {
+            GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(this);
+        } else {
             this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        }
+        this.validate();
         this.setMinimumSize(new Dimension(1280, 720));
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //this.requestFocus();
+    }
+    
+    public void toggleWRM() {
+        if (this.wrm == WindowRenderMode.FULLSCREEN) {
+            this.wrm = WindowRenderMode.WINDOWED;
+        } else {
+            this.wrm = WindowRenderMode.FULLSCREEN;
+        }
+        setRenderMode();
     }
     
     public void initFrame(String theme) {
