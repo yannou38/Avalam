@@ -16,18 +16,13 @@ import java.awt.event.MouseListener;
  */
 public class LAG_MouseListener implements MouseListener{
 
-    Coordinate c;
-    
-    public LAG_MouseListener(Coordinate c){
-        this.c=c;
-    }
-    
+    private static final int SIZE_OF_CELL = 100;
     @Override
     public void mouseClicked(MouseEvent e) {
-        /*Input.setButtonClicked(); 
-        Coordinate pos = new Coordinate(e.getX()%this.sizeOfCell,e.getY()%this.sizeOfCell);
+        Input.setButtonClicked(); 
+        Coordinate pos = new Coordinate(e.getX()%this.SIZE_OF_CELL,e.getY()%this.SIZE_OF_CELL);
         if(pos.isValid())
-            Input.updateMouseSrcPosition(pos);*/
+            Input.updateMouseSrcPosition(pos);
     }
 
     @Override
@@ -37,12 +32,12 @@ public class LAG_MouseListener implements MouseListener{
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        /*if(Input.isButtonClicked()){
+        if(Input.isButtonClicked()){
             Input.setButtonReleased();
-            Coordinate pos = new Coordinate(e.getX()%this.sizeOfCell, e.getY()%this.sizeOfCell);
+            Coordinate pos = new Coordinate(e.getX()%this.SIZE_OF_CELL, e.getY()%this.SIZE_OF_CELL);
             if(pos.isValid())
                 Input.updateMouseDestPosition(pos);
-        }*/
+        }
     }
 
     @Override
@@ -55,7 +50,4 @@ public class LAG_MouseListener implements MouseListener{
         
     }
     
-    public void setSizeOfCell(int size){
-        //this.sizeOfCell = size;
-    }
 }
