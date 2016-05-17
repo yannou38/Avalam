@@ -32,12 +32,12 @@ public class ControlledPlayer extends Player{
             Move m;
             Coordinate src = Input.getMouseSrcPosition();
             Coordinate dest = Input.getMouseDestPosition();
-            int srcSize = this.game.getGrid().getCellAt(src).getSize();
-            int destSize = this.game.getGrid().getCellAt(dest).getSize();
+            int srcSize = Input.getSrcSize();
+            int destSize = Input.getDestSize();
             m = new Move(src,srcSize, dest, destSize,this);
             Input.updateMouseDestPosition(new Coordinate());
             Input.updateMouseSrcPosition(new Coordinate());
-            if(m.isValid(this.game.getGrid()));
+            //if(m.isValid(this.game.getGrid())); <= move to Core
             return m;
         } else{
             return null;
