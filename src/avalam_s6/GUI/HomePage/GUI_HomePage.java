@@ -24,10 +24,8 @@ import javax.swing.*;
  * access options, check rules & tutorial, etc
  */
 public class GUI_HomePage extends JPanel {
-
-    Main_Frame parent;
     JButton quick, play, settings, rules, tuto, exit;
-    private Image background, quickI, playI, settingsI, rulesI, tutoI, exitI;
+    public Image background, quickI, playI, settingsI, rulesI, tutoI, exitI;
     String theme;
 
     public GUI_HomePage() {
@@ -84,61 +82,19 @@ public class GUI_HomePage extends JPanel {
         exit.addMouseListener(new HomePageListener("quit",theme));
 
         this.setLayout(null);
-        Insets insets = this.getInsets();
-
-        add(quick);
-        Dimension size = quick.getPreferredSize();
-        quick.setBounds(302 + insets.left, 302 + insets.top, size.width, size.height);
-
-        add(play);
-        size = play.getPreferredSize();
-        play.setBounds(302 + insets.left, 402 + insets.top, size.width, size.height);
-
-        add(rules);
-        size = rules.getPreferredSize();
-        rules.setBounds(302 + insets.left, 502 + insets.top, size.width, size.height);
-
-        add(tuto);
-        size = tuto.getPreferredSize();
-        tuto.setBounds(529 + insets.left, 502 + insets.top, size.width, size.height);
-
-        add(settings);
-        size = settings.getPreferredSize();
-        settings.setBounds(755 + insets.left, 502 + insets.top, size.width, size.height);
-
-        add(exit);
-        size = exit.getPreferredSize();
-        exit.setBounds(1107 + insets.left, 615 + insets.top, size.width, size.height);
+        this.add(quick);
+        this.add(play);
+        this.add(rules);
+        this.add(tuto);
+        this.add(settings);
+        this.add(exit);        
+        this.addComponentListener(new HomePageAdapterListener(this));
         
     }
 
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(background, 0, 0, this.getWidth(),this.getHeight(),null);
-        Insets insets = this.getInsets();
-        //1280*720 => taille de base
-        double ratioW = (double)this.getWidth()/(double)1280;
-        double ratioH = (double)this.getHeight()/(double)720;
         
-        
-        
-        /*Dimension size = quick.getPreferredSize();
-        System.out.println(ratioW +" "+ratioH);
-        quick.setBounds((int)round((302 + insets.left)*ratioW), ((int)round((302 + insets.top)*ratioH)), size.width, size.height);
-        quick.setSize((int)round(quick.getWidth()*ratioW), (int)round(quick.getHeight()*ratioH));*/
-                
-        
-        
-        /*size = play.getPreferredSize();
-        play.setBounds(302 + insets.left, 402 + insets.top, size.width, size.height);
-        size = rules.getPreferredSize();
-        rules.setBounds(302 + insets.left, 502 + insets.top, size.width, size.height);
-        size = tuto.getPreferredSize();
-        tuto.setBounds(529 + insets.left, 502 + insets.top, size.width, size.height);
-        size = settings.getPreferredSize();
-        settings.setBounds(755 + insets.left, 502 + insets.top, size.width, size.height);
-        size = exit.getPreferredSize();
-        exit.setBounds(1107 + insets.left, 615 + insets.top, size.width, size.height);*/
     }
-
 }
