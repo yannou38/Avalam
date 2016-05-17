@@ -109,7 +109,7 @@ public class GUI_HomePage extends JPanel {
         add(exit);
         size = exit.getPreferredSize();
         exit.setBounds(1107 + insets.left, 615 + insets.top, size.width, size.height);
-
+        
     }
 
     @Override
@@ -122,10 +122,12 @@ public class GUI_HomePage extends JPanel {
         
         
         
-        Dimension size = quick.getPreferredSize();
+        /*Dimension size = quick.getPreferredSize();
         System.out.println(ratioW +" "+ratioH);
         quick.setBounds((int)round((302 + insets.left)*ratioW), ((int)round((302 + insets.top)*ratioH)), size.width, size.height);
-        quick.setSize((int)round(quick.getWidth()*ratioW), (int)round(quick.getHeight()*ratioH));
+        quick.setSize((int)round(quick.getWidth()*ratioW), (int)round(quick.getHeight()*ratioH));*/
+                
+        
         
         /*size = play.getPreferredSize();
         play.setBounds(302 + insets.left, 402 + insets.top, size.width, size.height);
