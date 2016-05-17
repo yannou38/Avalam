@@ -12,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.util.Stack;
 import javax.swing.Timer;
 import avalam_s6.GUI.GUI_INTERFACE;
+import avalam_s6.GUI.LocalAvalamGame.GUI_LAG;
+import avalam_s6.GUI.Main_Frame;
 import avalam_s6.Player.AIPlayer;
 
 /**
@@ -114,18 +116,22 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     private void playATurn() {
         if(this.isTurnFinished){
             this.nbTurns++;
+            System.out.println(this.nbTurns);
             this.current_player = this.nbTurns%NB_PLAYERS;
             int w = winCheck();
             switch (w) {
                 case 1:
                 case 2:
                 case 3:
+                    System.out.println("y");
                     t.stop();
-                    this.winningProcedure(w);
-                    this.gui.render(); // we don't need to play after winning.
+                    ((Main_Frame)((GUI_LAG)this.gui).getParent()).setVictoryScreen(this.players[0]);
+                    /*this.winningProcedure(w);
+                    this.gui.render(); // we don't need to play after winning.*/
                     return;
                 case 0:
                 default:
+                    System.out.println("z");
                     this.isTurnFinished = false;
                     break;
             }
@@ -133,6 +139,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         if(this.players[this.current_player].isAI()) {
             ((AIPlayer)this.players[this.current_player]).setGame(this);
         }
+        System.out.println("Joueur : "+this.current_player);
         Move m = this.players[this.current_player].play();
         if(m != null){
             this.grid.moveCell(m.getC_src(), m.getC_dst());
