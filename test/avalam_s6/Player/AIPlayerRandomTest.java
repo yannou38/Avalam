@@ -6,6 +6,8 @@
 package avalam_s6.Player;
 
 import avalam_s6.Core.Move;
+import avalam_s6.Core.Owner;
+import java.awt.Color;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -44,12 +46,8 @@ public class AIPlayerRandomTest {
     @Test
     public void testPlay() {
         System.out.println("play");
-        AIPlayerRandom instance = null;
-        Move expResult = null;
+        AIPlayerRandom instance = new AIPlayerRandom("Test",Color.BLACK,Owner.PLAYER_1);
         Move result = instance.play();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

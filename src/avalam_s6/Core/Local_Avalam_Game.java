@@ -137,6 +137,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         if(m != null){
             this.grid.moveCell(m.getC_src(), m.getC_dst());
             this.history.add(m);
+            this.isTurnFinished = true;
         }        
         this.gui.render();
     }
