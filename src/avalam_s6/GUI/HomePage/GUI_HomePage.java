@@ -8,6 +8,8 @@ package avalam_s6.GUI.HomePage;
 import avalam_s6.GUI.Main_Frame;
 import java.awt.*;
 import java.io.File;
+import static java.lang.Math.floor;
+import static java.lang.Math.round;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -112,7 +114,29 @@ public class GUI_HomePage extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(background, 0, 0, null);
+        g.drawImage(background, 0, 0, this.getWidth(),this.getHeight(),null);
+        Insets insets = this.getInsets();
+        //1280*720 => taille de base
+        double ratioW = (double)this.getWidth()/(double)1280;
+        double ratioH = (double)this.getHeight()/(double)720;
+        
+        
+        
+        Dimension size = quick.getPreferredSize();
+        System.out.println(ratioW +" "+ratioH);
+        quick.setBounds((int)round((302 + insets.left)*ratioW), ((int)round((302 + insets.top)*ratioH)), size.width, size.height);
+        quick.setSize((int)round(quick.getWidth()*ratioW), (int)round(quick.getHeight()*ratioH));
+        
+        /*size = play.getPreferredSize();
+        play.setBounds(302 + insets.left, 402 + insets.top, size.width, size.height);
+        size = rules.getPreferredSize();
+        rules.setBounds(302 + insets.left, 502 + insets.top, size.width, size.height);
+        size = tuto.getPreferredSize();
+        tuto.setBounds(529 + insets.left, 502 + insets.top, size.width, size.height);
+        size = settings.getPreferredSize();
+        settings.setBounds(755 + insets.left, 502 + insets.top, size.width, size.height);
+        size = exit.getPreferredSize();
+        exit.setBounds(1107 + insets.left, 615 + insets.top, size.width, size.height);*/
     }
 
 }
