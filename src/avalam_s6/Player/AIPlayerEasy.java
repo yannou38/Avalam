@@ -34,6 +34,7 @@ public class AIPlayerEasy extends AIPlayer {
         ArrayList<Move> mesCoupsMehValue = new ArrayList<>();
         ArrayList<Move> mesCoupsBadValue = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];
+        Grid g = game.getGrid();
         for (int i = 0; i < this.game.getGrid().getWidth(); i++)
         {
             /**
@@ -93,25 +94,26 @@ public class AIPlayerEasy extends AIPlayer {
                 }
             }
         }
+        game.setGrid(g);
         Random r = new Random();
         if (!mesCoupsHighValue.isEmpty()){
             System.out.println("Je joue un coup genial");
-            return mesCoupsHighValue.get(r.nextInt(mesCoups.size())-1);
+            return mesCoupsHighValue.get(r.nextInt(mesCoupsHighValue.size())-1);
         }
         if(!mesCoupsOkValue.isEmpty()){
             System.out.println("Je joue un coup ok");
-            return mesCoupsOkValue.get(r.nextInt(mesCoups.size())-1);
+            return mesCoupsOkValue.get(r.nextInt(mesCoupsOkValue.size())-1);
         }
         if(!mesCoupsMehValue.isEmpty()){
-            System.out.println("Je joue un coup ok");
-            return mesCoupsMehValue.get(r.nextInt(mesCoups.size())-1);
+            System.out.println("Je joue un coup meh");
+            return mesCoupsMehValue.get(r.nextInt(mesCoupsMehValue.size())-1);
         }
         if(!mesCoups.isEmpty()){
             System.out.println("Je joue un coup");
             return mesCoups.get(r.nextInt(mesCoups.size())-1);
         }
         System.out.println("Je joue un mauvais coup");
-        return mesCoupsBadValue.get(r.nextInt(mesCoups.size())-1);
+        return mesCoupsBadValue.get(r.nextInt(mesCoupsBadValue.size())-1);
     }
 
 }

@@ -47,6 +47,7 @@ public interface Game_INTERFACE {
      * @return the game's grid.
      */
     public Grid getGrid();
+    public void setGrid(Grid g);
     
     /**
      * Get the current Player.

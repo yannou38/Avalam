@@ -83,6 +83,11 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     public Grid getGrid() {
         return this.grid;
     }
+    
+    @Override
+    public void setGrid(Grid g) {
+        this.grid = g;
+    }
 
     @Override
     public Player getCurrentPlayer() {
