@@ -77,9 +77,21 @@ public abstract class AIPlayer extends Player{
         }
         return false;
     }
+    
+    /**
+     * bad value
+    */
+    protected boolean suppressAPawn(Cell a, Cell b) {
+        if (this.owner !=b.getOwner()){
+                if (a.getSize() + b.getSize() < 4) {
+                    return true;
+            }
+        }
+        return false;
+    }
 
     /**
-     * Max value, we created a tower
+     * check if a coordinate is alone
      * @param c0
      * @return true if the coordinate is alone (no move possible) else false
      */
@@ -119,6 +131,12 @@ public abstract class AIPlayer extends Player{
         return true;
     }
     
+    /**
+     * best value
+     * @param c0
+     * @param dest
+     * @return 
+     */
     protected boolean createAloneUs(Coordinate c0, Coordinate dest)
     {
         Coordinate[] tabCoord = new Coordinate[8];
@@ -147,6 +165,8 @@ public abstract class AIPlayer extends Player{
         tabCoord[7] = c8;
         for (int k = 0; k < 8; k++) {
             this.game.getGrid().moveCell(c0, dest);
+            Move m = new Move(c0,this.game.getGrid().getCellAt(c0).getSize(),dest,this.game.getGrid().getCellAt(dest).getSize(),this);
+            this.game.addMoveToHistory(m);
             if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER
                     && this.owner == this.game.getGrid().getCellAt(tabCoord[k]).getOwner() && alone(tabCoord[k])){
                     this.game.undo();
@@ -158,6 +178,12 @@ public abstract class AIPlayer extends Player{
         return false;
     }
     
+    /**
+     * bad
+     * @param c0
+     * @param dest
+     * @return 
+     */
      protected boolean createAloneOp(Coordinate c0, Coordinate dest)
     {
         Coordinate[] tabCoord = new Coordinate[8];
@@ -186,6 +212,8 @@ public abstract class AIPlayer extends Player{
         tabCoord[7] = c8;
         for (int k = 0; k < 8; k++) {
             this.game.getGrid().moveCell(c0, dest);
+            Move m = new Move(c0,this.game.getGrid().getCellAt(c0).getSize(),dest,this.game.getGrid().getCellAt(dest).getSize(),this);
+            this.game.addMoveToHistory(m);
             if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER
                     && this.owner != this.game.getGrid().getCellAt(tabCoord[k]).getOwner() && alone(tabCoord[k])){ 
                     this.game.undo();

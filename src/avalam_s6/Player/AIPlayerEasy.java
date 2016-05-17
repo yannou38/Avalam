@@ -27,9 +27,11 @@ public class AIPlayerEasy extends AIPlayer {
      */
     @Override
    public Move play() {
+       System.out.println("Je suis "+name+" je vais jouer des coups faciles");
         ArrayList<Move> mesCoups = new ArrayList<>();
         ArrayList<Move> mesCoupsHighValue = new ArrayList<>();
         ArrayList<Move> mesCoupsOkValue = new ArrayList<>();
+        ArrayList<Move> mesCoupsMehValue = new ArrayList<>();
         ArrayList<Move> mesCoupsBadValue = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];
         for (int i = 0; i < this.game.getGrid().getWidth(); i++)
@@ -79,6 +81,9 @@ public class AIPlayerEasy extends AIPlayer {
                                 else if(completeTourOp(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k])) || createAloneOp(c0,tabCoord[k] )){
                                      mesCoupsBadValue.add(m);
                                 }
+                                else if(suppressAPawn(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k]))){
+                                    mesCoupsMehValue.add(m);
+                                }
                                 else{
                                       mesCoups.add(m);
                                 }
@@ -90,14 +95,22 @@ public class AIPlayerEasy extends AIPlayer {
         }
         Random r = new Random();
         if (!mesCoupsHighValue.isEmpty()){
+            System.out.println("Je joue un coup genial");
             return mesCoupsHighValue.get(r.nextInt(mesCoups.size())-1);
         }
         if(!mesCoupsOkValue.isEmpty()){
+            System.out.println("Je joue un coup ok");
             return mesCoupsOkValue.get(r.nextInt(mesCoups.size())-1);
         }
-        if(!mesCoups.isEmpty()){
-                return mesCoups.get(r.nextInt(mesCoups.size())-1);
+        if(!mesCoupsMehValue.isEmpty()){
+            System.out.println("Je joue un coup ok");
+            return mesCoupsMehValue.get(r.nextInt(mesCoups.size())-1);
         }
+        if(!mesCoups.isEmpty()){
+            System.out.println("Je joue un coup");
+            return mesCoups.get(r.nextInt(mesCoups.size())-1);
+        }
+        System.out.println("Je joue un mauvais coup");
         return mesCoupsBadValue.get(r.nextInt(mesCoups.size())-1);
     }
 
