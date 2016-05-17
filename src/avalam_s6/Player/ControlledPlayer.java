@@ -37,7 +37,6 @@ public class ControlledPlayer extends Player{
             m = new Move(src,srcSize, dest, destSize,this);
             Input.updateMouseDestPosition(new Coordinate());
             Input.updateMouseSrcPosition(new Coordinate());
-            //if(m.isValid(this.game.getGrid())); <= move to Core
             return m;
         } else{
             return null;

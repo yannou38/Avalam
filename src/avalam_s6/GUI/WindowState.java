@@ -20,6 +20,6 @@ public enum WindowState {
     
     private final int id;
     WindowState(int id) { this.id = id; }
-    public int getValue() { return id; }
+    public int getValue() { return this.id; }
     
 }

@@ -5,7 +5,6 @@
  */
 package avalam_s6.GUI;
 
-import java.awt.Container;
 import java.awt.KeyEventDispatcher;
 import java.awt.event.KeyEvent;
 import static java.awt.event.KeyEvent.VK_F11;
@@ -25,7 +24,7 @@ public class RenderKeyboardDispatcher implements KeyEventDispatcher {
     @Override
     public boolean dispatchKeyEvent(KeyEvent e) {
         if (e.getID() == KeyEvent.KEY_RELEASED && e.getKeyCode() == VK_F11) {
-            mainframe.toggleWRM();
+            this.mainframe.toggleWRM();
         }
         return false;
     }

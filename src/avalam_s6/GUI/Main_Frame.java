@@ -29,7 +29,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         /* UPDATE VARIABLES */
         this.panelList = new JPanel[2]; // TODO : add more JPanels.
         this.wState = WindowState.MAIN;
-        wrm = renderMode;
+        this.wrm = renderMode;
         /* FUNCTION CALL */
         this.initFrame(theme);        
         this.setRenderMode(); 
