@@ -26,10 +26,4 @@ public interface Player_INTERFACE {
      * @return true if the player is an AI, false otherwise.
      */
     public boolean isAI();
-    
-    /**
-     * gives the player access to the game so he can check its moves.
-     * @param game the game. (you lost it)
-     */
-    public void setGame(Game_INTERFACE game);
 }

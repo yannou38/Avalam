@@ -90,15 +90,15 @@ public class AIPlayerEasy extends AIPlayer {
         }
         Random r = new Random();
         if (!mesCoupsHighValue.isEmpty()){
-            return mesCoupsHighValue.get(r.nextInt(mesCoups.size()));
+            return mesCoupsHighValue.get(r.nextInt(mesCoups.size())-1);
         }
         if(!mesCoupsOkValue.isEmpty()){
-            return mesCoupsOkValue.get(r.nextInt(mesCoups.size()));
+            return mesCoupsOkValue.get(r.nextInt(mesCoups.size())-1);
         }
         if(!mesCoups.isEmpty()){
-                return mesCoups.get(r.nextInt(mesCoups.size()));
+                return mesCoups.get(r.nextInt(mesCoups.size())-1);
         }
-        return mesCoupsBadValue.get(r.nextInt(mesCoups.size()));
+        return mesCoupsBadValue.get(r.nextInt(mesCoups.size())-1);
     }
 
 }

@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.Stack;
 import javax.swing.Timer;
 import avalam_s6.GUI.GUI_INTERFACE;
+import avalam_s6.Player.AIPlayer;
 
 /**
  *
@@ -48,8 +49,10 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     //TODO: Check user is able to undo (GUI check if history is empty and call or not this function)
     @Override
     public void undo() {
-        this.cancelled_moves.add(this.history.pop());
-        this.grid.undoMove(this.cancelled_moves.lastElement());
+        if(! history.isEmpty()) {
+            this.cancelled_moves.add(this.history.pop());
+            this.grid.undoMove(this.cancelled_moves.lastElement());
+        }
     }
         
     //TODO: Check user is able to redo (GUI check if cancelled_moves is empty and call or not this function)
@@ -126,6 +129,9 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
                     this.isTurnFinished = false;
                     break;
             }
+        }
+        if(this.players[this.current_player].isAI()) {
+            ((AIPlayer)this.players[this.current_player]).setGame(this);
         }
         Move m = this.players[this.current_player].play();
         if(m != null){

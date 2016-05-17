@@ -10,9 +10,7 @@ import avalam_s6.Core.*;
 import avalam_s6.Exceptions.GridSizeException;
 import avalam_s6.GUI.HomePage.GUI_HomePage;
 import avalam_s6.GUI.Main_Frame;
-import avalam_s6.Player.AIPlayerRandom;
-import avalam_s6.Player.ControlledPlayer;
-import avalam_s6.Player.Player;
+import avalam_s6.Player.*;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
@@ -70,8 +68,8 @@ public class GUI_LAG extends JPanel {
 
     public void initGame() {
         try {
-            Player p1 = new ControlledPlayer("Jon Doe", Color.WHITE, Owner.PLAYER_1);
-            Player p2 = new AIPlayerRandom("Bot_Frank", Color.BLACK, Owner.PLAYER_2);
+            Player p1 = new AIPlayerEasy("Jon Doe", Color.WHITE, Owner.PLAYER_1);
+            Player p2 = new AIPlayerEasy("Bot_Frank", Color.BLACK, Owner.PLAYER_2);
             Level_Parser myParser = new Level_Parser("default");
             Grid g = new Grid(myParser.readLevel()); // IOException | GridSizeException | NumberFormatException
             Container mainFrame = this.getParent().getParent().getParent().getParent();
