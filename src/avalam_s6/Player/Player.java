@@ -33,7 +33,7 @@ public abstract class Player implements Player_INTERFACE {
     public abstract boolean isAI();
 
     public Color getColor() {
-        return color;
+        return this.color;
     }
     
     @Override

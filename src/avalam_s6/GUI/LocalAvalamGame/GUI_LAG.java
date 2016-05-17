@@ -89,16 +89,18 @@ public class GUI_LAG extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
+
         
-        /*g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
+        /*
+        g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
         int scaleW = this.getWidth() / 8;
         int scaleH = 2 * (this.getHeight() / 3);
-        if (player1IsPlaying) {
-            g.drawImage(player_playing, 3, this.getHeight() / 5, scaleW, scaleH, null);
-            g.drawImage(player_waiting, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
+        if (this.player1IsPlaying) {
+            g.drawImage(this.player_playing, 3, this.getHeight() / 5, scaleW, scaleH, null);
+            g.drawImage(this.player_waiting, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
         } else {
-            g.drawImage(player_waiting, 3, this.getHeight() / 5, scaleW, scaleH, null);
-            g.drawImage(player_playing, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
+            g.drawImage(this.player_waiting, 3, this.getHeight() / 5, scaleW, scaleH, null);
+            g.drawImage(this.player_playing, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
         }
         int bScaleW = 2 * (this.getWidth() / 3);
         int bScaleH = 2 * (this.getHeight() / 3);
@@ -130,7 +132,5 @@ public class GUI_LAG extends JPanel {
                 }
             }
         }
-    
-    
     }
 }
