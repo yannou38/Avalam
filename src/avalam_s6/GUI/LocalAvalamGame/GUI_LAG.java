@@ -33,6 +33,7 @@ public class GUI_LAG extends JPanel {
     private Game_INTERFACE game;
     String theme;
     boolean player1IsPlaying;
+    JPanel grille;
 
     private Image background, cancel, player_playing, player_waiting, redo, retour, save, board, black, white, empty;
     JButton[][] buttonmap = new JButton[9][9];
@@ -70,7 +71,7 @@ public class GUI_LAG extends JPanel {
         ImageIcon base = new ImageIcon(empty);
         JPanel panel = new JPanel();
         panel.setBackground(new Color(0, 0, 0, 0));
-        panel.setLayout(new GridLayout(9, 9, 4, 4));
+        panel.setLayout(new GridLayout(9, 9, 2, 2));
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 c.setX(i);
@@ -85,7 +86,10 @@ public class GUI_LAG extends JPanel {
                 panel.add(b);
             }
         }
+        this.setLayout(null);
+        this.grille = panel;
         this.add(panel);
+        this.addComponentListener(new LAG_AdapterListener(this));
     }
 
     public void initGame() {
@@ -109,24 +113,20 @@ public class GUI_LAG extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-
+        g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
         
-         g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
-         int scaleW = this.getWidth() / 8;
-         int scaleH = 2 * (this.getHeight() / 3);
-         if (this.player1IsPlaying) {
-         g.drawImage(this.player_playing, 3, this.getHeight() / 5, scaleW, scaleH, null);
-         g.drawImage(this.player_waiting, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
-         } else {
-         g.drawImage(this.player_waiting, 3, this.getHeight() / 5, scaleW, scaleH, null);
-         g.drawImage(this.player_playing, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
-         }
-         int bScaleW = 2 * (this.getWidth() / 3);
-         int bScaleH = 2 * (this.getHeight() / 3);
-         g.drawImage(this.board, (this.getWidth() / 2) - (bScaleW / 2), this.getHeight() / 5, bScaleW, bScaleH, null);
-        /*g.setColor(Color.blue);
-        g.fillRect(0, 0, this.getWidth(), this.getHeight());*/
-
+        int scaleW = this.getWidth() / 8;
+        int scaleH = 2 * (this.getHeight() / 3);
+        if (this.player1IsPlaying) {
+            g.drawImage(this.player_playing, 3, this.getHeight() / 5, scaleW, scaleH, null);
+            g.drawImage(this.player_waiting, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
+        } else {
+            g.drawImage(this.player_waiting, 3, this.getHeight() / 5, scaleW, scaleH, null);
+            g.drawImage(this.player_playing, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
+        }
+        int bScaleW = 2 * (this.getWidth() / 3);
+        int bScaleH = 2 * (this.getHeight() / 3);
+        g.drawImage(this.board, (this.getWidth() / 2) - (bScaleW / 2), this.getHeight() / 5, bScaleW, bScaleH, null);
         Grid gr = this.game.getGrid();
         Coordinate c = new Coordinate();
         ImageIcon wh = new ImageIcon(this.white);
@@ -141,18 +141,23 @@ public class GUI_LAG extends JPanel {
                     case PLAYER_1:
                         buttonmap[i][j].setIcon(wh);
                         buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
-                        
+
                         //g.drawImage(this.white, i * 60, j * 60, null);
                         break;
-                    case PLAYER_2: 
+                    case PLAYER_2:
                         buttonmap[i][j].setIcon(bl);
                         buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
                         //g.drawImage(this.black, i * 60, j * 60, null);
 
                         break;
                     case NO_OWNER:
-                        buttonmap[i][j].setIcon(em);
-                        buttonmap[i][j].setText("");
+
+                        if (gr.getCellAt(c).getState() == CellState.RESTRICTED) {
+                            buttonmap[i][j].setIcon(null);
+                        } else {
+                            buttonmap[i][j].setIcon(em);
+                            buttonmap[i][j].setText("");
+                        }
                         //g.drawImage(this.empty, i * 60, j * 60, null);
 
                         break;
