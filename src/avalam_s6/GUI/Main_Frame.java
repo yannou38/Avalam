@@ -19,17 +19,24 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable{
     JPanel[] panelList;
     
     public Main_Frame() {
-        this("Default");
+        this("Default",WindowRenderMode.WINDOWED);
     }
     
-    public Main_Frame(String theme) {
+    public Main_Frame(String theme, WindowRenderMode renderMode) {
         this.panelList = new JPanel[2]; // TODO : add more JPanels.
         this.wState = WindowState.MAIN;
         this.initFrame(theme);
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(1280, 720));
-        setResizable(false);  
+        this.setRenderMode(renderMode);  
         System.out.println(this.wState.getValue());
+    }
+    
+    public void setRenderMode(WindowRenderMode r) {
+        if (r == WindowRenderMode.FULLSCREEN)
+            this.setUndecorated(true);
+        else
+            this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        this.setMinimumSize(new Dimension(1280, 720));
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     
     public void initFrame(String theme) {
