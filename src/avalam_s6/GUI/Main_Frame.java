@@ -35,7 +35,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable{
             this.setUndecorated(true);
         else
             this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        this.setMinimumSize(new Dimension(1280, 720));
+        this.setMinimumSize(new Dimension(960, 540));
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     
