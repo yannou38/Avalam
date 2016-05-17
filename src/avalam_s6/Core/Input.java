@@ -13,7 +13,7 @@ package avalam_s6.Core;
 public class Input 
 {
     private static boolean mouseClicked = false;	
-    private static boolean hasClicked = true;
+    private static boolean hasClicked = false;
     private static Coordinate c_src = new Coordinate(Integer.MAX_VALUE, Integer.MAX_VALUE);
     private static Coordinate c_dest = new Coordinate(Integer.MAX_VALUE, Integer.MAX_VALUE);	
 	

@@ -5,7 +5,7 @@
  */
 package avalam_s6.GUI.HomePage;
 
-import avalam_s6.GUI.MainFrame;
+import avalam_s6.GUI.Main_Frame;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -35,12 +35,16 @@ public class HomePageListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        JButton source = (JButton) e.getSource();
+        GUI_HomePage homePage = ((GUI_HomePage)source.getParent());
+        Main_Frame mainFrame = ((Main_Frame)homePage.getParent().getParent().getParent().getParent());
         switch (this.name){
             case "quit" :
-                JButton source = (JButton) e.getSource();
-                GUI_HomePage homePage = ((GUI_HomePage)source.getParent());
-                ((MainFrame)homePage.getParent().getParent().getParent().getParent()).dispose();
+                mainFrame.dispose();
                 break;
+            case "quickgame" :                
+                mainFrame.initGame();                
+                break;                
         }
     }
 

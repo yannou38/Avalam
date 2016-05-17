@@ -5,7 +5,7 @@
  */
 package avalam_s6.GUI.HomePage;
 
-import avalam_s6.GUI.MainFrame;
+import avalam_s6.GUI.Main_Frame;
 import java.awt.*;
 import java.io.File;
 import java.util.logging.Level;
@@ -23,7 +23,7 @@ import javax.swing.*;
  */
 public class GUI_HomePage extends JPanel {
 
-    MainFrame parent;
+    Main_Frame parent;
     JButton quick, play, settings, rules, tuto, exit;
     private Image background, quickI, playI, settingsI, rulesI, tutoI, exitI;
     String theme;
