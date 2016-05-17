@@ -74,6 +74,7 @@ public class GUI_LAG extends JPanel {
             Container mainFrame = this.getParent().getParent().getParent().getParent();
             System.out.println(mainFrame.toString());
             this.game = new Local_Avalam_Game(g, p1, p2, (Main_Frame) mainFrame); // GridSizeException
+            Input.setInputGame(game);
         } catch (IOException | GridSizeException | NumberFormatException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -85,6 +86,7 @@ public class GUI_LAG extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
+        
         g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
         int scaleW = this.getWidth() / 8;
         int scaleH = 2 * (this.getHeight() / 3);
