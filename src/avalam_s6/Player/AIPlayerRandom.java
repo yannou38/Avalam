@@ -23,6 +23,7 @@ public class AIPlayerRandom extends AIPlayer{
     
     @Override
     public Move play() {
+        System.out.println("Je suis "+name+" je vais jouer des coups aléatoires");
         ArrayList<Move> mesCoups = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];
         for (int i = 0; i < this.game.getGrid().getWidth(); i++)

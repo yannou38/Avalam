@@ -25,6 +25,7 @@ public class AIPlayerMedium extends AIPlayer{
 
     @Override
    public Move play() {
+       System.out.println("Je suis "+name+" je vais jouer des coups moyens");
         ArrayList<Move> mesCoups = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];
         double maxvalue = 0;
