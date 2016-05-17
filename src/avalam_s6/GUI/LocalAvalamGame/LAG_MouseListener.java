@@ -19,8 +19,10 @@ public class LAG_MouseListener implements MouseListener{
     private static final int SIZE_OF_CELL = 100;
     @Override
     public void mouseClicked(MouseEvent e) {
-        Input.setButtonClicked();        
-        Input.updateMouseSrcPosition(new Coordinate(e.getX()%this.SIZE_OF_CELL,e.getY()%this.SIZE_OF_CELL));        
+        Input.setButtonClicked(); 
+        Coordinate pos = new Coordinate(e.getX()%this.SIZE_OF_CELL,e.getY()%this.SIZE_OF_CELL);
+        if(pos.isValid())
+            Input.updateMouseSrcPosition(pos);
     }
 
     @Override
@@ -32,7 +34,9 @@ public class LAG_MouseListener implements MouseListener{
     public void mouseReleased(MouseEvent e) {
         if(Input.isButtonClicked()){
             Input.setButtonReleased();
-            Input.updateMouseDestPosition(new Coordinate(e.getX()%this.SIZE_OF_CELL, e.getY()%this.SIZE_OF_CELL));
+            Coordinate pos = new Coordinate(e.getX()%this.SIZE_OF_CELL, e.getY()%this.SIZE_OF_CELL);
+            if(pos.isValid())
+                Input.updateMouseDestPosition(pos);
         }
     }
 

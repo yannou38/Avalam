@@ -12,10 +12,13 @@ package avalam_s6.Core;
 
 public class Input 
 {
+    private static Game_INTERFACE game;
     private static boolean mouseClicked = false;	
     private static boolean hasClicked = false;
     private static Coordinate c_src = new Coordinate(Integer.MAX_VALUE, Integer.MAX_VALUE);
     private static Coordinate c_dest = new Coordinate(Integer.MAX_VALUE, Integer.MAX_VALUE);	
+    private static int src_size = -1;
+    private static int dest_size = -1;
 	
     /**
      * Tells if button has been clicked.
@@ -57,6 +60,14 @@ public class Input
     {
         return Input.c_src;
     }
+    
+    /**
+     * Get the height of the source tower.
+     * @return the size of the source tower.
+     */
+    public static int getSrcSize() {
+        return Input.src_size;
+    }
 
     /**
      * Set the position of the click.
@@ -65,6 +76,10 @@ public class Input
     public static void updateMouseSrcPosition(Coordinate pos)
     {
         Input.c_src = pos;
+        if(pos.isValid())
+            Input.src_size = Input.game.getGrid().getCellAt(pos).getSize();
+        else
+            Input.src_size = -1;
     }
         
     /**
@@ -75,6 +90,14 @@ public class Input
     {
         return Input.c_dest;
     }
+    
+    /**
+     * Get the height of the destination tower.
+     * @return the size of the destination tower.
+     */
+    public static int getDestSize(){
+        return Input.dest_size;
+    }
 
     /**
      * Set the position of the release.
@@ -83,5 +106,14 @@ public class Input
     public static void updateMouseDestPosition(Coordinate pos)
     {
         Input.c_dest = pos;
+        if(pos.isValid())
+            Input.dest_size = Input.game.getGrid().getCellAt(pos).getSize();
+        else
+            Input.dest_size = -1;
     }
+    
+    public static void setInputGame(Game_INTERFACE g){
+        Input.game = g;
+    }
+
 }
