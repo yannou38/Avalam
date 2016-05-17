@@ -5,7 +5,11 @@
  */
 package avalam_s6.Player;
 
+import avalam_s6.Core.Grid;
 import avalam_s6.Core.Move;
+import avalam_s6.Core.Owner;
+import avalam_s6.GUI.GUI_INTERFACE;
+import java.awt.Color;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -44,12 +48,9 @@ public class AIPlayerEasyTest {
     @Test
     public void testPlay() {
         System.out.println("play");
-        AIPlayerEasy instance = null;
+        AIPlayerEasy instance = new AIPlayerEasy("Test",Color.BLACK,Owner.PLAYER_1);
         Move expResult = null;
-        Move result = instance.play();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Grid magrid = new Grid("011111111011111111011111111011111111011111111011111111011111111011111111011111111");
     }
     
 }
