@@ -25,7 +25,6 @@ import javax.swing.*;
  */
 public class GUI_HomePage extends JPanel {
 
-    Main_Frame parent;
     JButton quick, play, settings, rules, tuto, exit;
     private Image background, quickI, playI, settingsI, rulesI, tutoI, exitI;
     String theme;

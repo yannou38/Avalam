@@ -5,8 +5,10 @@
  */
 package avalam_s6.GUI;
 
+import avalam_s6.GUI.FinalScreen.GUI_FinalScreen;
 import avalam_s6.GUI.HomePage.GUI_HomePage;
 import avalam_s6.GUI.LocalAvalamGame.GUI_LAG;
+import avalam_s6.Player.Player_INTERFACE;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import static java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager;
@@ -27,13 +29,12 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
     
     public Main_Frame(String theme, WindowRenderMode renderMode) {
         /* UPDATE VARIABLES */
-        this.panelList = new JPanel[2]; // TODO : add more JPanels.
+        this.panelList = new JPanel[3]; // TODO : add more JPanels.
         this.wState = WindowState.MAIN;
         this.wrm = renderMode;
         /* FUNCTION CALL */
         this.initFrame(theme);        
         this.setRenderMode(); 
-        //System.out.println(this.wState.getValue());
         /* ADD KB DISPATCHER */
         getCurrentKeyboardFocusManager().addKeyEventDispatcher(new RenderKeyboardDispatcher(this));
     }
@@ -62,6 +63,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         this.wState = WindowState.MAIN;
         this.panelList[0] = new GUI_HomePage(theme);
         this.panelList[1] = new GUI_LAG(theme);
+        this.panelList[2] = new GUI_FinalScreen(theme);
         for (JPanel pElement : this.panelList) {
             //this.add(pElement);
             pElement.setVisible(false);
@@ -92,5 +94,10 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         this.setwState(WindowState.BOARD);
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).initGame();
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).start();
+    }
+    
+    public void setVictoryScreen(Player_INTERFACE p) {
+        ((GUI_FinalScreen)this.panelList[WindowState.VICTORY.getValue()]).setWinner(p);
+        this.setwState(WindowState.VICTORY);
     }
 }
