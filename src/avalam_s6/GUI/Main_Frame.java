@@ -35,7 +35,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         this.setRenderMode(); 
         //System.out.println(this.wState.getValue());
         /* ADD KB DISPATCHER */
-        getCurrentKeyboardFocusManager().addKeyEventDispatcher(new RenderKeyboardDispatcher());
+        getCurrentKeyboardFocusManager().addKeyEventDispatcher(new RenderKeyboardDispatcher(this));
     }
     
     public void setRenderMode() {

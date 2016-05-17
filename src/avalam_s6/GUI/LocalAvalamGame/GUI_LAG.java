@@ -98,6 +98,8 @@ public class GUI_LAG extends JPanel {
         int bScaleW = 2 * (this.getWidth() / 3);
         int bScaleH = 2 * (this.getHeight() / 3);
         g.drawImage(board, (this.getWidth() / 2) - (bScaleW / 2), this.getHeight() / 5, bScaleW, bScaleH, null);
+        
+        
     }
 
 }

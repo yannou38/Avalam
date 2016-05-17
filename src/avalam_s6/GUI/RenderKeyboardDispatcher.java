@@ -15,17 +15,18 @@ import static java.awt.event.KeyEvent.VK_F11;
  * @author sazeratj
  */
 public class RenderKeyboardDispatcher implements KeyEventDispatcher {
-    
-        @Override
-        public boolean dispatchKeyEvent(KeyEvent e) {
-            if (e.getID() == KeyEvent.KEY_RELEASED && e.getKeyCode() == VK_F11) {
-                Container o = (Container) e.getSource();
-                while (o.getClass() != Main_Frame.class) {
-                    //System.out.println(o.getClass());
-                    o = o.getParent();
-                }
-                ((Main_Frame) o).toggleWRM();
-            }
-            return false;
-        }
+
+    Main_Frame mainframe;
+
+    public RenderKeyboardDispatcher(Main_Frame mf) {
+        this.mainframe = mf;
     }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent e) {
+        if (e.getID() == KeyEvent.KEY_RELEASED && e.getKeyCode() == VK_F11) {
+            mainframe.toggleWRM();
+        }
+        return false;
+    }
+}
