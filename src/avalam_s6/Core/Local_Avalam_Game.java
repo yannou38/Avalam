@@ -194,4 +194,9 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     private void winningProcedure(int i) {
         /* Appel à GUI */
     }
+
+    @Override
+    public void addMoveToHistory(Move m) {
+        this.history.add(m);
+    }
 }

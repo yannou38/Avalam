@@ -53,4 +53,6 @@ public interface Game_INTERFACE {
      * @return the current player.
      */
     public Player getCurrentPlayer();
+    
+    public void addMoveToHistory(Move m);
 }
