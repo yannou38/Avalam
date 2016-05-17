@@ -10,8 +10,17 @@ package avalam_s6.Core;
  * @author TheDoctor
  */
 public enum CellState {
-    TOWER, // Tower 1-4
-    EMPTY, // Empty Cell
-    RESTRICTED, // Game Board
-    FULL; // Tower 5
+    TOWER(2), // Tower 1-4
+    EMPTY(1), // Empty Cell
+    RESTRICTED(0), // Game Board
+    FULL(3); // Tower 5
+    
+    private final int value;
+    
+    private CellState(int v){
+        this.value = v;
+    }
+    public int getValue(){
+        return this.value;
+    }
 }

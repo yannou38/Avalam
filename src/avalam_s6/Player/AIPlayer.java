@@ -19,6 +19,7 @@ public abstract class AIPlayer extends Player{
      * Constructor.
      * @param name The name of the player.
      * @param color The color of the player's pawns.
+     * @param owner 
      */
     public AIPlayer(String name, Color color, Owner owner) {
         super(name,color,owner);
@@ -122,7 +123,7 @@ public abstract class AIPlayer extends Player{
         tabCoord[6] = c7;
         tabCoord[7] = c8;
         for (int k = 0; k < 8; k++) {
-            if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER) {
+            if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()) {
                 if(this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k]))){
                     return false;
                 }
@@ -167,7 +168,7 @@ public abstract class AIPlayer extends Player{
             this.game.getGrid().moveCell(c0, dest);
             Move m = new Move(c0,this.game.getGrid().getCellAt(c0).getSize(),dest,this.game.getGrid().getCellAt(dest).getSize(),this);
             this.game.addMoveToHistory(m);
-            if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER
+            if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
                     && this.owner == this.game.getGrid().getCellAt(tabCoord[k]).getOwner() && alone(tabCoord[k])){
                     this.game.undo();
                     return true;
@@ -214,7 +215,7 @@ public abstract class AIPlayer extends Player{
             this.game.getGrid().moveCell(c0, dest);
             Move m = new Move(c0,this.game.getGrid().getCellAt(c0).getSize(),dest,this.game.getGrid().getCellAt(dest).getSize(),this);
             this.game.addMoveToHistory(m);
-            if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER
+            if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
                     && this.owner != this.game.getGrid().getCellAt(tabCoord[k]).getOwner() && alone(tabCoord[k])){ 
                     this.game.undo();
                     return true;

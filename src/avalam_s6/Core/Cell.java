@@ -19,17 +19,17 @@ public class Cell {
     public Cell(int owner) {
         this.contenu = new ArrayList<>();
         switch(owner) {
-            case -1:
+            case 0:
                 this.etat = CellState.RESTRICTED;
                 break;
-            case 0:
+            case 1:
                 this.etat = CellState.EMPTY;
                 break;
-            case 1:
+            case 2:
                 this.contenu.add(Owner.PLAYER_1);
                 this.etat = CellState.TOWER;
                 break;
-            case 2:
+            case 3:
                 this.contenu.add(Owner.PLAYER_2);
                 this.etat = CellState.TOWER;                
                 break;

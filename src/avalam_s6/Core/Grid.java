@@ -23,13 +23,13 @@ public class Grid {
         if(textGrid.length() == 81) {
             for(int i = 0; i < 9; i++){
                 for(int j = 0; j < 9; j++){
-                    this.grille[j][i] = new Cell(Integer.parseInt(""+textGrid.charAt(i*9+j))-1);
+                    this.grille[j][i] = new Cell(Integer.parseInt(""+textGrid.charAt(i*9+j)));
                 }
             }
         } else if (textGrid.length() == 9) {
            for(int i = 0; i < 3; i++){
                 for(int j = 0; j < 3; j++){
-                    this.grille[j][i] = new Cell(Integer.parseInt(""+textGrid.charAt(i*3+j))-1);
+                    this.grille[j][i] = new Cell(Integer.parseInt(""+textGrid.charAt(i*3+j)));
                 }
             } 
         }
@@ -90,6 +90,7 @@ public class Grid {
      * @return true if it is possible to add src on top of dst.
      */
     public boolean canStack(Cell src, Cell dst) {
-        return (src.getSize()+dst.getSize() <= 5) && (src.getState() == CellState.TOWER) && ((dst.getState() == CellState.TOWER)|| dst.getState() == CellState.EMPTY);
+        return (src.getSize()+dst.getSize() <= 5) && (src.getState().getValue() == CellState.TOWER.getValue()) && 
+                ((dst.getState().getValue() == CellState.TOWER.getValue())|| dst.getState().getValue() == CellState.EMPTY.getValue());
     }
 }

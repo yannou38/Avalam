@@ -27,14 +27,14 @@ public class AIPlayerEasy extends AIPlayer {
      */
     @Override
    public Move play() {
-       System.out.println("Je suis "+name+" je vais jouer des coups faciles");
+       System.out.println("Je suis "+this.name+" je vais jouer des coups faciles");
         ArrayList<Move> mesCoups = new ArrayList<>();
         ArrayList<Move> mesCoupsHighValue = new ArrayList<>();
         ArrayList<Move> mesCoupsOkValue = new ArrayList<>();
         ArrayList<Move> mesCoupsMehValue = new ArrayList<>();
         ArrayList<Move> mesCoupsBadValue = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];
-        Grid g = game.getGrid();
+        Grid g = this.game.getGrid();
         for (int i = 0; i < this.game.getGrid().getWidth(); i++)
         {
             /**
@@ -45,7 +45,7 @@ public class AIPlayerEasy extends AIPlayer {
             for (int j = 0; j < this.game.getGrid().getHeight(); j++)
             {
                 Coordinate c0 = new Coordinate(j,i);
-                if (c0.isValid() && this.game.getGrid().getCellAt(c0).getState() == CellState.TOWER)
+                if (c0.isValid() && this.game.getGrid().getCellAt(c0).getState().getValue() == CellState.TOWER.getValue())
                 {
                     Coordinate c1 = new Coordinate(j-1,i-1);
                     Coordinate c2 = new Coordinate(j,i-1);
@@ -65,7 +65,7 @@ public class AIPlayerEasy extends AIPlayer {
                     tabCoord[7] = c8;
                     for (int k = 0; k <8;k++)
                     {
-                        if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER)
+                        if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue())
                         {
                             if(this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k])))
                             {
@@ -94,7 +94,7 @@ public class AIPlayerEasy extends AIPlayer {
                 }
             }
         }
-        game.setGrid(g);
+        this.game.setGrid(g);
         Random r = new Random();
         if (!mesCoupsHighValue.isEmpty()){
             System.out.println("Je joue un coup genial");
