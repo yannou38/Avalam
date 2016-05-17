@@ -28,8 +28,6 @@ public class HomePageAdapterListener implements ComponentListener {
         //1280*720 => taille de base
         double ratioW = (double) hm.getWidth() / (double) 1280;
         double ratioH = (double) hm.getHeight() / (double) 720;
-
-        //System.out.println(ratioW +" "+ratioH);
         Dimension size = hm.quick.getPreferredSize();
         hm.quick.setBounds((int) round((302 + insets.left) * ratioW), ((int) round((302 + insets.top) * ratioH)), size.width, size.height);
         hm.quick.setSize((int) round(hm.quick.getWidth() * ratioW), (int) round(hm.quick.getHeight() * ratioH));
@@ -51,7 +49,7 @@ public class HomePageAdapterListener implements ComponentListener {
         hm.settings.setSize((int) round(hm.settings.getWidth() * ratioW), (int) round(hm.settings.getHeight() * ratioH));
 
         size = hm.exit.getPreferredSize();
-        hm.exit.setBounds((int) round((1107 + insets.left) * ratioW), ((int) round((615 + insets.top) * ratioH)), size.width, size.height);
+        hm.exit.setBounds((int) round((1107 + insets.left) * ratioW), ((int) round((645 + insets.top) * ratioH)), size.width, size.height);
         hm.exit.setSize((int) round(hm.exit.getWidth() * ratioW), (int) round(hm.exit.getHeight() * ratioH));
     }
 

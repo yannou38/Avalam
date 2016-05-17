@@ -22,7 +22,7 @@ import javax.swing.*;
  */
 public class GUI_HomePage extends JPanel {
     JButton quick, play, settings, rules, tuto, exit;
-    public Image background, quickI, playI, settingsI, rulesI, tutoI, exitI;
+    private Image background, quickI, playI, settingsI, rulesI, tutoI, exitI;
     String theme;
 
     public GUI_HomePage() {
@@ -51,31 +51,37 @@ public class GUI_HomePage extends JPanel {
         quick = new JButton(new ImageIcon(quickI));
         quick.setBorder(BorderFactory.createEmptyBorder());
         quick.setContentAreaFilled(false);
+        quick.setFocusPainted(false);
         quick.addMouseListener(new HomePageListener("quickgame",theme));
 
         play = new JButton(new ImageIcon(playI));
         play.setBorder(BorderFactory.createEmptyBorder());
         play.setContentAreaFilled(false);
+        play.setFocusPainted(false);
         play.addMouseListener(new HomePageListener("customgame",theme));
 
         rules = new JButton(new ImageIcon(rulesI));
         rules.setBorder(BorderFactory.createEmptyBorder());
         rules.setContentAreaFilled(false);
+        rules.setFocusPainted(false);
         rules.addMouseListener(new HomePageListener("rules",theme));
 
         tuto = new JButton(new ImageIcon(tutoI));
         tuto.setBorder(BorderFactory.createEmptyBorder());
         tuto.setContentAreaFilled(false);
+        tuto.setFocusPainted(false);
         tuto.addMouseListener(new HomePageListener("tuto",theme));
 
         settings = new JButton(new ImageIcon(settingsI));
         settings.setBorder(BorderFactory.createEmptyBorder());
         settings.setContentAreaFilled(false);
+        settings.setFocusPainted(false);
         settings.addMouseListener(new HomePageListener("options",theme));
 
         exit = new JButton(new ImageIcon(exitI));
         exit.setBorder(BorderFactory.createEmptyBorder());
         exit.setContentAreaFilled(false);
+        exit.setFocusPainted(false);
         exit.addMouseListener(new HomePageListener("quit",theme));
 
         this.setLayout(null);
