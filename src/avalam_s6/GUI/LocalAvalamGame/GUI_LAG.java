@@ -107,7 +107,7 @@ public class GUI_LAG extends JPanel {
         g.setColor(Color.blue);
         g.fillRect(0, 0, this.getWidth(), this.getHeight());
     
-        Grid gr = game.getGrid();
+        Grid gr = this.game.getGrid();
         Coordinate c = new Coordinate();
         for(int i =0;i<gr.getWidth();i++){
             for(int j=0;j<gr.getHeight();j++){
@@ -116,14 +116,14 @@ public class GUI_LAG extends JPanel {
                 Cell ce = gr.getCellAt(c);
                 switch(ce.getOwner()){
                     case PLAYER_1:
-                        g.drawImage(white, i*60, j*60, null);
+                        g.drawImage(this.white, i*60, j*60, null);
                         break;
                     case PLAYER_2:
-                        g.drawImage(black, i*60, j*60, null);
+                        g.drawImage(this.black, i*60, j*60, null);
                         
                         break;
                     case NO_OWNER:
-                        g.drawImage(empty, i*60, j*60, null);
+                        g.drawImage(this.empty, i*60, j*60, null);
                         
                         break;
                         
