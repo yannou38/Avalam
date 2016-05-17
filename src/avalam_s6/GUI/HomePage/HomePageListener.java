@@ -6,6 +6,7 @@
 package avalam_s6.GUI.HomePage;
 
 import avalam_s6.GUI.Main_Frame;
+import avalam_s6.GUI.WindowState;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -44,6 +45,9 @@ public class HomePageListener implements MouseListener {
             case "quickgame" :                
                 mainFrame.initGame();                
                 break;                
+            case "customgame" :
+                mainFrame.setwState(WindowState.PLAYERSELECT);
+                break;
         }
     }
 
