@@ -6,11 +6,9 @@
 package avalam_s6.GUI.HomePage;
 
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.*;
 import static java.lang.Math.round;
-import javax.swing.ImageIcon;
 
 /**
  *

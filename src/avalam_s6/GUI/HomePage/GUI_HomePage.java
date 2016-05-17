@@ -5,11 +5,8 @@
  */
 package avalam_s6.GUI.HomePage;
 
-import avalam_s6.GUI.Main_Frame;
 import java.awt.*;
 import java.io.File;
-import static java.lang.Math.floor;
-import static java.lang.Math.round;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;

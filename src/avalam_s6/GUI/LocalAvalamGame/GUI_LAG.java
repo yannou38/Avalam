@@ -14,6 +14,7 @@ import avalam_s6.Player.*;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +22,7 @@ import static java.lang.Math.floor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  *
@@ -30,9 +31,11 @@ import javax.swing.JPanel;
 public class GUI_LAG extends JPanel {
 
     private Game_INTERFACE game;
-    private Image background, cancel, player_playing, player_waiting, redo, retour, save, board,black,white,empty;
     String theme;
     boolean player1IsPlaying;
+
+    private Image background, cancel, player_playing, player_waiting, redo, retour, save, board, black, white, empty;
+    JButton[][] buttonmap = new JButton[9][9];
 
     /**
      * Constructor.
@@ -63,7 +66,26 @@ public class GUI_LAG extends JPanel {
         } catch (Exception ex) {
             Logger.getLogger(GUI_HomePage.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        Coordinate c = new Coordinate();
+        ImageIcon base = new ImageIcon(empty);
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(0, 0, 0, 0));
+        panel.setLayout(new GridLayout(9, 9, 4, 4));
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                c.setX(i);
+                c.setY(j);
+                JButton b = new JButton(base);
+                b.setBorder(BorderFactory.createEmptyBorder());
+                b.setContentAreaFilled(false);
+                b.addMouseListener(new LAG_MouseListener(c));
+                b.setHorizontalTextPosition(JButton.CENTER);
+                b.setVerticalTextPosition(JButton.CENTER);
+                buttonmap[i][j] = b;
+                panel.add(b);
+            }
+        }
+        this.add(panel);
     }
 
     public void initGame() {
@@ -89,44 +111,52 @@ public class GUI_LAG extends JPanel {
     public void paintComponent(Graphics g) {
 
         
-        /*
-        g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
-        int scaleW = this.getWidth() / 8;
-        int scaleH = 2 * (this.getHeight() / 3);
-        if (this.player1IsPlaying) {
-            g.drawImage(this.player_playing, 3, this.getHeight() / 5, scaleW, scaleH, null);
-            g.drawImage(this.player_waiting, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
-        } else {
-            g.drawImage(this.player_waiting, 3, this.getHeight() / 5, scaleW, scaleH, null);
-            g.drawImage(this.player_playing, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
-        }
-        int bScaleW = 2 * (this.getWidth() / 3);
-        int bScaleH = 2 * (this.getHeight() / 3);
-        g.drawImage(board, (this.getWidth() / 2) - (bScaleW / 2), this.getHeight() / 5, bScaleW, bScaleH, null);*/
-    
-        g.setColor(Color.blue);
-        g.fillRect(0, 0, this.getWidth(), this.getHeight());
-    
+         g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
+         int scaleW = this.getWidth() / 8;
+         int scaleH = 2 * (this.getHeight() / 3);
+         if (this.player1IsPlaying) {
+         g.drawImage(this.player_playing, 3, this.getHeight() / 5, scaleW, scaleH, null);
+         g.drawImage(this.player_waiting, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
+         } else {
+         g.drawImage(this.player_waiting, 3, this.getHeight() / 5, scaleW, scaleH, null);
+         g.drawImage(this.player_playing, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
+         }
+         int bScaleW = 2 * (this.getWidth() / 3);
+         int bScaleH = 2 * (this.getHeight() / 3);
+         g.drawImage(this.board, (this.getWidth() / 2) - (bScaleW / 2), this.getHeight() / 5, bScaleW, bScaleH, null);
+        /*g.setColor(Color.blue);
+        g.fillRect(0, 0, this.getWidth(), this.getHeight());*/
+
         Grid gr = this.game.getGrid();
         Coordinate c = new Coordinate();
-        for(int i =0;i<gr.getWidth();i++){
-            for(int j=0;j<gr.getHeight();j++){
+        ImageIcon wh = new ImageIcon(this.white);
+        ImageIcon bl = new ImageIcon(this.black);
+        ImageIcon em = new ImageIcon(this.empty);
+        for (int i = 0; i < gr.getWidth(); i++) {
+            for (int j = 0; j < gr.getHeight(); j++) {
                 c.setX(i);
                 c.setY(j);
                 Cell ce = gr.getCellAt(c);
-                switch(ce.getOwner()){
+                switch (ce.getOwner()) {
                     case PLAYER_1:
-                        g.drawImage(this.white, i*60, j*60, null);
-                        break;
-                    case PLAYER_2:
-                        g.drawImage(this.black, i*60, j*60, null);
+                        buttonmap[i][j].setIcon(wh);
+                        buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
                         
+                        //g.drawImage(this.white, i * 60, j * 60, null);
+                        break;
+                    case PLAYER_2: 
+                        buttonmap[i][j].setIcon(bl);
+                        buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
+                        //g.drawImage(this.black, i * 60, j * 60, null);
+
                         break;
                     case NO_OWNER:
-                        g.drawImage(this.empty, i*60, j*60, null);
-                        
+                        buttonmap[i][j].setIcon(em);
+                        buttonmap[i][j].setText("");
+                        //g.drawImage(this.empty, i * 60, j * 60, null);
+
                         break;
-                        
+
                 }
             }
         }
