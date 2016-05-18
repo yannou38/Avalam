@@ -18,9 +18,7 @@ import javax.swing.*;
  */
 public class GUI_Settings extends JPanel {
     private Image applyI,background,creditsI,returnI,leftI,rightI;
-    public JButton apply,retour,credits; 
-    
-    
+    public JButton apply,retour,credits;
     public String theme;
 
     public GUI_Settings() {
