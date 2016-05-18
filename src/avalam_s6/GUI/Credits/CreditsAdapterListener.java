@@ -30,7 +30,7 @@ public class CreditsAdapterListener implements ComponentListener {
         double ratioW = (double) cr.getWidth() / (double) 1280;
         double ratioH = (double) cr.getHeight() / (double) 720;
         Dimension size = cr.retour.getPreferredSize();
-        cr.retour.setBounds((int) round((3 + insets.left) * ratioW), ((int) round((620 + insets.top) * ratioH)), size.width, size.height);
+        cr.retour.setBounds((int) round((20 + insets.left) * ratioW), ((int) round((625 + insets.top) * ratioH)), size.width, size.height);
         cr.retour.setSize((int) round(cr.retour.getWidth() * ratioW), (int) round(cr.retour.getHeight() * ratioH));
     }
 
