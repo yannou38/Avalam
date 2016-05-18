@@ -32,4 +32,8 @@ public abstract class Player implements Player_INTERFACE {
     public Color getColor() {
         return this.color;
     }
+    @Override
+    public String getName() {
+        return this.name;
+    }
 }

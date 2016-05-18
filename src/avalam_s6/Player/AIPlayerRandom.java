@@ -23,7 +23,7 @@ public class AIPlayerRandom extends AIPlayer{
     
     @Override
     public Move play() {
-        System.out.println("Je suis "+name+" je vais jouer des coups aléatoires");
+        System.out.println("Je suis "+this.name+" je vais jouer des coups aléatoires");
         ArrayList<Move> mesCoups = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];
         for (int i = 0; i < this.game.getGrid().getWidth(); i++)
@@ -56,7 +56,7 @@ public class AIPlayerRandom extends AIPlayer{
                     tabCoord[7] = c8;
                     for (int k = 0; k <8;k++)
                     {
-                        if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER)
+                        if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue())
                         {
                             if(this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k])))
                             {

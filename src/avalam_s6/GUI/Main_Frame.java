@@ -8,6 +8,7 @@ package avalam_s6.GUI;
 import avalam_s6.GUI.FinalScreen.GUI_FinalScreen;
 import avalam_s6.GUI.HomePage.GUI_HomePage;
 import avalam_s6.GUI.LocalAvalamGame.GUI_LAG;
+import avalam_s6.GUI.NewGame.GUI_NewGame;
 import avalam_s6.Player.Player_INTERFACE;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
@@ -29,7 +30,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
     
     public Main_Frame(String theme, WindowRenderMode renderMode) {
         /* UPDATE VARIABLES */
-        this.panelList = new JPanel[3]; // TODO : add more JPanels.
+        this.panelList = new JPanel[4]; // TODO : add more JPanels.
         this.wState = WindowState.MAIN;
         this.wrm = renderMode;
         /* FUNCTION CALL */
@@ -64,6 +65,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         this.panelList[0] = new GUI_HomePage(theme);
         this.panelList[1] = new GUI_LAG(theme);
         this.panelList[2] = new GUI_FinalScreen(theme);
+        this.panelList[3] = new GUI_NewGame(theme);
         for (JPanel pElement : this.panelList) {
             //this.add(pElement);
             pElement.setVisible(false);
@@ -96,7 +98,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).start();
     }
     
-    public void setVictoryScreen(Player_INTERFACE p) {
+    public void setVictoryScreen(String p) {
         ((GUI_FinalScreen)this.panelList[WindowState.VICTORY.getValue()]).setWinner(p);
         this.setwState(WindowState.VICTORY);
     }

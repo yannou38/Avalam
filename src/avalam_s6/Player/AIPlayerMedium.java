@@ -25,7 +25,7 @@ public class AIPlayerMedium extends AIPlayer{
 
     @Override
    public Move play() {
-       System.out.println("Je suis "+name+" je vais jouer des coups moyens");
+       System.out.println("Je suis "+this.name+" je vais jouer des coups moyens");
         ArrayList<Move> mesCoups = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];
         double maxvalue = 0;
@@ -40,7 +40,7 @@ public class AIPlayerMedium extends AIPlayer{
             for (int j = 0; j < this.game.getGrid().getHeight(); j++)
             {
                 Coordinate c0 = new Coordinate(j,i);
-                if (c0.isValid() && this.game.getGrid().getCellAt(c0).getState() == CellState.TOWER)
+                if (c0.isValid() && this.game.getGrid().getCellAt(c0).getState().getValue() == CellState.TOWER.getValue())
                 {
                     Coordinate c1 = new Coordinate(j-1,i-1);
                     Coordinate c2 = new Coordinate(j,i-1);
@@ -61,7 +61,7 @@ public class AIPlayerMedium extends AIPlayer{
                     for (int k = 0; k <8;k++)
                     {
                         //un coup est possible
-                        if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER)
+                        if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue())
                         {
                             if(this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k])))
                             {
@@ -104,7 +104,7 @@ public class AIPlayerMedium extends AIPlayer{
             for (int j = 0; j < this.game.getGrid().getHeight(); j++)
             {
                 Coordinate c0 = new Coordinate(j,i);
-                if (c0.isValid() && this.game.getGrid().getCellAt(c0).getState() == CellState.TOWER)
+                if (c0.isValid() && this.game.getGrid().getCellAt(c0).getState().getValue() == CellState.TOWER.getValue())
                 {
                     Coordinate c1 = new Coordinate(j-1,i-1);
                     Coordinate c2 = new Coordinate(j,i-1);
@@ -125,7 +125,7 @@ public class AIPlayerMedium extends AIPlayer{
                     for (int k = 0; k <8;k++)
                     {
                         //un coup est possible
-                        if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState() == CellState.TOWER)
+                        if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue())
                         {
                             if(this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k])))
                             {

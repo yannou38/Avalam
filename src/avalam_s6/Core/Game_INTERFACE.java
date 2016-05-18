@@ -6,6 +6,7 @@
 package avalam_s6.Core;
 
 import avalam_s6.Player.Player;
+import avalam_s6.Player.Player_INTERFACE;
 import javax.swing.Timer;
 
 /**
@@ -53,7 +54,7 @@ public interface Game_INTERFACE {
      * Get the current Player.
      * @return the current player.
      */
-    public Player getCurrentPlayer();
+    public Player_INTERFACE getCurrentPlayer();
     
     public void addMoveToHistory(Move m);
 }

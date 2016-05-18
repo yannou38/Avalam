@@ -128,15 +128,12 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
                 case 1:
                 case 2:
                 case 3:
-                    System.out.println("y");
                     t.stop();
-                    ((Main_Frame)((GUI_LAG)this.gui).getParent()).setVictoryScreen(this.players[0]);
-                    /*this.winningProcedure(w);
-                    this.gui.render(); // we don't need to play after winning.*/
+                    this.winningProcedure(w);
+//                    this.gui.render();
                     return;
                 case 0:
                 default:
-                    System.out.println("z");
                     this.isTurnFinished = false;
                     break;
             }
@@ -168,25 +165,28 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         
         for(int x=0;x<9;x++) {
             for(int y=0;y<9;y++) {
-                c[0].setX(x);c[0].setY(y);
-                c[1].setX(x-1);c[1].setY(y-1);
-                c[2].setX(x-1);c[2].setY(y);
-                c[3].setX(x-1);c[3].setY(y+1);
-                c[4].setX(x);c[4].setY(y-1);
-                c[5].setX(x);c[5].setY(y+1);
-                c[6].setX(x+1);c[6].setY(y-1);
-                c[7].setX(x+1);c[7].setY(y);
-                c[8].setX(x+1);c[8].setY(y+1);
+                c[0].setX(x);   c[0].setY(y);
+                c[1].setX(x-1); c[1].setY(y-1);
+                c[2].setX(x-1); c[2].setY(y);
+                c[3].setX(x-1); c[3].setY(y+1);
+                c[4].setX(x);   c[4].setY(y-1);
+                c[5].setX(x);   c[5].setY(y+1);
+                c[6].setX(x+1); c[6].setY(y-1);
+                c[7].setX(x+1); c[7].setY(y);
+                c[8].setX(x+1); c[8].setY(y+1);
                 for (int i=1;i<9;i++) {
-                    if(c[i].isValid()) {
-                        if(this.grid.canStack(this.grid.getCellAt(c[0]),this.grid.getCellAt(c[i]))) {                      
-                          return 0; 
+                    if(this.grid.getCellAt(c[0]).getState().getValue() != CellState.RESTRICTED.getValue() || this.grid.getCellAt(c[0]).getState().getValue() != CellState.EMPTY.getValue()){
+                        if(c[i].isValid() && this.grid.getCellAt(c[i]).getState().getValue() != CellState.RESTRICTED.getValue() && this.grid.getCellAt(c[i]).getState().getValue() != CellState.EMPTY.getValue()) {
+                            if(this.grid.canStack(this.grid.getCellAt(c[0]),this.grid.getCellAt(c[i]))) {                      
+//                                System.out.println("x = "+ x+ ", y = "+y+", c[0] = "+ c[0]+", cell = "+this.grid.getCellAt(c[0]).getState().getValue()+"c["+i+"] = "+c[i]+", cell = "+this.grid.getCellAt(c[i]).getState().getValue()+".");
+                                return 0;
+                            }
                         }
                     }                     
                 }
-                if(this.grid.getCellAt(c[0]).getOwner() == Owner.PLAYER_1) {
+                if(this.grid.getCellAt(c[0]).getOwner().getValue() == Owner.PLAYER_1.getValue()) {
                     score_p1++;
-                } else if(this.grid.getCellAt(c[0]).getOwner() == Owner.PLAYER_2) {
+                } else if(this.grid.getCellAt(c[0]).getOwner().getValue() == Owner.PLAYER_2.getValue()) {
                     score_p1--;
                 }
             }
@@ -206,6 +206,11 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
      */
     private void winningProcedure(int i) {
         /* Appel à GUI */
+        if(i<3) {
+            ((Main_Frame)this.gui).setVictoryScreen(this.players[i-1].getName());
+        } else {
+            //EGALITE
+        }
     }
 
     @Override

@@ -26,4 +26,6 @@ public interface Player_INTERFACE {
      * @return true if the player is an AI, false otherwise.
      */
     public boolean isAI();
+    
+    public String getName();
 }
