@@ -5,7 +5,6 @@
  */
 package avalam_s6.GUI.FinalScreen;
 
-import avalam_s6.GUI.HomePage.GUI_HomePage;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;
 import java.awt.Image;
