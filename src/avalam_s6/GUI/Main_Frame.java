@@ -9,6 +9,8 @@ import avalam_s6.GUI.FinalScreen.GUI_FinalScreen;
 import avalam_s6.GUI.HomePage.GUI_HomePage;
 import avalam_s6.GUI.LocalAvalamGame.GUI_LAG;
 import avalam_s6.GUI.NewGame.GUI_NewGame;
+import avalam_s6.GUI.Settings.GUI_Settings;
+import avalam_s6.GUI.Credits.GUI_Credits;
 import avalam_s6.Player.Player_INTERFACE;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
@@ -30,7 +32,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
     
     public Main_Frame(String theme, WindowRenderMode renderMode) {
         /* UPDATE VARIABLES */
-        this.panelList = new JPanel[4]; // TODO : add more JPanels.
+        this.panelList = new JPanel[6]; // TODO : add more JPanels.
         this.wState = WindowState.MAIN;
         this.wrm = renderMode;
         /* FUNCTION CALL */
@@ -69,6 +71,8 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         this.panelList[1] = new GUI_LAG(theme);
         this.panelList[2] = new GUI_FinalScreen(theme);
         this.panelList[3] = new GUI_NewGame(theme);
+        this.panelList[4] = new GUI_Settings(theme);
+        this.panelList[5] = new GUI_Credits(theme);
         for (JPanel pElement : this.panelList) {
             //this.add(pElement);
             pElement.setVisible(false);

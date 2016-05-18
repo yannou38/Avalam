@@ -47,6 +47,9 @@ public class HomePageListener implements MouseListener {
                 break;                
             case "customgame" :
                 mainFrame.setwState(WindowState.PLAYERSELECT);
+                break;                
+            case "options" :
+                mainFrame.setwState(WindowState.SETTINGS);
                 break;
         }
         ((JButton)e.getSource()).setIcon(new ImageIcon(iconbase));
