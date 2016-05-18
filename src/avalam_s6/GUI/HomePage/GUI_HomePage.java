@@ -21,9 +21,9 @@ import javax.swing.*;
  * access options, check rules & tutorial, etc
  */
 public class GUI_HomePage extends JPanel {
-    JButton quick, play, settings, rules, tuto, exit;
+    public JButton quick, play, settings, rules, tuto, exit;
     private Image background, quickI, playI, settingsI, rulesI, tutoI, exitI;
-    String theme;
+    public String theme;
 
     public GUI_HomePage() {
         this("Default");

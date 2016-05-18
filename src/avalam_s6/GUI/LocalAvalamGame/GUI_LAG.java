@@ -130,7 +130,7 @@ public class GUI_LAG extends JPanel {
     }
 
     public void start() {
-        //this.game.getTimer().start();
+        this.game.getTimer().start();
     }
 
     @Override

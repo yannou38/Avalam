@@ -5,7 +5,6 @@
  */
 package avalam_s6.GUI.LocalAvalamGame;
 
-import avalam_s6.GUI.HomePage.GUI_HomePage;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ComponentEvent;
@@ -18,7 +17,7 @@ import static java.lang.Math.round;
  */
 public class LAG_AdapterListener implements ComponentListener {
 
-    GUI_LAG page;
+    private GUI_LAG page;
 
     public LAG_AdapterListener(GUI_LAG page) {
         this.page = page;

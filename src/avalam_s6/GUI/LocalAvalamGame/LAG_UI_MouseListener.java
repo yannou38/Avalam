@@ -20,9 +20,9 @@ import javax.swing.JButton;
  */
 public class LAG_UI_MouseListener implements MouseListener {
 
-    String name;
-    Image icon;
-    Image iconbase;
+    private String name;
+    private Image icon;
+    private Image iconbase;
 
     public LAG_UI_MouseListener(String buttonname, String theme) {
         this.name = buttonname;

@@ -29,8 +29,8 @@ import javax.swing.JPanel;
 public class GUI_FinalScreen extends JPanel {
     public String theme;
     private Image background, homeI;
-    private JLabel victoryText;
-    private JButton home;
+    public JLabel victoryText;
+    public JButton home;
     
     public GUI_FinalScreen() {
         this("Default");
@@ -69,9 +69,10 @@ public class GUI_FinalScreen extends JPanel {
         this.home.setFocusPainted(false);
         //home.addMouseListener(/*new HomePageListener("quit",theme)*/);
         
-        //this.setLayout(null);
+        this.setLayout(null);
         this.add(this.victoryText);
         this.add(this.home);
+        this.addComponentListener(new Final_AdapterListener(this));
     }
     
     public void setWinner(String p) {
