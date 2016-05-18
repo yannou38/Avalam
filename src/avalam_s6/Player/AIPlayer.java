@@ -165,8 +165,8 @@ public abstract class AIPlayer extends Player{
         tabCoord[6] = c7;
         tabCoord[7] = c8;
         for (int k = 0; k < 8; k++) {
-            this.game.getGrid().moveCell(c0, dest);
             Move m = new Move(c0,this.game.getGrid().getCellAt(c0).getSize(),dest,this.game.getGrid().getCellAt(dest).getSize(),this);
+            this.game.getGrid().moveCell(c0, dest);
             this.game.addMoveToHistory(m);
             if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
                     && this.owner == this.game.getGrid().getCellAt(tabCoord[k]).getOwner() && alone(tabCoord[k])){
@@ -212,8 +212,8 @@ public abstract class AIPlayer extends Player{
         tabCoord[6] = c7;
         tabCoord[7] = c8;
         for (int k = 0; k < 8; k++) {
-            this.game.getGrid().moveCell(c0, dest);
             Move m = new Move(c0,this.game.getGrid().getCellAt(c0).getSize(),dest,this.game.getGrid().getCellAt(dest).getSize(),this);
+            this.game.getGrid().moveCell(c0, dest);
             this.game.addMoveToHistory(m);
             if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
                     && this.owner != this.game.getGrid().getCellAt(tabCoord[k]).getOwner() && alone(tabCoord[k])){ 

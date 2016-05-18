@@ -34,23 +34,8 @@ public class AIPlayerEasy extends AIPlayer {
         ArrayList<Move> mesCoupsMehValue = new ArrayList<>();
         ArrayList<Move> mesCoupsBadValue = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];
-        Coordinate c1 = new Coordinate(0,0);
-        Coordinate c2 = new Coordinate(0,0);
-        Coordinate c3 = new Coordinate(0,0);
-        Coordinate c4 = new Coordinate(0,0);
-        Coordinate c5 = new Coordinate(0,0);
-        Coordinate c6 = new Coordinate(0,0);
-        Coordinate c7 = new Coordinate(0,0);
-        Coordinate c8 = new Coordinate(0,0);
-                    tabCoord[0] = c1;
-                    tabCoord[1] = c2;
-                    tabCoord[2] = c3;
-                    tabCoord[3] = c4;
-                    tabCoord[4] = c5;
-                    tabCoord[5] = c6;
-                    tabCoord[6] = c7;
-                    tabCoord[7] = c8;
         Grid g = this.game.getGrid();
+        System.out.println(g.toString());
         for (int i = 0; i < this.game.getGrid().getWidth(); i++)
         {
             /**   
@@ -61,22 +46,22 @@ public class AIPlayerEasy extends AIPlayer {
             for (int j = 0; j < this.game.getGrid().getHeight(); j++)
             {
                 Coordinate c0 = new Coordinate(j,i);
-                c1.setX(j-1);
-                c1.setY(i-1);
-                c2.setX(j);
-                c2.setY(i-1);
-                c3.setX(j+1);
-                c3.setY(i-1);
-                c4.setX(j);
-                c4.setY(i-1);
-                c5.setX(j);
-                c5.setY(i+1);
-                c6.setX(j+1);
-                c6.setY(i-1);
-                c7.setX(j+1);
-                c7.setY(i);
-                c8.setX(j+1);
-                c8.setY(i+1);
+                Coordinate c1 = new Coordinate(j-1,i-1);		                    
+                Coordinate c2 = new Coordinate(j,i-1);		
+                Coordinate c3 = new Coordinate(j+1,i-1);		
+                Coordinate c4 = new Coordinate(j-1,i);		
+                Coordinate c5 = new Coordinate(j+1,i);		
+                Coordinate c6 = new Coordinate(j-1,i+1);		
+                Coordinate c7 = new Coordinate(j,i+1);		
+                Coordinate c8 = new Coordinate(j+1,i+1);		
+                tabCoord[0] = c1;		
+                tabCoord[1] = c2;		
+                tabCoord[2] = c3;		
+                tabCoord[3] = c4;		
+                tabCoord[4] = c5;		
+                tabCoord[5] = c6;		
+                tabCoord[6] = c7;		
+                tabCoord[7] = c8;
                 
                 if (c0.isValid() && this.game.getGrid().getCellAt(c0).getState().getValue() == CellState.TOWER.getValue())
                 {
@@ -112,7 +97,9 @@ public class AIPlayerEasy extends AIPlayer {
                 }
             }
         }
+        System.out.println(g.toString());
         this.game.setGrid(g);
+        System.out.println(this.game.getGrid().toString());
         Random r = new Random();
         if (!mesCoupsHighValue.isEmpty()){
             System.out.println("Je joue un coup genial");
@@ -124,7 +111,9 @@ public class AIPlayerEasy extends AIPlayer {
         }
         if(!mesCoupsMehValue.isEmpty()){
             System.out.println("Je joue un coup meh");
-            return mesCoupsMehValue.get(r.nextInt(mesCoupsMehValue.size()));
+            Move meh = mesCoupsMehValue.get(r.nextInt(mesCoupsMehValue.size()));
+            System.out.println(" "+meh.getC_src().getX() + " " + meh.getC_src().getY() + " "+ meh.getC_dst().getX() + " " + meh.getC_dst().getY());
+            return meh;
         }
         if(!mesCoups.isEmpty()){
             System.out.println("Je joue un coup");
