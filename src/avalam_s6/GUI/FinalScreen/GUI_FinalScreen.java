@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -20,8 +21,9 @@ import javax.swing.JPanel;
  */
 public class GUI_FinalScreen extends JPanel {
     public String theme;
-    private Image background;
+    private Image background, retI;
     private JLabel victoryText;
+    private JButton ret;
     
     public GUI_FinalScreen() {
         this("Default");
@@ -34,7 +36,7 @@ public class GUI_FinalScreen extends JPanel {
     
     private void init() {
         try {
-            this.background = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/main_bg.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/final/background.jpg"));
         } catch (Exception ex) {
             Logger.getLogger(GUI_FinalScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -50,7 +52,6 @@ public class GUI_FinalScreen extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(background, 0, 0, this.getWidth(),this.getHeight(),null);
-        
     }
 }
 
