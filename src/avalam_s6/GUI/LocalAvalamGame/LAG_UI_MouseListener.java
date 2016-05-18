@@ -44,6 +44,7 @@ public class LAG_UI_MouseListener implements MouseListener {
         Main_Frame mainFrame = ((Main_Frame)lag.getParent().getParent().getParent().getParent());
         switch (this.name){
             case "return" :
+                lag.stop();
                 mainFrame.setwState(WindowState.MAIN);                
                 break;
             case "redo" :

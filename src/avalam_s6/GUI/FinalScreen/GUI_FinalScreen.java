@@ -5,7 +5,7 @@
  */
 package avalam_s6.GUI.FinalScreen;
 
-import avalam_s6.GUI.HomePage.HomePageListener;
+import avalam_s6.Core.Grid;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
@@ -31,10 +31,7 @@ public class GUI_FinalScreen extends JPanel {
     private Image background, homeI;
     public JLabel victoryText;
     public JButton home;
-    
-    public GUI_FinalScreen() {
-        this("Default");
-    }
+    private Grid finalGrid;
     
     public GUI_FinalScreen(String theme) {
         this.theme = theme;
@@ -44,21 +41,22 @@ public class GUI_FinalScreen extends JPanel {
     
     private void initComponents() {
         try {
+            Font localFont = new Font("Arial",Font.PLAIN,60);
             /* Chargement de la police */
             try {
-                Font localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + this.theme + "/font/Gamaliel.otf"));
+                localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + this.theme + "/font/Gamaliel.otf"));
                 GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
-                /* Application de la police */
-                this.victoryText.setFont(localFont.deriveFont(2*30f)); /* On peut appliquer un ratio a la police (ici 2) */
                 /* Aggrandissement des bordures */
                 this.victoryText.setBorder(BorderFactory.createEmptyBorder(0, 20, 20, 20));
             } catch (IOException|FontFormatException ex) {
-                Logger.getLogger(GUI_FinalScreen.class.getName()).log(Level.SEVERE, null, ex);
+                throw(ex);
             }
             /* Chargement des images // du theme */
             this.background = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/final/background.jpg"));
             this.homeI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/final/home.png"));
-        } catch (Exception ex) {
+            /* Application Police */
+            this.victoryText.setFont(localFont.deriveFont(2*30f)); /* On peut appliquer un ratio a la police (ici 2) */
+        } catch (IOException | FontFormatException ex) {
             Logger.getLogger(GUI_FinalScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
         

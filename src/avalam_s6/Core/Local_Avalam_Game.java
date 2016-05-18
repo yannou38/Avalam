@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.util.Stack;
 import javax.swing.Timer;
 import avalam_s6.GUI.GUI_INTERFACE;
-import avalam_s6.GUI.LocalAvalamGame.GUI_LAG;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.Player.AIPlayer;
 

@@ -5,7 +5,6 @@
  */
 package avalam_s6.GUI.FinalScreen;
 
-import avalam_s6.GUI.LocalAvalamGame.GUI_LAG;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ComponentEvent;

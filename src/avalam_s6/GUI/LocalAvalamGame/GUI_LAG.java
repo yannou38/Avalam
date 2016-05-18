@@ -132,6 +132,10 @@ public class GUI_LAG extends JPanel {
     public void start() {
         this.game.getTimer().start();
     }
+    
+    public void stop() {
+        this.game.getTimer().stop();
+    }
 
     @Override
     public void paintComponent(Graphics g) {
