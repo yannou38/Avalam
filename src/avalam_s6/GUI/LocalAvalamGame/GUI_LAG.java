@@ -186,22 +186,22 @@ public class GUI_LAG extends JPanel {
     }
 
     public JButton getUndoB() {
-        return undoB;
+        return this.undoB;
     }
 
     public JButton getRedoB() {
-        return redoB;
+        return this.redoB;
     }
 
     public JButton getRetourB() {
-        return retourB;
+        return this.retourB;
     }
 
     public JButton getSaveB() {
-        return saveB;
+        return this.saveB;
     }
 
     public JPanel getGrille() {
-        return grille;
+        return this.grille;
     }
 }

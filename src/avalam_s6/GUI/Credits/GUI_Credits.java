@@ -56,6 +56,6 @@ public class GUI_Credits extends JPanel {
     }
 
     public JButton getRetour() {
-        return retour;
+        return this.retour;
     }  
 }

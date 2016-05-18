@@ -33,11 +33,11 @@ import javax.swing.JPanel;
  */
 public class GUI_FinalScreen extends JPanel {
 
-    public String theme;
+    private String theme;
     private Image background, homeI, black, white, empty;
-    public JLabel victoryText;
-    public JButton home;
-    public JPanel grille;
+    private JLabel victoryText;
+    private JButton home;
+    private JPanel grille;
 
     private Grid finalGrid;
     JButton[][] buttonmap;
@@ -149,6 +149,20 @@ public class GUI_FinalScreen extends JPanel {
                 }
             }
         }
+        
+        
 
+    }
+
+    public JLabel getVictoryText() {
+        return this.victoryText;
+    }
+    
+    public JButton getHome() {
+        return this.home;
+    }
+
+    public JPanel getGrille() {
+        return this.grille;
     }
 }

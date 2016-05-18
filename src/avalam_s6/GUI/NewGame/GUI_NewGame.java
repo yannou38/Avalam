@@ -155,63 +155,63 @@ public class GUI_NewGame extends JPanel {
     }
 
     public JButton getPlayer1() {
-        return player1;
+        return this.player1;
     }
 
     public JButton getPrec1() {
-        return prec1;
+        return this.prec1;
     }
 
     public JButton getSup1() {
-        return sup1;
+        return this.sup1;
     }
 
     public JButton getPlayer2() {
-        return player2;
+        return this.player2;
     }
 
     public JButton getPrec2() {
-        return prec2;
+        return this.prec2;
     }
 
     public JButton getSup2() {
-        return sup2;
+        return this.sup2;
     }
 
     public JButton getAie1() {
-        return aie1;
+        return this.aie1;
     }
 
     public JButton getAim1() {
-        return aim1;
+        return this.aim1;
     }
 
     public JButton getAih1() {
-        return aih1;
+        return this.aih1;
     }
 
     public JButton getAie2() {
-        return aie2;
+        return this.aie2;
     }
 
     public JButton getAim2() {
-        return aim2;
+        return this.aim2;
     }
 
     public JButton getAih2() {
-        return aih2;
+        return this.aih2;
     }
 
     public JButton getLoad() {
-        return load;
+        return this.load;
     }
 
     public JButton getRetour() {
-        return retour;
+        return this.retour;
     }
 
     public JButton getStart() {
-        return start;
+        return this.start;
     }
 
     

@@ -100,27 +100,27 @@ public class GUI_HomePage extends JPanel {
     }
 
     public JButton getQuick() {
-        return quick;
+        return this.quick;
     }
 
     public JButton getPlay() {
-        return play;
+        return this.play;
     }
 
     public JButton getSettings() {
-        return settings;
+        return this.settings;
     }
 
     public JButton getRules() {
-        return rules;
+        return this.rules;
     }
 
     public JButton getTuto() {
-        return tuto;
+        return this.tuto;
     }
 
     public JButton getExit() {
-        return exit;
+        return this.exit;
     }
     
     
