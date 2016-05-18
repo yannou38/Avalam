@@ -26,12 +26,14 @@ public class LAG_UI_MouseListener implements MouseListener {
     private String name;
     private Image icon;
     private Image iconbase;
+    private String theme;
 
     public LAG_UI_MouseListener(String buttonname, String theme) {
         this.name = buttonname;
+        this.theme = theme;
         try {
-            icon = ImageIO.read(new File("./ressources/Themes/" + theme + "/board/" + name + "_h.png"));
-            iconbase = ImageIO.read(new File("./ressources/Themes/" + theme + "/board/" + name + ".png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/" + this.name + "_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/" + this.name + ".png"));
         } catch (Exception ex) {
             Logger.getLogger(GUI_HomePage.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -54,7 +56,7 @@ public class LAG_UI_MouseListener implements MouseListener {
             case "save" :
                 break;
         }
-        ((JButton) e.getSource()).setIcon(new ImageIcon(iconbase));
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
         
     }
 
@@ -69,13 +71,13 @@ public class LAG_UI_MouseListener implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         //replace the icon with another
-        ((JButton) e.getSource()).setIcon(new ImageIcon(icon));
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.icon));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         //replace the icon with another
-        ((JButton) e.getSource()).setIcon(new ImageIcon(iconbase));
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
 }

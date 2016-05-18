@@ -17,15 +17,11 @@ import javax.swing.*;
  * @author ducruyy
  */
 public class GUI_Credits extends JPanel {
-    JButton retour;
+    private JButton retour;
     private Image returnI,background;
-    String theme;
+    private String theme;
     
     
-    public GUI_Credits() {
-        this("Default");
-    }
-
     public GUI_Credits(String theme) {
         this.theme = theme;
         this.initComponents();
@@ -33,32 +29,33 @@ public class GUI_Credits extends JPanel {
 
     private void initComponents() {
         try {
-            background = ImageIO.read(new File("./ressources/Themes/" + theme + "/credits/background.png"));
-            returnI = ImageIO.read(new File("./ressources/Themes/" + theme + "/credits/home.png"));
+            background = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/credits/background.png"));
+            returnI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/credits/home.png"));
         } catch (Exception ex) {
             System.out.println("Error - "+GUI_Credits.class.toString());
             Logger.getLogger(GUI_Credits.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
-        retour = new JButton(new ImageIcon(returnI));
-        retour.setBorder(BorderFactory.createEmptyBorder());
-        retour.setContentAreaFilled(false);
-        retour.setFocusPainted(false);
-        retour.addMouseListener(new CreditsListener("home",theme,0));
+        this.retour = new JButton(new ImageIcon(returnI));
+        this.retour.setBorder(BorderFactory.createEmptyBorder());
+        this.retour.setContentAreaFilled(false);
+        this.retour.setFocusPainted(false);
+        this.retour.addMouseListener(new CreditsListener("home",theme,0));
 
         this.setLayout(null);
-        this.add(retour);    
+        this.add(this.retour);    
         this.addComponentListener(new CreditsAdapterListener(this));
         
     }
 
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(background, 0, 0, this.getWidth(),this.getHeight(),null);
+        g.drawImage(this.background, 0, 0, this.getWidth(),this.getHeight(),null);
         
     }
 
-
-    
+    public JButton getRetour() {
+        return retour;
+    }  
 }

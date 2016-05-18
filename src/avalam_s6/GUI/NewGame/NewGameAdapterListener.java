@@ -16,7 +16,7 @@ import static java.lang.Math.round;
  */
 public class NewGameAdapterListener implements ComponentListener {
 
-    GUI_NewGame ng;
+    private GUI_NewGame ng;
 
     public NewGameAdapterListener(GUI_NewGame newgame) {
         this.ng = newgame;
@@ -25,65 +25,65 @@ public class NewGameAdapterListener implements ComponentListener {
     //JButton player, prec, sup, load, retour, start;
     @Override
     public void componentResized(ComponentEvent e) {
-        Insets insets = ng.getInsets();
+        Insets insets = this.ng.getInsets();
         //1280*720 => taille de base
-        double ratioW = (double) ng.getWidth() / (double) 1280;
-        double ratioH = (double) ng.getHeight() / (double) 720;
-        Dimension size = ng.player1.getPreferredSize();
-        ng.player1.setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
-        ng.player1.setSize((int) round(ng.player1.getWidth() * ratioW), (int) round(ng.player1.getHeight() * ratioH));
+        double ratioW = (double) this.ng.getWidth() / (double) 1280;
+        double ratioH = (double) this.ng.getHeight() / (double) 720;
+        Dimension size = this.ng.getPlayer1().getPreferredSize();
+        this.ng.getPlayer1().setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getPlayer1().setSize((int) round(this.ng.getPlayer1().getWidth() * ratioW), (int) round(this.ng.getPlayer1().getHeight() * ratioH));
         
-        ng.aie1.setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
-        ng.aie1.setSize((int) round(ng.aie1.getWidth() * ratioW), (int) round(ng.aie1.getHeight() * ratioH));
+        this.ng.getAie1().setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getAie1().setSize((int) round(this.ng.getAie1().getWidth() * ratioW), (int) round(this.ng.getAie1().getHeight() * ratioH));
         
-        ng.aim1.setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
-        ng.aim1.setSize((int) round(ng.aim1.getWidth() * ratioW), (int) round(ng.aim1.getHeight() * ratioH));
+        this.ng.getAim1().setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getAim1().setSize((int) round(this.ng.getAim1().getWidth() * ratioW), (int) round(this.ng.getAim1().getHeight() * ratioH));
         
-        ng.aih1.setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
-        ng.aih1.setSize((int) round(ng.aih1.getWidth() * ratioW), (int) round(ng.aih1.getHeight() * ratioH));
+        this.ng.getAih1().setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getAih1().setSize((int) round(this.ng.getAih1().getWidth() * ratioW), (int) round(this.ng.getAih1().getHeight() * ratioH));
 
-        size = ng.prec1.getPreferredSize();
-        ng.prec1.setBounds((int) round((250 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
-        ng.prec1.setSize((int) round(ng.prec1.getWidth() * ratioW), (int) round(ng.prec1.getHeight() * ratioH));
+        size = this.ng.getPrec1().getPreferredSize();
+        this.ng.getPrec1().setBounds((int) round((250 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getPrec1().setSize((int) round(this.ng.getPrec1().getWidth() * ratioW), (int) round(this.ng.getPrec1().getHeight() * ratioH));
 
-        size = ng.sup1.getPreferredSize();
-        ng.sup1.setBounds((int) round((470 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
-        ng.sup1.setSize((int) round(ng.sup1.getWidth() * ratioW), (int) round(ng.sup1.getHeight() * ratioH));
+        size = this.ng.getSup1().getPreferredSize();
+        this.ng.getSup1().setBounds((int) round((470 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getSup1().setSize((int) round(this.ng.getSup1().getWidth() * ratioW), (int) round(this.ng.getSup1().getHeight() * ratioH));
         
         
-        size = ng.player2.getPreferredSize();
-        ng.player2.setBounds((int) round((760 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
-        ng.player2.setSize((int) round(ng.player2.getWidth() * ratioW), (int) round(ng.player2.getHeight() * ratioH));
+        size = this.ng.getPlayer2().getPreferredSize();
+        this.ng.getPlayer2().setBounds((int) round((760 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getPlayer2().setSize((int) round(this.ng.getPlayer2().getWidth() * ratioW), (int) round(this.ng.getPlayer2().getHeight() * ratioH));
         
-        ng.aie2.setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
-        ng.aie2.setSize((int) round(ng.aie2.getWidth() * ratioW), (int) round(ng.aie2.getHeight() * ratioH));
+        this.ng.getAie2().setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getAie2().setSize((int) round(this.ng.getAie2().getWidth() * ratioW), (int) round(this.ng.getAie2().getHeight() * ratioH));
         
-        ng.aim2.setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
-        ng.aim2.setSize((int) round(ng.aim2.getWidth() * ratioW), (int) round(ng.aim2.getHeight() * ratioH));
+        this.ng.getAim2().setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getAim2().setSize((int) round(this.ng.getAim2().getWidth() * ratioW), (int) round(this.ng.getAim2().getHeight() * ratioH));
         
-        ng.aih2.setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
-        ng.aih2.setSize((int) round(ng.aih2.getWidth() * ratioW), (int) round(ng.aih2.getHeight() * ratioH));
+        this.ng.getAih2().setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getAih2().setSize((int) round(this.ng.getAih2().getWidth() * ratioW), (int) round(this.ng.getAih2().getHeight() * ratioH));
 
-        size = ng.prec2.getPreferredSize();
-        ng.prec2.setBounds((int) round((710 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
-        ng.prec2.setSize((int) round(ng.prec2.getWidth() * ratioW), (int) round(ng.prec2.getHeight() * ratioH));
+        size = this.ng.getPrec2().getPreferredSize();
+        this.ng.getPrec2().setBounds((int) round((710 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getPrec2().setSize((int) round(this.ng.getPrec2().getWidth() * ratioW), (int) round(this.ng.getPrec2().getHeight() * ratioH));
 
-        size = ng.sup2.getPreferredSize();
-        ng.sup2.setBounds((int) round((930 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
-        ng.sup2.setSize((int) round(ng.sup2.getWidth() * ratioW), (int) round(ng.sup2.getHeight() * ratioH));
+        size = this.ng.getSup2().getPreferredSize();
+        this.ng.getSup2().setBounds((int) round((930 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getSup2().setSize((int) round(this.ng.getSup2().getWidth() * ratioW), (int) round(this.ng.getSup2().getHeight() * ratioH));
         
 
-        size = ng.load.getPreferredSize();
-        ng.load.setBounds((int) round((1102 + insets.left) * ratioW), ((int) round((620 + insets.top) * ratioH)), size.width, size.height);
-        ng.load.setSize((int) round(ng.load.getWidth() * ratioW), (int) round(ng.load.getHeight() * ratioH));
+        size = this.ng.getLoad().getPreferredSize();
+        this.ng.getLoad().setBounds((int) round((1102 + insets.left) * ratioW), ((int) round((620 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getLoad().setSize((int) round(this.ng.getLoad().getWidth() * ratioW), (int) round(this.ng.getLoad().getHeight() * ratioH));
 
-        size = ng.retour.getPreferredSize();
-        ng.retour.setBounds((int) round((3 + insets.left) * ratioW), ((int) round((620 + insets.top) * ratioH)), size.width, size.height);
-        ng.retour.setSize((int) round(ng.retour.getWidth() * ratioW), (int) round(ng.retour.getHeight() * ratioH));
+        size = this.ng.getRetour().getPreferredSize();
+        this.ng.getRetour().setBounds((int) round((3 + insets.left) * ratioW), ((int) round((620 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getRetour().setSize((int) round(this.ng.getRetour().getWidth() * ratioW), (int) round(this.ng.getRetour().getHeight() * ratioH));
 
-        size = ng.start.getPreferredSize();
-        ng.start.setBounds((int) round((290 + insets.left) * ratioW), ((int) round((600 + insets.top) * ratioH)), size.width, size.height);
-        ng.start.setSize((int) round(ng.start.getWidth() * ratioW), (int) round(ng.start.getHeight() * ratioH));
+        size = this.ng.getStart().getPreferredSize();
+        this.ng.getStart().setBounds((int) round((290 + insets.left) * ratioW), ((int) round((600 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getStart().setSize((int) round(this.ng.getStart().getWidth() * ratioW), (int) round(this.ng.getStart().getHeight() * ratioH));
     }
 
     @Override

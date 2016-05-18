@@ -23,15 +23,17 @@ import javax.swing.JButton;
  */
 public class SettingsListener implements MouseListener {
 
-    String name;
-    Image icon;
-    Image iconbase;
+    private String name;
+    private Image icon;
+    private Image iconbase;
+    private String theme;
 
     public SettingsListener(String buttonname, String theme) {
         this.name = buttonname;
+        this.theme = theme;
         try {
-            icon = ImageIO.read(new File("./ressources/Themes/" + theme + "/options/" + name + "_h.png"));
-            iconbase = ImageIO.read(new File("./ressources/Themes/" + theme + "/options/" + name + ".png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/options/" + this.name + "_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/options/" + this.name + ".png"));
         } catch (Exception ex) {
             System.out.println("Error - "+SettingsListener.class.toString());
             Logger.getLogger(SettingsListener.class.getName()).log(Level.SEVERE, null, ex);

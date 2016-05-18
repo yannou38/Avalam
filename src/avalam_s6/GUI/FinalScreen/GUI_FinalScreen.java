@@ -27,10 +27,10 @@ import javax.swing.JPanel;
  * @author sazeratj
  */
 public class GUI_FinalScreen extends JPanel {
-    public String theme;
+    private String theme;
     private Image background, homeI;
-    public JLabel victoryText;
-    public JButton home;
+    private JLabel victoryText;
+    private JButton home;
     private Grid finalGrid;
     
     public GUI_FinalScreen(String theme) {
@@ -67,7 +67,7 @@ public class GUI_FinalScreen extends JPanel {
         this.home.setBorder(BorderFactory.createEmptyBorder());
         this.home.setContentAreaFilled(false);
         this.home.setFocusPainted(false);
-        home.addMouseListener(new Final_MouseListener(theme));
+        this.home.addMouseListener(new Final_MouseListener(this.theme));
         
         this.setLayout(null);
         this.add(this.victoryText);
@@ -85,7 +85,11 @@ public class GUI_FinalScreen extends JPanel {
     
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(background, 0, 0, this.getWidth(),this.getHeight(),null);
+        g.drawImage(this.background, 0, 0, this.getWidth(),this.getHeight(),null);
+    }
+
+    public JButton getHome() {
+        return home;
     }
 }
 

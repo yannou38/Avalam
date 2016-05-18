@@ -8,7 +8,6 @@ package avalam_s6.GUI.LocalAvalamGame;
 import avalam_s6.Core.File_IO.Level_Parser;
 import avalam_s6.Core.*;
 import avalam_s6.Exceptions.GridSizeException;
-import avalam_s6.GUI.HomePage.GUI_HomePage;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.Player.*;
 import java.awt.*;
@@ -24,21 +23,18 @@ import javax.swing.*;
 public class GUI_LAG extends JPanel {
 
     private Game_INTERFACE game;
-    String theme;
-    boolean player1IsPlaying;
-    JPanel grille;
-    JButton undoB, redoB, retourB, saveB;
-    private Image background, cancel, player_playing, player_waiting, redo, retour, save, board, black, white, empty;
-    JButton[][] buttonmap = new JButton[9][9];
+    private final String theme;
+    private final boolean player1IsPlaying;
+    private JPanel grille;
+    private JButton undoB, redoB, retourB, saveB;
+    private Image background, cancel, player_playing, player_waiting, redo, retour, save, board, black, white, empty, restricted;
+    private final JButton[][] buttonmap;
 
     /**
      * Constructor.
      */
-    public GUI_LAG() {
-        this("Default");
-    }
-
     public GUI_LAG(String theme) {
+        this.buttonmap = new JButton[9][9];
         this.theme = theme;
         this.initComponents();
         this.player1IsPlaying = true;
@@ -46,23 +42,24 @@ public class GUI_LAG extends JPanel {
 
     private void initComponents() {
         try {
-            this.background = ImageIO.read(new File("./ressources/Themes/" + theme + "/board/background.png"));
-            this.cancel = ImageIO.read(new File("./ressources/Themes/" + theme + "/board/cancel.png"));
-            this.player_playing = ImageIO.read(new File("./ressources/Themes/" + theme + "/board/player_playing.png"));
-            this.player_waiting = ImageIO.read(new File("./ressources/Themes/" + theme + "/board/player_waiting.png"));
-            this.redo = ImageIO.read(new File("./ressources/Themes/" + theme + "/board/redo.png"));
-            this.retour = ImageIO.read(new File("./ressources/Themes/" + theme + "/board/return.png"));
-            this.save = ImageIO.read(new File("./ressources/Themes/" + theme + "/board/save.png"));
-            this.board = ImageIO.read(new File("./ressources/Themes/" + theme + "/board/board.png"));
-            this.black = ImageIO.read(new File("./ressources/Themes/" + theme + "/board/black.png"));
-            this.white = ImageIO.read(new File("./ressources/Themes/" + theme + "/board/white.png"));
-            this.empty = ImageIO.read(new File("./ressources/Themes/" + theme + "/board/empty.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/background.png"));
+            this.cancel = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/cancel.png"));
+            this.player_playing = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/player_playing.png"));
+            this.player_waiting = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/player_waiting.png"));
+            this.restricted = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/restricted.png"));
+            this.redo = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/redo.png"));
+            this.retour = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/return.png"));
+            this.save = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/save.png"));
+            this.board = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/board.png"));
+            this.black = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/black.png"));
+            this.white = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/white.png"));
+            this.empty = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/empty.png"));
         } catch (Exception ex) {
             System.out.println("Error - "+GUI_LAG.class.toString());
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
         Coordinate c = new Coordinate();
-        ImageIcon base = new ImageIcon(empty);
+        ImageIcon base = new ImageIcon(this.empty);
         JPanel panel = new JPanel();
         panel.setBackground(new Color(0, 0, 0, 0));
         panel.setLayout(new GridLayout(9, 9, 2, 2));
@@ -76,7 +73,7 @@ public class GUI_LAG extends JPanel {
                 b.addMouseListener(new LAG_MouseListener(c));
                 b.setHorizontalTextPosition(JButton.CENTER);
                 b.setVerticalTextPosition(JButton.CENTER);
-                buttonmap[j][i] = b;
+                this.buttonmap[j][i] = b;
                 panel.add(b);
             }
         }
@@ -84,33 +81,33 @@ public class GUI_LAG extends JPanel {
         this.grille = panel;
         this.add(panel);
         
-        undoB = new JButton(new ImageIcon(cancel));
-        undoB.setBorder(BorderFactory.createEmptyBorder());
-        undoB.setContentAreaFilled(false);
-        undoB.setFocusPainted(false);
-        undoB.addMouseListener(new LAG_UI_MouseListener("cancel",theme));
-        this.add(undoB);
+        this.undoB = new JButton(new ImageIcon(this.cancel));
+        this.undoB.setBorder(BorderFactory.createEmptyBorder());
+        this.undoB.setContentAreaFilled(false);
+        this.undoB.setFocusPainted(false);
+        this.undoB.addMouseListener(new LAG_UI_MouseListener("cancel",this.theme));
+        this.add(this.undoB);
         
-        retourB = new JButton(new ImageIcon(retour));
-        retourB.setBorder(BorderFactory.createEmptyBorder());
-        retourB.setContentAreaFilled(false);
-        retourB.setFocusPainted(false);
-        retourB.addMouseListener(new LAG_UI_MouseListener("return",theme));
-        this.add(retourB);
+        this.retourB = new JButton(new ImageIcon(this.retour));
+        this.retourB.setBorder(BorderFactory.createEmptyBorder());
+        this.retourB.setContentAreaFilled(false);
+        this.retourB.setFocusPainted(false);
+        this.retourB.addMouseListener(new LAG_UI_MouseListener("return",this.theme));
+        this.add(this.retourB);
         
-        redoB = new JButton(new ImageIcon(redo));
-        redoB.setBorder(BorderFactory.createEmptyBorder());
-        redoB.setContentAreaFilled(false);
-        redoB.setFocusPainted(false);
-        redoB.addMouseListener(new LAG_UI_MouseListener("redo",theme));
-        this.add(redoB);
+        this.redoB = new JButton(new ImageIcon(this.redo));
+        this.redoB.setBorder(BorderFactory.createEmptyBorder());
+        this.redoB.setContentAreaFilled(false);
+        this.redoB.setFocusPainted(false);
+        this.redoB.addMouseListener(new LAG_UI_MouseListener("redo",this.theme));
+        this.add(this.redoB);
         
-        saveB = new JButton(new ImageIcon(save));
-        saveB.setBorder(BorderFactory.createEmptyBorder());
-        saveB.setContentAreaFilled(false);
-        saveB.setFocusPainted(false);
-        saveB.addMouseListener(new LAG_UI_MouseListener("save",theme));
-        this.add(saveB);
+        this.saveB = new JButton(new ImageIcon(this.save));
+        this.saveB.setBorder(BorderFactory.createEmptyBorder());
+        this.saveB.setContentAreaFilled(false);
+        this.saveB.setFocusPainted(false);
+        this.saveB.addMouseListener(new LAG_UI_MouseListener("save",this.theme));
+        this.add(this.saveB);
         
         this.addComponentListener(new LAG_AdapterListener(this));
     }
@@ -124,7 +121,7 @@ public class GUI_LAG extends JPanel {
             Container mainFrame = this.getParent().getParent().getParent().getParent();
             System.out.println(mainFrame.toString());
             this.game = new Local_Avalam_Game(g, p1, p2, (Main_Frame) mainFrame); // GridSizeException
-            Input.setInputGame(game);
+            Input.setInputGame(this.game);
         } catch (IOException | GridSizeException | NumberFormatException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -159,6 +156,7 @@ public class GUI_LAG extends JPanel {
         ImageIcon wh = new ImageIcon(this.white);
         ImageIcon bl = new ImageIcon(this.black);
         ImageIcon em = new ImageIcon(this.empty);
+        ImageIcon re = new ImageIcon(this.restricted);
         for (int i = 0; i < gr.getWidth(); i++) {
             for (int j = 0; j < gr.getHeight(); j++) {
                 c.setX(i);
@@ -175,7 +173,7 @@ public class GUI_LAG extends JPanel {
                         break;
                     case NO_OWNER:
                         if (gr.getCellAt(c).getState() == CellState.RESTRICTED) {
-                            buttonmap[i][j].setIcon(null);
+                            buttonmap[i][j].setIcon(re);
                         } else {
                             buttonmap[i][j].setIcon(em);
                             buttonmap[i][j].setText("");
@@ -185,5 +183,25 @@ public class GUI_LAG extends JPanel {
                 }
             }
         }
+    }
+
+    public JButton getUndoB() {
+        return undoB;
+    }
+
+    public JButton getRedoB() {
+        return redoB;
+    }
+
+    public JButton getRetourB() {
+        return retourB;
+    }
+
+    public JButton getSaveB() {
+        return saveB;
+    }
+
+    public JPanel getGrille() {
+        return grille;
     }
 }

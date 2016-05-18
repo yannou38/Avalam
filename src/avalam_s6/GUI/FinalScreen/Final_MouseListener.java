@@ -25,11 +25,13 @@ import javax.swing.JButton;
 public class Final_MouseListener implements MouseListener {
     private Image icon;
     private Image iconbase;
+    String theme;
     
     public Final_MouseListener(String theme) {
+        this.theme = theme;
         try {
-            icon = ImageIO.read(new File("./ressources/Themes/" + theme + "/final/home_h.png"));
-            iconbase = ImageIO.read(new File("./ressources/Themes/" + theme + "/final/home.png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/final/home_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/final/home.png"));
         } catch (Exception ex) {
             System.out.println("Error - "+Final_MouseListener.class.toString());
             Logger.getLogger(Final_MouseListener.class.getName()).log(Level.SEVERE, null, ex);
@@ -43,7 +45,7 @@ public class Final_MouseListener implements MouseListener {
         GUI_FinalScreen fs = ((GUI_FinalScreen)source.getParent());
         Main_Frame mainFrame = ((Main_Frame)fs.getParent().getParent().getParent().getParent());
         mainFrame.setwState(WindowState.MAIN);
-        ((JButton) e.getSource()).setIcon(new ImageIcon(iconbase));
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
     @Override
@@ -54,12 +56,12 @@ public class Final_MouseListener implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        ((JButton) e.getSource()).setIcon(new ImageIcon(icon));
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.icon));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        ((JButton) e.getSource()).setIcon(new ImageIcon(iconbase));
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
     
 }

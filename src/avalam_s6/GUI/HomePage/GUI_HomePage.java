@@ -21,13 +21,10 @@ import javax.swing.*;
  * access options, check rules & tutorial, etc
  */
 public class GUI_HomePage extends JPanel {
-    public JButton quick, play, settings, rules, tuto, exit;
-    private Image background, quickI, playI, settingsI, rulesI, tutoI, exitI;
-    public String theme;
 
-    public GUI_HomePage() {
-        this("Default");
-    }
+    private JButton quick, play, settings, rules, tuto, exit;
+    private Image background, quickI, playI, settingsI, rulesI, tutoI, exitI;
+    private String theme;
 
     public GUI_HomePage(String theme) {
         this.theme = theme;
@@ -37,68 +34,94 @@ public class GUI_HomePage extends JPanel {
     private void initComponents() {
 
         try {
-            background = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/main_bg.png"));
-            playI = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/customgame.png"));
-            tutoI = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/tuto.png"));
-            quickI = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/quickgame.png"));
-            settingsI = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/options.png"));
-            rulesI = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/rules.png"));
-            exitI = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/quit.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/main_bg.png"));
+            this.playI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/customgame.png"));
+            this.tutoI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/tuto.png"));
+            this.quickI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/quickgame.png"));
+            this.settingsI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/options.png"));
+            this.rulesI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/rules.png"));
+            this.exitI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/quit.png"));
         } catch (Exception ex) {
-            System.out.println("Error - "+GUI_HomePage.class.toString());
+            System.out.println("Error - " + GUI_HomePage.class.toString());
             Logger.getLogger(GUI_HomePage.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        quick = new JButton(new ImageIcon(quickI));
-        quick.setBorder(BorderFactory.createEmptyBorder());
-        quick.setContentAreaFilled(false);
-        quick.setFocusPainted(false);
-        quick.addMouseListener(new HomePageListener("quickgame",theme));
+        this.quick = new JButton(new ImageIcon(this.quickI));
+        this.quick.setBorder(BorderFactory.createEmptyBorder());
+        this.quick.setContentAreaFilled(false);
+        this.quick.setFocusPainted(false);
+        this.quick.addMouseListener(new HomePageListener("quickgame", this.theme));
 
-        play = new JButton(new ImageIcon(playI));
-        play.setBorder(BorderFactory.createEmptyBorder());
-        play.setContentAreaFilled(false);
-        play.setFocusPainted(false);
-        play.addMouseListener(new HomePageListener("customgame",theme));
+        this.play = new JButton(new ImageIcon(this.playI));
+        this.play.setBorder(BorderFactory.createEmptyBorder());
+        this.play.setContentAreaFilled(false);
+        this.play.setFocusPainted(false);
+        this.play.addMouseListener(new HomePageListener("customgame", this.theme));
 
-        rules = new JButton(new ImageIcon(rulesI));
-        rules.setBorder(BorderFactory.createEmptyBorder());
-        rules.setContentAreaFilled(false);
-        rules.setFocusPainted(false);
-        rules.addMouseListener(new HomePageListener("rules",theme));
+        this.rules = new JButton(new ImageIcon(this.rulesI));
+        this.rules.setBorder(BorderFactory.createEmptyBorder());
+        this.rules.setContentAreaFilled(false);
+        this.rules.setFocusPainted(false);
+        this.rules.addMouseListener(new HomePageListener("rules", this.theme));
 
-        tuto = new JButton(new ImageIcon(tutoI));
-        tuto.setBorder(BorderFactory.createEmptyBorder());
-        tuto.setContentAreaFilled(false);
-        tuto.setFocusPainted(false);
-        tuto.addMouseListener(new HomePageListener("tuto",theme));
+        this.tuto = new JButton(new ImageIcon(this.tutoI));
+        this.tuto.setBorder(BorderFactory.createEmptyBorder());
+        this.tuto.setContentAreaFilled(false);
+        this.tuto.setFocusPainted(false);
+        this.tuto.addMouseListener(new HomePageListener("tuto", this.theme));
 
-        settings = new JButton(new ImageIcon(settingsI));
-        settings.setBorder(BorderFactory.createEmptyBorder());
-        settings.setContentAreaFilled(false);
-        settings.setFocusPainted(false);
-        settings.addMouseListener(new HomePageListener("options",theme));
+        this.settings = new JButton(new ImageIcon(this.settingsI));
+        this.settings.setBorder(BorderFactory.createEmptyBorder());
+        this.settings.setContentAreaFilled(false);
+        this.settings.setFocusPainted(false);
+        this.settings.addMouseListener(new HomePageListener("options", this.theme));
 
-        exit = new JButton(new ImageIcon(exitI));
-        exit.setBorder(BorderFactory.createEmptyBorder());
-        exit.setContentAreaFilled(false);
-        exit.setFocusPainted(false);
-        exit.addMouseListener(new HomePageListener("quit",theme));
+        this.exit = new JButton(new ImageIcon(this.exitI));
+        this.exit.setBorder(BorderFactory.createEmptyBorder());
+        this.exit.setContentAreaFilled(false);
+        this.exit.setFocusPainted(false);
+        this.exit.addMouseListener(new HomePageListener("quit", this.theme));
 
         this.setLayout(null);
-        this.add(quick);
-        this.add(play);
-        this.add(rules);
-        this.add(tuto);
-        this.add(settings);
-        this.add(exit);        
+        this.add(this.quick);
+        this.add(this.play);
+        this.add(this.rules);
+        this.add(this.tuto);
+        this.add(this.settings);
+        this.add(this.exit);
         this.addComponentListener(new HomePageAdapterListener(this));
-        
+
     }
 
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(background, 0, 0, this.getWidth(),this.getHeight(),null);
-        
+        g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
+
     }
+
+    public JButton getQuick() {
+        return quick;
+    }
+
+    public JButton getPlay() {
+        return play;
+    }
+
+    public JButton getSettings() {
+        return settings;
+    }
+
+    public JButton getRules() {
+        return rules;
+    }
+
+    public JButton getTuto() {
+        return tuto;
+    }
+
+    public JButton getExit() {
+        return exit;
+    }
+    
+    
 }

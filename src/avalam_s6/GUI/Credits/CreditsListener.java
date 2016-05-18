@@ -21,17 +21,17 @@ import javax.swing.*;
  */
 public class CreditsListener implements MouseListener {
 
-    String name;
-    Image icon;
-    Image iconbase;
-    int playernum;
+    private String name;
+    private Image icon;
+    private Image iconbase;
+    private int playernum;
     
     public CreditsListener(String buttonname, String theme, int playernumber) {
         this.name = buttonname;
         this.playernum = playernumber;
         try {
-            icon = ImageIO.read(new File("./ressources/Themes/" + theme + "/credits/" + name + "_h.png"));
-            iconbase = ImageIO.read(new File("./ressources/Themes/" + theme + "/credits/" + name + ".png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + theme + "/credits/" + this.name + "_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + theme + "/credits/" + this.name + ".png"));
         } catch (Exception ex) {
             System.out.println("Error - "+CreditsListener.class.toString());
             Logger.getLogger(CreditsListener.class.getName()).log(Level.SEVERE, null, ex);
@@ -44,7 +44,7 @@ public class CreditsListener implements MouseListener {
         GUI_Credits Credits = ((GUI_Credits)source.getParent());
         Main_Frame mainFrame = ((Main_Frame)Credits.getParent().getParent().getParent().getParent());
             mainFrame.setwState(WindowState.MAIN);   
-        ((JButton)e.getSource()).setIcon(new ImageIcon(iconbase));
+        ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
     @Override
@@ -58,13 +58,13 @@ public class CreditsListener implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(icon));        
+        ((JButton)e.getSource()).setIcon(new ImageIcon(this.icon));        
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(iconbase));
+        ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
 }

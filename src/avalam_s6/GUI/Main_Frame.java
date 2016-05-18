@@ -22,9 +22,10 @@ import javax.swing.JPanel;
  * @author sazeratj
  */
 public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
-    WindowState wState;
-    WindowRenderMode wrm;
-    JPanel[] panelList;
+    private WindowState wState;
+    private WindowRenderMode wrm;
+    private JPanel[] panelList;
+    private String theme;
     
     public Main_Frame() {
         this("Default",WindowRenderMode.WINDOWED);
@@ -35,8 +36,9 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         this.panelList = new JPanel[6]; // TODO : add more JPanels.
         this.wState = WindowState.MAIN;
         this.wrm = renderMode;
+        this.theme = theme;
         /* FUNCTION CALL */
-        this.initFrame(theme);        
+        this.initFrame(this.theme);        
         this.setRenderMode(); 
         /* ADD KB DISPATCHER */
         getCurrentKeyboardFocusManager().addKeyEventDispatcher(new RenderKeyboardDispatcher(this));

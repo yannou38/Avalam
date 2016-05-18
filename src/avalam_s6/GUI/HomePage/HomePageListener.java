@@ -21,15 +21,17 @@ import javax.swing.*;
  */
 public class HomePageListener implements MouseListener {
 
-    String name;
-    Image icon;
-    Image iconbase;
+    private String name;
+    private Image icon;
+    private Image iconbase;
+    private String theme;
 
     public HomePageListener(String buttonname, String theme) {
         this.name = buttonname;
+        this.theme = theme;
         try {
-            icon = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/" + name + "_h.png"));
-            iconbase = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/" + name + ".png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/" + this.name + "_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/" + this.name + ".png"));
         } catch (Exception ex) {
             System.out.println("Error - "+HomePageListener.class.toString());
             Logger.getLogger(HomePageListener.class.getName()).log(Level.SEVERE, null, ex);
@@ -55,7 +57,7 @@ public class HomePageListener implements MouseListener {
                 mainFrame.setwState(WindowState.SETTINGS);
                 break;
         }
-        ((JButton)e.getSource()).setIcon(new ImageIcon(iconbase));
+        ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
     @Override
@@ -69,13 +71,13 @@ public class HomePageListener implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(icon));        
+        ((JButton)e.getSource()).setIcon(new ImageIcon(this.icon));        
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(iconbase));
+        ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
 }

@@ -16,7 +16,7 @@ import static java.lang.Math.round;
  */
 public class CreditsAdapterListener implements ComponentListener {
 
-    GUI_Credits cr;
+    private final GUI_Credits cr;
 
     public CreditsAdapterListener(GUI_Credits credits) {
         this.cr = credits;
@@ -25,13 +25,13 @@ public class CreditsAdapterListener implements ComponentListener {
     //JButton player, prec, sup, load, retour, start;
     @Override
     public void componentResized(ComponentEvent e) {
-        Insets insets = cr.getInsets();
+        Insets insets = this.cr.getInsets();
         //1280*720 => taille de base
-        double ratioW = (double) cr.getWidth() / (double) 1280;
-        double ratioH = (double) cr.getHeight() / (double) 720;
-        Dimension size = cr.retour.getPreferredSize();
-        cr.retour.setBounds((int) round((20 + insets.left) * ratioW), ((int) round((625 + insets.top) * ratioH)), size.width, size.height);
-        cr.retour.setSize((int) round(cr.retour.getWidth() * ratioW), (int) round(cr.retour.getHeight() * ratioH));
+        double ratioW = (double) this.cr.getWidth() / (double) 1280;
+        double ratioH = (double) this.cr.getHeight() / (double) 720;
+        Dimension size = this.cr.getRetour().getPreferredSize();
+        this.cr.getRetour().setBounds((int) round((20 + insets.left) * ratioW), ((int) round((625 + insets.top) * ratioH)), size.width, size.height);
+        this.cr.getRetour().setSize((int) round(this.cr.getRetour().getWidth() * ratioW), (int) round(this.cr.getRetour().getHeight() * ratioH));
     }
 
     @Override

@@ -6,7 +6,7 @@
 package avalam_s6.GUI.LocalAvalamGame;
 
 import avalam_s6.Core.Coordinate;
-import avalam_s6.Core.Input;
+//import avalam_s6.Core.Input;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 

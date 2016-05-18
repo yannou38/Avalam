@@ -16,7 +16,7 @@ import static java.lang.Math.round;
  * @author sazeratj
  */
 public class Final_AdapterListener implements ComponentListener {
-    private GUI_FinalScreen page;
+    private final GUI_FinalScreen page;
 
     public Final_AdapterListener(GUI_FinalScreen page) {
         this.page = page;
@@ -24,13 +24,13 @@ public class Final_AdapterListener implements ComponentListener {
 
     @Override
     public void componentResized(ComponentEvent e) {
-        Insets insets = page.getInsets();
+        Insets insets = this.page.getInsets();
         //1280*720 => taille de base
-        double ratioW = (double) page.getWidth() / (double) 1280;
-        double ratioH = (double) page.getHeight() / (double) 720;
-        Dimension size = page.home.getPreferredSize();
-        page.home.setBounds((int) round((3 + insets.left) * ratioW), ((int) round((620 + insets.top) * ratioH)), size.width, size.height);
-        page.home.setSize((int) round(page.home.getWidth() * ratioW), (int) round(page.home.getHeight() * ratioH));
+        double ratioW = (double) this.page.getWidth() / (double) 1280;
+        double ratioH = (double) this.page.getHeight() / (double) 720;
+        Dimension size = this.page.getHome().getPreferredSize();
+        this.page.getHome().setBounds((int) round((3 + insets.left) * ratioW), ((int) round((620 + insets.top) * ratioH)), size.width, size.height);
+        this.page.getHome().setSize((int) round(this.page.getHome().getWidth() * ratioW), (int) round(this.page.getHome().getHeight() * ratioH));
     }
 
     @Override
