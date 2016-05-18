@@ -34,27 +34,14 @@ public class AIPlayerEasy extends AIPlayer {
         ArrayList<Move> mesCoupsMehValue = new ArrayList<>();
         ArrayList<Move> mesCoupsBadValue = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];
-        Grid g = this.game.getGrid();
-        for (int i = 0; i < this.game.getGrid().getWidth(); i++)
-        {
-            /**
-             *    1 2 3
-             *    4 0 5
-             *    6 7 8
-             */   
-            for (int j = 0; j < this.game.getGrid().getHeight(); j++)
-            {
-                Coordinate c0 = new Coordinate(j,i);
-                if (c0.isValid() && this.game.getGrid().getCellAt(c0).getState().getValue() == CellState.TOWER.getValue())
-                {
-                    Coordinate c1 = new Coordinate(j-1,i-1);
-                    Coordinate c2 = new Coordinate(j,i-1);
-                    Coordinate c3 = new Coordinate(j+1,i-1);
-                    Coordinate c4 = new Coordinate(j-1,i);
-                    Coordinate c5 = new Coordinate(j+1,i);
-                    Coordinate c6 = new Coordinate(j-1,i+1);
-                    Coordinate c7 = new Coordinate(j,i+1);
-                    Coordinate c8 = new Coordinate(j+1,i+1);
+        Coordinate c1 = new Coordinate(0,0);
+        Coordinate c2 = new Coordinate(0,0);
+        Coordinate c3 = new Coordinate(0,0);
+        Coordinate c4 = new Coordinate(0,0);
+        Coordinate c5 = new Coordinate(0,0);
+        Coordinate c6 = new Coordinate(0,0);
+        Coordinate c7 = new Coordinate(0,0);
+        Coordinate c8 = new Coordinate(0,0);
                     tabCoord[0] = c1;
                     tabCoord[1] = c2;
                     tabCoord[2] = c3;
@@ -63,6 +50,37 @@ public class AIPlayerEasy extends AIPlayer {
                     tabCoord[5] = c6;
                     tabCoord[6] = c7;
                     tabCoord[7] = c8;
+        Grid g = this.game.getGrid();
+        for (int i = 0; i < this.game.getGrid().getWidth(); i++)
+        {
+            /**   
+             *    1 2 3
+             *    4 0 5
+             *    6 7 8
+             */   
+            for (int j = 0; j < this.game.getGrid().getHeight(); j++)
+            {
+                Coordinate c0 = new Coordinate(j,i);
+                c1.setX(j-1);
+                c1.setY(i-1);
+                c2.setX(j);
+                c2.setY(i-1);
+                c3.setX(j+1);
+                c3.setY(i-1);
+                c4.setX(j);
+                c4.setY(i-1);
+                c5.setX(j);
+                c5.setY(i+1);
+                c6.setX(j+1);
+                c6.setY(i-1);
+                c7.setX(j+1);
+                c7.setY(i);
+                c8.setX(j+1);
+                c8.setY(i+1);
+                
+                if (c0.isValid() && this.game.getGrid().getCellAt(c0).getState().getValue() == CellState.TOWER.getValue())
+                {
+                    
                     for (int k = 0; k <8;k++)
                     {
                         if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue())
@@ -98,22 +116,22 @@ public class AIPlayerEasy extends AIPlayer {
         Random r = new Random();
         if (!mesCoupsHighValue.isEmpty()){
             System.out.println("Je joue un coup genial");
-            return mesCoupsHighValue.get(r.nextInt(mesCoupsHighValue.size())-1);
+            return mesCoupsHighValue.get(r.nextInt(mesCoupsHighValue.size()));
         }
         if(!mesCoupsOkValue.isEmpty()){
             System.out.println("Je joue un coup ok");
-            return mesCoupsOkValue.get(r.nextInt(mesCoupsOkValue.size())-1);
+            return mesCoupsOkValue.get(r.nextInt(mesCoupsOkValue.size()));
         }
         if(!mesCoupsMehValue.isEmpty()){
             System.out.println("Je joue un coup meh");
-            return mesCoupsMehValue.get(r.nextInt(mesCoupsMehValue.size())-1);
+            return mesCoupsMehValue.get(r.nextInt(mesCoupsMehValue.size()));
         }
         if(!mesCoups.isEmpty()){
             System.out.println("Je joue un coup");
-            return mesCoups.get(r.nextInt(mesCoups.size())-1);
+            return mesCoups.get(r.nextInt(mesCoups.size()));
         }
         System.out.println("Je joue un mauvais coup");
-        return mesCoupsBadValue.get(r.nextInt(mesCoupsBadValue.size())-1);
+        return mesCoupsBadValue.get(r.nextInt(mesCoupsBadValue.size()));
     }
 
 }
