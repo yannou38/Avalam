@@ -37,6 +37,10 @@ public class Input
         return Input.hasClicked;
     }
 
+    public static void resetClick() {
+        Input.hasClicked = false;
+    }
+    
     /**
      * Tells the Input class that the button has been clicked.
      */

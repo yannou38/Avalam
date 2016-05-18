@@ -143,9 +143,19 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         System.out.println("Joueur : "+this.current_player);
         Move m = this.players[this.current_player].play();
         if(m != null){
-            this.grid.moveCell(m.getC_src(), m.getC_dst());
-            this.history.add(m);
-            this.isTurnFinished = true;
+            if(this.players[this.current_player].isAI()) { // IA
+                this.grid.moveCell(m.getC_src(), m.getC_dst());
+                this.history.add(m);
+                this.isTurnFinished = true;
+            } else { // JOUEUR
+                if(this.grid.canStack(this.grid.getCellAt(m.getC_src()), this.grid.getCellAt(m.getC_dst()))) { // MOVE OK
+                    this.grid.moveCell(m.getC_src(), m.getC_dst());
+                    this.history.add(m);
+                    this.isTurnFinished = true;
+                }  else {
+ //TODO                   /* Afficher warning de deplacement */
+                }
+            }
         }        
         this.gui.render();
     }

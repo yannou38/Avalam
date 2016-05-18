@@ -6,7 +6,7 @@
 package avalam_s6.GUI.LocalAvalamGame;
 
 import avalam_s6.Core.Coordinate;
-//import avalam_s6.Core.Input;
+import avalam_s6.Core.Input;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -16,7 +16,7 @@ import java.awt.event.MouseListener;
  */
 public class LAG_MouseListener implements MouseListener{
 
-    Coordinate c;
+    private Coordinate c;
     
     public LAG_MouseListener(Coordinate c){
         this.c=c;
@@ -24,10 +24,15 @@ public class LAG_MouseListener implements MouseListener{
     
     @Override
     public void mouseClicked(MouseEvent e) {
-        /*Input.setButtonClicked(); 
-        Coordinate pos = new Coordinate(e.getX()%this.SIZE_OF_CELL,e.getY()%this.SIZE_OF_CELL);
-        if(pos.isValid())
-            Input.updateMouseSrcPosition(pos);*/
+        if(!Input.isButtonClicked()) {
+            Input.setButtonClicked(); 
+            Input.updateMouseSrcPosition(this.c);
+        } else {
+            if ((Math.abs(c.getX() - Input.getMouseSrcPosition().getX()) <=1) && (Math.abs(c.getY() - Input.getMouseSrcPosition().getY()) <=1) && (!(c.getX() == Input.getMouseSrcPosition().getX() && c.getY() == Input.getMouseSrcPosition().getY()))) {
+                Input.setButtonReleased();
+                Input.updateMouseDestPosition(this.c);
+            }
+        }
     }
 
     @Override
@@ -37,12 +42,7 @@ public class LAG_MouseListener implements MouseListener{
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        /*if(Input.isButtonClicked()){
-            Input.setButtonReleased();
-            Coordinate pos = new Coordinate(e.getX()%this.SIZE_OF_CELL, e.getY()%this.SIZE_OF_CELL);
-            if(pos.isValid())
-                Input.updateMouseDestPosition(pos);
-        }*/
+    
     }
 
     @Override

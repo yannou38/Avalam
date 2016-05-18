@@ -29,12 +29,12 @@ public class ControlledPlayer extends Player{
     @Override
     public Move play() {
         if(Input.hasClicked()){
-            Move m;
             Coordinate src = Input.getMouseSrcPosition();
             Coordinate dest = Input.getMouseDestPosition();
             int srcSize = Input.getSrcSize();
             int destSize = Input.getDestSize();
-            m = new Move(src,srcSize, dest, destSize,this);
+            Move m = new Move(src,srcSize, dest, destSize,this);
+            Input.resetClick();
             Input.updateMouseDestPosition(new Coordinate());
             Input.updateMouseSrcPosition(new Coordinate());
             return m;

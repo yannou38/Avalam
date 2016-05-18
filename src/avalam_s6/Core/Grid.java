@@ -91,6 +91,6 @@ public class Grid {
      */
     public boolean canStack(Cell src, Cell dst) {
         return (src.getSize()+dst.getSize() <= 5) && (src.getState().getValue() == CellState.TOWER.getValue()) && 
-                ((dst.getState().getValue() == CellState.TOWER.getValue())|| dst.getState().getValue() == CellState.EMPTY.getValue());
+                ((dst.getState().getValue() == CellState.TOWER.getValue()));
     }
 }
