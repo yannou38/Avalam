@@ -3,31 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package avalam_s6.GUI.HomePage;
+package avalam_s6.GUI.LocalAvalamGame;
 
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;
-import java.awt.*;
+import java.awt.Image;
 import java.awt.event.*;
 import java.io.File;
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 /**
  *
  * @author ducruyy
  */
-public class HomePageListener implements MouseListener {
+public class LAG_UI_MouseListener implements MouseListener {
 
     String name;
     Image icon;
     Image iconbase;
 
-    public HomePageListener(String buttonname, String theme) {
+    public LAG_UI_MouseListener(String buttonname, String theme) {
         this.name = buttonname;
         try {
-            icon = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/" + name + "_h.png"));
-            iconbase = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/" + name + ".png"));
+            icon = ImageIO.read(new File("./ressources/Themes/" + theme + "/board/" + name + "_h.png"));
+            iconbase = ImageIO.read(new File("./ressources/Themes/" + theme + "/board/" + name + ".png"));
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -36,20 +37,21 @@ public class HomePageListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
-        GUI_HomePage homePage = ((GUI_HomePage)source.getParent());
-        Main_Frame mainFrame = ((Main_Frame)homePage.getParent().getParent().getParent().getParent());
+        GUI_LAG lag = ((GUI_LAG)source.getParent());
+        Main_Frame mainFrame = ((Main_Frame)lag.getParent().getParent().getParent().getParent());
         switch (this.name){
-            case "quit" :
-                mainFrame.dispose();
+            case "return" :
+                mainFrame.setwState(WindowState.MAIN);                
                 break;
-            case "quickgame" :                
-                mainFrame.initGame();                
+            case "redo" :
                 break;                
-            case "customgame" :
-                mainFrame.setwState(WindowState.PLAYERSELECT);
+            case "cancel" :
+                break;                
+            case "save" :
                 break;
         }
-        ((JButton)e.getSource()).setIcon(new ImageIcon(iconbase));
+        ((JButton) e.getSource()).setIcon(new ImageIcon(iconbase));
+        
     }
 
     @Override
@@ -63,13 +65,13 @@ public class HomePageListener implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(icon));        
+        ((JButton) e.getSource()).setIcon(new ImageIcon(icon));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(iconbase));
+        ((JButton) e.getSource()).setIcon(new ImageIcon(iconbase));
     }
 
 }

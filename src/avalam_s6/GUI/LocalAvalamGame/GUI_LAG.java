@@ -27,7 +27,7 @@ public class GUI_LAG extends JPanel {
     String theme;
     boolean player1IsPlaying;
     JPanel grille;
-
+    JButton undoB, redoB, retourB, saveB;
     private Image background, cancel, player_playing, player_waiting, redo, retour, save, board, black, white, empty;
     JButton[][] buttonmap = new JButton[9][9];
 
@@ -82,6 +82,35 @@ public class GUI_LAG extends JPanel {
         this.setLayout(null);
         this.grille = panel;
         this.add(panel);
+        
+        undoB = new JButton(new ImageIcon(cancel));
+        undoB.setBorder(BorderFactory.createEmptyBorder());
+        undoB.setContentAreaFilled(false);
+        undoB.setFocusPainted(false);
+        undoB.addMouseListener(new LAG_UI_MouseListener("cancel",theme));
+        this.add(undoB);
+        
+        retourB = new JButton(new ImageIcon(retour));
+        retourB.setBorder(BorderFactory.createEmptyBorder());
+        retourB.setContentAreaFilled(false);
+        retourB.setFocusPainted(false);
+        retourB.addMouseListener(new LAG_UI_MouseListener("return",theme));
+        this.add(retourB);
+        
+        redoB = new JButton(new ImageIcon(redo));
+        redoB.setBorder(BorderFactory.createEmptyBorder());
+        redoB.setContentAreaFilled(false);
+        redoB.setFocusPainted(false);
+        redoB.addMouseListener(new LAG_UI_MouseListener("redo",theme));
+        this.add(redoB);
+        
+        saveB = new JButton(new ImageIcon(save));
+        saveB.setBorder(BorderFactory.createEmptyBorder());
+        saveB.setContentAreaFilled(false);
+        saveB.setFocusPainted(false);
+        saveB.addMouseListener(new LAG_UI_MouseListener("save",theme));
+        this.add(saveB);
+        
         this.addComponentListener(new LAG_AdapterListener(this));
     }
 
@@ -101,7 +130,7 @@ public class GUI_LAG extends JPanel {
     }
 
     public void start() {
-        this.game.getTimer().start();
+        //this.game.getTimer().start();
     }
 
     @Override
@@ -134,25 +163,18 @@ public class GUI_LAG extends JPanel {
                     case PLAYER_1:
                         buttonmap[i][j].setIcon(wh);
                         buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
-
-                        //g.drawImage(this.white, i * 60, j * 60, null);
                         break;
                     case PLAYER_2:
                         buttonmap[i][j].setIcon(bl);
                         buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
-                        //g.drawImage(this.black, i * 60, j * 60, null);
-
                         break;
                     case NO_OWNER:
-
                         if (gr.getCellAt(c).getState() == CellState.RESTRICTED) {
                             buttonmap[i][j].setIcon(null);
                         } else {
                             buttonmap[i][j].setIcon(em);
                             buttonmap[i][j].setText("");
                         }
-                        //g.drawImage(this.empty, i * 60, j * 60, null);
-
                         break;
 
                 }
