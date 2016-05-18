@@ -76,7 +76,7 @@ public class GUI_FinalScreen extends JPanel {
             Logger.getLogger(GUI_FinalScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        ImageIcon base = new ImageIcon(empty);
+        ImageIcon base = new ImageIcon(this.empty);
         JPanel panel = new JPanel();
         panel.setBackground(new Color(0, 0, 0, 0));
         panel.setLayout(new GridLayout(9, 9, 2, 2));
@@ -87,7 +87,7 @@ public class GUI_FinalScreen extends JPanel {
                 b.setContentAreaFilled(false);
                 b.setHorizontalTextPosition(JButton.CENTER);
                 b.setVerticalTextPosition(JButton.CENTER);
-                buttonmap[j][i] = b;
+                this.buttonmap[j][i] = b;
                 panel.add(b);
             }
         }
@@ -98,7 +98,7 @@ public class GUI_FinalScreen extends JPanel {
         this.home.setBorder(BorderFactory.createEmptyBorder());
         this.home.setContentAreaFilled(false);
         this.home.setFocusPainted(false);
-        this.home.addMouseListener(new Final_MouseListener(theme));
+        this.home.addMouseListener(new Final_MouseListener(this.theme));
 
         this.setLayout(null);
         this.add(this.victoryText);
@@ -116,7 +116,7 @@ public class GUI_FinalScreen extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
+        g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
 
         Grid gr = this.finalGrid;
         Coordinate c = new Coordinate();
@@ -130,19 +130,19 @@ public class GUI_FinalScreen extends JPanel {
                 Cell ce = gr.getCellAt(c);
                 switch (ce.getOwner()) {
                     case PLAYER_1:
-                        buttonmap[i][j].setIcon(wh);
-                        buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
+                        this.buttonmap[i][j].setIcon(wh);
+                        this.buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
                         break;
                     case PLAYER_2:
-                        buttonmap[i][j].setIcon(bl);
-                        buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
+                        this.buttonmap[i][j].setIcon(bl);
+                        this.buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
                         break;
                     case NO_OWNER:
                         if (gr.getCellAt(c).getState() == CellState.RESTRICTED) {
-                            buttonmap[i][j].setIcon(null);
+                            this.buttonmap[i][j].setIcon(null);
                         } else {
-                            buttonmap[i][j].setIcon(em);
-                            buttonmap[i][j].setText("");
+                            this.buttonmap[i][j].setIcon(em);
+                            this.buttonmap[i][j].setText("");
                         }
                         break;
 

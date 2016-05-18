@@ -29,12 +29,12 @@ public class Final_AdapterListener implements ComponentListener {
         double ratioW = (double) page.getWidth() / (double) 1280;
         double ratioH = (double) page.getHeight() / (double) 720;
         Dimension size = page.home.getPreferredSize();
-        page.home.setBounds((int) round((3 + insets.left) * ratioW), ((int) round((620 + insets.top) * ratioH)), size.width, size.height);
-        page.home.setSize((int) round(page.home.getWidth() * ratioW), (int) round(page.home.getHeight() * ratioH));
+        this.page.home.setBounds((int) round((3 + insets.left) * ratioW), ((int) round((620 + insets.top) * ratioH)), size.width, size.height);
+        this.page.home.setSize((int) round(this.page.home.getWidth() * ratioW), (int) round(this.page.home.getHeight() * ratioH));
         
-        size = page.victoryText.getPreferredSize();
-        page.victoryText.setBounds((int) round((500 + insets.left) * ratioW), ((int) round((50 + insets.top) * ratioH)), size.width, size.height);
-        page.victoryText.setSize((int) round(page.victoryText.getWidth() * ratioW), (int) round(page.victoryText.getHeight() * ratioH));
+        size = this.page.victoryText.getPreferredSize();
+        this.page.victoryText.setBounds((int) round((500 + insets.left) * ratioW), ((int) round((50 + insets.top) * ratioH)), size.width, size.height);
+        this.page.victoryText.setSize((int) round(this.page.victoryText.getWidth() * ratioW), (int) round(this.page.victoryText.getHeight() * ratioH));
         
         size = this.page.grille.getPreferredSize();
         this.page.grille.setBounds((int) round((450 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
