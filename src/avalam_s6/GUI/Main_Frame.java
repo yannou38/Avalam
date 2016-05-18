@@ -98,7 +98,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).start();
     }
     
-    public void setVictoryScreen(Player_INTERFACE p) {
+    public void setVictoryScreen(String p) {
         ((GUI_FinalScreen)this.panelList[WindowState.VICTORY.getValue()]).setWinner(p);
         this.setwState(WindowState.VICTORY);
     }

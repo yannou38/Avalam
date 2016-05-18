@@ -6,6 +6,7 @@
 package avalam_s6.GUI.FinalScreen;
 
 import avalam_s6.Player.Player_INTERFACE;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
 import java.util.logging.Level;
@@ -22,7 +23,6 @@ public class GUI_FinalScreen extends JPanel {
     public String theme;
     private Image background;
     private JLabel victoryText;
-    private Player_INTERFACE winner;
     
     public GUI_FinalScreen() {
         this("Default");
@@ -30,20 +30,28 @@ public class GUI_FinalScreen extends JPanel {
     
     public GUI_FinalScreen(String theme) {
         this.theme = theme;
-        this.winner = null;
+        this.init();
     }
     
-    public void init() {
+    private void init() {
         try {
-            background = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/main_bg.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/main_bg.png"));
         } catch (Exception ex) {
             Logger.getLogger(GUI_FinalScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        victoryText = new JLabel();
+        this.victoryText = new JLabel();
+        this.add(this.victoryText);
     }
     
-    public void setWinner(Player_INTERFACE p) {
-        this.winner = p;
+    public void setWinner(String p) {
+        this.victoryText.setText(p+" a gagné!");        
+    }
+    
+    @Override
+    public void paintComponent(Graphics g) {
+        g.drawImage(background, 0, 0, this.getWidth(),this.getHeight(),null);
+        
     }
 }
+

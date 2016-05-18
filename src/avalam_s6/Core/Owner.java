@@ -10,7 +10,16 @@ package avalam_s6.Core;
  * @author TheDoctor
  */
 public enum Owner {
-    PLAYER_1, //P1
-    PLAYER_2, //P2
-    NO_OWNER; //No Owner
+    PLAYER_1(1), //P1
+    PLAYER_2(2), //P2
+    NO_OWNER(3); //No Owner
+    
+    private final int value;
+    
+    private Owner(int v){
+        this.value = v;
+    }
+    public int getValue(){
+        return this.value;
+    }
 }

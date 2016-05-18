@@ -184,9 +184,9 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
                         }
                     }                     
                 }
-                if(this.grid.getCellAt(c[0]).getOwner() == Owner.PLAYER_1) {
+                if(this.grid.getCellAt(c[0]).getOwner().getValue() == Owner.PLAYER_1.getValue()) {
                     score_p1++;
-                } else if(this.grid.getCellAt(c[0]).getOwner() == Owner.PLAYER_2) {
+                } else if(this.grid.getCellAt(c[0]).getOwner().getValue() == Owner.PLAYER_2.getValue()) {
                     score_p1--;
                 }
             }
@@ -206,7 +206,11 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
      */
     private void winningProcedure(int i) {
         /* Appel à GUI */
-        ((Main_Frame)this.gui).setVictoryScreen(this.players[i-1]);
+        if(i<3) {
+            ((Main_Frame)this.gui).setVictoryScreen(this.players[i-1].getName());
+        } else {
+            //EGALITE
+        }
     }
 
     @Override
