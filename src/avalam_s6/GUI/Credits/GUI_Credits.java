@@ -44,7 +44,7 @@ public class GUI_Credits extends JPanel {
         retour.setBorder(BorderFactory.createEmptyBorder());
         retour.setContentAreaFilled(false);
         retour.setFocusPainted(false);
-        retour.addMouseListener(new CreditsListener("return",theme,0));
+        retour.addMouseListener(new CreditsListener("home",theme,0));
 
         this.setLayout(null);
         this.add(retour);    
