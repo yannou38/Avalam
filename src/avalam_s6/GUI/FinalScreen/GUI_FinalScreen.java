@@ -5,7 +5,6 @@
  */
 package avalam_s6.GUI.FinalScreen;
 
-import avalam_s6.Player.Player_INTERFACE;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
