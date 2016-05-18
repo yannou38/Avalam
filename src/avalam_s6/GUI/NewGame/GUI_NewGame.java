@@ -17,8 +17,8 @@ import javax.swing.*;
  * @author ducruyy
  */
 public class GUI_NewGame extends JPanel {
-    JButton player1, prec1, sup1, player2, prec2, sup2, load, retour, start;
-    private Image background, iaEasyI, iaMidI, iaHardI, loadI, player1I, prec1I, sup1I, player2I, prec2I, sup2I, returnI, startI;
+    JButton player1, prec1, sup1, player2, prec2, sup2, aie1, aim1, aih1, aie2, aim2, aih2, load, retour, start;
+    private Image background, aieI, aimI, aihI, loadI, playerI, precI, supI, returnI, startI;
     String theme;
     
     
@@ -34,77 +34,110 @@ public class GUI_NewGame extends JPanel {
     private void initComponents() {
         try {
             background = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/background.png"));
-            iaEasyI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/ia_easy.png"));
-            iaHardI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/ia_hard.png"));
-            iaMidI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/ia_mid.png"));
+            aieI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/ia_easy.png"));
+            aimI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/ia_mid.png"));
+            aihI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/ia_hard.png"));
             loadI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/load.png"));
-            player1I = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/player.png"));
-            prec1I = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/prec.png"));
-            sup1I = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/sup.png"));
-            player2I = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/player.png"));
-            prec2I = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/prec.png"));
-            sup2I = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/sup.png"));
+            playerI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/player.png"));
+            precI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/prec.png"));
+            supI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/sup.png"));
             returnI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/return.png"));
             startI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/start.png"));
         } catch (Exception ex) {
             Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        player1 = new JButton(new ImageIcon(player1I));
+        player1 = new JButton(new ImageIcon(playerI));
         player1.setBorder(BorderFactory.createEmptyBorder());
         player1.setContentAreaFilled(false);
         player1.setFocusPainted(false);
-        player1.addMouseListener(new NewGameListener("player1",theme));
+        player1.addMouseListener(new NewGameListener("player",theme,1));
+        
+        aie1 = new JButton(new ImageIcon(aieI));
+        aie1.setBorder(BorderFactory.createEmptyBorder());
+        aie1.setContentAreaFilled(false);
+        aie1.setFocusPainted(false);
+        aie1.addMouseListener(new NewGameListener("player",theme,1));
+        
+        aim1 = new JButton(new ImageIcon(aimI));
+        aim1.setBorder(BorderFactory.createEmptyBorder());
+        aim1.setContentAreaFilled(false);
+        aim1.setFocusPainted(false);
+        aim1.addMouseListener(new NewGameListener("player",theme,1));        
+         
+        aih1 = new JButton(new ImageIcon(aihI));
+        aih1.setBorder(BorderFactory.createEmptyBorder());
+        aih1.setContentAreaFilled(false);
+        aih1.setFocusPainted(false);
+        aih1.addMouseListener(new NewGameListener("player",theme,1));             
 
-        prec1 = new JButton(new ImageIcon(prec1I));
+        prec1 = new JButton(new ImageIcon(precI));
         prec1.setBorder(BorderFactory.createEmptyBorder());
         prec1.setContentAreaFilled(false);
         prec1.setFocusPainted(false);
-        prec1.addMouseListener(new NewGameListener("prec1",theme));
+        prec1.addMouseListener(new NewGameListener("prec",theme,1));
 
-        sup1 = new JButton(new ImageIcon(sup1I));
+        sup1 = new JButton(new ImageIcon(supI));
         sup1.setBorder(BorderFactory.createEmptyBorder());
         sup1.setContentAreaFilled(false);
         sup1.setFocusPainted(false);
-        sup1.addMouseListener(new NewGameListener("sup1",theme));
+        sup1.addMouseListener(new NewGameListener("sup",theme,1));
         
 
-        player2 = new JButton(new ImageIcon(player2I));
+        player2 = new JButton(new ImageIcon(playerI));
         player2.setBorder(BorderFactory.createEmptyBorder());
         player2.setContentAreaFilled(false);
         player2.setFocusPainted(false);
-        player2.addMouseListener(new NewGameListener("player2",theme));
+        player2.addMouseListener(new NewGameListener("player",theme,2));
 
-        prec2 = new JButton(new ImageIcon(prec2I));
+        aie2 = new JButton(new ImageIcon(aieI));
+        aie2.setBorder(BorderFactory.createEmptyBorder());
+        aie2.setContentAreaFilled(false);
+        aie2.setFocusPainted(false);
+        aie2.addMouseListener(new NewGameListener("player",theme,2));
+
+        aim2 = new JButton(new ImageIcon(aimI));
+        aim2.setBorder(BorderFactory.createEmptyBorder());
+        aim2.setContentAreaFilled(false);
+        aim2.setFocusPainted(false);
+        aim2.addMouseListener(new NewGameListener("player",theme,2));        
+         
+        aih2 = new JButton(new ImageIcon(aihI));
+        aih2.setBorder(BorderFactory.createEmptyBorder());
+        aih2.setContentAreaFilled(false);
+        aih2.setFocusPainted(false);
+        aih2.addMouseListener(new NewGameListener("player",theme,2));     
+        
+        prec2 = new JButton(new ImageIcon(precI));
         prec2.setBorder(BorderFactory.createEmptyBorder());
         prec2.setContentAreaFilled(false);
         prec2.setFocusPainted(false);
-        prec2.addMouseListener(new NewGameListener("prec2",theme));
+        prec2.addMouseListener(new NewGameListener("prec",theme,2));
 
-        sup2 = new JButton(new ImageIcon(sup2I));
+        sup2 = new JButton(new ImageIcon(supI));
         sup2.setBorder(BorderFactory.createEmptyBorder());
         sup2.setContentAreaFilled(false);
         sup2.setFocusPainted(false);
-        sup2.addMouseListener(new NewGameListener("sup2",theme));  
+        sup2.addMouseListener(new NewGameListener("sup",theme,2));  
         
 
         load = new JButton(new ImageIcon(loadI));
         load.setBorder(BorderFactory.createEmptyBorder());
         load.setContentAreaFilled(false);
         load.setFocusPainted(false);
-        load.addMouseListener(new NewGameListener("load",theme));
+        load.addMouseListener(new NewGameListener("load",theme,0));
 
         retour = new JButton(new ImageIcon(returnI));
         retour.setBorder(BorderFactory.createEmptyBorder());
         retour.setContentAreaFilled(false);
         retour.setFocusPainted(false);
-        retour.addMouseListener(new NewGameListener("retour",theme));
+        retour.addMouseListener(new NewGameListener("return",theme,0));
 
         start = new JButton(new ImageIcon(startI));
         start.setBorder(BorderFactory.createEmptyBorder());
         start.setContentAreaFilled(false);
         start.setFocusPainted(false);
-        start.addMouseListener(new NewGameListener("start",theme));
+        start.addMouseListener(new NewGameListener("start",theme,0));
 
         this.setLayout(null);
         this.add(player1);

@@ -32,6 +32,15 @@ public class NewGameAdapterListener implements ComponentListener {
         Dimension size = ng.player1.getPreferredSize();
         ng.player1.setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
         ng.player1.setSize((int) round(ng.player1.getWidth() * ratioW), (int) round(ng.player1.getHeight() * ratioH));
+        
+        ng.aie1.setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        ng.aie1.setSize((int) round(ng.aie1.getWidth() * ratioW), (int) round(ng.aie1.getHeight() * ratioH));
+        
+        ng.aim1.setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        ng.aim1.setSize((int) round(ng.aim1.getWidth() * ratioW), (int) round(ng.aim1.getHeight() * ratioH));
+        
+        ng.aih1.setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        ng.aih1.setSize((int) round(ng.aih1.getWidth() * ratioW), (int) round(ng.aih1.getHeight() * ratioH));
 
         size = ng.prec1.getPreferredSize();
         ng.prec1.setBounds((int) round((250 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
@@ -45,6 +54,15 @@ public class NewGameAdapterListener implements ComponentListener {
         size = ng.player2.getPreferredSize();
         ng.player2.setBounds((int) round((760 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
         ng.player2.setSize((int) round(ng.player2.getWidth() * ratioW), (int) round(ng.player2.getHeight() * ratioH));
+        
+        ng.aie2.setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        ng.aie2.setSize((int) round(ng.aie2.getWidth() * ratioW), (int) round(ng.aie2.getHeight() * ratioH));
+        
+        ng.aim2.setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        ng.aim2.setSize((int) round(ng.aim2.getWidth() * ratioW), (int) round(ng.aim2.getHeight() * ratioH));
+        
+        ng.aih2.setBounds((int) round((300 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
+        ng.aih2.setSize((int) round(ng.aih2.getWidth() * ratioW), (int) round(ng.aih2.getHeight() * ratioH));
 
         size = ng.prec2.getPreferredSize();
         ng.prec2.setBounds((int) round((710 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);

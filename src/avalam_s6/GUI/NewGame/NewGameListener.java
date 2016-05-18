@@ -22,9 +22,11 @@ public class NewGameListener implements MouseListener {
     String name;
     Image icon;
     Image iconbase;
-
-    public NewGameListener(String buttonname, String theme) {
+    int playernum;
+    
+    public NewGameListener(String buttonname, String theme, int playernumber) {
         this.name = buttonname;
+        this.playernum = playernumber;
         try {
             icon = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/" + name + "_h.png"));
             iconbase = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/" + name + ".png"));
@@ -39,14 +41,22 @@ public class NewGameListener implements MouseListener {
         GUI_NewGame newGame = ((GUI_NewGame)source.getParent());
         Main_Frame mainFrame = ((Main_Frame)newGame.getParent().getParent().getParent().getParent());
         switch (this.name){
-            case "quit" :
-                mainFrame.dispose();
+            case "load" :
                 break;
-            case "quickgame" :                
+            case "start" :                
                 mainFrame.initGame();                
                 break;                
-            case "customgame" :
-                mainFrame.setwState(WindowState.PLAYERSELECT);
+            case "return" :
+                mainFrame.setwState(WindowState.MAIN);   
+                break;
+            case "player" :
+                //TODO : Le choix de l'ia
+                break;
+            case "sup" :
+                //TODO : Changer le bouton vers AIHard
+                break;
+            case "prec" :
+                //TODO : Changer le bouton vers AIEasy
                 break;
         }
         ((JButton)e.getSource()).setIcon(new ImageIcon(iconbase));
