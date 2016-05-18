@@ -12,7 +12,6 @@ import avalam_s6.GUI.LocalAvalamGame.GUI_LAG;
 import avalam_s6.GUI.NewGame.GUI_NewGame;
 import avalam_s6.GUI.Settings.GUI_Settings;
 import avalam_s6.GUI.Credits.GUI_Credits;
-import avalam_s6.Player.Player_INTERFACE;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import static java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager;
@@ -45,7 +44,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
     
     public void setRenderMode() {
         GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
-        if (this.wrm == WindowRenderMode.FULLSCREEN) {
+        if (this.wrm.getValue() == WindowRenderMode.FULLSCREEN.getValue()) {
             GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(this);
         } else {
             this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,7 +55,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
     }
     
     public void toggleWRM() {
-        if (this.wrm == WindowRenderMode.FULLSCREEN) {
+        if (this.wrm.getValue() == WindowRenderMode.FULLSCREEN.getValue()) {
             this.wrm = WindowRenderMode.WINDOWED;
         } else {
             this.wrm = WindowRenderMode.FULLSCREEN;

@@ -11,6 +11,10 @@ package avalam_s6.GUI;
  * @author IQbrod
  */
 public enum WindowRenderMode {
-    FULLSCREEN,
-    WINDOWED;
+    FULLSCREEN(0),
+    WINDOWED(1);
+    
+    private final int id;
+    WindowRenderMode(int id) { this.id = id; }
+    public int getValue() { return this.id; }
 }
