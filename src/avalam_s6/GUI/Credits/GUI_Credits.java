@@ -36,6 +36,7 @@ public class GUI_Credits extends JPanel {
             background = ImageIO.read(new File("./ressources/Themes/" + theme + "/credits/background.png"));
             returnI = ImageIO.read(new File("./ressources/Themes/" + theme + "/credits/home.png"));
         } catch (Exception ex) {
+            System.out.println("Error - "+GUI_Credits.class.toString());
             Logger.getLogger(GUI_Credits.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -44,7 +45,7 @@ public class GUI_Credits extends JPanel {
         retour.setBorder(BorderFactory.createEmptyBorder());
         retour.setContentAreaFilled(false);
         retour.setFocusPainted(false);
-        retour.addMouseListener(new CreditsListener("return",theme,0));
+        retour.addMouseListener(new CreditsListener("home",theme,0));
 
         this.setLayout(null);
         this.add(retour);    

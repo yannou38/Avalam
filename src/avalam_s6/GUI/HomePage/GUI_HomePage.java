@@ -45,6 +45,7 @@ public class GUI_HomePage extends JPanel {
             rulesI = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/rules.png"));
             exitI = ImageIO.read(new File("./ressources/Themes/" + theme + "/main/quit.png"));
         } catch (Exception ex) {
+            System.out.println("Error - "+GUI_HomePage.class.toString());
             Logger.getLogger(GUI_HomePage.class.getName()).log(Level.SEVERE, null, ex);
         }
 

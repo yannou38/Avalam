@@ -46,10 +46,8 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
         if (this.wrm == WindowRenderMode.FULLSCREEN) {
             GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(this);
-            this.setUndecorated(true);
         } else {
             this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-            this.setUndecorated(false);
         }
         this.setMinimumSize(new Dimension(960, 540));
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);

@@ -58,7 +58,8 @@ public class GUI_LAG extends JPanel {
             this.white = ImageIO.read(new File("./ressources/Themes/" + theme + "/board/white.png"));
             this.empty = ImageIO.read(new File("./ressources/Themes/" + theme + "/board/empty.png"));
         } catch (Exception ex) {
-            Logger.getLogger(GUI_HomePage.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error - "+GUI_LAG.class.toString());
+            Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
         Coordinate c = new Coordinate();
         ImageIcon base = new ImageIcon(empty);

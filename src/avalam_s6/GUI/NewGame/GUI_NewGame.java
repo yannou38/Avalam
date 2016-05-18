@@ -44,6 +44,7 @@ public class GUI_NewGame extends JPanel {
             returnI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/return.png"));
             startI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/start.png"));
         } catch (Exception ex) {
+            System.out.println("Error - "+GUI_NewGame.class.toString());
             Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
         }
 

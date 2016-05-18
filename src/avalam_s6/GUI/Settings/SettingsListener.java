@@ -11,6 +11,8 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,8 +32,9 @@ public class SettingsListener implements MouseListener {
         try {
             icon = ImageIO.read(new File("./ressources/Themes/" + theme + "/options/" + name + "_h.png"));
             iconbase = ImageIO.read(new File("./ressources/Themes/" + theme + "/options/" + name + ".png"));
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception ex) {
+            System.out.println("Error - "+SettingsListener.class.toString());
+            Logger.getLogger(SettingsListener.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -45,7 +48,7 @@ public class SettingsListener implements MouseListener {
                 mainFrame.setwState(WindowState.ABOUT);
                 break;
         }
-        ((JButton)e.getSource()).setIcon(new ImageIcon(iconbase));
+        ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
     @Override
@@ -59,13 +62,13 @@ public class SettingsListener implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(icon));        
+        ((JButton)e.getSource()).setIcon(new ImageIcon(this.icon));        
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(iconbase));
+        ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
 }

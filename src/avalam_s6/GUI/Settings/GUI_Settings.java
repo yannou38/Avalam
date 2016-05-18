@@ -42,6 +42,7 @@ public class GUI_Settings extends JPanel {
             this.leftI = ImageIO.read(new File("./ressources/Themes/" + theme + "/options/left.png"));
             this.rightI = ImageIO.read(new File("./ressources/Themes/" + theme + "/options/right.png"));
         } catch (Exception ex) {
+            System.out.println("Error - "+GUI_Settings.class.toString());
             Logger.getLogger(GUI_Settings.class.getName()).log(Level.SEVERE, null, ex);
         }
         

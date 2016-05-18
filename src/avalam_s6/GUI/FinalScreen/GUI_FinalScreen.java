@@ -57,6 +57,7 @@ public class GUI_FinalScreen extends JPanel {
             /* Application Police */
             this.victoryText.setFont(localFont.deriveFont(2*30f)); /* On peut appliquer un ratio a la police (ici 2) */
         } catch (IOException | FontFormatException ex) {
+            System.out.println("Error - "+GUI_FinalScreen.class.toString());
             Logger.getLogger(GUI_FinalScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
         
