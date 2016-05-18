@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI;
 
+import avalam_s6.Core.Grid;
 import avalam_s6.GUI.FinalScreen.GUI_FinalScreen;
 import avalam_s6.GUI.HomePage.GUI_HomePage;
 import avalam_s6.GUI.LocalAvalamGame.GUI_LAG;
@@ -103,7 +104,8 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).start();
     }
     
-    public void setVictoryScreen(String p) {
+    public void setVictoryScreen(String p, Grid g) {
+        ((GUI_FinalScreen)this.panelList[WindowState.VICTORY.getValue()]).setGrid(g);
         ((GUI_FinalScreen)this.panelList[WindowState.VICTORY.getValue()]).setWinner(p);
         this.setwState(WindowState.VICTORY);
     }

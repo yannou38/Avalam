@@ -44,7 +44,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         this.isTurnFinished = false;
         this.gui = gui;
         this.nbTurns = 0;
-        t = new Timer(1000, (ActionListener) this);
+        t = new Timer(500, (ActionListener) this);
     }
     
     //TODO: Check user is able to undo (GUI check if history is empty and call or not this function)
@@ -206,7 +206,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     private void winningProcedure(int i) {
         /* Appel à GUI */
         if(i<3) {
-            ((Main_Frame)this.gui).setVictoryScreen(this.players[i-1].getName());
+            ((Main_Frame)this.gui).setVictoryScreen(this.players[i-1].getName(),this.grid);
         } else {
             //EGALITE
         }

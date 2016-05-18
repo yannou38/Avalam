@@ -36,6 +36,7 @@ public class GUI_FinalScreen extends JPanel {
     public GUI_FinalScreen(String theme) {
         this.theme = theme;
         this.victoryText = new JLabel();
+        this.finalGrid = null;
         this.initComponents();
     }
     
@@ -72,6 +73,10 @@ public class GUI_FinalScreen extends JPanel {
         this.add(this.victoryText);
         this.add(this.home);
         this.addComponentListener(new Final_AdapterListener(this));
+    }
+    
+    public void setGrid(Grid g) {
+        this.finalGrid = g;
     }
     
     public void setWinner(String p) {
