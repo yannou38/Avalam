@@ -10,6 +10,8 @@ import avalam_s6.GUI.WindowState;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -30,8 +32,9 @@ public class NewGameListener implements MouseListener {
         try {
             icon = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/" + name + "_h.png"));
             iconbase = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/" + name + ".png"));
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception ex) {
+            System.out.println("Error - "+NewGameListener.class.toString());
+            Logger.getLogger(NewGameListener.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
