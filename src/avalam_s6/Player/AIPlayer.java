@@ -40,8 +40,13 @@ public abstract class AIPlayer extends Player{
      * @return true if the move a on b would give us a 5 tour, b is opponent
      */
     protected boolean completeTourUsVsOp(Cell a, Cell b) {
-        if (this.owner == a.getOwner()) {
-            if (this.owner != b.getOwner()) {
+        System.out.println("je joue des coups");
+        System.out.println(this.owner);
+        System.out.println(this.owner.getValue());
+        System.out.println(a.getOwner().getValue());
+        System.out.println("autre coup");
+        if (this.owner.getValue() == a.getOwner().getValue()) {
+            if (this.owner.getValue() != b.getOwner().getValue()) {
                 if (a.getSize() + b.getSize() == 5) {
                     return true;
                 }
@@ -58,7 +63,7 @@ public abstract class AIPlayer extends Player{
      * @return true if the move a on b would give us a 5 tour
      */
     protected boolean completeTourUs(Cell a, Cell b) {
-        if (this.owner == a.getOwner()) {
+        if (this.owner.getValue() == a.getOwner().getValue()) {
             if (a.getSize() + b.getSize() == 5) {
                 return true;
             }
@@ -70,7 +75,7 @@ public abstract class AIPlayer extends Player{
      * bad value
     */
     protected boolean completeTourOp(Cell a, Cell b) {
-        if (this.owner != a.getOwner()) {
+        if (this.owner.getValue() != a.getOwner().getValue()) {
             if (a.getSize() + b.getSize() == 5) {
                 return true;
             }
@@ -83,7 +88,7 @@ public abstract class AIPlayer extends Player{
      * bad value
     */
     protected boolean suppressAPawn(Cell a, Cell b) {
-        if (this.owner !=b.getOwner()){
+        if (this.owner.getValue() !=b.getOwner().getValue()){
                 if (a.getSize() + b.getSize() < 4) {
                     return true;
             }
@@ -169,7 +174,7 @@ public abstract class AIPlayer extends Player{
             this.game.getGrid().moveCell(c0, dest);
             this.game.addMoveToHistory(m);
             if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
-                    && this.owner == this.game.getGrid().getCellAt(tabCoord[k]).getOwner() && alone(tabCoord[k])){
+                    && this.owner.getValue() == this.game.getGrid().getCellAt(tabCoord[k]).getOwner().getValue() && alone(tabCoord[k])){
                     this.game.undo();
                     return true;
                 }
@@ -216,7 +221,7 @@ public abstract class AIPlayer extends Player{
             this.game.getGrid().moveCell(c0, dest);
             this.game.addMoveToHistory(m);
             if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
-                    && this.owner != this.game.getGrid().getCellAt(tabCoord[k]).getOwner() && alone(tabCoord[k])){ 
+                    && this.owner.getValue() != this.game.getGrid().getCellAt(tabCoord[k]).getOwner().getValue() && alone(tabCoord[k])){ 
                     this.game.undo();
                     return true;
                 }

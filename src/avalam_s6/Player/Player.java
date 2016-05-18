@@ -21,6 +21,7 @@ public abstract class Player implements Player_INTERFACE {
     public Player(String name, Color color, Owner owner) {
         this.name = name;
         this.color = color;
+        this.owner = owner;
     }
     
     @Override
