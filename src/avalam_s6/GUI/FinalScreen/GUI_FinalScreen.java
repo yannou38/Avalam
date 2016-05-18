@@ -67,7 +67,7 @@ public class GUI_FinalScreen extends JPanel {
         this.home.setBorder(BorderFactory.createEmptyBorder());
         this.home.setContentAreaFilled(false);
         this.home.setFocusPainted(false);
-        //home.addMouseListener(/*new HomePageListener("quit",theme)*/);
+        home.addMouseListener(new Final_MouseListener(theme));
         
         this.setLayout(null);
         this.add(this.victoryText);
