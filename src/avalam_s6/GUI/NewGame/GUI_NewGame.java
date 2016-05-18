@@ -5,9 +5,7 @@
  */
 package avalam_s6.GUI.NewGame;
 
-import avalam_s6.GUI.HomePage.GUI_HomePage;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,8 +17,8 @@ import javax.swing.*;
  * @author ducruyy
  */
 public class GUI_NewGame extends JPanel {
-    JButton player, prec, sup, load, retour, start;
-    private Image background, iaEasyI, iaMidI, iaHardI, loadI, playerI, precI, returnI, startI, supI;
+    JButton player1, prec1, sup1, player2, prec2, sup2, load, retour, start;
+    private Image background, iaEasyI, iaMidI, iaHardI, loadI, player1I, prec1I, sup1I, player2I, prec2I, sup2I, returnI, startI;
     String theme;
     
     
@@ -40,59 +38,85 @@ public class GUI_NewGame extends JPanel {
             iaHardI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/ia_hard.png"));
             iaMidI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/ia_mid.png"));
             loadI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/load.png"));
-            playerI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/player.png"));
-            precI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/prec.png"));
+            player1I = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/player.png"));
+            prec1I = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/prec.png"));
+            sup1I = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/sup.png"));
+            player2I = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/player.png"));
+            prec2I = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/prec.png"));
+            sup2I = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/sup.png"));
             returnI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/return.png"));
-            supI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/sup.png"));
             startI = ImageIO.read(new File("./ressources/Themes/" + theme + "/playerselect/start.png"));
         } catch (Exception ex) {
-            Logger.getLogger(GUI_HomePage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        player = new JButton(new ImageIcon(playerI));
-        player.setBorder(BorderFactory.createEmptyBorder());
-        player.setContentAreaFilled(false);
-        player.setFocusPainted(false);
-        //player.addMouseListener(new HomePageListener("quickgame",theme));
+        player1 = new JButton(new ImageIcon(player1I));
+        player1.setBorder(BorderFactory.createEmptyBorder());
+        player1.setContentAreaFilled(false);
+        player1.setFocusPainted(false);
+        player1.addMouseListener(new NewGameListener("player1",theme));
 
-        prec = new JButton(new ImageIcon(precI));
-        prec.setBorder(BorderFactory.createEmptyBorder());
-        prec.setContentAreaFilled(false);
-        prec.setFocusPainted(false);
-        //prec.addMouseListener(new HomePageListener("customgame",theme));
+        prec1 = new JButton(new ImageIcon(prec1I));
+        prec1.setBorder(BorderFactory.createEmptyBorder());
+        prec1.setContentAreaFilled(false);
+        prec1.setFocusPainted(false);
+        prec1.addMouseListener(new NewGameListener("prec1",theme));
 
-        sup = new JButton(new ImageIcon(supI));
-        sup.setBorder(BorderFactory.createEmptyBorder());
-        sup.setContentAreaFilled(false);
-        sup.setFocusPainted(false);
-        //rules.addMouseListener(new HomePageListener("rules",theme));
+        sup1 = new JButton(new ImageIcon(sup1I));
+        sup1.setBorder(BorderFactory.createEmptyBorder());
+        sup1.setContentAreaFilled(false);
+        sup1.setFocusPainted(false);
+        sup1.addMouseListener(new NewGameListener("sup1",theme));
+        
+
+        player2 = new JButton(new ImageIcon(player2I));
+        player2.setBorder(BorderFactory.createEmptyBorder());
+        player2.setContentAreaFilled(false);
+        player2.setFocusPainted(false);
+        player2.addMouseListener(new NewGameListener("player2",theme));
+
+        prec2 = new JButton(new ImageIcon(prec2I));
+        prec2.setBorder(BorderFactory.createEmptyBorder());
+        prec2.setContentAreaFilled(false);
+        prec2.setFocusPainted(false);
+        prec2.addMouseListener(new NewGameListener("prec2",theme));
+
+        sup2 = new JButton(new ImageIcon(sup2I));
+        sup2.setBorder(BorderFactory.createEmptyBorder());
+        sup2.setContentAreaFilled(false);
+        sup2.setFocusPainted(false);
+        sup2.addMouseListener(new NewGameListener("sup2",theme));  
+        
 
         load = new JButton(new ImageIcon(loadI));
         load.setBorder(BorderFactory.createEmptyBorder());
         load.setContentAreaFilled(false);
         load.setFocusPainted(false);
-        //tuto.addMouseListener(new HomePageListener("tuto",theme));
+        load.addMouseListener(new NewGameListener("load",theme));
 
         retour = new JButton(new ImageIcon(returnI));
         retour.setBorder(BorderFactory.createEmptyBorder());
         retour.setContentAreaFilled(false);
         retour.setFocusPainted(false);
-        //settings.addMouseListener(new HomePageListener("options",theme));
+        retour.addMouseListener(new NewGameListener("retour",theme));
 
         start = new JButton(new ImageIcon(startI));
         start.setBorder(BorderFactory.createEmptyBorder());
         start.setContentAreaFilled(false);
         start.setFocusPainted(false);
-        //exit.addMouseListener(new HomePageListener("quit",theme));
+        start.addMouseListener(new NewGameListener("start",theme));
 
         this.setLayout(null);
-        this.add(player);
-        this.add(prec);
-        this.add(sup);
+        this.add(player1);
+        this.add(prec1);
+        this.add(sup1);
+        this.add(player2);
+        this.add(prec2);
+        this.add(sup2);
         this.add(load);
         this.add(retour);
         this.add(start);        
-        //this.addComponentListener(new HomePageAdapterListener(this));
+        this.addComponentListener(new NewGameAdapterListener(this));
         
     }
 
