@@ -67,15 +67,15 @@ public class GUI_LAG extends JPanel {
         panel.setLayout(new GridLayout(9, 9, 2, 2));
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                c.setX(i);
-                c.setY(j);
+                c.setX(j);
+                c.setY(i);
                 JButton b = new JButton(base);
                 b.setBorder(BorderFactory.createEmptyBorder());
                 b.setContentAreaFilled(false);
                 b.addMouseListener(new LAG_MouseListener(c));
                 b.setHorizontalTextPosition(JButton.CENTER);
                 b.setVerticalTextPosition(JButton.CENTER);
-                buttonmap[i][j] = b;
+                buttonmap[j][i] = b;
                 panel.add(b);
             }
         }
