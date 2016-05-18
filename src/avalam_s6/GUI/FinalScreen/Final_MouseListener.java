@@ -5,7 +5,6 @@
  */
 package avalam_s6.GUI.FinalScreen;
 
-import avalam_s6.GUI.HomePage.GUI_HomePage;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;
 import java.awt.Image;
@@ -25,7 +24,7 @@ import javax.swing.JButton;
 public class Final_MouseListener implements MouseListener {
     private Image icon;
     private Image iconbase;
-    String theme;
+    private String theme;
     
     public Final_MouseListener(String theme) {
         this.theme = theme;

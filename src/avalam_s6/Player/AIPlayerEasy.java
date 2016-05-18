@@ -81,12 +81,13 @@ public class AIPlayerEasy extends AIPlayer {
                                 else if (completeTourUs(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k]))){
                                      mesCoupsOkValue.add(m);
                                 }
+                                
+                                else if(suppressAPawn(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k]))){
+                                    mesCoupsMehValue.add(m);
+                                }
                                 //whatever 
                                 else if(completeTourOp(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k])) || createAloneOp(c0,tabCoord[k] )){
                                      mesCoupsBadValue.add(m);
-                                }
-                                else if(suppressAPawn(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k]))){
-                                    mesCoupsMehValue.add(m);
                                 }
                                 else{
                                       mesCoups.add(m);
