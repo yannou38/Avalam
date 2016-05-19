@@ -29,19 +29,19 @@ public class GUI_Credits extends JPanel {
 
     private void initComponents() {
         try {
-            background = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/credits/background.png"));
-            returnI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/credits/home.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/credits/background.png"));
+            this.returnI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/credits/home.png"));
         } catch (Exception ex) {
             System.out.println("Error - "+GUI_Credits.class.toString());
             Logger.getLogger(GUI_Credits.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
-        this.retour = new JButton(new ImageIcon(returnI));
+        this.retour = new JButton(new ImageIcon(this.returnI));
         this.retour.setBorder(BorderFactory.createEmptyBorder());
         this.retour.setContentAreaFilled(false);
         this.retour.setFocusPainted(false);
-        this.retour.addMouseListener(new CreditsListener("home",theme,0));
+        this.retour.addMouseListener(new CreditsListener("home",this.theme,0));
 
         this.setLayout(null);
         this.add(this.retour);    
@@ -58,4 +58,6 @@ public class GUI_Credits extends JPanel {
     public JButton getRetour() {
         return this.retour;
     }  
+    
+    
 }
