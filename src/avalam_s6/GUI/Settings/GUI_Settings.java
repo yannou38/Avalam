@@ -5,7 +5,7 @@
  */
 package avalam_s6.GUI.Settings;
 
-import avalam_s6.GUI.FinalScreen.GUI_FinalScreen;
+import avalam_s6.Core.Globals.LanguageManager;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +27,7 @@ public class GUI_Settings extends JPanel {
 
     private String[] language, fullScreen, Theme, Sound;
     private int languageSelected, fullScreenSelected, ThemeSelected, SoundSelected;
+    private int languagesize,themesize;
     private JLabel LabelSound, LabelLanguage, LabelFS, LabelTheme;
 
     private SettingsAdapterListener listener;
@@ -160,15 +161,15 @@ public class GUI_Settings extends JPanel {
     }
 
     private void initOptions() {
-        String yes = "Oui";
-        String no = "Non";
-        String fr = "Français";
-        String en = "Anglais";
+        String yes = LanguageManager.getElement("Oui");
+        String no = LanguageManager.getElement("Non");
+        
         String themeDefault = "Default";
 
-        this.language = new String[2];
-        this.language[0] = fr;
-        this.language[1] = en;
+        String[] temp = LanguageManager.getChildrensOf("Langue");
+        this.languagesize = temp.length;
+        this.language = new String[this.languagesize];
+        this.language = temp;
         this.languageSelected = 0;
 
         this.fullScreen = new String[2];
@@ -181,7 +182,9 @@ public class GUI_Settings extends JPanel {
         this.Sound[1] = no;
         this.SoundSelected = 0;
 
-        this.Theme = new String[1];
+        
+        this.themesize = 1;
+        this.Theme = new String[this.themesize];
         this.Theme[0] = themeDefault;
 
         Font localFont = new Font("Arial", Font.PLAIN, 60);

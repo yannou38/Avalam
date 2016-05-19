@@ -37,13 +37,13 @@ public class NewGameAdapterListener implements ComponentListener {
         this.ng.getStart().setBounds((int) round((290 + insets.left) * ratioW), ((int) round((600 + insets.top) * ratioH)), size.width, size.height);
         this.ng.getStart().setSize((int) round(this.ng.getStart().getWidth() * ratioW), (int) round(this.ng.getStart().getHeight() * ratioH));
         
-        size = this.ng.getLabelPlayerSelect1().getPreferredSize();
-        this.ng.getLabelPlayerSelect1().setBounds((int) round((290 + insets.left) * ratioW), ((int) round((300 + insets.top) * ratioH)), size.width, size.height);
-        this.ng.getLabelPlayerSelect1().setSize((int) round(this.ng.getLabelPlayerSelect1().getWidth() * ratioW), (int) round(this.ng.getLabelPlayerSelect1().getHeight() * ratioH));
+        size = this.ng.getP1button().getPreferredSize();
+        this.ng.getP1button().setBounds((int) round((290 + insets.left) * ratioW), ((int) round((300 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getP1button().setSize((int) round(this.ng.getP1button().getWidth() * ratioW), (int) round(this.ng.getP1button().getHeight() * ratioH));
         
-        size = this.ng.getLabelPlayerSelect2().getPreferredSize();
-        this.ng.getLabelPlayerSelect2().setBounds((int) round((590 + insets.left) * ratioW), ((int) round((300 + insets.top) * ratioH)), size.width, size.height);
-        this.ng.getLabelPlayerSelect2().setSize((int) round(this.ng.getLabelPlayerSelect2().getWidth() * ratioW), (int) round(this.ng.getLabelPlayerSelect2().getHeight() * ratioH));
+        size = this.ng.getP2button().getPreferredSize();
+        this.ng.getP2button().setBounds((int) round((590 + insets.left) * ratioW), ((int) round((300 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getP2button().setSize((int) round(this.ng.getP2button().getWidth() * ratioW), (int) round(this.ng.getP2button().getHeight() * ratioH));
         
         
         size = this.ng.getPrec1().getPreferredSize();

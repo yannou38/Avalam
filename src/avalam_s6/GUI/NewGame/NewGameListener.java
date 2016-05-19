@@ -52,7 +52,7 @@ public class NewGameListener implements MouseListener {
                 mainFrame.initGame();
                 ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
                 break;
-            case "return":
+            case "home":
                 ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
                 mainFrame.setwState(WindowState.MAIN);
                 break;
