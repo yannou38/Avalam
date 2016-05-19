@@ -60,7 +60,7 @@ public class AIPlayerMedium extends AIPlayer {
                         if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()) {
                             if (this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0), this.game.getGrid().getCellAt(tabCoord[k]))) {
                                 Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), tabCoord[k], this.game.getGrid().getCellAt(tabCoord[k]).getSize(), this);
-                                value = miniMax(m, 2);
+                                value = miniMax(m, 1);
                                 if (value > maxvalue) {
                                     maxvalue = value;
                                     mesCoups.clear();
