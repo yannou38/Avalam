@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<Langage id="fr">
+    <Langue>
+        <Français>Français</Français>
+        <Anglais>Anglais</Anglais>
+    </Langue>
+    <Oui>Oui</Oui>
+    <Non>Non</Non>
+    <Joueur>
+        <JoueurIRL>Joueur</JoueurIRL>
+        <IA>
+            <Facile>IA Facile</Facile>
+            <Moyen>IA Moyenne</Moyen>
+            <Difficle>IA Difficile</Difficle>
+            <Expert>IA Experte</Expert>
+            <Légende>IA Légendaire</Légende>           
+        </IA>
+    </Joueur>
+    <Nom>Nom</Nom>
+    <Couleur>Couleur</Couleur>
+    <Fin>a gagné!</Fin>
+</Langage>

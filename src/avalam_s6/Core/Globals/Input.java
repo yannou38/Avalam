@@ -3,7 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package avalam_s6.Core;
+package avalam_s6.Core.Globals;
+
+import avalam_s6.Core.Coordinate;
+import avalam_s6.Core.Game_INTERFACE;
+import avalam_s6.Core.Owner;
 
 /**
  *

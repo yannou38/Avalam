@@ -5,6 +5,7 @@
  */
 package avalam_s6.Core;
 
+import avalam_s6.Core.Globals.Input;
 import avalam_s6.Exceptions.GridSizeException;
 import avalam_s6.Player.Player;
 import java.awt.event.ActionEvent;
@@ -45,6 +46,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         this.gui = gui;
         this.nbTurns = 0;
         t = new Timer(100, (ActionListener) this);
+        Input.resetClick();
     }
     
     //TODO: Check user is able to undo (GUI check if history is empty and call or not this function)

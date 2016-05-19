@@ -6,7 +6,7 @@
 package avalam_s6.Player;
 
 import avalam_s6.Core.Coordinate;
-import avalam_s6.Core.Input;
+import avalam_s6.Core.Globals.Input;
 import avalam_s6.Core.Move;
 import avalam_s6.Core.Owner;
 import java.awt.Color;
