@@ -21,9 +21,11 @@ public class Cell {
         switch(owner) {
             case 0:
                 this.etat = CellState.RESTRICTED;
+                this.contenu.add(Owner.NO_OWNER);
                 break;
             case 1:
                 this.etat = CellState.EMPTY;
+                this.contenu.add(Owner.NO_OWNER);
                 break;
             case 2:
                 this.contenu.add(Owner.PLAYER_1);

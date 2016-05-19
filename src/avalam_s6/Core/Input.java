@@ -79,11 +79,13 @@ public class Input
      */
     public static void updateMouseSrcPosition(Coordinate pos)
     {
-        Input.c_src = pos;
-        if(pos.isValid())
+        Input.c_src = pos;        
+        if(pos.isValid() && Input.game.getGrid().getCellAt(pos).getOwner().getValue() != Owner.NO_OWNER.getValue()){
             Input.src_size = Input.game.getGrid().getCellAt(pos).getSize();
-        else
-            Input.src_size = -1;
+        }
+        else{
+            Input.mouseClicked = false;
+        }
     }
         
     /**
@@ -110,10 +112,13 @@ public class Input
     public static void updateMouseDestPosition(Coordinate pos)
     {
         Input.c_dest = pos;
-        if(pos.isValid())
+        if(pos.isValid() && Input.game.getGrid().getCellAt(pos).getOwner().getValue() != Owner.NO_OWNER.getValue()) {
             Input.dest_size = Input.game.getGrid().getCellAt(pos).getSize();
-        else
+        }
+        else {
+            Input.hasClicked = false;
             Input.dest_size = -1;
+        }
     }
     
     public static void setInputGame(Game_INTERFACE g){

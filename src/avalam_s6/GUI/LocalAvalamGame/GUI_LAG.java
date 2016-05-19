@@ -171,8 +171,8 @@ public class GUI_LAG extends JPanel {
                         buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
                         break;
                     case NO_OWNER:
-                        if (gr.getCellAt(c).getState() == CellState.RESTRICTED) {
-                            buttonmap[i][j].setIcon(re);
+                        if (gr.getCellAt(c).getState().getValue() == CellState.RESTRICTED.getValue()) {
+                            buttonmap[i][j].setOpaque(false);//setIcon(re);
                         } else {
                             buttonmap[i][j].setIcon(em);
                             buttonmap[i][j].setText("");
@@ -202,5 +202,9 @@ public class GUI_LAG extends JPanel {
 
     public JPanel getGrille() {
         return this.grille;
+    }
+    
+    public Game_INTERFACE getGame(){
+        return this.game;
     }
 }

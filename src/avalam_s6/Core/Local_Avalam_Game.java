@@ -44,13 +44,13 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         this.isTurnFinished = false;
         this.gui = gui;
         this.nbTurns = 0;
-        t = new Timer(500, (ActionListener) this);
+        t = new Timer(100, (ActionListener) this);
     }
     
     //TODO: Check user is able to undo (GUI check if history is empty and call or not this function)
     @Override
     public void undo() {
-        if(! history.isEmpty()) {
+        if(! this.history.isEmpty()) {
             this.cancelled_moves.add(this.history.pop());
             this.grid.undoMove(this.cancelled_moves.lastElement());
         }
@@ -59,8 +59,10 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     //TODO: Check user is able to redo (GUI check if cancelled_moves is empty and call or not this function)
     @Override
     public void redo() {
-        this.history.add(this.cancelled_moves.pop());
-        this.grid.moveCell(this.history.lastElement().getC_src(), this.history.lastElement().getC_src());
+        if(! this.cancelled_moves.isEmpty()){
+            this.history.add(this.cancelled_moves.pop());
+            this.grid.moveCell(this.history.lastElement().getC_src(), this.history.lastElement().getC_dst());
+        }
     }
 
     @Override
@@ -156,6 +158,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
  //TODO                   /* Afficher warning de deplacement */
                 }
             }
+            this.cancelled_moves.clear();
         }        
         this.gui.render();
     }

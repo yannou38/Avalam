@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI.LocalAvalamGame;
 
+import avalam_s6.Core.Local_Avalam_Game;
 import avalam_s6.GUI.HomePage.GUI_HomePage;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;
@@ -50,8 +51,26 @@ public class LAG_UI_MouseListener implements MouseListener {
                 mainFrame.setwState(WindowState.MAIN);                
                 break;
             case "redo" :
-                break;                
+                if(((Local_Avalam_Game) lag.getGame()).getCancelled_moves().size() > 0){
+                    lag.getGame().redo();
+                    if(!lag.getUndoB().isEnabled()){
+                        lag.getUndoB().setEnabled(true);
+                    }
+                    if(((Local_Avalam_Game) lag.getGame()).getCancelled_moves().isEmpty()){
+                        lag.getRedoB().setEnabled(false);
+                    }
+                }                
+                break;
             case "cancel" :
+                if(((Local_Avalam_Game) lag.getGame()).getHistory().size() > 0){
+                    lag.getGame().undo();
+                    if(!lag.getRedoB().isEnabled()){
+                        lag.getRedoB().setEnabled(true);
+                    }
+                    if(((Local_Avalam_Game) lag.getGame()).getHistory().isEmpty()){
+                        lag.getUndoB().setEnabled(false);
+                    }
+                }
                 break;                
             case "save" :
                 break;
