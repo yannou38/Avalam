@@ -19,11 +19,6 @@ public class Avalam_S6{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //SwingUtilities.invokeLater(new Main_Frame());
-        LanguageManager.setLanguage("French");
-        String[] st = LanguageManager.getChildrensOf("IA");
-        for (int i=0;i<st.length;i++) {
-            System.out.println(i+" : "+st[i]);
-        }
+        SwingUtilities.invokeLater(new Main_Frame());
     }
 }
