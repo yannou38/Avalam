@@ -55,6 +55,12 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         if(! this.history.isEmpty()) {
             this.cancelled_moves.add(this.history.pop());
             this.grid.undoMove(this.cancelled_moves.lastElement());
+            this.nbTurns--;
+            System.out.println(this.nbTurns);
+            this.current_player = this.nbTurns%NB_PLAYERS;
+        }
+        if(getCurrentPlayer().isAI()){
+            undo();
         }
     }
         
@@ -64,6 +70,9 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         if(! this.cancelled_moves.isEmpty()){
             this.history.add(this.cancelled_moves.pop());
             this.grid.moveCell(this.history.lastElement().getC_src(), this.history.lastElement().getC_dst());
+            this.nbTurns++;
+            System.out.println(this.nbTurns);
+            this.current_player = this.nbTurns%NB_PLAYERS;
         }
     }
 
