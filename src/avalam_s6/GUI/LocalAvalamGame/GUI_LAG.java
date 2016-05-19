@@ -28,7 +28,7 @@ public class GUI_LAG extends JPanel {
     private final boolean player1IsPlaying;
     private JPanel grille;
     private JButton undoB, redoB, retourB, saveB;
-    private Image background, cancel, player_playing, player_waiting, redo, retour, save, board, black, white, empty, restricted;
+    private Image background, cancel, player_playing, player_waiting, redo, retour, save, board, black, white, empty, restricted, w_selected, b_selected, w_possible, b_possible;
     private final JButton[][] buttonmap;
 
     /**
@@ -55,6 +55,10 @@ public class GUI_LAG extends JPanel {
             this.black = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/black.png"));
             this.white = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/white.png"));
             this.empty = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/empty.png"));
+            this.w_selected = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/white_selected.png"));
+            this.b_selected = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/black_selected.png"));
+            this.w_possible = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/white_possible.png"));
+            this.b_possible = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/black_possible.png"));
         } catch (Exception ex) {
             System.out.println("Error - "+GUI_LAG.class.toString());
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,11 +78,13 @@ public class GUI_LAG extends JPanel {
                 b.setHorizontalTextPosition(JButton.CENTER);
                 b.setVerticalTextPosition(JButton.CENTER);
                 this.buttonmap[j][i] = b;
+                b.setOpaque(false);
                 panel.add(b);
             }
         }
         this.setLayout(null);
         this.grille = panel;
+        this.grille.setOpaque(false);
         this.add(panel);
         
         this.undoB = new JButton(new ImageIcon(this.cancel));
@@ -157,30 +163,67 @@ public class GUI_LAG extends JPanel {
         ImageIcon bl = new ImageIcon(this.black);
         ImageIcon em = new ImageIcon(this.empty);
         ImageIcon re = new ImageIcon(this.restricted);
+        ImageIcon wsel = new ImageIcon(this.w_selected);
+        ImageIcon bsel = new ImageIcon(this.b_selected);
+        ImageIcon wpos = new ImageIcon(this.w_possible);
+        ImageIcon bpos = new ImageIcon(this.b_possible);
         for (int i = 0; i < gr.getWidth(); i++) {
             for (int j = 0; j < gr.getHeight(); j++) {
                 c.setX(i);
                 c.setY(j);
                 Cell ce = gr.getCellAt(c);
-                switch (ce.getOwner()) {
-                    case PLAYER_1:
-                        buttonmap[i][j].setIcon(wh);
-                        buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
-                        break;
-                    case PLAYER_2:
-                        buttonmap[i][j].setIcon(bl);
-                        buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
-                        break;
-                    case NO_OWNER:
-                        if (gr.getCellAt(c).getState().getValue() == CellState.RESTRICTED.getValue()) {
-                            buttonmap[i][j].setOpaque(false);//setIcon(re);
-                        } else {
-                            buttonmap[i][j].setIcon(em);
-                            buttonmap[i][j].setText("");
+                if(Input.isButtonClicked()){
+                    int m1 = Math.abs(c.getX()-Input.getMouseSrcPosition().getX());
+                    int m2 = Math.abs(c.getY() - Input.getMouseSrcPosition().getY());                    
+                    if( m1<=1 &&  m2<= 1 && gr.canStack(ce, gr.getCellAt(Input.getMouseSrcPosition()))){
+                        switch (ce.getOwner()) {
+                            case PLAYER_1:
+                                if(m1 ==0 && m2 == 0){
+                                    this.buttonmap[i][j].setIcon(wsel);
+                                } else {
+                                    this.buttonmap[i][j].setIcon(wpos);
+                                }
+                                this.buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
+                                break;
+                            case PLAYER_2:
+                                if( m1 == 0 && m2 == 0){
+                                    this.buttonmap[i][j].setIcon(bsel);
+                                } else {
+                                    this.buttonmap[i][j].setIcon(bpos);                                
+                                }
+                                this.buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
+                                break;
+                            case NO_OWNER:
+                                if (gr.getCellAt(c).getState().getValue() == CellState.RESTRICTED.getValue()) {
+                                    this.buttonmap[i][j].setOpaque(false);//setIcon(re);
+                                } else {
+                                    this.buttonmap[i][j].setIcon(em);
+                                    this.buttonmap[i][j].setText("");
+                                }
+                                break;                       
                         }
-                        break;
-
+                    }
+                } else {
+                    switch (ce.getOwner()) {
+                        case PLAYER_1:
+                            this.buttonmap[i][j].setIcon(wh);
+                            this.buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
+                            break;
+                        case PLAYER_2:
+                            this.buttonmap[i][j].setIcon(bl);
+                            this.buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
+                            break;
+                        case NO_OWNER:
+                            if (gr.getCellAt(c).getState().getValue() == CellState.RESTRICTED.getValue()) {
+                                this.buttonmap[i][j].setIcon(re);
+                            } else {
+                                this.buttonmap[i][j].setIcon(em);
+                                this.buttonmap[i][j].setText("");
+                            }
+                            break;                       
+                    }
                 }
+                this.buttonmap[i][j].setOpaque(false);                
             }
         }
     }

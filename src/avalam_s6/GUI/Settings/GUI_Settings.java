@@ -30,11 +30,11 @@ public class GUI_Settings extends JPanel {
     private JLabel LabelSound, LabelLanguage, LabelFS, LabelTheme;
 
     private SettingsAdapterListener listener;
-    private Boolean debugging;
+    private Boolean callResize;
 
     public GUI_Settings(String theme) {
         this.theme = theme;
-        this.debugging = false;
+        this.callResize = false;
         this.listener = new SettingsAdapterListener(this);
         initOptions();
         initComponents();
@@ -140,9 +140,9 @@ public class GUI_Settings extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
-        if (this.debugging == true) {
+        if (this.callResize == true) {
             this.listener.componentResized(null);
-            this.debugging = false;
+            this.callResize = false;
         }
 
     }
@@ -270,7 +270,7 @@ public class GUI_Settings extends JPanel {
             this.languageSelected = 1;
         }
         this.LabelLanguage.setText(this.language[this.languageSelected]);
-        this.debugging = true;
+        this.callResize = true;
     }
 
     void leftFS() {
@@ -280,7 +280,7 @@ public class GUI_Settings extends JPanel {
             this.fullScreenSelected = 1;
         }
         this.LabelFS.setText(this.fullScreen[this.fullScreenSelected]);
-        this.debugging = true;
+        this.callResize = true;
     }
 
     void leftTheme() {
@@ -290,7 +290,7 @@ public class GUI_Settings extends JPanel {
             this.ThemeSelected = 0;
         }
         this.LabelTheme.setText(this.Theme[this.ThemeSelected]);
-        this.debugging = true;
+        this.callResize = true;
     }
 
     void leftSound() {
@@ -300,35 +300,35 @@ public class GUI_Settings extends JPanel {
             this.SoundSelected = 1;
         }
         this.LabelSound.setText(this.Sound[this.SoundSelected]);
-        this.debugging = true;
+        this.callResize = true;
     }
 
     void rightLanguage() {
         //le 2 en hardcodé sera a changer :/
         this.languageSelected = (this.languageSelected + 1) % 2;
         this.LabelLanguage.setText(this.language[this.languageSelected]);
-        this.debugging = true;
+        this.callResize = true;
     }
 
     void rightFS() {
         //le 2 en hardcodé sera a changer :/
         this.fullScreenSelected = (this.fullScreenSelected + 1) % 2;
         this.LabelFS.setText(this.fullScreen[this.fullScreenSelected]);
-        this.debugging = true;
+        this.callResize = true;
     }
 
     void rightTheme() {
         //le 2 en hardcodé sera a changer :/
         this.ThemeSelected = (this.ThemeSelected + 1) % 1;
         this.LabelTheme.setText(this.Theme[this.ThemeSelected]);
-        this.debugging = true;
+        this.callResize = true;
     }
 
     void rightSound() {
         //le 2 en hardcodé sera a changer :/
         this.SoundSelected = (this.SoundSelected + 1) % 2;
         this.LabelSound.setText(this.Sound[this.SoundSelected]);
-        this.debugging = true;
+        this.callResize = true;
     }
 
 }

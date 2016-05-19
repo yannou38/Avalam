@@ -112,4 +112,8 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         ((GUI_FinalScreen)this.panelList[WindowState.VICTORY.getValue()]).setWinner(p);
         this.setwState(WindowState.VICTORY);
     }
+
+    public void changeSettings(String Language, String FS, String Theme, String Sound) {
+        System.out.println("changeSettings function : TODO");
+    }
 }

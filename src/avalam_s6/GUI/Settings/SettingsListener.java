@@ -63,6 +63,15 @@ public class SettingsListener implements MouseListener {
                 ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
                 mainFrame.setwState(WindowState.MAIN);
                 break;
+            case "apply":
+                ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
+                String Language = this.page.getLabelLanguage().getText();
+                String FS = this.page.getLabelFS().getText();
+                String Theme = this.page.getLabelTheme().getText();
+                String Sound = this.page.getLabelSound().getText();
+                mainFrame.changeSettings(Language,FS,Theme,Sound);
+                mainFrame.setwState(WindowState.MAIN);
+                break;
             case "left":
                 switch (this.relatedLabel) {
                     case "language":
