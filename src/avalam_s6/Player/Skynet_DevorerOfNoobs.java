@@ -14,9 +14,9 @@ import java.util.Random;
  *
  * @author Seawolf
  */
-public class AIPlayerEasy extends AIPlayer {
+public class Skynet_DevorerOfNoobs extends AIPlayer {
 
-    public AIPlayerEasy(String name, Color color, Owner owner) {
+    public Skynet_DevorerOfNoobs(String name, Color color, Owner owner) {
         super(name, color, owner);
     }
     
@@ -102,47 +102,25 @@ public class AIPlayerEasy extends AIPlayer {
         this.game.setGrid(g);
         System.out.println(this.game.getGrid().toString());
         Random r = new Random();
-        
-        
-        
         if (!mesCoupsHighValue.isEmpty()){
-            if(r.nextInt(100) < 87){
-                return mesCoupsHighValue.get(r.nextInt(mesCoupsHighValue.size()));
-            }
-        }
-        if(!mesCoupsOkValue.isEmpty()){
-             if(r.nextInt(100) < 87){
-                return mesCoupsOkValue.get(r.nextInt(mesCoupsOkValue.size()));
-             }
-        }
-        if(!mesCoupsMehValue.isEmpty()){
-            if(r.nextInt(100) < 87){
-                return mesCoupsMehValue.get(r.nextInt(mesCoupsMehValue.size()));
-            }
-        }
-        if(!mesCoups.isEmpty()){
-            if(r.nextInt(100) < 87){
-                return mesCoups.get(r.nextInt(mesCoups.size()));
-            }
-        }
-        if(!mesCoupsBadValue.isEmpty()){
-            return mesCoupsBadValue.get(r.nextInt(mesCoupsBadValue.size()));
-        }
-        
-        //just in case
-        
-         if (!mesCoupsHighValue.isEmpty()){
+            System.out.println("Je joue un coup genial");
             return mesCoupsHighValue.get(r.nextInt(mesCoupsHighValue.size()));
         }
         if(!mesCoupsOkValue.isEmpty()){
+            System.out.println("Je joue un coup ok");
             return mesCoupsOkValue.get(r.nextInt(mesCoupsOkValue.size()));
         }
         if(!mesCoupsMehValue.isEmpty()){
-            return mesCoupsMehValue.get(r.nextInt(mesCoupsMehValue.size()));
+            System.out.println("Je joue un coup meh");
+            Move meh = mesCoupsMehValue.get(r.nextInt(mesCoupsMehValue.size()));
+            System.out.println(" "+meh.getC_src().getX() + " " + meh.getC_src().getY() + " "+ meh.getC_dst().getX() + " " + meh.getC_dst().getY());
+            return meh;
         }
         if(!mesCoups.isEmpty()){
+            System.out.println("Je joue un coup");
             return mesCoups.get(r.nextInt(mesCoups.size()));
         }
+        System.out.println("Je joue un mauvais coup");
         return mesCoupsBadValue.get(r.nextInt(mesCoupsBadValue.size()));
     }
 
