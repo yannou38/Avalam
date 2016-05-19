@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 /**
  *
@@ -23,34 +24,82 @@ import javax.swing.JButton;
  */
 public class SettingsListener implements MouseListener {
 
+    private GUI_Settings page;
     private String name;
     private Image icon;
     private Image iconbase;
     private String theme;
+    private String relatedLabel;
 
-    public SettingsListener(String buttonname, String theme) {
+    public SettingsListener(String buttonname, String theme, String relatedLabel, GUI_Settings page) {
         this.name = buttonname;
         this.theme = theme;
         try {
             this.icon = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/options/" + this.name + "_h.png"));
             this.iconbase = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/options/" + this.name + ".png"));
         } catch (Exception ex) {
-            System.out.println("Error - "+SettingsListener.class.toString());
+            System.out.println("Error - " + SettingsListener.class.toString());
             Logger.getLogger(SettingsListener.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.relatedLabel = relatedLabel;
+        this.page=page;
+    }
+
+    public SettingsListener(String buttonname, String theme) {
+        this(buttonname, theme, null, null);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
-        GUI_Settings homePage = ((GUI_Settings)source.getParent());
-        Main_Frame mainFrame = ((Main_Frame)homePage.getParent().getParent().getParent().getParent());
-        switch (this.name){            
-            case "credits" :
+        GUI_Settings homePage = ((GUI_Settings) source.getParent());
+        Main_Frame mainFrame = ((Main_Frame) homePage.getParent().getParent().getParent().getParent());
+        switch (this.name) {
+            case "credits":
+                ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
                 mainFrame.setwState(WindowState.ABOUT);
                 break;
+            case "home":
+                ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
+                mainFrame.setwState(WindowState.MAIN);
+                break;
+            case "left":
+                switch (this.relatedLabel) {
+                    case "language":
+                        this.page.leftLanguage();
+                        break;
+                    case "fullscreen":
+                        this.page.leftFS();
+
+                        break;
+                    case "theme":
+                        this.page.leftTheme();
+
+                        break;
+                    case "sound":
+                        this.page.leftSound();
+                        break;
+                }
+                break;
+                case "right":
+                switch (this.relatedLabel) {
+                    case "language":
+                        this.page.rightLanguage();
+                        break;
+                    case "fullscreen":
+                        this.page.rightFS();
+
+                        break;
+                    case "theme":
+                        this.page.rightTheme();
+
+                        break;
+                    case "sound":
+                        this.page.rightSound();
+                        break;
+                }
+                break;
         }
-        ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
     @Override
@@ -64,13 +113,13 @@ public class SettingsListener implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(this.icon));        
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.icon));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
 }
