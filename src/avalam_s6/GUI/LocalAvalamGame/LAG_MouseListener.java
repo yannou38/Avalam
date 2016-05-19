@@ -31,6 +31,8 @@ public class LAG_MouseListener implements MouseListener{
             if ((Math.abs(c.getX() - Input.getMouseSrcPosition().getX()) <=1) && (Math.abs(c.getY() - Input.getMouseSrcPosition().getY()) <=1) && (!(c.getX() == Input.getMouseSrcPosition().getX() && c.getY() == Input.getMouseSrcPosition().getY()))) {
                 Input.setButtonReleased();
                 Input.updateMouseDestPosition(this.c);
+            } else {
+                Input.resetClick();
             }
         }
     }
