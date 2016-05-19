@@ -173,9 +173,9 @@ public class GUI_LAG extends JPanel {
                 c.setY(j);
                 Cell ce = gr.getCellAt(c);
                 if(Input.isButtonClicked()){
-                    int m1 = Math.abs(c.getX()-Input.getMouseSrcPosition().getX());
+                    int m1 = Math.abs(c.getX() - Input.getMouseSrcPosition().getX());
                     int m2 = Math.abs(c.getY() - Input.getMouseSrcPosition().getY());                    
-                    if( m1<=1 &&  m2<= 1 && gr.canStack(ce, gr.getCellAt(Input.getMouseSrcPosition()))){
+                    if( m1<=1 &&  m2<= 1 && (gr.canStack(ce, gr.getCellAt(Input.getMouseSrcPosition()))||(m1==0&&m2==0))){
                         switch (ce.getOwner()) {
                             case PLAYER_1:
                                 if(m1 ==0 && m2 == 0){
