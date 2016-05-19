@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI.LocalAvalamGame;
 
+import avalam_s6.Core.Globals.Input;
 import avalam_s6.Core.File_IO.Level_Parser;
 import avalam_s6.Core.*;
 import avalam_s6.Exceptions.GridSizeException;
