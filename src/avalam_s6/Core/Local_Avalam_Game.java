@@ -55,12 +55,6 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         if(! this.history.isEmpty()) {
             this.cancelled_moves.add(this.history.pop());
             this.grid.undoMove(this.cancelled_moves.lastElement());
-            this.nbTurns--;
-            System.out.println(this.nbTurns);
-            this.current_player = this.nbTurns%NB_PLAYERS;
-        }
-        if(getCurrentPlayer().isAI()){
-            undo();
         }
     }
         
@@ -70,9 +64,6 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         if(! this.cancelled_moves.isEmpty()){
             this.history.add(this.cancelled_moves.pop());
             this.grid.moveCell(this.history.lastElement().getC_src(), this.history.lastElement().getC_dst());
-            this.nbTurns++;
-            System.out.println(this.nbTurns);
-            this.current_player = this.nbTurns%NB_PLAYERS;
         }
     }
 
@@ -132,9 +123,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
      */
     private void playATurn() {
         if(this.isTurnFinished){
-            this.nbTurns++;
-            System.out.println(this.nbTurns);
-            this.current_player = this.nbTurns%NB_PLAYERS;
+            this.changeNbTurns(1);
             int w = winCheck();
             switch (w) {
                 case 1:
@@ -240,4 +229,10 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     public void addMoveToHistory(Move m) {
         this.history.add(m);
     }
+    
+    public void changeNbTurns(int n){
+        this.nbTurns += n;
+        this.current_player = this.nbTurns%NB_PLAYERS;
+    }
+    
 }

@@ -45,30 +45,41 @@ public class LAG_UI_MouseListener implements MouseListener {
         JButton source = (JButton) e.getSource();
         GUI_LAG lag = ((GUI_LAG)source.getParent());
         Main_Frame mainFrame = ((Main_Frame)lag.getParent().getParent().getParent().getParent());
+        Local_Avalam_Game game = ((Local_Avalam_Game) lag.getGame());
         switch (this.name){
             case "return" :
                 lag.stop();
                 mainFrame.setwState(WindowState.MAIN);                
                 break;
             case "redo" :
-                if(((Local_Avalam_Game) lag.getGame()).getCancelled_moves().size() > 0){
-                    lag.getGame().redo();
+                if(game.getCancelled_moves().size() > 0){
+                    game.redo();
+                        game.changeNbTurns(1);
                     if(!lag.getUndoB().isEnabled()){
                         lag.getUndoB().setEnabled(true);
                     }
-                    if(((Local_Avalam_Game) lag.getGame()).getCancelled_moves().isEmpty()){
+                    if(game.getCancelled_moves().isEmpty()){
                         lag.getRedoB().setEnabled(false);
+                    }
+                    else if (game.getCurrentPlayer().isAI()) {
+                        game.redo();
+                        game.changeNbTurns(1);
                     }
                 }                
                 break;
             case "cancel" :
-                if(((Local_Avalam_Game) lag.getGame()).getHistory().size() > 0){
-                    lag.getGame().undo();
+                if(game.getHistory().size() > 0){
+                    game.undo();
+                    game.changeNbTurns(-1);
                     if(!lag.getRedoB().isEnabled()){
                         lag.getRedoB().setEnabled(true);
                     }
-                    if(((Local_Avalam_Game) lag.getGame()).getHistory().isEmpty()){
+                    if(game.getHistory().isEmpty()){
                         lag.getUndoB().setEnabled(false);
+                    }
+                    else if (game.getCurrentPlayer().isAI()) {
+                        game.undo();
+                        game.changeNbTurns(-1);
                     }
                 }
                 break;                
