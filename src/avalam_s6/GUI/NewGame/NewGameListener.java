@@ -27,12 +27,14 @@ public class NewGameListener implements MouseListener {
     private int playernum;
     private String theme;
     private GUI_NewGame page;
+    private final String type;
 
-    public NewGameListener(String buttonname, String theme, int playernumber,GUI_NewGame page) {
+    public NewGameListener(String buttonname, String theme, int playernumber, GUI_NewGame page, String type) {
         this.name = buttonname;
         this.playernum = playernumber;
         this.theme = theme;
         this.page = page;
+        this.type = type;
         try {
             this.icon = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/" + this.name + "_h.png"));
             this.iconbase = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/" + this.name + ".png"));
@@ -57,10 +59,25 @@ public class NewGameListener implements MouseListener {
                 mainFrame.setwState(WindowState.MAIN);
                 break;
             case "sup":
-                this.page.rightAI(playernum);
+                switch (this.name) {
+                    case "supcolor":
+                        this.page.rightColorAI(playernum);
+                        break;
+                    case "supia":
+                        this.page.rightAI(playernum);
+                        break;
+                }
                 break;
             case "prec":
-                this.page.leftAI(playernum);
+                switch (this.name) {
+                    case "preccolor":
+                        this.page.leftColorAI(playernum);
+                        break;
+                    case "precia":
+                        this.page.leftAI(playernum);
+                        break;
+
+                }
                 break;
         }
     }

@@ -37,29 +37,49 @@ public class NewGameAdapterListener implements ComponentListener {
         this.ng.getStart().setBounds((int) round((290 + insets.left) * ratioW), ((int) round((600 + insets.top) * ratioH)), size.width, size.height);
         this.ng.getStart().setSize((int) round(this.ng.getStart().getWidth() * ratioW), (int) round(this.ng.getStart().getHeight() * ratioH));
         
-        size = this.ng.getP1button().getPreferredSize();
-        this.ng.getP1button().setBounds((int) round((290 + insets.left) * ratioW), ((int) round((300 + insets.top) * ratioH)), size.width, size.height);
-        this.ng.getP1button().setSize((int) round(this.ng.getP1button().getWidth() * ratioW), (int) round(this.ng.getP1button().getHeight() * ratioH));
-        
-        size = this.ng.getP2button().getPreferredSize();
-        this.ng.getP2button().setBounds((int) round((590 + insets.left) * ratioW), ((int) round((300 + insets.top) * ratioH)), size.width, size.height);
-        this.ng.getP2button().setSize((int) round(this.ng.getP2button().getWidth() * ratioW), (int) round(this.ng.getP2button().getHeight() * ratioH));
         
         
         size = this.ng.getPrec1().getPreferredSize();
-        this.ng.getPrec1().setBounds((int) round((290 + insets.left) * ratioW), ((int) round((300 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getPrec1().setBounds((int) round((140 + insets.left) * ratioW), ((int) round((300 + insets.top) * ratioH)), size.width, size.height);
         this.ng.getPrec1().setSize((int) round(this.ng.getPrec1().getWidth() * ratioW), (int) round(this.ng.getPrec1().getHeight() * ratioH));
+        size = this.ng.getP1button().getPreferredSize();
+        this.ng.getP1button().setBounds((int) round((190 + insets.left) * ratioW), ((int) round((300 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getP1button().setSize((int) round(this.ng.getP1button().getWidth() * ratioW), (int) round(this.ng.getP1button().getHeight() * ratioH));        
         size = this.ng.getSup1().getPreferredSize();
-        this.ng.getSup1().setBounds((int) round((350 + insets.left) * ratioW), ((int) round((300 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getSup1().setBounds((int) round((290 + insets.left) * ratioW), ((int) round((300 + insets.top) * ratioH)), size.width, size.height);
         this.ng.getSup1().setSize((int) round(this.ng.getSup1().getWidth() * ratioW), (int) round(this.ng.getSup1().getHeight() * ratioH));
         
         
         size = this.ng.getPrec2().getPreferredSize();
-        this.ng.getPrec2().setBounds((int) round((590 + insets.left) * ratioW), ((int) round((300 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getPrec2().setBounds((int) round((490 + insets.left) * ratioW), ((int) round((300 + insets.top) * ratioH)), size.width, size.height);
         this.ng.getPrec2().setSize((int) round(this.ng.getPrec2().getWidth() * ratioW), (int) round(this.ng.getPrec2().getHeight() * ratioH));
+        size = this.ng.getP2button().getPreferredSize();
+        this.ng.getP2button().setBounds((int) round((540 + insets.left) * ratioW), ((int) round((300 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getP2button().setSize((int) round(this.ng.getP2button().getWidth() * ratioW), (int) round(this.ng.getP2button().getHeight() * ratioH));
         size = this.ng.getSup2().getPreferredSize();
-        this.ng.getSup2().setBounds((int) round((650 + insets.left) * ratioW), ((int) round((300 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getSup2().setBounds((int) round((640 + insets.left) * ratioW), ((int) round((300 + insets.top) * ratioH)), size.width, size.height);
         this.ng.getSup2().setSize((int) round(this.ng.getSup2().getWidth() * ratioW), (int) round(this.ng.getSup2().getHeight() * ratioH));
+        
+        
+        size = this.ng.getPreccolor1().getPreferredSize();
+        this.ng.getPreccolor1().setBounds((int) round((140 + insets.left) * ratioW), ((int) round((200 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getPreccolor1().setSize((int) round(this.ng.getPreccolor1().getWidth() * ratioW), (int) round(this.ng.getPreccolor1().getHeight() * ratioH));
+        size = this.ng.getP1color().getPreferredSize();
+        this.ng.getP1color().setBounds((int) round((190 + insets.left) * ratioW), ((int) round((200 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getP1color().setSize((int) round(this.ng.getP1color().getWidth() * ratioW), (int) round(this.ng.getP1color().getHeight() * ratioH));
+        size = this.ng.getSupcolor1().getPreferredSize();
+        this.ng.getSupcolor1().setBounds((int) round((290 + insets.left) * ratioW), ((int) round((200 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getSupcolor1().setSize((int) round(this.ng.getSupcolor1().getWidth() * ratioW), (int) round(this.ng.getSupcolor1().getHeight() * ratioH));
+               
+        size = this.ng.getPreccolor2().getPreferredSize();
+        this.ng.getPreccolor2().setBounds((int) round((490 + insets.left) * ratioW), ((int) round((200 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getPreccolor2().setSize((int) round(this.ng.getPreccolor2().getWidth() * ratioW), (int) round(this.ng.getPreccolor2().getHeight() * ratioH));
+        size = this.ng.getP2color().getPreferredSize();
+        this.ng.getP2color().setBounds((int) round((540 + insets.left) * ratioW), ((int) round((200 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getP2color().setSize((int) round(this.ng.getP2color().getWidth() * ratioW), (int) round(this.ng.getP2color().getHeight() * ratioH));
+        size = this.ng.getSupcolor2().getPreferredSize();
+        this.ng.getSupcolor2().setBounds((int) round((640 + insets.left) * ratioW), ((int) round((200 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getSupcolor2().setSize((int) round(this.ng.getSupcolor2().getWidth() * ratioW), (int) round(this.ng.getSupcolor2().getHeight() * ratioH));
         
         
                 

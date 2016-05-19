@@ -23,6 +23,16 @@
             <Expert>ia_exp</Expert>
             <Légende>ia_leg</Légende>           
         </IAImages>
+        <Colors>
+            <Noir>black</Noir>
+            <Bleu>blue</Bleu>
+            <Jaune>yellow</Jaune>
+            <Rouge>red</Rouge>
+            <Vert>green</Vert>
+            <Violet>purple</Violet>   
+            <Cyan>clearblue</Cyan>   
+            <Blanc>white</Blanc>           
+        </Colors>
     </Joueur>
     <Nom>Nom</Nom>
     <Couleur>Couleur</Couleur>
