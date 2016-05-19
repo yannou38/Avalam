@@ -41,8 +41,16 @@ public class LanguageManager {
         }
     }
     
-    public static void getElement(String s) {
-        System.out.println(aDoc.getElementsByTagName(s).item(0).getTextContent());
+    public static String getElement(String s) {
+        return (aDoc.getElementsByTagName(s).item(0).getTextContent());
+    }
+    
+    public static String[] getChildrensOf(String s) {
+        String[] st = new String[aDoc.getElementsByTagName(s).getLength()];
+        for (int i=0;i<st.length;i++) {
+            st[i] = aDoc.getElementsByTagName(s).item(i).getTextContent();
+        }
+        return st;
     }
     
     
