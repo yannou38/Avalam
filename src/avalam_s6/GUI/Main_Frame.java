@@ -6,6 +6,7 @@
 package avalam_s6.GUI;
 
 import avalam_s6.Core.Globals.LanguageManager;
+import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Core.Grid;
 import avalam_s6.GUI.FinalScreen.GUI_FinalScreen;
 import avalam_s6.GUI.HomePage.GUI_HomePage;
@@ -68,6 +69,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
     }
     
     public void initFrame(String theme) {
+        SetupManager.load();
         this.wState = WindowState.MAIN;
         this.panelList[0] = new GUI_HomePage(theme);
         this.panelList[1] = new GUI_LAG(theme);

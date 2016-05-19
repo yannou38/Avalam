@@ -26,16 +26,18 @@ public class NewGameListener implements MouseListener {
     private Image iconbase;
     private int playernum;
     private String theme;
-    
-    public NewGameListener(String buttonname, String theme, int playernumber) {
+    private GUI_NewGame page;
+
+    public NewGameListener(String buttonname, String theme, int playernumber,GUI_NewGame page) {
         this.name = buttonname;
         this.playernum = playernumber;
         this.theme = theme;
+        this.page = page;
         try {
             this.icon = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/" + this.name + "_h.png"));
             this.iconbase = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/" + this.name + ".png"));
         } catch (Exception ex) {
-            System.out.println("Error - "+NewGameListener.class.toString());
+            System.out.println("Error - " + NewGameListener.class.toString());
             Logger.getLogger(NewGameListener.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -43,28 +45,24 @@ public class NewGameListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
-        GUI_NewGame newGame = ((GUI_NewGame)source.getParent());
-        Main_Frame mainFrame = ((Main_Frame)newGame.getParent().getParent().getParent().getParent());
-        switch (this.name){
-            case "load" :
+        GUI_NewGame newGame = ((GUI_NewGame) source.getParent());
+        Main_Frame mainFrame = ((Main_Frame) newGame.getParent().getParent().getParent().getParent());
+        switch (this.name) {
+            case "start":
+                mainFrame.initGame();
+                ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
                 break;
-            case "start" :                
-                mainFrame.initGame();                
-                break;                
-            case "return" :
-                mainFrame.setwState(WindowState.MAIN);   
+            case "home":
+                ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
+                mainFrame.setwState(WindowState.MAIN);
                 break;
-            case "player" :
-                //TODO : Le choix de l'ia
+            case "sup":
+                this.page.rightAI(playernum);
                 break;
-            case "sup" :
-                //TODO : Changer le bouton vers AIHard
-                break;
-            case "prec" :
-                //TODO : Changer le bouton vers AIEasy
+            case "prec":
+                this.page.leftAI(playernum);
                 break;
         }
-        ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
     @Override
@@ -78,13 +76,13 @@ public class NewGameListener implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(this.icon));        
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.icon));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
 }

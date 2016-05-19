@@ -123,9 +123,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
      */
     private void playATurn() {
         if(this.isTurnFinished){
-            this.nbTurns++;
-            System.out.println(this.nbTurns);
-            this.current_player = this.nbTurns%NB_PLAYERS;
+            this.changeNbTurns(1);
             int w = winCheck();
             switch (w) {
                 case 1:
@@ -231,4 +229,10 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     public void addMoveToHistory(Move m) {
         this.history.add(m);
     }
+    
+    public void changeNbTurns(int n){
+        this.nbTurns += n;
+        this.current_player = this.nbTurns%NB_PLAYERS;
+    }
+    
 }

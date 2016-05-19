@@ -121,7 +121,8 @@ public class GUI_LAG extends JPanel {
     public void initGame() {
         try {
             Player p1 = new ControlledPlayer("Jon Doe", Color.WHITE, Owner.PLAYER_1);
-            Player p2 = new ControlledPlayer("Bot_Frank", Color.BLACK, Owner.PLAYER_2);
+            //Player p2 = new ControlledPlayer("Bot_Frank", Color.BLACK, Owner.PLAYER_2);
+            Player p2 = new AIPlayerEasy("Bot_Frank", Color.BLACK, Owner.PLAYER_2);
             Level_Parser myParser = new Level_Parser("default");
             Grid g = new Grid(myParser.readLevel()); // IOException | GridSizeException | NumberFormatException
             Container mainFrame = this.getParent().getParent().getParent().getParent();

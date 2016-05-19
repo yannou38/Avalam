@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
@@ -41,9 +43,35 @@ public class LanguageManager {
         }
     }
     
-    public static void getElement(String s) {
-        System.out.println(aDoc.getElementsByTagName(s).item(0).getTextContent());
+    public static String getElement(String s) {
+        return (aDoc.getElementsByTagName(s).item(0).getTextContent());
     }
     
+    public static String[] getChildrensOf(String s) {
+        if(aDoc.getElementsByTagName(s).item(0).hasChildNodes()) {
+            NodeList lChilds =  aDoc.getElementsByTagName(s).item(0).getChildNodes();
+            int lSize = 0;
+            for (int i=0;i<lChilds.getLength();i++) {
+                if(lChilds.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                    lSize ++;
+                }
+            }
+            String[] st = new String[lSize];
+            int lPassage = 0;
+            for (int i=0;i<lChilds.getLength();i++) {
+                if(lChilds.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                    st[lPassage] = lChilds.item(i).getTextContent();
+                    lPassage++;
+                }
+            }
+            return st;
+        } else {
+            return null;
+        }
+    }
+    
+    public static String getFolderShortcut() {
+        return LanguageManager.aCurrentShortcut;
+    }
     
 }
