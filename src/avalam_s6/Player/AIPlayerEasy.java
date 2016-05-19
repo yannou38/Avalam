@@ -15,6 +15,8 @@ import java.util.Random;
  * @author Seawolf
  */
 public class AIPlayerEasy extends AIPlayer {
+    
+    private final static int nerf = 87;
 
     public AIPlayerEasy(String name, Color color, Owner owner) {
         super(name, color, owner);
@@ -106,22 +108,22 @@ public class AIPlayerEasy extends AIPlayer {
         
         
         if (!mesCoupsHighValue.isEmpty()){
-            if(r.nextInt(100) < 87){
+            if(r.nextInt(100) < this.nerf){
                 return mesCoupsHighValue.get(r.nextInt(mesCoupsHighValue.size()));
             }
         }
         if(!mesCoupsOkValue.isEmpty()){
-             if(r.nextInt(100) < 87){
+             if(r.nextInt(100) < this.nerf){
                 return mesCoupsOkValue.get(r.nextInt(mesCoupsOkValue.size()));
              }
         }
         if(!mesCoupsMehValue.isEmpty()){
-            if(r.nextInt(100) < 87){
+            if(r.nextInt(100) < this.nerf){
                 return mesCoupsMehValue.get(r.nextInt(mesCoupsMehValue.size()));
             }
         }
         if(!mesCoups.isEmpty()){
-            if(r.nextInt(100) < 87){
+            if(r.nextInt(100) < this.nerf){
                 return mesCoups.get(r.nextInt(mesCoups.size()));
             }
         }
