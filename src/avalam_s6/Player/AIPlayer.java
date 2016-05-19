@@ -12,26 +12,26 @@ import java.awt.Color;
  *
  * @author TheDoctor
  */
-public abstract class AIPlayer extends Player{
+public abstract class AIPlayer extends Player {
+
     protected Game_INTERFACE game;
-    
+
     /**
      * Constructor.
+     *
      * @param name The name of the player.
      * @param color The color of the player's pawns.
-     * @param owner 
+     * @param owner
      */
     public AIPlayer(String name, Color color, Owner owner) {
-        super(name,color,owner);
+        super(name, color, owner);
     }
-    
+
     @Override
     public boolean isAI() {
         return true;
     }
-    
-    
-    
+
     /**
      * Max value
      *
@@ -40,11 +40,6 @@ public abstract class AIPlayer extends Player{
      * @return true if the move a on b would give us a 5 tour, b is opponent
      */
     protected boolean completeTourUsVsOp(Cell a, Cell b) {
-        System.out.println("je joue des coups");
-        System.out.println(this.owner);
-        System.out.println(this.owner.getValue());
-        System.out.println(a.getOwner().getValue());
-        System.out.println("autre coup");
         if (this.owner.getValue() == a.getOwner().getValue()) {
             if (this.owner.getValue() != b.getOwner().getValue()) {
                 if (a.getSize() + b.getSize() == 5) {
@@ -70,10 +65,10 @@ public abstract class AIPlayer extends Player{
         }
         return false;
     }
-    
+
     /**
      * bad value
-    */
+     */
     protected boolean completeTourOp(Cell a, Cell b) {
         if (this.owner.getValue() != a.getOwner().getValue()) {
             if (a.getSize() + b.getSize() == 5) {
@@ -83,14 +78,14 @@ public abstract class AIPlayer extends Player{
         }
         return false;
     }
-    
+
     /**
      * bad value
-    */
+     */
     protected boolean suppressAPawn(Cell a, Cell b) {
-        if (this.owner.getValue() !=b.getOwner().getValue()){
-                if (a.getSize() + b.getSize() < 4) {
-                    return true;
+        if (this.owner.getValue() != b.getOwner().getValue()) {
+            if (a.getSize() + b.getSize() < 4) {
+                return true;
             }
         }
         return false;
@@ -98,6 +93,7 @@ public abstract class AIPlayer extends Player{
 
     /**
      * check if a coordinate is alone
+     *
      * @param c0
      * @return true if the coordinate is alone (no move possible) else false
      */
@@ -129,22 +125,22 @@ public abstract class AIPlayer extends Player{
         tabCoord[7] = c8;
         for (int k = 0; k < 8; k++) {
             if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()) {
-                if(this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k]))){
+                if (this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0), this.game.getGrid().getCellAt(tabCoord[k]))) {
                     return false;
                 }
             }
         }
         return true;
     }
-    
+
     /**
      * best value
+     *
      * @param c0
      * @param dest
-     * @return 
+     * @return
      */
-    protected boolean createAloneUs(Coordinate c0, Coordinate dest)
-    {
+    protected boolean createAloneUs(Coordinate c0, Coordinate dest) {
         Coordinate[] tabCoord = new Coordinate[8];
         int i = c0.getY();
         int j = c0.getX();
@@ -170,28 +166,28 @@ public abstract class AIPlayer extends Player{
         tabCoord[6] = c7;
         tabCoord[7] = c8;
         for (int k = 0; k < 8; k++) {
-            Move m = new Move(c0,this.game.getGrid().getCellAt(c0).getSize(),dest,this.game.getGrid().getCellAt(dest).getSize(),this);
+            Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), dest, this.game.getGrid().getCellAt(dest).getSize(), this);
             this.game.getGrid().moveCell(c0, dest);
             this.game.addMoveToHistory(m);
             if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
-                    && this.owner.getValue() == this.game.getGrid().getCellAt(tabCoord[k]).getOwner().getValue() && alone(tabCoord[k])){
-                    this.game.undo();
-                    return true;
-                }
+                    && this.owner.getValue() == this.game.getGrid().getCellAt(tabCoord[k]).getOwner().getValue() && alone(tabCoord[k])) {
+                this.game.undo();
+                return true;
+            }
             this.game.undo();
         }
-        
+
         return false;
     }
-    
+
     /**
      * bad
+     *
      * @param c0
      * @param dest
-     * @return 
+     * @return
      */
-     protected boolean createAloneOp(Coordinate c0, Coordinate dest)
-    {
+    protected boolean createAloneOp(Coordinate c0, Coordinate dest) {
         Coordinate[] tabCoord = new Coordinate[8];
         int i = c0.getY();
         int j = c0.getX();
@@ -217,23 +213,22 @@ public abstract class AIPlayer extends Player{
         tabCoord[6] = c7;
         tabCoord[7] = c8;
         for (int k = 0; k < 8; k++) {
-            Move m = new Move(c0,this.game.getGrid().getCellAt(c0).getSize(),dest,this.game.getGrid().getCellAt(dest).getSize(),this);
+            Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), dest, this.game.getGrid().getCellAt(dest).getSize(), this);
             this.game.getGrid().moveCell(c0, dest);
             this.game.addMoveToHistory(m);
             if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
-                    && this.owner.getValue() != this.game.getGrid().getCellAt(tabCoord[k]).getOwner().getValue() && alone(tabCoord[k])){ 
-                    this.game.undo();
-                    return true;
-                }
+                    && this.owner.getValue() != this.game.getGrid().getCellAt(tabCoord[k]).getOwner().getValue() && alone(tabCoord[k])) {
+                this.game.undo();
+                return true;
+            }
             this.game.undo();
         }
-        
+
         return false;
     }
-     
-    public void setGame(Game_INTERFACE game){
+
+    public void setGame(Game_INTERFACE game) {
         this.game = game;
     }
 
-       
 }
