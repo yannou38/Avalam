@@ -68,6 +68,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
     }
     
     public void initFrame(String theme) {
+        LanguageManager.setLanguage("French");
         this.wState = WindowState.MAIN;
         this.panelList[0] = new GUI_HomePage(theme);
         this.panelList[1] = new GUI_LAG(theme);
