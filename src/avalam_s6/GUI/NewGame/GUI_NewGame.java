@@ -5,8 +5,10 @@
  */
 package avalam_s6.GUI.NewGame;
 
+import avalam_s6.Core.Globals.LanguageManager;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -17,203 +19,208 @@ import javax.swing.*;
  * @author ducruyy
  */
 public class GUI_NewGame extends JPanel {
-    private JButton player1, prec1, sup1, player2, prec2, sup2, aie1, aim1, aih1, aie2, aim2, aih2, load, retour, start;
-    private Image background, aieI, aimI, aihI, loadI, playerI, precI, supI, returnI, startI;
-    private String theme;
-    
+
+    private JButton prec1, sup1, prec2, sup2, retour, start;
+    private Image background, precI, supI, returnI, startI;
+    private final String theme;
+
+    private String[] AIlist;
+    private int AIlistsize;
+    private int p1select, p2select;
+
+    private NewGameAdapterListener listener;
+    private Boolean callResize;
+    private JLabel LabelPlayerSelect1;
+    private JLabel LabelPlayerSelect2;
+
     public GUI_NewGame(String theme) {
         this.theme = theme;
+        this.callResize = false;
+        this.listener = new NewGameAdapterListener(this);
         this.initComponents();
+        this.initLabels();
     }
 
     private void initComponents() {
         try {
             this.background = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/background.png"));
-            this.aieI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/ia_easy.png"));
-            this.aimI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/ia_mid.png"));
-            this.aihI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/ia_hard.png"));
-            this.loadI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/load.png"));
-            this.playerI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/player.png"));
             this.precI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/prec.png"));
             this.supI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/sup.png"));
             this.returnI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/return.png"));
             this.startI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/start.png"));
         } catch (Exception ex) {
-            System.out.println("Error - "+GUI_NewGame.class.toString());
+            System.out.println("Error - " + GUI_NewGame.class.toString());
             Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        this.player1 = new JButton(new ImageIcon(this.playerI));
-        this.player1.setBorder(BorderFactory.createEmptyBorder());
-        this.player1.setContentAreaFilled(false);
-        this.player1.setFocusPainted(false);
-        this.player1.addMouseListener(new NewGameListener("player",this.theme,1));
-        
-        this.aie1 = new JButton(new ImageIcon(this.aieI));
-        this.aie1.setBorder(BorderFactory.createEmptyBorder());
-        this.aie1.setContentAreaFilled(false);
-        this.aie1.setFocusPainted(false);
-        this.aie1.addMouseListener(new NewGameListener("player",this.theme,1));
-        
-        this.aim1 = new JButton(new ImageIcon(this.aimI));
-        this.aim1.setBorder(BorderFactory.createEmptyBorder());
-        this.aim1.setContentAreaFilled(false);
-        this.aim1.setFocusPainted(false);
-        this.aim1.addMouseListener(new NewGameListener("player",this.theme,1));        
-         
-        this.aih1 = new JButton(new ImageIcon(this.aihI));
-        this.aih1.setBorder(BorderFactory.createEmptyBorder());
-        this.aih1.setContentAreaFilled(false);
-        this.aih1.setFocusPainted(false);
-        this.aih1.addMouseListener(new NewGameListener("player",this.theme,1));             
 
         this.prec1 = new JButton(new ImageIcon(this.precI));
         this.prec1.setBorder(BorderFactory.createEmptyBorder());
         this.prec1.setContentAreaFilled(false);
         this.prec1.setFocusPainted(false);
-        this.prec1.addMouseListener(new NewGameListener("prec",this.theme,1));
+        this.prec1.addMouseListener(new NewGameListener("prec", this.theme, 1, this));
 
         this.sup1 = new JButton(new ImageIcon(this.supI));
         this.sup1.setBorder(BorderFactory.createEmptyBorder());
         this.sup1.setContentAreaFilled(false);
         this.sup1.setFocusPainted(false);
-        this.sup1.addMouseListener(new NewGameListener("sup",this.theme,1));
-        
+        this.sup1.addMouseListener(new NewGameListener("sup", this.theme, 1, this));
 
-        this.player2 = new JButton(new ImageIcon(this.playerI));
-        this.player2.setBorder(BorderFactory.createEmptyBorder());
-        this.player2.setContentAreaFilled(false);
-        this.player2.setFocusPainted(false);
-        this.player2.addMouseListener(new NewGameListener("player",this.theme,2));
-
-        this.aie2 = new JButton(new ImageIcon(this.aieI));
-        this.aie2.setBorder(BorderFactory.createEmptyBorder());
-        this.aie2.setContentAreaFilled(false);
-        this.aie2.setFocusPainted(false);
-        this.aie2.addMouseListener(new NewGameListener("player",this.theme,2));
-
-        this.aim2 = new JButton(new ImageIcon(this.aimI));
-        this.aim2.setBorder(BorderFactory.createEmptyBorder());
-        this.aim2.setContentAreaFilled(false);
-        this.aim2.setFocusPainted(false);
-        this.aim2.addMouseListener(new NewGameListener("player",this.theme,2));        
-         
-        this.aih2 = new JButton(new ImageIcon(this.aihI));
-        this.aih2.setBorder(BorderFactory.createEmptyBorder());
-        this.aih2.setContentAreaFilled(false);
-        this.aih2.setFocusPainted(false);
-        this.aih2.addMouseListener(new NewGameListener("player",this.theme,2));     
-        
         this.prec2 = new JButton(new ImageIcon(this.precI));
         this.prec2.setBorder(BorderFactory.createEmptyBorder());
         this.prec2.setContentAreaFilled(false);
         this.prec2.setFocusPainted(false);
-        this.prec2.addMouseListener(new NewGameListener("prec",this.theme,2));
+        this.prec2.addMouseListener(new NewGameListener("prec", this.theme, 2, this));
 
         this.sup2 = new JButton(new ImageIcon(this.supI));
         this.sup2.setBorder(BorderFactory.createEmptyBorder());
         this.sup2.setContentAreaFilled(false);
         this.sup2.setFocusPainted(false);
-        this.sup2.addMouseListener(new NewGameListener("sup",this.theme,2));  
-        
-
-        this.load = new JButton(new ImageIcon(this.loadI));
-        this.load.setBorder(BorderFactory.createEmptyBorder());
-        this.load.setContentAreaFilled(false);
-        this.load.setFocusPainted(false);
-        this.load.addMouseListener(new NewGameListener("load",this.theme,0));
+        this.sup2.addMouseListener(new NewGameListener("sup", this.theme, 2, this));
 
         this.retour = new JButton(new ImageIcon(this.returnI));
         this.retour.setBorder(BorderFactory.createEmptyBorder());
         this.retour.setContentAreaFilled(false);
         this.retour.setFocusPainted(false);
-        this.retour.addMouseListener(new NewGameListener("return",this.theme,0));
+        this.retour.addMouseListener(new NewGameListener("return", this.theme, 0, this));
 
         this.start = new JButton(new ImageIcon(this.startI));
         this.start.setBorder(BorderFactory.createEmptyBorder());
         this.start.setContentAreaFilled(false);
         this.start.setFocusPainted(false);
-        this.start.addMouseListener(new NewGameListener("start",this.theme,0));
+        this.start.addMouseListener(new NewGameListener("start", this.theme, 0, this));
 
         this.setLayout(null);
-        this.add(this.player1);
         this.add(this.prec1);
         this.add(this.sup1);
-        this.add(this.player2);
         this.add(this.prec2);
         this.add(this.sup2);
-        this.add(this.load);
         this.add(this.retour);
-        this.add(this.start);        
-        this.addComponentListener(new NewGameAdapterListener(this));
-        
+        this.add(this.start);
+        this.addComponentListener(this.listener);
+
+    }
+
+    private void initLabels() {
+        String player = LanguageManager.getElement("JoueurIRL");
+        String[] ais = LanguageManager.getChildrensOf("IA");
+
+        //note : comme on ajoute un joueur, ona  aps besoin de faire length -1
+        this.AIlistsize = ais.length+1;
+        this.AIlist = new String[this.AIlistsize];
+        this.AIlist[0] = player;
+        int j = 1;
+        for (int i = 0; i < ais.length; i++) {
+            this.AIlist[j] = ais[i];
+            j++;
+        }
+
+        Font localFont = new Font("Arial", Font.PLAIN, 60);
+        try {
+            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + this.theme + "/font/Gamaliel.otf"));
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
+        } catch (IOException | FontFormatException ex) {
+            System.out.println("Error - " + GUI_NewGame.class.toString());
+            Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        this.LabelPlayerSelect1 = new JLabel(this.AIlist[this.p1select]);
+        this.LabelPlayerSelect1.setBorder(BorderFactory.createEmptyBorder());
+        this.LabelPlayerSelect1.setFont(localFont.deriveFont(3 * 30f));
+        this.add(this.LabelPlayerSelect1);
+
+        this.LabelPlayerSelect2 = new JLabel(this.AIlist[this.p2select]);
+        this.LabelPlayerSelect2.setBorder(BorderFactory.createEmptyBorder());
+        this.LabelPlayerSelect2.setFont(localFont.deriveFont(3 * 30f));
+        this.add(this.LabelPlayerSelect2);
+
     }
 
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(this.background, 0, 0, this.getWidth(),this.getHeight(),null);
-    }
-
-    public JButton getPlayer1() {
-        return this.player1;
-    }
-
-    public JButton getPrec1() {
-        return this.prec1;
-    }
-
-    public JButton getSup1() {
-        return this.sup1;
-    }
-
-    public JButton getPlayer2() {
-        return this.player2;
-    }
-
-    public JButton getPrec2() {
-        return this.prec2;
-    }
-
-    public JButton getSup2() {
-        return this.sup2;
-    }
-
-    public JButton getAie1() {
-        return this.aie1;
-    }
-
-    public JButton getAim1() {
-        return this.aim1;
-    }
-
-    public JButton getAih1() {
-        return this.aih1;
-    }
-
-    public JButton getAie2() {
-        return this.aie2;
-    }
-
-    public JButton getAim2() {
-        return this.aim2;
-    }
-
-    public JButton getAih2() {
-        return this.aih2;
-    }
-
-    public JButton getLoad() {
-        return this.load;
+        g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
+        if (this.callResize == true) {
+            this.listener.componentResized(null);
+            this.callResize = false;
+        }
     }
 
     public JButton getRetour() {
-        return this.retour;
+        return retour;
     }
 
     public JButton getStart() {
-        return this.start;
+        return start;
     }
 
+    public JLabel getLabelPlayerSelect1() {
+        return LabelPlayerSelect1;
+    }
+
+    public JLabel getLabelPlayerSelect2() {
+        return LabelPlayerSelect2;
+    }
+
+    public JButton getLeftP1() {
+        return this.prec1;
+    }
+
+    public JButton getRightP1() {
+        return this.sup1;
+    }
+
+    public JButton getLeftP2() {
+        return this.prec2;
+    }
+
+    public JButton getRightP2() {
+        return this.sup2;
+    }
+
+    public void leftAI(int numplayer) {
+        if (numplayer == 1) {
+            this.p1select = (this.p1select - 1);
+            if (this.p1select == -1) {
+                this.p1select = this.AIlistsize-1;
+            }
+            this.LabelPlayerSelect1.setText(this.AIlist[this.p1select]);
+            this.callResize = true;
+        } else {
+            this.p2select = (this.p2select - 1);
+            if (this.p2select == -1) {
+                this.p2select = this.AIlistsize-1;
+            }
+            this.LabelPlayerSelect2.setText(this.AIlist[this.p2select]);
+            this.callResize = true;
+        }
+    }
+
+    public void rightAI(int numplayer) {
+        if (numplayer == 1) {
+            this.p1select = (this.p1select + 1) % this.AIlistsize;
+            this.LabelPlayerSelect1.setText(this.AIlist[this.p1select]);
+            this.callResize = true;
+        } else {
+            this.p2select = (this.p2select + 1) % this.AIlistsize;
+            this.LabelPlayerSelect2.setText(this.AIlist[this.p2select]);
+            this.callResize = true;
+        }
+    }
+
+    public JButton getPrec1() {
+        return prec1;
+    }
+
+    public JButton getSup1() {
+        return sup1;
+    }
+
+    public JButton getPrec2() {
+        return prec2;
+    }
+
+    public JButton getSup2() {
+        return sup2;
+    }
     
     
 }
