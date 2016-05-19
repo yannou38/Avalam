@@ -14,9 +14,9 @@ import java.util.Random;
  *
  * @author Seawolf
  */
-public class Skynet_DevorerOfNoobs extends AIPlayer {
+public class DevourerOfNoobs extends AIPlayer {
 
-    public Skynet_DevorerOfNoobs(String name, Color color, Owner owner) {
+    public DevourerOfNoobs(String name, Color color, Owner owner) {
         super(name, color, owner);
     }
 
