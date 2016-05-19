@@ -19,8 +19,8 @@ public class Input
     private static Game_INTERFACE game;
     private static boolean mouseClicked = false;	
     private static boolean hasClicked = false;
-    private static Coordinate c_src = new Coordinate(Integer.MAX_VALUE, Integer.MAX_VALUE);
-    private static Coordinate c_dest = new Coordinate(Integer.MAX_VALUE, Integer.MAX_VALUE);	
+    private static Coordinate c_src = new Coordinate();
+    private static Coordinate c_dest = new Coordinate();	
     private static int src_size = -1;
     private static int dest_size = -1;
 	
@@ -43,6 +43,8 @@ public class Input
 
     public static void resetClick() {
         Input.hasClicked = false;
+        Input.c_src = new Coordinate();
+        Input.mouseClicked = false;
     }
     
     /**
