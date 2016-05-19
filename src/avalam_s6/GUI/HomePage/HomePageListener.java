@@ -33,7 +33,7 @@ public class HomePageListener implements MouseListener {
             this.icon = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/" + this.name + "_h.png"));
             this.iconbase = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/" + this.name + ".png"));
         } catch (Exception ex) {
-            System.out.println("Error - "+HomePageListener.class.toString());
+            System.out.println("Error - " + HomePageListener.class.toString());
             Logger.getLogger(HomePageListener.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -41,23 +41,26 @@ public class HomePageListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
-        GUI_HomePage homePage = ((GUI_HomePage)source.getParent());
-        Main_Frame mainFrame = ((Main_Frame)homePage.getParent().getParent().getParent().getParent());
-        switch (this.name){
-            case "quit" :
+        GUI_HomePage homePage = ((GUI_HomePage) source.getParent());
+        Main_Frame mainFrame = ((Main_Frame) homePage.getParent().getParent().getParent().getParent());
+        switch (this.name) {
+            case "quit":
                 mainFrame.dispose();
                 break;
-            case "quickgame" :                
-                mainFrame.initGame();                
-                break;                
-            case "customgame" :
+            case "quickgame":
+                mainFrame.initGame();
+                break;
+            case "customgame":
                 mainFrame.setwState(WindowState.PLAYERSELECT);
-                break;                
-            case "options" :
+                break;
+            case "options":
                 mainFrame.setwState(WindowState.SETTINGS);
                 break;
+            case "load":
+                mainFrame.setwState(WindowState.SAVE);
+                break;
         }
-        ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
     @Override
@@ -71,13 +74,13 @@ public class HomePageListener implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(this.icon));        
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.icon));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
 }

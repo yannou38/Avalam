@@ -19,21 +19,23 @@ import java.awt.GraphicsEnvironment;
 import static java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 /**
  *
  * @author sazeratj
  */
 public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
+
     private WindowState wState;
     private WindowRenderMode wrm;
     private JPanel[] panelList;
     private String theme;
-    
+
     public Main_Frame() {
-        this("Default",WindowRenderMode.WINDOWED);
+        this("Default", WindowRenderMode.WINDOWED);
         LanguageManager.setLanguage("French");
     }
-    
+
     public Main_Frame(String theme, WindowRenderMode renderMode) {
         /* UPDATE VARIABLES */
         this.panelList = new JPanel[6]; // TODO : add more JPanels.
@@ -41,12 +43,12 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         this.wrm = renderMode;
         this.theme = theme;
         /* FUNCTION CALL */
-        this.initFrame(this.theme);        
-        this.setRenderMode(); 
+        this.initFrame(this.theme);
+        this.setRenderMode();
         /* ADD KB DISPATCHER */
         getCurrentKeyboardFocusManager().addKeyEventDispatcher(new RenderKeyboardDispatcher(this));
     }
-    
+
     public void setRenderMode() {
         GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
         if (this.wrm.getValue() == WindowRenderMode.FULLSCREEN.getValue()) {
@@ -58,7 +60,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         //this.requestFocus();
     }
-    
+
     public void toggleWRM() {
         if (this.wrm.getValue() == WindowRenderMode.FULLSCREEN.getValue()) {
             this.wrm = WindowRenderMode.WINDOWED;
@@ -67,7 +69,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         }
         setRenderMode();
     }
-    
+
     public void initFrame(String theme) {
         SetupManager.load();
         this.wState = WindowState.MAIN;
@@ -83,7 +85,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         }
         this.setwState(WindowState.MAIN);
     }
-    
+
     public void setwState(WindowState wState) {
         this.panelList[this.wState.getValue()].setVisible(false);
         this.remove(this.panelList[this.wState.getValue()]);
@@ -91,7 +93,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         this.panelList[this.wState.getValue()].setVisible(true);
         this.add(this.panelList[this.wState.getValue()]);
     }
-    
+
     @Override
     public void render() {
         this.repaint();
@@ -108,10 +110,16 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).initGame();
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).start();
     }
-    
+
+    public void initGame(String[] p1, String[] p2) {
+        this.setwState(WindowState.BOARD);
+        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).initGame(p1,p2);
+        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).start();
+    }
+
     public void setVictoryScreen(String p, Grid g) {
-        ((GUI_FinalScreen)this.panelList[WindowState.VICTORY.getValue()]).setGrid(g);
-        ((GUI_FinalScreen)this.panelList[WindowState.VICTORY.getValue()]).setWinner(p);
+        ((GUI_FinalScreen) this.panelList[WindowState.VICTORY.getValue()]).setGrid(g);
+        ((GUI_FinalScreen) this.panelList[WindowState.VICTORY.getValue()]).setWinner(p);
         this.setwState(WindowState.VICTORY);
     }
 

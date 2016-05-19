@@ -22,8 +22,8 @@ import javax.swing.*;
  */
 public class GUI_HomePage extends JPanel {
 
-    private JButton quick, play, settings, rules, exit;
-    private Image background, quickI, playI, settingsI, rulesI, tutoI, exitI;
+    private JButton quick, play, settings, rules, exit, load;
+    private Image background, quickI, playI, settingsI, rulesI, loadI, exitI;
     private String theme;
 
     public GUI_HomePage(String theme) {
@@ -40,6 +40,7 @@ public class GUI_HomePage extends JPanel {
             this.settingsI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/options.png"));
             this.rulesI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/rules.png"));
             this.exitI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/quit.png"));
+            this.loadI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/load.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_HomePage.class.toString());
             Logger.getLogger(GUI_HomePage.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,6 +63,12 @@ public class GUI_HomePage extends JPanel {
         this.rules.setContentAreaFilled(false);
         this.rules.setFocusPainted(false);
         this.rules.addMouseListener(new HomePageListener("rules", this.theme));
+        
+        this.load = new JButton(new ImageIcon(this.loadI));
+        this.load.setBorder(BorderFactory.createEmptyBorder());
+        this.load.setContentAreaFilled(false);
+        this.load.setFocusPainted(false);
+        this.load.addMouseListener(new HomePageListener("load", this.theme));
 
         this.settings = new JButton(new ImageIcon(this.settingsI));
         this.settings.setBorder(BorderFactory.createEmptyBorder());
@@ -81,6 +88,7 @@ public class GUI_HomePage extends JPanel {
         this.add(this.rules);
         this.add(this.settings);
         this.add(this.exit);
+        this.add(load);
         this.addComponentListener(new HomePageAdapterListener(this));
 
     }
@@ -110,6 +118,12 @@ public class GUI_HomePage extends JPanel {
     public JButton getExit() {
         return this.exit;
     }
+
+    public JButton getLoad() {
+        return load;
+    }
+    
+    
     
     
 }

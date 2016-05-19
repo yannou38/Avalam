@@ -51,7 +51,9 @@ public class NewGameListener implements MouseListener {
         Main_Frame mainFrame = ((Main_Frame) newGame.getParent().getParent().getParent().getParent());
         switch (this.name) {
             case "start":
-                mainFrame.initGame();
+                String[] p1 = this.page.loadP1Settings();
+                String[] p2 = this.page.loadP2Settings();
+                mainFrame.initGame(p1,p2);
                 ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
                 break;
             case "home":
@@ -59,7 +61,7 @@ public class NewGameListener implements MouseListener {
                 mainFrame.setwState(WindowState.MAIN);
                 break;
             case "sup":
-                switch (this.name) {
+                switch (this.type) {
                     case "supcolor":
                         this.page.rightColorAI(playernum);
                         break;
@@ -69,7 +71,7 @@ public class NewGameListener implements MouseListener {
                 }
                 break;
             case "prec":
-                switch (this.name) {
+                switch (this.type) {
                     case "preccolor":
                         this.page.leftColorAI(playernum);
                         break;

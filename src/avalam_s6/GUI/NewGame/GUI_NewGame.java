@@ -38,7 +38,7 @@ public class GUI_NewGame extends JPanel {
 
     private final NewGameAdapterListener listener;
     private Boolean callResize;
-    private JButton preccolor1,preccolor2,supcolor1,supcolor2;
+    private JButton preccolor1, preccolor2, supcolor1, supcolor2;
 
     public GUI_NewGame(String theme) {
         this.theme = theme;
@@ -63,37 +63,37 @@ public class GUI_NewGame extends JPanel {
         this.prec1.setBorder(BorderFactory.createEmptyBorder());
         this.prec1.setContentAreaFilled(false);
         this.prec1.setFocusPainted(false);
-        this.prec1.addMouseListener(new NewGameListener("prec", this.theme, 1, this,"precia"));
+        this.prec1.addMouseListener(new NewGameListener("prec", this.theme, 1, this, "precia"));
 
         this.sup1 = new JButton(new ImageIcon(this.supI));
         this.sup1.setBorder(BorderFactory.createEmptyBorder());
         this.sup1.setContentAreaFilled(false);
         this.sup1.setFocusPainted(false);
-        this.sup1.addMouseListener(new NewGameListener("sup", this.theme, 1, this,"supia"));
+        this.sup1.addMouseListener(new NewGameListener("sup", this.theme, 1, this, "supia"));
 
         this.prec2 = new JButton(new ImageIcon(this.precI));
         this.prec2.setBorder(BorderFactory.createEmptyBorder());
         this.prec2.setContentAreaFilled(false);
         this.prec2.setFocusPainted(false);
-        this.prec2.addMouseListener(new NewGameListener("prec", this.theme, 2, this,"precia"));
+        this.prec2.addMouseListener(new NewGameListener("prec", this.theme, 2, this, "precia"));
 
         this.sup2 = new JButton(new ImageIcon(this.supI));
         this.sup2.setBorder(BorderFactory.createEmptyBorder());
         this.sup2.setContentAreaFilled(false);
         this.sup2.setFocusPainted(false);
-        this.sup2.addMouseListener(new NewGameListener("sup", this.theme, 2, this,"supia"));
+        this.sup2.addMouseListener(new NewGameListener("sup", this.theme, 2, this, "supia"));
 
         this.retour = new JButton(new ImageIcon(this.returnI));
         this.retour.setBorder(BorderFactory.createEmptyBorder());
         this.retour.setContentAreaFilled(false);
         this.retour.setFocusPainted(false);
-        this.retour.addMouseListener(new NewGameListener("home", this.theme, 0, this,null));
+        this.retour.addMouseListener(new NewGameListener("home", this.theme, 0, this, null));
 
         this.start = new JButton(new ImageIcon(this.startI));
         this.start.setBorder(BorderFactory.createEmptyBorder());
         this.start.setContentAreaFilled(false);
         this.start.setFocusPainted(false);
-        this.start.addMouseListener(new NewGameListener("start", this.theme, 0, this,null));
+        this.start.addMouseListener(new NewGameListener("start", this.theme, 0, this, null));
 
         this.setLayout(null);
         this.add(this.prec1);
@@ -144,37 +144,37 @@ public class GUI_NewGame extends JPanel {
         this.p1color.setBorder(BorderFactory.createEmptyBorder());
         this.p1color.setContentAreaFilled(false);
         this.p1color.setFocusPainted(false);
+        this.p1colorselect = 0;
         this.p2color = new JButton(new ImageIcon(this.ColorImgs[1]));
         this.p2color.setBorder(BorderFactory.createEmptyBorder());
         this.p2color.setContentAreaFilled(false);
         this.p2color.setFocusPainted(false);
+        this.p2colorselect = 1;
 
-        
-        
         this.preccolor1 = new JButton(new ImageIcon(this.precI));
         this.preccolor1.setBorder(BorderFactory.createEmptyBorder());
         this.preccolor1.setContentAreaFilled(false);
         this.preccolor1.setFocusPainted(false);
-        this.preccolor1.addMouseListener(new NewGameListener("prec", this.theme, 1, this,"preccolor"));
+        this.preccolor1.addMouseListener(new NewGameListener("prec", this.theme, 1, this, "preccolor"));
 
         this.supcolor1 = new JButton(new ImageIcon(this.supI));
         this.supcolor1.setBorder(BorderFactory.createEmptyBorder());
         this.supcolor1.setContentAreaFilled(false);
         this.supcolor1.setFocusPainted(false);
-        this.supcolor1.addMouseListener(new NewGameListener("sup", this.theme, 1, this,"supcolor"));
+        this.supcolor1.addMouseListener(new NewGameListener("sup", this.theme, 1, this, "supcolor"));
 
         this.preccolor2 = new JButton(new ImageIcon(this.precI));
         this.preccolor2.setBorder(BorderFactory.createEmptyBorder());
         this.preccolor2.setContentAreaFilled(false);
         this.preccolor2.setFocusPainted(false);
-        this.preccolor2.addMouseListener(new NewGameListener("prec", this.theme, 2, this,"preccolor"));
+        this.preccolor2.addMouseListener(new NewGameListener("prec", this.theme, 2, this, "preccolor"));
 
         this.supcolor2 = new JButton(new ImageIcon(this.supI));
         this.supcolor2.setBorder(BorderFactory.createEmptyBorder());
         this.supcolor2.setContentAreaFilled(false);
         this.supcolor2.setFocusPainted(false);
-        this.supcolor2.addMouseListener(new NewGameListener("sup", this.theme, 2, this,"supcolor"));
-        
+        this.supcolor2.addMouseListener(new NewGameListener("sup", this.theme, 2, this, "supcolor"));
+
         this.add(this.p1color);
         this.add(this.p2color);
         this.add(this.preccolor1);
@@ -232,7 +232,6 @@ public class GUI_NewGame extends JPanel {
     public JButton getSupcolor2() {
         return supcolor2;
     }
-    
 
     public void leftAI(int numplayer) {
         if (numplayer == 1) {
@@ -295,8 +294,6 @@ public class GUI_NewGame extends JPanel {
     public JButton getP2color() {
         return p2color;
     }
-    
-    
 
     void leftColorAI(int numplayer) {
         if (numplayer == 1) {
@@ -348,6 +345,20 @@ public class GUI_NewGame extends JPanel {
             this.p2color.setIcon(new ImageIcon(this.ColorImgs[this.p2colorselect]));
             this.callResize = true;
         }
+    }
+
+    String[] loadP1Settings() {
+        String[] p1 = new String[2];
+        p1[0] = this.ColorList[this.p1colorselect];
+        p1[1] = this.AIlist[this.p1select];
+        return p1;
+    }
+
+    String[] loadP2Settings() {
+        String[] p2 = new String[2];
+        p2[0] = this.ColorList[this.p2colorselect];
+        p2[1] = this.AIlist[this.p2select];
+        return p2;
     }
 
 }

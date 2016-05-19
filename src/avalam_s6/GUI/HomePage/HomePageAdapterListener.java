@@ -39,10 +39,15 @@ public class HomePageAdapterListener implements ComponentListener {
         size = this.hm.getRules().getPreferredSize();
         this.hm.getRules().setBounds((int) round((302 + insets.left) * ratioW), ((int) round((502 + insets.top) * ratioH)), size.width, size.height);
         this.hm.getRules().setSize((int) round(this.hm.getRules().getWidth() * ratioW), (int) round(this.hm.getRules().getHeight() * ratioH));
+        
+        
+        size = this.hm.getLoad().getPreferredSize();
+        this.hm.getLoad().setBounds((int) round((528 + insets.left) * ratioW), ((int) round((502 + insets.top) * ratioH)), size.width, size.height);
+        this.hm.getLoad().setSize((int) round(this.hm.getLoad().getWidth() * ratioW), (int) round(this.hm.getLoad().getHeight() * ratioH));
 
 
         size = this.hm.getSettings().getPreferredSize();
-        this.hm.getSettings().setBounds((int) round((755 + insets.left) * ratioW), ((int) round((502 + insets.top) * ratioH)), size.width, size.height);
+        this.hm.getSettings().setBounds((int) round((753 + insets.left) * ratioW), ((int) round((502 + insets.top) * ratioH)), size.width, size.height);
         this.hm.getSettings().setSize((int) round(this.hm.getSettings().getWidth() * ratioW), (int) round(this.hm.getSettings().getHeight() * ratioH));
 
         size = this.hm.getExit().getPreferredSize();
