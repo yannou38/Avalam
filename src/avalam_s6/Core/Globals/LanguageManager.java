@@ -12,6 +12,9 @@ import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
@@ -46,11 +49,26 @@ public class LanguageManager {
     }
     
     public static String[] getChildrensOf(String s) {
-        String[] st = new String[aDoc.getElementsByTagName(s).getLength()];
-        for (int i=0;i<st.length;i++) {
-            st[i] = aDoc.getElementsByTagName(s).item(i).getTextContent();
+        if(aDoc.getElementsByTagName(s).item(0).hasChildNodes()) {
+            NodeList lChilds =  aDoc.getElementsByTagName(s).item(0).getChildNodes();
+            int lSize = 0;
+            for (int i=0;i<lChilds.getLength();i++) {
+                if(lChilds.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                    lSize ++;
+                }
+            }
+            String[] st = new String[lSize];
+            int lPassage = 0;
+            for (int i=0;i<lChilds.getLength();i++) {
+                if(lChilds.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                    st[lPassage] = lChilds.item(i).getTextContent();
+                    lPassage++;
+                }
+            }
+            return st;
+        } else {
+            return null;
         }
-        return st;
     }
     
     
