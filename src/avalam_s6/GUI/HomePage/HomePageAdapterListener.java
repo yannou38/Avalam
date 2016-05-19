@@ -40,9 +40,6 @@ public class HomePageAdapterListener implements ComponentListener {
         this.hm.getRules().setBounds((int) round((302 + insets.left) * ratioW), ((int) round((502 + insets.top) * ratioH)), size.width, size.height);
         this.hm.getRules().setSize((int) round(this.hm.getRules().getWidth() * ratioW), (int) round(this.hm.getRules().getHeight() * ratioH));
 
-        size = this.hm.getTuto().getPreferredSize();
-        this.hm.getTuto().setBounds((int) round((529 + insets.left) * ratioW), ((int) round((502 + insets.top) * ratioH)), size.width, size.height);
-        this.hm.getTuto().setSize((int) round(this.hm.getTuto().getWidth() * ratioW), (int) round(this.hm.getTuto().getHeight() * ratioH));
 
         size = this.hm.getSettings().getPreferredSize();
         this.hm.getSettings().setBounds((int) round((755 + insets.left) * ratioW), ((int) round((502 + insets.top) * ratioH)), size.width, size.height);

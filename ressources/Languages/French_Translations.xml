@@ -15,6 +15,14 @@
             <Expert>IA Experte</Expert>
             <Légende>IA Légendaire</Légende>           
         </IA>
+        <IAImages>
+            <JoueurIRL>player</JoueurIRL>
+            <Facile>ia_easy</Facile>
+            <Moyen>ia_mid</Moyen>
+            <Difficle>ia_hard</Difficle>
+            <Expert>ia_exp</Expert>
+            <Légende>ia_leg</Légende>           
+        </IAImages>
     </Joueur>
     <Nom>Nom</Nom>
     <Couleur>Couleur</Couleur>

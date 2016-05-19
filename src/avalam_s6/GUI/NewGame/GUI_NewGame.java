@@ -8,7 +8,6 @@ package avalam_s6.GUI.NewGame;
 import avalam_s6.Core.Globals.LanguageManager;
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -22,16 +21,17 @@ public class GUI_NewGame extends JPanel {
 
     private JButton prec1, sup1, prec2, sup2, retour, start;
     private Image background, precI, supI, returnI, startI;
+    private Image player;
     private final String theme;
 
     private String[] AIlist;
+    private Image[] AIimgs;
     private int AIlistsize;
+    private JButton p1button, p2button;
     private int p1select, p2select;
 
     private NewGameAdapterListener listener;
     private Boolean callResize;
-    private JLabel LabelPlayerSelect1;
-    private JLabel LabelPlayerSelect2;
 
     public GUI_NewGame(String theme) {
         this.theme = theme;
@@ -46,7 +46,7 @@ public class GUI_NewGame extends JPanel {
             this.background = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/background.png"));
             this.precI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/prec.png"));
             this.supI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/sup.png"));
-            this.returnI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/return.png"));
+            this.returnI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/home.png"));
             this.startI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/start.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_NewGame.class.toString());
@@ -81,7 +81,7 @@ public class GUI_NewGame extends JPanel {
         this.retour.setBorder(BorderFactory.createEmptyBorder());
         this.retour.setContentAreaFilled(false);
         this.retour.setFocusPainted(false);
-        this.retour.addMouseListener(new NewGameListener("return", this.theme, 0, this));
+        this.retour.addMouseListener(new NewGameListener("home", this.theme, 0, this));
 
         this.start = new JButton(new ImageIcon(this.startI));
         this.start.setBorder(BorderFactory.createEmptyBorder());
@@ -101,37 +101,24 @@ public class GUI_NewGame extends JPanel {
     }
 
     private void initLabels() {
-        String player = LanguageManager.getElement("JoueurIRL");
-        String[] ais = LanguageManager.getChildrensOf("IA");
-
-        //note : comme on ajoute un joueur, ona  aps besoin de faire length -1
-        this.AIlistsize = ais.length+1;
-        this.AIlist = new String[this.AIlistsize];
-        this.AIlist[0] = player;
-        int j = 1;
-        for (int i = 0; i < ais.length; i++) {
-            this.AIlist[j] = ais[i];
-            j++;
+        this.AIlist = LanguageManager.getChildrensOf("IAImages");
+        this.AIlistsize = this.AIlist.length;
+        this.AIimgs = new Image[this.AIlistsize];
+        for (int i = 0; i < this.AIlistsize; i++) {
+            try {
+                this.AIimgs[i] = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/" + this.AIlist[i] + ".png"));
+            } catch (Exception ex) {
+                System.out.println("Error - " + GUI_NewGame.class.toString());
+                Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
-        Font localFont = new Font("Arial", Font.PLAIN, 60);
-        try {
-            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + this.theme + "/font/Gamaliel.otf"));
-            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
-        } catch (IOException | FontFormatException ex) {
-            System.out.println("Error - " + GUI_NewGame.class.toString());
-            Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-        this.LabelPlayerSelect1 = new JLabel(this.AIlist[this.p1select]);
-        this.LabelPlayerSelect1.setBorder(BorderFactory.createEmptyBorder());
-        this.LabelPlayerSelect1.setFont(localFont.deriveFont(3 * 30f));
-        this.add(this.LabelPlayerSelect1);
-
-        this.LabelPlayerSelect2 = new JLabel(this.AIlist[this.p2select]);
-        this.LabelPlayerSelect2.setBorder(BorderFactory.createEmptyBorder());
-        this.LabelPlayerSelect2.setFont(localFont.deriveFont(3 * 30f));
-        this.add(this.LabelPlayerSelect2);
+        this.p1button = new JButton(new ImageIcon(this.AIimgs[0]));
+        this.p2button = new JButton(new ImageIcon(this.AIimgs[0]));
+        
+        this.add(this.p1button);
+        this.add(this.p2button);
 
     }
 
@@ -150,14 +137,6 @@ public class GUI_NewGame extends JPanel {
 
     public JButton getStart() {
         return start;
-    }
-
-    public JLabel getLabelPlayerSelect1() {
-        return LabelPlayerSelect1;
-    }
-
-    public JLabel getLabelPlayerSelect2() {
-        return LabelPlayerSelect2;
     }
 
     public JButton getLeftP1() {
@@ -180,16 +159,16 @@ public class GUI_NewGame extends JPanel {
         if (numplayer == 1) {
             this.p1select = (this.p1select - 1);
             if (this.p1select == -1) {
-                this.p1select = this.AIlistsize-1;
+                this.p1select = this.AIlistsize - 1;
             }
-            this.LabelPlayerSelect1.setText(this.AIlist[this.p1select]);
+            this.p1button.setIcon(new ImageIcon(this.AIimgs[this.p1select]));
             this.callResize = true;
         } else {
             this.p2select = (this.p2select - 1);
             if (this.p2select == -1) {
-                this.p2select = this.AIlistsize-1;
+                this.p2select = this.AIlistsize - 1;
             }
-            this.LabelPlayerSelect2.setText(this.AIlist[this.p2select]);
+            this.p2button.setIcon(new ImageIcon(this.AIimgs[this.p2select]));
             this.callResize = true;
         }
     }
@@ -197,13 +176,21 @@ public class GUI_NewGame extends JPanel {
     public void rightAI(int numplayer) {
         if (numplayer == 1) {
             this.p1select = (this.p1select + 1) % this.AIlistsize;
-            this.LabelPlayerSelect1.setText(this.AIlist[this.p1select]);
+            this.p1button.setIcon(new ImageIcon(this.AIimgs[this.p1select]));
             this.callResize = true;
         } else {
             this.p2select = (this.p2select + 1) % this.AIlistsize;
-            this.LabelPlayerSelect2.setText(this.AIlist[this.p2select]);
+            this.p2button.setIcon(new ImageIcon(this.AIimgs[this.p2select]));
             this.callResize = true;
         }
+    }
+
+    public JButton getP1button() {
+        return p1button;
+    }
+
+    public JButton getP2button() {
+        return p2button;
     }
 
     public JButton getPrec1() {
@@ -221,6 +208,5 @@ public class GUI_NewGame extends JPanel {
     public JButton getSup2() {
         return sup2;
     }
-    
-    
+
 }
