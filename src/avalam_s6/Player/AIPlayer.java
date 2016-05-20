@@ -80,11 +80,23 @@ public abstract class AIPlayer extends Player {
     }
 
     /**
-     * bad value
+     * meh value
      */
     protected boolean suppressAPawn(Cell a, Cell b) {
         if (this.owner.getValue() != b.getOwner().getValue()) {
             if (a.getSize() + b.getSize() < 4) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * meh value
+     */
+    protected boolean suppressAPawnCreate3Op(Cell a, Cell b) {
+        if (this.owner.getValue() != b.getOwner().getValue()) {
+            if (a.getSize() + b.getSize() == 3) {
                 return true;
             }
         }
