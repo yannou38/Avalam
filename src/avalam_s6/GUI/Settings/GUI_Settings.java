@@ -7,6 +7,7 @@ package avalam_s6.GUI.Settings;
 
 import avalam_s6.Core.Globals.LanguageManager;
 import avalam_s6.Core.Globals.SetupManager;
+import avalam_s6.Core.Globals.ThemesLister;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +28,6 @@ public class GUI_Settings extends JPanel {
 
     private String[] language, fullScreen, Theme, Sound;
     private int currentLanguage, fullScreenSelected, ThemeSelected, SoundSelected;
-    private int themesize;
     private JLabel LabelSound, LabelLanguage, LabelFS, LabelTheme;
 
     private final SettingsAdapterListener listener;
@@ -58,19 +58,19 @@ public class GUI_Settings extends JPanel {
         this.apply.setBorder(BorderFactory.createEmptyBorder());
         this.apply.setContentAreaFilled(false);
         this.apply.setFocusPainted(false);
-        this.apply.addMouseListener(new SettingsListener("apply",this));
+        this.apply.addMouseListener(new SettingsListener("apply", this));
 
         this.retour = new JButton(new ImageIcon(this.returnI));
         this.retour.setBorder(BorderFactory.createEmptyBorder());
         this.retour.setContentAreaFilled(false);
         this.retour.setFocusPainted(false);
-        this.retour.addMouseListener(new SettingsListener("home",this));
+        this.retour.addMouseListener(new SettingsListener("home", this));
 
         this.credits = new JButton(new ImageIcon(this.creditsI));
         this.credits.setBorder(BorderFactory.createEmptyBorder());
         this.credits.setContentAreaFilled(false);
         this.credits.setFocusPainted(false);
-        this.credits.addMouseListener(new SettingsListener("credits",this));
+        this.credits.addMouseListener(new SettingsListener("credits", this));
 
         //private JButton leftLanguage, rightlanguage, laftFS, rightFS, leftTheme, rightTheme, leftSound, rightSound;
         this.leftLanguage = new JButton(new ImageIcon(this.leftI));
@@ -125,8 +125,7 @@ public class GUI_Settings extends JPanel {
         this.rightSound.setContentAreaFilled(false);
         this.rightSound.setFocusPainted(false);
         this.rightSound.addMouseListener(new SettingsListener("right", "sound", this));
-        
-        
+
         Font localFont = new Font("Arial", Font.PLAIN, 60);
         try {
             localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
@@ -135,7 +134,7 @@ public class GUI_Settings extends JPanel {
             System.out.println("Error - " + GUI_Settings.class.toString());
             Logger.getLogger(GUI_Settings.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         this.LabelFS = new JLabel(LanguageManager.getElement(this.fullScreen[this.fullScreenSelected]));
         this.LabelFS.setBorder(BorderFactory.createEmptyBorder());
         this.LabelFS.setFont(localFont.deriveFont(3 * 30f));
@@ -193,7 +192,7 @@ public class GUI_Settings extends JPanel {
         String themeDefault = "Default";
 
         this.language = LanguageManager.getChildrensNameOf("Langue");
-        for (int x=0;x<this.language.length;x++) {
+        for (int x = 0; x < this.language.length; x++) {
             if (this.language[x].equals(SetupManager.getElement("Langue"))) {
                 this.currentLanguage = x;
             }
@@ -203,15 +202,24 @@ public class GUI_Settings extends JPanel {
         this.fullScreen[0] = "Oui";
         this.fullScreen[1] = "Non";
         this.fullScreenSelected = 1;
+        if (SetupManager.getElement("FullScreen").equals("Oui")) {
+            this.fullScreenSelected = 0;
+        }
 
         this.Sound = new String[2];
         this.Sound[0] = "Oui";
         this.Sound[1] = "Non";
         this.SoundSelected = 1;
+        if (SetupManager.getElement("Son").equals("Oui")) {
+            this.SoundSelected = 0;
+        }
 
-        this.themesize = 1;
-        this.Theme = new String[this.themesize];
-        this.Theme[0] = themeDefault;
+        this.Theme = ThemesLister.listThemes();
+        for (int x = 0; x < this.Theme.length; x++) {
+            if (this.Theme[x].equals(SetupManager.getElement("Theme"))) {
+                this.ThemeSelected = x;
+            }
+        }
     }
 
     public JLabel getLabelSound() {
@@ -263,18 +271,16 @@ public class GUI_Settings extends JPanel {
     }
 
     void leftLanguage() {
-        //le 2 en hardcodé sera a changer :/
         this.currentLanguage = (this.currentLanguage - 1);
         if (this.currentLanguage == -1) {
-            this.currentLanguage = this.language.length-1;
+            this.currentLanguage = this.language.length - 1;
         }
         this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.currentLanguage]));
         this.callResize();
     }
 
     void leftFS() {
-        //le 2 en hardcodé sera a changer :/
-        this.fullScreenSelected = (this.fullScreenSelected - 1) % 2;
+        this.fullScreenSelected = (this.fullScreenSelected - 1);
         if (this.fullScreenSelected == -1) {
             this.fullScreenSelected = 1;
         }
@@ -283,18 +289,16 @@ public class GUI_Settings extends JPanel {
     }
 
     void leftTheme() {
-        //le 1 en hardcodé sera a changer :/
-        this.ThemeSelected = (this.ThemeSelected - 1) % 1;
+        this.ThemeSelected = (this.ThemeSelected - 1) ;
         if (this.ThemeSelected == -1) {
-            this.ThemeSelected = 0;
+            this.ThemeSelected = this.Theme.length;
         }
         this.LabelTheme.setText(this.Theme[this.ThemeSelected]);
         this.callResize();
     }
 
     void leftSound() {
-        //le 2 en hardcodé sera a changer :/
-        this.SoundSelected = (this.SoundSelected - 1) % 2;
+        this.SoundSelected = (this.SoundSelected - 1);
         if (this.SoundSelected == -1) {
             this.SoundSelected = 1;
         }
@@ -303,28 +307,24 @@ public class GUI_Settings extends JPanel {
     }
 
     void rightLanguage() {
-        //le 2 en hardcodé sera a changer :/
         this.currentLanguage = (this.currentLanguage + 1) % 2;
         this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.currentLanguage]));
         this.callResize();
     }
 
     void rightFS() {
-        //le 2 en hardcodé sera a changer :/
         this.fullScreenSelected = (this.fullScreenSelected + 1) % 2;
         this.LabelFS.setText(LanguageManager.getElement(this.fullScreen[this.fullScreenSelected]));
         this.callResize();
     }
 
     void rightTheme() {
-        //le 2 en hardcodé sera a changer :/
-        this.ThemeSelected = (this.ThemeSelected + 1) % 1;
+        this.ThemeSelected = (this.ThemeSelected + 1) % this.Theme.length;
         this.LabelTheme.setText(this.Theme[this.ThemeSelected]);
         this.callResize();
     }
 
     void rightSound() {
-        //le 2 en hardcodé sera a changer :/
         this.SoundSelected = (this.SoundSelected + 1) % 2;
         this.LabelSound.setText(LanguageManager.getElement(this.Sound[this.SoundSelected]));
         this.callResize();
@@ -334,19 +334,22 @@ public class GUI_Settings extends JPanel {
         this.callResize = true;
     }
 
-    public String getSelectedLanguage(){
+    public String getSelectedLanguage() {
         return this.language[this.currentLanguage];
     }
-    public String getSelectedFS(){
+
+    public String getSelectedFS() {
         return this.fullScreen[this.fullScreenSelected];
-        
+
     }
-    public String getSelectedTheme(){
+
+    public String getSelectedTheme() {
         return this.Theme[this.ThemeSelected];
-        
+
     }
-    public String getSelectedSound(){
+
+    public String getSelectedSound() {
         return this.Sound[this.SoundSelected];
-        
+
     }
 }
