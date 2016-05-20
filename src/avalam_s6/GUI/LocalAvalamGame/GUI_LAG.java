@@ -193,9 +193,48 @@ public class GUI_LAG extends JPanel {
                     break;
             }
 
-            Player p1 = new ControlledPlayer("Jon Doe", c1, Owner.PLAYER_1);
-            //Player p2 = new ControlledPlayer("Bot_Frank", Color.BLACK, Owner.PLAYER_2);
-            Player p2 = new AIPlayerEasy("Bot_Frank", c2, Owner.PLAYER_2);
+            Player p1 = new ControlledPlayer("John Doe", c1, Owner.PLAYER_1);
+            switch (player1[1]) {
+                case "player":
+                    p1 = new ControlledPlayer("John Doe", c1, Owner.PLAYER_1);
+                    break;
+                case "ia_easy":
+                    p1 = new AIPlayerEasy("John Doe", c1, Owner.PLAYER_1);
+                    break;
+                case "ia_mid":
+                    p1 = new AIPlayerMedium("John Doe", c1, Owner.PLAYER_1);
+                    break;
+                case "ia_hard":
+                    p1 = new AIPlayerMedium("John Doe", c1, Owner.PLAYER_1);
+                    break;
+                case "ia_exp":
+                    p1 = new AIPlayerMedium("John Doe", c1, Owner.PLAYER_1);
+                    break;
+                case "ia_leg":
+                    p1 = new AIPlayerMedium("John Doe", c1, Owner.PLAYER_1);
+                    break;
+            }
+            Player p2 = new ControlledPlayer("Bot Franck", c2, Owner.PLAYER_2);
+            switch (player2[1]) {
+                case "player":
+                    p2 = new ControlledPlayer("Bot Franck", c2, Owner.PLAYER_2);
+                    break;
+                case "ia_easy":
+                    p2 = new AIPlayerEasy("Bot Franck", c2, Owner.PLAYER_2);
+                    break;
+                case "ia_mid":
+                    p2 = new AIPlayerMedium("Bot Franck", c2, Owner.PLAYER_2);
+                    break;
+                case "ia_hard":
+                    p2 = new AIPlayerMedium("Bot Franck", c2, Owner.PLAYER_2);
+                    break;
+                case "ia_exp":
+                    p2 = new AIPlayerMedium("Bot Franck", c2, Owner.PLAYER_2);
+                    break;
+                case "ia_leg":
+                    p2 = new AIPlayerMedium("Bot Franck", c2, Owner.PLAYER_2);
+                    break;
+            }
             Level_Parser myParser = new Level_Parser("default");
             Grid g = new Grid(myParser.readLevel()); // IOException | GridSizeException | NumberFormatException
             Container mainFrame = this.getParent().getParent().getParent().getParent();
