@@ -71,7 +71,10 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         System.out.println("[1] "+this.players[1].getClass()+": "+this.players[1].getName());
         System.out.println("[Current] "+this.current_player);
         System.out.println("[GName] "+this.getGrid().getName());
-        System.out.println("[Historique des coups]");
+        System.out.println(this.getHistory().size());
+        this.getHistory().stream().forEach(System.out::println);
+        System.out.println(this.getCancelled_moves().size());
+        this.getCancelled_moves().stream().forEach(System.out::println);
         System.out.println("[Historique des coups deja annules]");
     }
 
