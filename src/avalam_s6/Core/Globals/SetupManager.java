@@ -28,6 +28,7 @@ public class SetupManager {
     private static Document aDoc;
     
     public static void load() {
+        ConfigGenerator.generate();
         try {
             File xmlFile = new File("./ressources/config/config.xml");
             SetupManager.aDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(xmlFile);		
