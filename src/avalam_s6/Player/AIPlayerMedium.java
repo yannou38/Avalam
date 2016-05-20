@@ -18,6 +18,8 @@ import java.util.Random;
  * @author Seawolf
  */
 public class AIPlayerMedium extends AIPlayer {
+    
+    private int nbtours;
 
     public AIPlayerMedium(String name, Color color, Owner owner) {
         super(name, color, owner);
@@ -60,7 +62,7 @@ public class AIPlayerMedium extends AIPlayer {
                         if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()) {
                             if (this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0), this.game.getGrid().getCellAt(tabCoord[k]))) {
                                 Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), tabCoord[k], this.game.getGrid().getCellAt(tabCoord[k]).getSize(), this);
-                                value = miniMax(m, 1);
+                                value = miniMax(m, 1+(nbtours/3));
                                 if (value > maxvalue) {
                                     maxvalue = value;
                                     mesCoups.clear();
