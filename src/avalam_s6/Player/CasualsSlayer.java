@@ -97,9 +97,14 @@ public class CasualsSlayer extends AIPlayer {
             value = 1;
         } //we can secure a point
         else if (completeTourUs(this.game.getGrid().getCellAt(move.getC_src()), this.game.getGrid().getCellAt(move.getC_dst()))) {
-            value = 0.8;
-        } else if (suppressAPawn(this.game.getGrid().getCellAt(move.getC_src()), this.game.getGrid().getCellAt(move.getC_dst()))) {
-            value = 0.3;
+            value = 0.9;
+        }
+        else if (suppressAPawnCreate3Op(this.game.getGrid().getCellAt(move.getC_src()), this.game.getGrid().getCellAt(move.getC_dst()))){
+            value = 0.25;
+                    
+        }
+        else if (suppressAPawn(this.game.getGrid().getCellAt(move.getC_src()), this.game.getGrid().getCellAt(move.getC_dst()))) {
+            value = 0.45;
         } //whatever 
         else if (completeTourOp(this.game.getGrid().getCellAt(move.getC_src()), this.game.getGrid().getCellAt(move.getC_dst())) || createAloneOp(move.getC_src(), move.getC_dst())) {
             value = 0;
@@ -153,7 +158,7 @@ public class CasualsSlayer extends AIPlayer {
             }
         }
         this.game.undo();
-        return (value + 2*(minmaxValue / nbCoups));
+        return (value + 2*(minmaxValue / nbCoups)/3);
     }
     
     private double miniMaxOp(Move move, int profondeur) {
@@ -168,8 +173,12 @@ public class CasualsSlayer extends AIPlayer {
         } //we can secure a point
         else if (completeTourUs(this.game.getGrid().getCellAt(move.getC_src()), this.game.getGrid().getCellAt(move.getC_dst()))) {
             value = 1;
+        }
+        else if (suppressAPawnCreate3Op(this.game.getGrid().getCellAt(move.getC_src()), this.game.getGrid().getCellAt(move.getC_dst()))){
+            value = 0.25;
+                    
         } else if (suppressAPawn(this.game.getGrid().getCellAt(move.getC_src()), this.game.getGrid().getCellAt(move.getC_dst()))) {
-            value = 0.35;
+            value = 0.45;
         } //whatever 
         else if (completeTourOp(this.game.getGrid().getCellAt(move.getC_src()), this.game.getGrid().getCellAt(move.getC_dst())) || createAloneOp(move.getC_src(), move.getC_dst())) {
             value = 0;
@@ -223,7 +232,7 @@ public class CasualsSlayer extends AIPlayer {
             }
         }
         this.game.undo();
-        return (value + 2*(minmaxValue / nbCoups));
+        return (value + 2*(minmaxValue / nbCoups)/3);
     }
 
 }
