@@ -60,6 +60,29 @@ public class LanguageManager {
             int lPassage = 0;
             for (int i=0;i<lChilds.getLength();i++) {
                 if(lChilds.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                    st[lPassage] = lChilds.item(i).getTextContent();
+                    lPassage++;
+                }
+            }
+            return st;
+        } else {
+            return null;
+        }
+    }
+    
+    public static String[] getChildrensNameOf(String s) {
+        if(aDoc.getElementsByTagName(s).item(0).hasChildNodes()) {
+            NodeList lChilds =  aDoc.getElementsByTagName(s).item(0).getChildNodes();
+            int lSize = 0;
+            for (int i=0;i<lChilds.getLength();i++) {
+                if(lChilds.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                    lSize ++;
+                }
+            }
+            String[] st = new String[lSize];
+            int lPassage = 0;
+            for (int i=0;i<lChilds.getLength();i++) {
+                if(lChilds.item(i).getNodeType() == Node.ELEMENT_NODE) {
                     st[lPassage] = lChilds.item(i).getNodeName();
                     lPassage++;
                 }

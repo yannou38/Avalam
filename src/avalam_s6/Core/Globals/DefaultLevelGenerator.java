@@ -5,10 +5,17 @@
  */
 package avalam_s6.Core.Globals;
 
+import java.io.File;
+
 /**
  *
  * @author sazeratj
  */
 public class DefaultLevelGenerator {
-    
+    public static void generate() {
+        File f = new File("./ressources/Levels/default");
+        if(! f.exists()) { 
+            // do something
+        }
+    }
 }
