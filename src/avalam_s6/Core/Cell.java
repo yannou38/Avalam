@@ -16,25 +16,24 @@ public class Cell {
     private ArrayList<Owner> contenu;
     private CellState etat;
     
-    public Cell(int owner) {
+    public Cell(int size, int owner) {
         this.contenu = new ArrayList<>();
-        switch(owner) {
-            case 0:
-                this.etat = CellState.RESTRICTED;
-                this.contenu.add(Owner.NO_OWNER);
-                break;
-            case 1:
+        if (owner == 0) {
+            this.contenu.add(Owner.NO_OWNER);
+            if(size == 0) {
                 this.etat = CellState.EMPTY;
-                this.contenu.add(Owner.NO_OWNER);
-                break;
-            case 2:
-                this.contenu.add(Owner.PLAYER_1);
-                this.etat = CellState.TOWER;
-                break;
-            case 3:
-                this.contenu.add(Owner.PLAYER_2);
-                this.etat = CellState.TOWER;                
-                break;
+            } else {
+                this.etat = CellState.RESTRICTED;
+            }
+        } else {
+            for (int i=0;i<size;i++) {
+               if(owner == 1) {
+                   this.contenu.add(Owner.PLAYER_1);
+               } else {
+                   this.contenu.add(Owner.PLAYER_2);
+               }
+            }
+            this.etat = CellState.TOWER;
         }
     }
     

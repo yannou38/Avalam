@@ -123,12 +123,12 @@ public class GUI_LAG extends JPanel {
             //Player p2 = new ControlledPlayer("Bot_Frank", Color.BLACK, Owner.PLAYER_2);
             Player p2 = new AIPlayerEasy("Bot_Frank", Color.BLACK, Owner.PLAYER_2);
             Level_Parser myParser = new Level_Parser("default");
-            Grid g = new Grid(myParser.readLevel()); // IOException | GridSizeException | NumberFormatException
+            Grid g = new Grid(myParser.readLevel()); // IOException | GridSizeException | GridCharException
             Container mainFrame = this.getParent().getParent().getParent().getParent();
             System.out.println(mainFrame.toString());
             this.game = new Local_Avalam_Game(g, p1, p2, (Main_Frame) mainFrame); // GridSizeException
             Input.setInputGame(this.game);
-        } catch (IOException | GridSizeException | NumberFormatException ex) {
+        } catch (IOException | GridSizeException | GridCharException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -240,7 +240,7 @@ public class GUI_LAG extends JPanel {
             System.out.println(mainFrame.toString());
             this.game = new Local_Avalam_Game(g, p1, p2, (Main_Frame) mainFrame); // GridSizeException
             Input.setInputGame(this.game);
-        } catch (IOException | GridSizeException | NumberFormatException ex) {
+        } catch (IOException | GridSizeException | GridCharException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
