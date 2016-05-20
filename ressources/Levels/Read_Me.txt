@@ -4,12 +4,12 @@ Avalam Level Editor
 /***** TUTORIAL *****\
 - Create a file (without extension)
 - Name it without special characters : "-" and "_" are tolerated.
-  Only 0-9, a-z and A-Z and "-" and "_"
+  Only 0-9, a-z and A-Z and "-" and "_" NO DOT !!!!
 - Insert your cells in the file this way :
-    - 0 is a boardgame cell (No pawn can be placed on this cell)
-    - 1 is an empty cell
-    - 2 is a pawn of color 1
-    - 3 is a pawn of color 2
+    - 1 to 5 = Cell for Player_1 with 1 to 5 cells.
+    - A to E = Cell for Player_2 with 1 to 5 cells.(1=A 2=B 3=C 4=D 5=E)
+    - 0 is an empty cell
+    - R is a restrcited cell (Gameboard cell)
 - Save and exit
 \********************/
 
@@ -20,6 +20,6 @@ Avalam Level Editor
 - If you write any space or character before, behind or in your grid, the grid won't be playable and the game may raise an exception (and crash).
 \*                                                        */
 
-If you try to edit levels like "default" and the game raise errors, remove the file and it will be generated automaticcaly
+If you try to edit levels like "default" and the game raise errors, remove the file and it will be generated automaticaly
 
 Team 7
