@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI.NewGame;
 
+import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;
 import java.awt.*;
@@ -25,19 +26,17 @@ public class NewGameListener implements MouseListener {
     private Image icon;
     private Image iconbase;
     private int playernum;
-    private String theme;
     private GUI_NewGame page;
     private final String type;
 
-    public NewGameListener(String buttonname, String theme, int playernumber, GUI_NewGame page, String type) {
+    public NewGameListener(String buttonname, int playernumber, GUI_NewGame page, String type) {
         this.name = buttonname;
         this.playernum = playernumber;
-        this.theme = theme;
         this.page = page;
         this.type = type;
         try {
-            this.icon = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/" + this.name + "_h.png"));
-            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/playerselect/" + this.name + ".png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/playerselect/" + this.name + "_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/playerselect/" + this.name + ".png"));
         } catch (Exception ex) {
             System.out.println("Error - " + NewGameListener.class.toString());
             Logger.getLogger(NewGameListener.class.getName()).log(Level.SEVERE, null, ex);
@@ -53,7 +52,7 @@ public class NewGameListener implements MouseListener {
             case "start":
                 String[] p1 = this.page.loadP1Settings();
                 String[] p2 = this.page.loadP2Settings();
-                mainFrame.initGame(p1,p2);
+                mainFrame.initGame(p1, p2);
                 ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
                 break;
             case "home":
@@ -78,7 +77,6 @@ public class NewGameListener implements MouseListener {
                     case "precia":
                         this.page.leftAI(playernum);
                         break;
-
                 }
                 break;
         }

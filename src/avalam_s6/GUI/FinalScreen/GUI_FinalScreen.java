@@ -8,6 +8,7 @@ package avalam_s6.GUI.FinalScreen;
 import avalam_s6.Core.Cell;
 import avalam_s6.Core.CellState;
 import avalam_s6.Core.Coordinate;
+import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Core.Grid;
 import java.awt.Color;
 import java.awt.Font;
@@ -33,7 +34,6 @@ import javax.swing.JPanel;
  */
 public class GUI_FinalScreen extends JPanel {
 
-    private String theme;
     private Image background, homeI, black, white, empty;
     private JLabel victoryText;
     private JButton home;
@@ -42,8 +42,7 @@ public class GUI_FinalScreen extends JPanel {
     private Grid finalGrid;
     JButton[][] buttonmap;
 
-    public GUI_FinalScreen(String theme) {
-        this.theme = theme;
+    public GUI_FinalScreen() {
         this.victoryText = new JLabel();
         this.finalGrid = null;
         this.buttonmap = new JButton[9][9];
@@ -55,7 +54,7 @@ public class GUI_FinalScreen extends JPanel {
             Font localFont = new Font("Arial", Font.PLAIN, 60);
             /* Chargement de la police */
             try {
-                localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + this.theme + "/font/Gamaliel.otf"));
+                localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
                 GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
                 /* Aggrandissement des bordures */
                 this.victoryText.setBorder(BorderFactory.createEmptyBorder(0, 20, 20, 20));
@@ -63,11 +62,11 @@ public class GUI_FinalScreen extends JPanel {
                 throw (ex);
             }
             /* Chargement des images // du theme */
-            this.background = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/final/background.jpg"));
-            this.homeI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/final/home.png"));
-            this.black = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/black.png"));
-            this.white = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/white.png"));
-            this.empty = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/empty.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/final/background.jpg"));
+            this.homeI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/final/home.png"));
+            this.black = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/black.png"));
+            this.white = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/white.png"));
+            this.empty = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/empty.png"));
             /* Application Police */
             this.victoryText.setFont(localFont.deriveFont(2 * 30f)); /* On peut appliquer un ratio a la police (ici 2) */
 
@@ -98,7 +97,7 @@ public class GUI_FinalScreen extends JPanel {
         this.home.setBorder(BorderFactory.createEmptyBorder());
         this.home.setContentAreaFilled(false);
         this.home.setFocusPainted(false);
-        this.home.addMouseListener(new Final_MouseListener(this.theme));
+        this.home.addMouseListener(new Final_MouseListener());
 
         this.setLayout(null);
         this.add(this.victoryText);

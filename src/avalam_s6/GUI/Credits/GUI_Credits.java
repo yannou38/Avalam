@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI.Credits;
 
+import avalam_s6.Core.Globals.SetupManager;
 import java.awt.*;
 import java.io.File;
 import java.util.logging.Level;
@@ -19,18 +20,16 @@ import javax.swing.*;
 public class GUI_Credits extends JPanel {
     private JButton retour;
     private Image returnI,background;
-    private String theme;
     
     
-    public GUI_Credits(String theme) {
-        this.theme = theme;
+    public GUI_Credits() {
         this.initComponents();
     }
 
     private void initComponents() {
         try {
-            this.background = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/credits/background.png"));
-            this.returnI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/credits/home.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/credits/background.png"));
+            this.returnI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/credits/home.png"));
         } catch (Exception ex) {
             System.out.println("Error - "+GUI_Credits.class.toString());
             Logger.getLogger(GUI_Credits.class.getName()).log(Level.SEVERE, null, ex);
@@ -41,7 +40,7 @@ public class GUI_Credits extends JPanel {
         this.retour.setBorder(BorderFactory.createEmptyBorder());
         this.retour.setContentAreaFilled(false);
         this.retour.setFocusPainted(false);
-        this.retour.addMouseListener(new CreditsListener("home",this.theme,0));
+        this.retour.addMouseListener(new CreditsListener("home"));
 
         this.setLayout(null);
         this.add(this.retour);    

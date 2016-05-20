@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI.Credits;
 
+import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;
 import java.awt.*;
@@ -24,14 +25,12 @@ public class CreditsListener implements MouseListener {
     private String name;
     private Image icon;
     private Image iconbase;
-    private int playernum;
     
-    public CreditsListener(String buttonname, String theme, int playernumber) {
+    public CreditsListener(String buttonname) {
         this.name = buttonname;
-        this.playernum = playernumber;
         try {
-            this.icon = ImageIO.read(new File("./ressources/Themes/" + theme + "/credits/" + this.name + "_h.png"));
-            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + theme + "/credits/" + this.name + ".png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/credits/" + this.name + "_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/credits/" + this.name + ".png"));
         } catch (Exception ex) {
             System.out.println("Error - "+CreditsListener.class.toString());
             Logger.getLogger(CreditsListener.class.getName()).log(Level.SEVERE, null, ex);
