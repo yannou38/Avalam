@@ -17,15 +17,15 @@ import java.util.logging.Logger;
  *
  * @author sazeratj
  */
-public class DefaultLevelGenerator {
+public class ConfigGenerator {
     public static void generate() {
-        if (! Files.exists(Paths.get("./ressources/Levels/default"))) {
-            try (PrintWriter writer = new PrintWriter("./ressources/Levels/default", "UTF-8")) {
-                writer.print("RR1ARRRRR\nR1A1ARRRR\nRA1A1A1RR\nR1A1A1A1A\n1A1A0A1A1\nA1A1A1A1R\nRR1A1A1AR\nRRRRA1A1R\nRRRRRA1RR");
+        if (! Files.exists(Paths.get("./ressources/config/config.xml"))) {
+            try (PrintWriter writer = new PrintWriter("./ressources/config/config.xml", "UTF-8")) {
+                writer.print("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<config>\n\t<Langue>French</Langue>\n\t<FullScreen>Oui</FullScreen>\n\t<Theme>Default</Theme>\n\t<Son>Non</Son>\n</config>");
                 writer.close();
             } catch (FileNotFoundException | UnsupportedEncodingException ex) {
-                System.out.println("Error - " + DefaultLevelGenerator.class.toString());
-                Logger.getLogger(DefaultLevelGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Error - " + ConfigGenerator.class.toString());
+                Logger.getLogger(ConfigGenerator.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

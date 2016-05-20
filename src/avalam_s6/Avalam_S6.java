@@ -6,7 +6,6 @@
 package avalam_s6;
 
 
-//import avalam_s6.Core.Globals.LanguageManager;
 import avalam_s6.GUI.Main_Frame;
 import javax.swing.SwingUtilities;
 /**

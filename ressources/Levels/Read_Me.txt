@@ -15,11 +15,11 @@ Avalam Level Editor
 
 /* PLEASE READ THIS PART OR YOUR GRID MAY NOT BE PLAYABLE *\
 - Grids are only 9x9
-- You must fill your file in one line (each lines are stuck on the first line of the file)
+- Line separators aren't read... You can write your grid in several lines. (Until no space is written on an empty line)
 - The final string length is 9x9 = 81.
 - If you write any space or character before, behind or in your grid, the grid won't be playable and the game may raise an exception (and crash).
 \*                                                        */
 
-If you try to edit levels like "default" and the game raise errors, remove the file and it will be generated automaticaly
+If you try to edit "default" and the game crashs, remove the file and it will be generated automaticaly
 
 Team 7
