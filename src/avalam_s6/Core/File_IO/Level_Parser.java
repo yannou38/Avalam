@@ -34,9 +34,9 @@ public class Level_Parser {
             byte[] encoded = Files.readAllBytes(Paths.get(this.path));
             this.grid = new String(encoded, StandardCharsets.UTF_8);
         }
-        if (this.grid.length() == 81 || this.grid.length() == 9) {            
+        if (this.grid.length() == 81) {            
             return this.grid;
         } else
-            throw new GridSizeException(0);
+            throw new GridSizeException();
     }
 }

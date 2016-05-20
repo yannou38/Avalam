@@ -5,6 +5,8 @@
  */
 package avalam_s6.Core;
 
+import avalam_s6.Exceptions.GridCharException;
+
 /**
  *
  * @author TheDoctor
@@ -17,21 +19,48 @@ public class Grid {
     /**
      * Constructor
      * @param textGrid the text version of the grid. SIZE MUST BE 81.
+     * @throws avalam_s6.Exceptions.GridCharException Illegal Character in the grid
      */
-    public Grid(String textGrid) throws NumberFormatException {
+    public Grid(String textGrid) throws GridCharException {
         grille = new Cell[9][9];
         if(textGrid.length() == 81) {
             for(int i = 0; i < 9; i++){
                 for(int j = 0; j < 9; j++){
-                    this.grille[j][i] = new Cell(Integer.parseInt(""+textGrid.charAt(i*9+j)));
+                    char c = textGrid.charAt(i*9+j);
+                    switch (c) {
+                        case '1':
+                        case '2':
+                        case '3':
+                        case '4':
+                        case '5':
+                            this.grille[j][i] = new Cell(Integer.parseInt(""+c),1);
+                            break;
+                        case 'A':
+                            this.grille[j][i] = new Cell(1,2);
+                            break;
+                        case 'B':
+                            this.grille[j][i] = new Cell(2,2);
+                            break;
+                        case 'C':
+                            this.grille[j][i] = new Cell(3,2);
+                            break;
+                        case 'D':
+                            this.grille[j][i] = new Cell(4,2);
+                            break;
+                        case 'E':
+                            this.grille[j][i] = new Cell(5,2);
+                            break; 
+                        case '0':
+                            this.grille[j][i] = new Cell(0,0);
+                            break;
+                        case 'R':
+                            this.grille[j][i] = new Cell(-1,0);
+                            break;
+                        default:
+                            throw new GridCharException(c,i*9+j);
+                    }
                 }
             }
-        } else if (textGrid.length() == 9) {
-           for(int i = 0; i < 3; i++){
-                for(int j = 0; j < 3; j++){
-                    this.grille[j][i] = new Cell(Integer.parseInt(""+textGrid.charAt(i*3+j)));
-                }
-            } 
         }
     }
     
