@@ -5,7 +5,6 @@
  */
 package avalam_s6.GUI.Settings;
 
-import avalam_s6.Core.Globals.LanguageManager;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;

@@ -26,8 +26,8 @@ public class GUI_Settings extends JPanel {
     private JButton leftLanguage, rightLanguage, leftFS, rightFS, leftTheme, rightTheme, leftSound, rightSound;
 
     private String[] language, fullScreen, Theme, Sound;
-    private int languageSelected, fullScreenSelected, ThemeSelected, SoundSelected;
-    private int languagesize, themesize;
+    private int currentLanguage, fullScreenSelected, ThemeSelected, SoundSelected;
+    private int themesize;
     private JLabel LabelSound, LabelLanguage, LabelFS, LabelTheme;
 
     private SettingsAdapterListener listener;
@@ -162,11 +162,12 @@ public class GUI_Settings extends JPanel {
     private void initOptions() {
         String themeDefault = "Default";
 
-        String[] temp = LanguageManager.getChildrensNameOf("Langue");
-        this.languagesize = temp.length;
-        this.language = new String[this.languagesize];
-        this.language = temp;
-        this.languageSelected = 0;
+        this.language = LanguageManager.getChildrensNameOf("Langue");
+        for (int x=0;x<this.language.length;x++) {
+            if (this.language[x].equals(LanguageManager.getElement(SetupManager.getElement("Langue")))) {
+                this.currentLanguage = x;
+            }
+        }
 
         this.fullScreen = new String[2];
         this.fullScreen[0] = "Oui";
@@ -196,7 +197,7 @@ public class GUI_Settings extends JPanel {
         this.LabelFS.setFont(localFont.deriveFont(3 * 30f));
         this.add(this.LabelFS);
 
-        this.LabelLanguage = new JLabel(LanguageManager.getElement(this.language[this.languageSelected]));
+        this.LabelLanguage = new JLabel(LanguageManager.getElement(this.language[this.currentLanguage]));
         this.LabelLanguage.setBorder(BorderFactory.createEmptyBorder());
         this.LabelLanguage.setFont(localFont.deriveFont(3 * 30f));
         this.add(this.LabelLanguage);
@@ -263,11 +264,11 @@ public class GUI_Settings extends JPanel {
 
     void leftLanguage() {
         //le 2 en hardcodé sera a changer :/
-        this.languageSelected = (this.languageSelected - 1);
-        if (this.languageSelected == -1) {
-            this.languageSelected = 1;
+        this.currentLanguage = (this.currentLanguage - 1);
+        if (this.currentLanguage == -1) {
+            this.currentLanguage = this.language.length-1;
         }
-        this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.languageSelected]));
+        this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.currentLanguage]));
         this.callResize();
     }
 
@@ -303,8 +304,8 @@ public class GUI_Settings extends JPanel {
 
     void rightLanguage() {
         //le 2 en hardcodé sera a changer :/
-        this.languageSelected = (this.languageSelected + 1) % 2;
-        this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.languageSelected]));
+        this.currentLanguage = (this.currentLanguage + 1) % 2;
+        this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.currentLanguage]));
         this.callResize();
     }
 
@@ -334,7 +335,7 @@ public class GUI_Settings extends JPanel {
     }
 
     public String getSelectedLanguage(){
-        return this.language[this.languageSelected];
+        return this.language[this.currentLanguage];
     }
     public String getSelectedFS(){
         return this.fullScreen[this.fullScreenSelected];

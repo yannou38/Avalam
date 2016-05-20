@@ -26,16 +26,10 @@ import javax.swing.JPanel;
 public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
 
     private WindowState wState;
-    private WindowRenderMode wrm;
     private JPanel[] panelList;
 
     public Main_Frame() {
-        this(WindowRenderMode.WINDOWED);
-    }
-
-    public Main_Frame(WindowRenderMode renderMode) {
-        /* UPDATE VARIABLES */
-        this.wrm = renderMode;
+        SetupManager.load();
         /* FUNCTION CALL */
         this.initFrame(WindowState.MAIN);
         /* ADD KB DISPATCHER */
@@ -44,7 +38,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
 
     public void setRenderMode() {
         GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
-        if (this.wrm.getValue() == WindowRenderMode.FULLSCREEN.getValue()) {
+        if (SetupManager.getElement("FullScreen").equals("Oui")) {
             GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(this);
         } else {
             this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -55,16 +49,15 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
     }
 
     public void toggleWRM() {
-        if (this.wrm.getValue() == WindowRenderMode.FULLSCREEN.getValue()) {
-            this.wrm = WindowRenderMode.WINDOWED;
+        if (SetupManager.getElement("FullScreen").equals("Oui")) {
+            SetupManager.setElement("FullScreen", "Non");
         } else {
-            this.wrm = WindowRenderMode.FULLSCREEN;
+            SetupManager.setElement("FullScreen", "Oui");
         }
         setRenderMode();
     }
 
     public void initFrame(WindowState wState) {
-        SetupManager.load();
         this.wState = wState;
         if (this.panelList != null) {
             for (JPanel pElement : this.panelList) {
