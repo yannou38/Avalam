@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package avalam_s6.Core.File_IO;
+package avalam_s6.Core.Globals;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -15,7 +15,7 @@ import java.nio.file.Paths;
  * @author sazeratj
  */
 public class ThemesLister {
-    public String[] listThemes() {
+    public static String[] listThemes() {
         Path p = Paths.get("./ressources/Themes");
         if (Files.exists(p) && Files.isDirectory(p)) {
             File f = new File("./ressources/Themes");
