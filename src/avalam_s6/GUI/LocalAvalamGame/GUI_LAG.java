@@ -8,6 +8,7 @@ package avalam_s6.GUI.LocalAvalamGame;
 import avalam_s6.Core.Globals.Input;
 import avalam_s6.Core.File_IO.Level_Parser;
 import avalam_s6.Core.*;
+import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Exceptions.GridCharException;
 import avalam_s6.Exceptions.GridSizeException;
 import avalam_s6.GUI.Main_Frame;
@@ -25,7 +26,6 @@ import javax.swing.*;
 public class GUI_LAG extends JPanel {
 
     private Game_INTERFACE game;
-    private final String theme;
     private final boolean player1IsPlaying;
     private JPanel grille;
     private JButton undoB, redoB, retourB, saveB;
@@ -35,31 +35,30 @@ public class GUI_LAG extends JPanel {
     /**
      * Constructor.
      */
-    public GUI_LAG(String theme) {
+    public GUI_LAG() {
         this.buttonmap = new JButton[9][9];
-        this.theme = theme;
         this.initComponents();
         this.player1IsPlaying = true;
     }
 
     private void initComponents() {
         try {
-            this.background = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/background.png"));
-            this.cancel = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/cancel.png"));
-            this.player_playing = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/player_playing.png"));
-            this.player_waiting = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/player_waiting.png"));
-            this.restricted = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/restricted.png"));
-            this.redo = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/redo.png"));
-            this.retour = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/return.png"));
-            this.save = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/save.png"));
-            this.board = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/board.png"));
-            this.black = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/black.png"));
-            this.white = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/white.png"));
-            this.empty = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/empty.png"));
-            this.w_selected = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/white_selected.png"));
-            this.b_selected = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/black_selected.png"));
-            this.w_possible = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/white_possible.png"));
-            this.b_possible = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/black_possible.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/background.png"));
+            this.cancel = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/cancel.png"));
+            this.player_playing = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/player_playing.png"));
+            this.player_waiting = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/player_waiting.png"));
+            this.restricted = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/restricted.png"));
+            this.redo = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/redo.png"));
+            this.retour = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/return.png"));
+            this.save = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/save.png"));
+            this.board = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/board.png"));
+            this.black = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/black.png"));
+            this.white = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/white.png"));
+            this.empty = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/empty.png"));
+            this.w_selected = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/white_selected.png"));
+            this.b_selected = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/black_selected.png"));
+            this.w_possible = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/white_possible.png"));
+            this.b_possible = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/black_possible.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_LAG.class.toString());
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,28 +91,28 @@ public class GUI_LAG extends JPanel {
         this.undoB.setBorder(BorderFactory.createEmptyBorder());
         this.undoB.setContentAreaFilled(false);
         this.undoB.setFocusPainted(false);
-        this.undoB.addMouseListener(new LAG_UI_MouseListener("cancel", this.theme));
+        this.undoB.addMouseListener(new LAG_UI_MouseListener("cancel"));
         this.add(this.undoB);
 
         this.retourB = new JButton(new ImageIcon(this.retour));
         this.retourB.setBorder(BorderFactory.createEmptyBorder());
         this.retourB.setContentAreaFilled(false);
         this.retourB.setFocusPainted(false);
-        this.retourB.addMouseListener(new LAG_UI_MouseListener("return", this.theme));
+        this.retourB.addMouseListener(new LAG_UI_MouseListener("return"));
         this.add(this.retourB);
 
         this.redoB = new JButton(new ImageIcon(this.redo));
         this.redoB.setBorder(BorderFactory.createEmptyBorder());
         this.redoB.setContentAreaFilled(false);
         this.redoB.setFocusPainted(false);
-        this.redoB.addMouseListener(new LAG_UI_MouseListener("redo", this.theme));
+        this.redoB.addMouseListener(new LAG_UI_MouseListener("redo"));
         this.add(this.redoB);
 
         this.saveB = new JButton(new ImageIcon(this.save));
         this.saveB.setBorder(BorderFactory.createEmptyBorder());
         this.saveB.setContentAreaFilled(false);
         this.saveB.setFocusPainted(false);
-        this.saveB.addMouseListener(new LAG_UI_MouseListener("save", this.theme));
+        this.saveB.addMouseListener(new LAG_UI_MouseListener("save"));
         this.add(this.saveB);
 
         this.addComponentListener(new LAG_AdapterListener(this));

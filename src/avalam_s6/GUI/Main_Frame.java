@@ -29,21 +29,19 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
     private WindowState wState;
     private WindowRenderMode wrm;
     private JPanel[] panelList;
-    private String theme;
 
     public Main_Frame() {
-        this("Default", WindowRenderMode.WINDOWED);
+        this(WindowRenderMode.WINDOWED);
         LanguageManager.setLanguage("French");
     }
 
-    public Main_Frame(String theme, WindowRenderMode renderMode) {
+    public Main_Frame(WindowRenderMode renderMode) {
         /* UPDATE VARIABLES */
         this.panelList = new JPanel[6]; // TODO : add more JPanels.
         this.wState = WindowState.MAIN;
         this.wrm = renderMode;
-        this.theme = theme;
         /* FUNCTION CALL */
-        this.initFrame(this.theme);
+        this.initFrame();
         this.setRenderMode();
         /* ADD KB DISPATCHER */
         getCurrentKeyboardFocusManager().addKeyEventDispatcher(new RenderKeyboardDispatcher(this));
@@ -70,15 +68,15 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         setRenderMode();
     }
 
-    public void initFrame(String theme) {
+    public void initFrame() {
         SetupManager.load();
         this.wState = WindowState.MAIN;
-        this.panelList[0] = new GUI_HomePage(theme);
-        this.panelList[1] = new GUI_LAG(theme);
-        this.panelList[2] = new GUI_FinalScreen(theme);
-        this.panelList[3] = new GUI_NewGame(theme);
-        this.panelList[4] = new GUI_Settings(theme);
-        this.panelList[5] = new GUI_Credits(theme);
+        this.panelList[0] = new GUI_HomePage();
+        this.panelList[1] = new GUI_LAG();
+        this.panelList[2] = new GUI_FinalScreen();
+        this.panelList[3] = new GUI_NewGame();
+        this.panelList[4] = new GUI_Settings();
+        this.panelList[5] = new GUI_Credits();
         for (JPanel pElement : this.panelList) {
             //this.add(pElement);
             pElement.setVisible(false);
@@ -113,7 +111,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
 
     public void initGame(String[] p1, String[] p2) {
         this.setwState(WindowState.BOARD);
-        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).initGame(p1,p2);
+        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).initGame(p1, p2);
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).start();
     }
 
@@ -125,5 +123,10 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
 
     public void changeSettings(String Language, String FS, String Theme, String Sound) {
         System.out.println("changeSettings function : TODO");
+        SetupManager.setElement("Langue", Language);
+        SetupManager.setElement("FullScreen", FS);
+        SetupManager.setElement("Theme", Theme);
+        SetupManager.setElement("Son", Sound);
+
     }
 }

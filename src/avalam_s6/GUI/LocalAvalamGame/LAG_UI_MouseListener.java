@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI.LocalAvalamGame;
 
+import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Core.Local_Avalam_Game;
 import avalam_s6.GUI.HomePage.GUI_HomePage;
 import avalam_s6.GUI.Main_Frame;
@@ -27,14 +28,12 @@ public class LAG_UI_MouseListener implements MouseListener {
     private String name;
     private Image icon;
     private Image iconbase;
-    private String theme;
 
-    public LAG_UI_MouseListener(String buttonname, String theme) {
+    public LAG_UI_MouseListener(String buttonname) {
         this.name = buttonname;
-        this.theme = theme;
         try {
-            this.icon = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/" + this.name + "_h.png"));
-            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/board/" + this.name + ".png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/" + this.name + "_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/" + this.name + ".png"));
         } catch (Exception ex) {
             Logger.getLogger(GUI_HomePage.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI.HomePage;
 
+import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;
 import java.awt.*;
@@ -24,14 +25,12 @@ public class HomePageListener implements MouseListener {
     private String name;
     private Image icon;
     private Image iconbase;
-    private String theme;
 
-    public HomePageListener(String buttonname, String theme) {
+    public HomePageListener(String buttonname) {
         this.name = buttonname;
-        this.theme = theme;
         try {
-            this.icon = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/" + this.name + "_h.png"));
-            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/" + this.name + ".png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/" + this.name + "_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/" + this.name + ".png"));
         } catch (Exception ex) {
             System.out.println("Error - " + HomePageListener.class.toString());
             Logger.getLogger(HomePageListener.class.getName()).log(Level.SEVERE, null, ex);

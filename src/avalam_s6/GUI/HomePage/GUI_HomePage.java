@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI.HomePage;
 
+import avalam_s6.Core.Globals.SetupManager;
 import java.awt.*;
 import java.io.File;
 import java.util.logging.Level;
@@ -24,23 +25,21 @@ public class GUI_HomePage extends JPanel {
 
     private JButton quick, play, settings, rules, exit, load;
     private Image background, quickI, playI, settingsI, rulesI, loadI, exitI;
-    private String theme;
 
-    public GUI_HomePage(String theme) {
-        this.theme = theme;
+    public GUI_HomePage() {
         initComponents();
     }
 
     private void initComponents() {
 
         try {
-            this.background = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/main_bg.png"));
-            this.playI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/customgame.png"));
-            this.quickI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/quickgame.png"));
-            this.settingsI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/options.png"));
-            this.rulesI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/rules.png"));
-            this.exitI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/quit.png"));
-            this.loadI = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/main/load.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/main_bg.png"));
+            this.playI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme")+ "/main/customgame.png"));
+            this.quickI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/quickgame.png"));
+            this.settingsI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/options.png"));
+            this.rulesI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/rules.png"));
+            this.exitI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/quit.png"));
+            this.loadI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/load.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_HomePage.class.toString());
             Logger.getLogger(GUI_HomePage.class.getName()).log(Level.SEVERE, null, ex);
@@ -50,37 +49,37 @@ public class GUI_HomePage extends JPanel {
         this.quick.setBorder(BorderFactory.createEmptyBorder());
         this.quick.setContentAreaFilled(false);
         this.quick.setFocusPainted(false);
-        this.quick.addMouseListener(new HomePageListener("quickgame", this.theme));
+        this.quick.addMouseListener(new HomePageListener("quickgame"));
 
         this.play = new JButton(new ImageIcon(this.playI));
         this.play.setBorder(BorderFactory.createEmptyBorder());
         this.play.setContentAreaFilled(false);
         this.play.setFocusPainted(false);
-        this.play.addMouseListener(new HomePageListener("customgame", this.theme));
+        this.play.addMouseListener(new HomePageListener("customgame"));
 
         this.rules = new JButton(new ImageIcon(this.rulesI));
         this.rules.setBorder(BorderFactory.createEmptyBorder());
         this.rules.setContentAreaFilled(false);
         this.rules.setFocusPainted(false);
-        this.rules.addMouseListener(new HomePageListener("rules", this.theme));
+        this.rules.addMouseListener(new HomePageListener("rules"));
         
         this.load = new JButton(new ImageIcon(this.loadI));
         this.load.setBorder(BorderFactory.createEmptyBorder());
         this.load.setContentAreaFilled(false);
         this.load.setFocusPainted(false);
-        this.load.addMouseListener(new HomePageListener("load", this.theme));
+        this.load.addMouseListener(new HomePageListener("load"));
 
         this.settings = new JButton(new ImageIcon(this.settingsI));
         this.settings.setBorder(BorderFactory.createEmptyBorder());
         this.settings.setContentAreaFilled(false);
         this.settings.setFocusPainted(false);
-        this.settings.addMouseListener(new HomePageListener("options", this.theme));
+        this.settings.addMouseListener(new HomePageListener("options"));
 
         this.exit = new JButton(new ImageIcon(this.exitI));
         this.exit.setBorder(BorderFactory.createEmptyBorder());
         this.exit.setContentAreaFilled(false);
         this.exit.setFocusPainted(false);
-        this.exit.addMouseListener(new HomePageListener("quit", this.theme));
+        this.exit.addMouseListener(new HomePageListener("quit"));
 
         this.setLayout(null);
         this.add(this.quick);

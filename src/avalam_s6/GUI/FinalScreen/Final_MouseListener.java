@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI.FinalScreen;
 
+import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;
 import java.awt.Image;
@@ -24,13 +25,10 @@ import javax.swing.JButton;
 public class Final_MouseListener implements MouseListener {
     private Image icon;
     private Image iconbase;
-    private String theme;
-    
-    public Final_MouseListener(String theme) {
-        this.theme = theme;
+    public Final_MouseListener() {
         try {
-            this.icon = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/final/home_h.png"));
-            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/final/home.png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" +SetupManager.getElement("Theme") + "/final/home_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/final/home.png"));
         } catch (Exception ex) {
             System.out.println("Error - "+Final_MouseListener.class.toString());
             Logger.getLogger(Final_MouseListener.class.getName()).log(Level.SEVERE, null, ex);

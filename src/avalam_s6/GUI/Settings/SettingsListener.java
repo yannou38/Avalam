@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI.Settings;
 
+import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;
 import java.awt.Image;
@@ -16,7 +17,6 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 
 /**
  *
@@ -28,25 +28,23 @@ public class SettingsListener implements MouseListener {
     private String name;
     private Image icon;
     private Image iconbase;
-    private String theme;
     private String relatedLabel;
 
-    public SettingsListener(String buttonname, String theme, String relatedLabel, GUI_Settings page) {
+    public SettingsListener(String buttonname, String relatedLabel, GUI_Settings page) {
         this.name = buttonname;
-        this.theme = theme;
+        this.page = page;
+        this.relatedLabel = relatedLabel;
         try {
-            this.icon = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/options/" + this.name + "_h.png"));
-            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + this.theme + "/options/" + this.name + ".png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/options/" + this.name + "_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/options/" + this.name + ".png"));
         } catch (Exception ex) {
             System.out.println("Error - " + SettingsListener.class.toString());
             Logger.getLogger(SettingsListener.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.relatedLabel = relatedLabel;
-        this.page=page;
     }
 
-    public SettingsListener(String buttonname, String theme) {
-        this(buttonname, theme, null, null);
+    public SettingsListener(String buttonname, GUI_Settings page) {
+        this(buttonname, null, page);
     }
 
     @Override
@@ -54,6 +52,7 @@ public class SettingsListener implements MouseListener {
         JButton source = (JButton) e.getSource();
         GUI_Settings homePage = ((GUI_Settings) source.getParent());
         Main_Frame mainFrame = ((Main_Frame) homePage.getParent().getParent().getParent().getParent());
+        this.page.callResize();
         switch (this.name) {
             case "credits":
                 ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
@@ -69,7 +68,7 @@ public class SettingsListener implements MouseListener {
                 String FS = this.page.getLabelFS().getText();
                 String Theme = this.page.getLabelTheme().getText();
                 String Sound = this.page.getLabelSound().getText();
-                mainFrame.changeSettings(Language,FS,Theme,Sound);
+                mainFrame.changeSettings(Language, FS, Theme, Sound);
                 mainFrame.setwState(WindowState.MAIN);
                 break;
             case "left":
@@ -90,7 +89,7 @@ public class SettingsListener implements MouseListener {
                         break;
                 }
                 break;
-                case "right":
+            case "right":
                 switch (this.relatedLabel) {
                     case "language":
                         this.page.rightLanguage();
