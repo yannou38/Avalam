@@ -19,10 +19,9 @@ import java.util.logging.Logger;
  */
 public class DefaultLevelGenerator {
     public static void generate() {
-        String lContent = "RR1ARRRRRR1A1ARRRRRA1A1A1RRR1A1A1A1A1A1A0A1A1A1A1A1A1RRR1A1A1ARRRRRA1A1RRRRRRA1RR";
         if (! Files.exists(Paths.get("./ressources/Levels/default"))) {
             try (PrintWriter writer = new PrintWriter("./ressources/Levels/default", "UTF-8")) {
-                writer.print(lContent);
+                writer.print("RR1ARRRRR\nR1A1ARRRR\nRA1A1A1RR\nR1A1A1A1A\n1A1A0A1A1\nA1A1A1A1R\nRR1A1A1AR\nRRRRA1A1R\nRRRRRA1RR");
                 writer.close();
             } catch (FileNotFoundException | UnsupportedEncodingException ex) {
                 System.out.println("Error - " + DefaultLevelGenerator.class.toString());

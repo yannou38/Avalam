@@ -33,6 +33,7 @@ public class Level_Parser {
         if (this.grid==null) {
             byte[] encoded = Files.readAllBytes(Paths.get(this.path));
             this.grid = new String(encoded, StandardCharsets.UTF_8);
+            grid = grid.replaceAll("\\r|\\n", "");
         }
         if (this.grid.length() == 81) {            
             return this.grid;
