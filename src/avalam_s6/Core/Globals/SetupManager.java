@@ -38,6 +38,7 @@ public class SetupManager {
             Logger.getLogger(LanguageManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         LanguageManager.setLanguage(SetupManager.getElement("Langue"));
+        DefaultLevelGenerator.generate();
     }
     
     public static String getElement(String s) {

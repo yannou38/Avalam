@@ -5,7 +5,13 @@
  */
 package avalam_s6.Core.Globals;
 
-import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,9 +19,15 @@ import java.io.File;
  */
 public class DefaultLevelGenerator {
     public static void generate() {
-        File f = new File("./ressources/Levels/default");
-        if(! f.exists()) { 
-            // do something
+        String lContent = "RR1ARRRRRR1A1ARRRRRA1A1A1RRR1A1A1A1A1A1A0A1A1A1A1A1A1RRR1A1A1ARRRRRA1A1RRRRRRA1RR";
+        if (! Files.exists(Paths.get("./ressources/Levels/default"))) {
+            try (PrintWriter writer = new PrintWriter("./ressources/Levels/default", "UTF-8")) {
+                writer.print(lContent);
+                writer.close();
+            } catch (FileNotFoundException | UnsupportedEncodingException ex) {
+                System.out.println("Error - " + DefaultLevelGenerator.class.toString());
+                Logger.getLogger(DefaultLevelGenerator.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }
