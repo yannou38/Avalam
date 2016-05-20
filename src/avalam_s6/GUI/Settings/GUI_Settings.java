@@ -30,7 +30,7 @@ public class GUI_Settings extends JPanel {
     private int themesize;
     private JLabel LabelSound, LabelLanguage, LabelFS, LabelTheme;
 
-    private SettingsAdapterListener listener;
+    private final SettingsAdapterListener listener;
     private Boolean callResize;
 
     public GUI_Settings() {
@@ -125,6 +125,36 @@ public class GUI_Settings extends JPanel {
         this.rightSound.setContentAreaFilled(false);
         this.rightSound.setFocusPainted(false);
         this.rightSound.addMouseListener(new SettingsListener("right", "sound", this));
+        
+        
+        Font localFont = new Font("Arial", Font.PLAIN, 60);
+        try {
+            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
+        } catch (IOException | FontFormatException ex) {
+            System.out.println("Error - " + GUI_Settings.class.toString());
+            Logger.getLogger(GUI_Settings.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        this.LabelFS = new JLabel(LanguageManager.getElement(this.fullScreen[this.fullScreenSelected]));
+        this.LabelFS.setBorder(BorderFactory.createEmptyBorder());
+        this.LabelFS.setFont(localFont.deriveFont(3 * 30f));
+        this.add(this.LabelFS);
+
+        this.LabelLanguage = new JLabel(LanguageManager.getElement(this.language[this.currentLanguage]));
+        this.LabelLanguage.setBorder(BorderFactory.createEmptyBorder());
+        this.LabelLanguage.setFont(localFont.deriveFont(3 * 30f));
+        this.add(this.LabelLanguage);
+
+        this.LabelSound = new JLabel(LanguageManager.getElement(this.Sound[this.SoundSelected]));
+        this.LabelSound.setBorder(BorderFactory.createEmptyBorder());
+        this.LabelSound.setFont(localFont.deriveFont(3 * 30f));
+        this.add(this.LabelSound);
+
+        this.LabelTheme = new JLabel(this.Theme[this.ThemeSelected]);
+        this.LabelTheme.setBorder(BorderFactory.createEmptyBorder());
+        this.LabelTheme.setFont(localFont.deriveFont(3 * 30f));
+        this.add(this.LabelTheme);
 
         this.add(this.rightLanguage);
         this.add(this.rightFS);
@@ -182,36 +212,6 @@ public class GUI_Settings extends JPanel {
         this.themesize = 1;
         this.Theme = new String[this.themesize];
         this.Theme[0] = themeDefault;
-
-        Font localFont = new Font("Arial", Font.PLAIN, 60);
-        try {
-            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
-            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
-        } catch (IOException | FontFormatException ex) {
-            System.out.println("Error - " + GUI_Settings.class.toString());
-            Logger.getLogger(GUI_Settings.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        this.LabelFS = new JLabel(LanguageManager.getElement(this.fullScreen[this.fullScreenSelected]));
-        this.LabelFS.setBorder(BorderFactory.createEmptyBorder());
-        this.LabelFS.setFont(localFont.deriveFont(3 * 30f));
-        this.add(this.LabelFS);
-
-        this.LabelLanguage = new JLabel(LanguageManager.getElement(this.language[this.currentLanguage]));
-        this.LabelLanguage.setBorder(BorderFactory.createEmptyBorder());
-        this.LabelLanguage.setFont(localFont.deriveFont(3 * 30f));
-        this.add(this.LabelLanguage);
-
-        this.LabelSound = new JLabel(LanguageManager.getElement(this.Sound[this.SoundSelected]));
-        this.LabelSound.setBorder(BorderFactory.createEmptyBorder());
-        this.LabelSound.setFont(localFont.deriveFont(3 * 30f));
-        this.add(this.LabelSound);
-
-        this.LabelTheme = new JLabel(this.Theme[this.ThemeSelected]);
-        this.LabelTheme.setBorder(BorderFactory.createEmptyBorder());
-        this.LabelTheme.setFont(localFont.deriveFont(3 * 30f));
-        this.add(this.LabelTheme);
-
     }
 
     public JLabel getLabelSound() {
