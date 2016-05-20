@@ -9,6 +9,7 @@ import avalam_s6.Core.Globals.Input;
 import avalam_s6.Core.File_IO.Level_Parser;
 import avalam_s6.Core.*;
 import avalam_s6.Core.Globals.SetupManager;
+import avalam_s6.Exceptions.GridCharException;
 import avalam_s6.Exceptions.GridSizeException;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.Player.*;
