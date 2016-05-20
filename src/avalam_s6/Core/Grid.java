@@ -12,7 +12,8 @@ import avalam_s6.Exceptions.GridCharException;
  * @author TheDoctor
  */
 public class Grid {
-    private Cell[][] grille;    
+    private Cell[][] grille;
+    private String gridName;
     
     //TODO: Check length before calling constructor
     
@@ -21,8 +22,9 @@ public class Grid {
      * @param textGrid the text version of the grid. SIZE MUST BE 81.
      * @throws avalam_s6.Exceptions.GridCharException Illegal Character in the grid
      */
-    public Grid(String textGrid) throws GridCharException {
-        grille = new Cell[9][9];
+    public Grid(String textGrid, String name) throws GridCharException {
+        this.grille = new Cell[9][9];
+        this.gridName = name;
         if(textGrid.length() == 81) {
             for(int i = 0; i < 9; i++){
                 for(int j = 0; j < 9; j++){
@@ -122,4 +124,8 @@ public class Grid {
         return (src.getSize()+dst.getSize() <= 5) && (src.getState().getValue() == CellState.TOWER.getValue()) && 
                 ((dst.getState().getValue() == CellState.TOWER.getValue()));
     }
-}
+    
+    public String getName() {
+        return this.gridName;
+    }
+} 

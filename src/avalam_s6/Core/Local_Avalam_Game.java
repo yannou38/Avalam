@@ -66,8 +66,13 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     }
 
     @Override
-    public void save(String filePath) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void save(String aFilePath) {
+        System.out.println("[0] "+this.players[0].getClass()+": "+this.players[0].getName());
+        System.out.println("[1] "+this.players[1].getClass()+": "+this.players[1].getName());
+        System.out.println("[Current] "+this.current_player);
+        System.out.println("[GName] "+this.getGrid().getName());
+        System.out.println("[Historique des coups]");
+        System.out.println("[Historique des coups deja annules]");
     }
 
     @Override
@@ -232,5 +237,4 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         this.nbTurns += n;
         this.current_player = this.nbTurns%NB_PLAYERS;
     }
-    
 }
