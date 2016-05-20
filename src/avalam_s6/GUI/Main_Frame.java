@@ -35,12 +35,9 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
 
     public Main_Frame(WindowRenderMode renderMode) {
         /* UPDATE VARIABLES */
-        this.panelList = new JPanel[6]; // TODO : add more JPanels.
-        this.wState = WindowState.MAIN;
         this.wrm = renderMode;
         /* FUNCTION CALL */
-        this.initFrame();
-        this.setRenderMode();
+        this.initFrame(WindowState.MAIN);
         /* ADD KB DISPATCHER */
         getCurrentKeyboardFocusManager().addKeyEventDispatcher(new RenderKeyboardDispatcher(this));
     }
@@ -66,9 +63,15 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         setRenderMode();
     }
 
-    public void initFrame() {
+    public void initFrame(WindowState wState) {
         SetupManager.load();
-        this.wState = WindowState.MAIN;
+        this.wState = wState;
+        if (this.panelList != null) {
+            for (JPanel pElement : this.panelList) {
+                pElement.setVisible(false);
+            }
+        }
+        this.panelList = new JPanel[6];
         this.panelList[0] = new GUI_HomePage();
         this.panelList[1] = new GUI_LAG();
         this.panelList[2] = new GUI_FinalScreen();
@@ -80,6 +83,7 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
             pElement.setVisible(false);
         }
         this.setwState(WindowState.MAIN);
+        this.setRenderMode();
     }
 
     public void setwState(WindowState wState) {
@@ -124,7 +128,6 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         SetupManager.setElement("FullScreen", FS);
         SetupManager.setElement("Theme", Theme);
         SetupManager.setElement("Son", Sound);
-        //this.initFrame();
-
+        this.initFrame(WindowState.SETTINGS);
     }
 }
