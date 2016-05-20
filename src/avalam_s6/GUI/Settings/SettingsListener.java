@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI.Settings;
 
+import avalam_s6.Core.Globals.LanguageManager;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;
@@ -64,10 +65,10 @@ public class SettingsListener implements MouseListener {
                 break;
             case "apply":
                 ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
-                String Language = this.page.getLabelLanguage().getText();
-                String FS = this.page.getLabelFS().getText();
-                String Theme = this.page.getLabelTheme().getText();
-                String Sound = this.page.getLabelSound().getText();
+                String Language = this.page.getSelectedLanguage();
+                String FS = this.page.getSelectedFS();
+                String Theme = this.page.getSelectedTheme();
+                String Sound = this.page.getSelectedSound();
                 mainFrame.changeSettings(Language, FS, Theme, Sound);
                 mainFrame.setwState(WindowState.MAIN);
                 break;

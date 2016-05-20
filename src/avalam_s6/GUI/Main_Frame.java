@@ -5,7 +5,6 @@
  */
 package avalam_s6.GUI;
 
-import avalam_s6.Core.Globals.LanguageManager;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Core.Grid;
 import avalam_s6.GUI.FinalScreen.GUI_FinalScreen;
@@ -32,7 +31,6 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
 
     public Main_Frame() {
         this(WindowRenderMode.WINDOWED);
-        LanguageManager.setLanguage("French");
     }
 
     public Main_Frame(WindowRenderMode renderMode) {
@@ -122,11 +120,11 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
     }
 
     public void changeSettings(String Language, String FS, String Theme, String Sound) {
-        System.out.println("changeSettings function : TODO");
         SetupManager.setElement("Langue", Language);
         SetupManager.setElement("FullScreen", FS);
         SetupManager.setElement("Theme", Theme);
         SetupManager.setElement("Son", Sound);
+        //this.initFrame();
 
     }
 }

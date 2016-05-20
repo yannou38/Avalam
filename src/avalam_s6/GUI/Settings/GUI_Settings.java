@@ -160,26 +160,23 @@ public class GUI_Settings extends JPanel {
     }
 
     private void initOptions() {
-        String yes = LanguageManager.getElement("Oui");
-        String no = LanguageManager.getElement("Non");
-
         String themeDefault = "Default";
 
-        String[] temp = LanguageManager.getChildrensOf("Langue");
+        String[] temp = LanguageManager.getChildrensNameOf("Langue");
         this.languagesize = temp.length;
         this.language = new String[this.languagesize];
         this.language = temp;
         this.languageSelected = 0;
 
         this.fullScreen = new String[2];
-        this.fullScreen[0] = yes;
-        this.fullScreen[1] = no;
+        this.fullScreen[0] = "Oui";
+        this.fullScreen[1] = "Non";
         this.fullScreenSelected = 1;
 
         this.Sound = new String[2];
-        this.Sound[0] = yes;
-        this.Sound[1] = no;
-        this.SoundSelected = 0;
+        this.Sound[0] = "Oui";
+        this.Sound[1] = "Non";
+        this.SoundSelected = 1;
 
         this.themesize = 1;
         this.Theme = new String[this.themesize];
@@ -194,17 +191,17 @@ public class GUI_Settings extends JPanel {
             Logger.getLogger(GUI_Settings.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        this.LabelFS = new JLabel(this.fullScreen[this.fullScreenSelected]);
+        this.LabelFS = new JLabel(LanguageManager.getElement(this.fullScreen[this.fullScreenSelected]));
         this.LabelFS.setBorder(BorderFactory.createEmptyBorder());
         this.LabelFS.setFont(localFont.deriveFont(3 * 30f));
         this.add(this.LabelFS);
 
-        this.LabelLanguage = new JLabel(this.language[this.languageSelected]);
+        this.LabelLanguage = new JLabel(LanguageManager.getElement(this.language[this.languageSelected]));
         this.LabelLanguage.setBorder(BorderFactory.createEmptyBorder());
         this.LabelLanguage.setFont(localFont.deriveFont(3 * 30f));
         this.add(this.LabelLanguage);
 
-        this.LabelSound = new JLabel(this.Sound[this.SoundSelected]);
+        this.LabelSound = new JLabel(LanguageManager.getElement(this.Sound[this.SoundSelected]));
         this.LabelSound.setBorder(BorderFactory.createEmptyBorder());
         this.LabelSound.setFont(localFont.deriveFont(3 * 30f));
         this.add(this.LabelSound);
@@ -270,7 +267,7 @@ public class GUI_Settings extends JPanel {
         if (this.languageSelected == -1) {
             this.languageSelected = 1;
         }
-        this.LabelLanguage.setText(this.language[this.languageSelected]);
+        this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.languageSelected]));
         this.callResize();
     }
 
@@ -280,7 +277,7 @@ public class GUI_Settings extends JPanel {
         if (this.fullScreenSelected == -1) {
             this.fullScreenSelected = 1;
         }
-        this.LabelFS.setText(this.fullScreen[this.fullScreenSelected]);
+        this.LabelFS.setText(LanguageManager.getElement(this.fullScreen[this.fullScreenSelected]));
         this.callResize();
     }
 
@@ -300,21 +297,21 @@ public class GUI_Settings extends JPanel {
         if (this.SoundSelected == -1) {
             this.SoundSelected = 1;
         }
-        this.LabelSound.setText(this.Sound[this.SoundSelected]);
+        this.LabelSound.setText(LanguageManager.getElement(this.Sound[this.SoundSelected]));
         this.callResize();
     }
 
     void rightLanguage() {
         //le 2 en hardcodé sera a changer :/
         this.languageSelected = (this.languageSelected + 1) % 2;
-        this.LabelLanguage.setText(this.language[this.languageSelected]);
+        this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.languageSelected]));
         this.callResize();
     }
 
     void rightFS() {
         //le 2 en hardcodé sera a changer :/
         this.fullScreenSelected = (this.fullScreenSelected + 1) % 2;
-        this.LabelFS.setText(this.fullScreen[this.fullScreenSelected]);
+        this.LabelFS.setText(LanguageManager.getElement(this.fullScreen[this.fullScreenSelected]));
         this.callResize();
     }
 
@@ -328,7 +325,7 @@ public class GUI_Settings extends JPanel {
     void rightSound() {
         //le 2 en hardcodé sera a changer :/
         this.SoundSelected = (this.SoundSelected + 1) % 2;
-        this.LabelSound.setText(this.Sound[this.SoundSelected]);
+        this.LabelSound.setText(LanguageManager.getElement(this.Sound[this.SoundSelected]));
         this.callResize();
     }
 
@@ -336,4 +333,19 @@ public class GUI_Settings extends JPanel {
         this.callResize = true;
     }
 
+    public String getSelectedLanguage(){
+        return this.language[this.languageSelected];
+    }
+    public String getSelectedFS(){
+        return this.fullScreen[this.fullScreenSelected];
+        
+    }
+    public String getSelectedTheme(){
+        return this.Theme[this.ThemeSelected];
+        
+    }
+    public String getSelectedSound(){
+        return this.Sound[this.SoundSelected];
+        
+    }
 }
