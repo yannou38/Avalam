@@ -15,6 +15,8 @@ import javax.swing.Timer;
 import avalam_s6.GUI.GUI_INTERFACE;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.Player.AIPlayer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -67,15 +69,16 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
 
     @Override
     public void save(String aFilePath) {
+        SimpleDateFormat lDateFormat = new SimpleDateFormat ("dd/MM/yyyy - hh:mm");
+        System.out.println("[Date] " + lDateFormat.format(new Date()));
         System.out.println("[0] "+this.players[0].getClass()+": "+this.players[0].getName());
         System.out.println("[1] "+this.players[1].getClass()+": "+this.players[1].getName());
         System.out.println("[Current] "+this.current_player);
         System.out.println("[GName] "+this.getGrid().getName());
-        System.out.println(this.getHistory().size());
+        System.out.println("[Histo] " + this.getHistory().size());
         this.getHistory().stream().forEach(System.out::println);
-        System.out.println(this.getCancelled_moves().size());
+        System.out.println("[Cancel] " + this.getCancelled_moves().size());
         this.getCancelled_moves().stream().forEach(System.out::println);
-        System.out.println("[Historique des coups deja annules]");
     }
 
     @Override
