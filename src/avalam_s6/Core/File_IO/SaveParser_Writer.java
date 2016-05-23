@@ -6,6 +6,7 @@
 package avalam_s6.Core.File_IO;
 
 import avalam_s6.Core.Local_Avalam_Game;
+import avalam_s6.Core.Move;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -43,8 +44,17 @@ public class SaveParser_Writer {
             /* Current Plyaer */
             bw.write("[Current] "+this.aGame.getCurrentPlayer().getName()+"\n");
             /* Grid */
-            bw.write("[GName] " + this.aGame.getGrid().getName());
-            
+            bw.write("[GName] " + this.aGame.getGrid().getName()+"\n");
+            /* Redo */
+            bw.write("[Histo] " + this.aGame.getHistory().size()+"\n");
+            for(Move m : this.aGame.getHistory()) {
+                bw.write(m+"\n");
+            }
+            /* Undo */
+            bw.write("[Cancel] " + this.aGame.getCancelled_moves().size()+"\n");
+            for(Move m : this.aGame.getCancelled_moves()) {
+                bw.write(m+"\n");
+            }
             bw.close();
         } catch (IOException ex) {
             System.out.println("Error - "+SaveParser_Writer.class.getName());

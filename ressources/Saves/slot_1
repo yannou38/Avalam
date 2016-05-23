@@ -1,5 +1,11 @@
-[Date] 23/05/2016 - 14:41
-[Player_1] ControlledPlayer | -1 | John Doe
-[Player_2] ControlledPlayer | -16777216 | Bot Franck
-[Current] avalam_s6.Player.ControlledPlayer@3256a589
+[Date] 23/05/2016 - 16:35
+[Player_1] ControlledPlayer | WHITE | John Doe
+[Player_2] ControlledPlayer | BLACK | Bot Franck
+[Current] Bot Franck
 [GName] default
+[Histo] 5
+(6 4) 1 (7 4) 1 John Doe
+(7 3) 1 (6 3) 1 Bot Franck
+(6 3) 2 (5 2) 1 John Doe
+(5 2) 3 (5 3) 1 Bot Franck
+(5 3) 4 (4 3) 1 John Doe
