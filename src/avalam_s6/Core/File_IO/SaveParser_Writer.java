@@ -38,10 +38,10 @@ public class SaveParser_Writer {
             SimpleDateFormat lDateFormat = new SimpleDateFormat ("dd/MM/yyyy - HH:mm");
             bw.write("[Date] " + lDateFormat.format(new Date())+"\n");
             /* Players */
-            bw.write("[Player_1] "+this.aGame.getPlayers()[0].getClass().getSimpleName()+" | "+ aGame.getPlayers()[0].getColor().getRGB() +" | "+this.aGame.getPlayers()[0].getName()+"\n");
-            bw.write("[Player_2] "+this.aGame.getPlayers()[1].getClass().getSimpleName()+" | "+ aGame.getPlayers()[1].getColor().getRGB() +" | "+this.aGame.getPlayers()[1].getName()+"\n");
+            bw.write("[Player_1] "+this.aGame.getPlayers()[0].getClass().getSimpleName()+" | "+ aGame.getPlayers()[0].getColor().name() +" | "+this.aGame.getPlayers()[0].getName()+"\n");
+            bw.write("[Player_2] "+this.aGame.getPlayers()[1].getClass().getSimpleName()+" | "+ aGame.getPlayers()[1].getColor().name() +" | "+this.aGame.getPlayers()[1].getName()+"\n");
             /* Current Plyaer */
-            bw.write("[Current] "+this.aGame.getCurrentPlayer()+"\n");
+            bw.write("[Current] "+this.aGame.getCurrentPlayer().getName()+"\n");
             /* Grid */
             bw.write("[GName] " + this.aGame.getGrid().getName());
             

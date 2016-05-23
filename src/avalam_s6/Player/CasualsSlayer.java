@@ -7,9 +7,9 @@ package avalam_s6.Player;
 
 import avalam_s6.Core.CellState;
 import avalam_s6.Core.Coordinate;
+import avalam_s6.Core.Globals.AvalamColor;
 import avalam_s6.Core.Move;
 import avalam_s6.Core.Owner;
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -21,7 +21,7 @@ public class CasualsSlayer extends AIPlayer {
     
     private int nbtours;
 
-    public CasualsSlayer(String name, Color color, Owner owner) {
+    public CasualsSlayer(String name, AvalamColor color, Owner owner) {
         super(name, color, owner);
     }
 

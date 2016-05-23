@@ -4,9 +4,9 @@
  */
 package avalam_s6.Player;
 
+import avalam_s6.Core.Globals.AvalamColor;
 import avalam_s6.Core.Move;
 import avalam_s6.Core.Owner;
-import java.awt.Color;
 
 /**
  *
@@ -14,7 +14,7 @@ import java.awt.Color;
  */
 public class AIPlayerOnlyUndo extends AIPlayer{
 
-    public AIPlayerOnlyUndo(String name, Color color, Owner owner) {
+    public AIPlayerOnlyUndo(String name, AvalamColor color, Owner owner) {
         super(name, color, owner);
     }
 
