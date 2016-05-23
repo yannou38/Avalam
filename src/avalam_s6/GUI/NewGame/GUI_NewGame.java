@@ -191,9 +191,10 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         }
 
         this.name1 = new JTextField();
+        this.name1.setEditable(true);
         this.name1.setFont(localFont.deriveFont(2 * 25f));
         this.name1.setBorder(BorderFactory.createEmptyBorder(0, 20, 20, 20));
-        this.name1.setSize(150,50);
+        //this.name1.setSize(150,50);
         this.name1.setText("Player 1's name");
         
         this.name2 = new JTextField();
