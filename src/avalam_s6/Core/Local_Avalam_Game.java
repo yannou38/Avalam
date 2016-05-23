@@ -5,6 +5,7 @@
  */
 package avalam_s6.Core;
 
+import avalam_s6.Core.File_IO.SaveParser_Writer;
 import avalam_s6.Core.Globals.Input;
 import avalam_s6.Exceptions.GridSizeException;
 import avalam_s6.Player.Player;
@@ -68,17 +69,19 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     }
 
     @Override
-    public void save(String aFilePath) {
+    public void save(String aSaveName) {
         SimpleDateFormat lDateFormat = new SimpleDateFormat ("dd/MM/yyyy - hh:mm");
         System.out.println("[Date] " + lDateFormat.format(new Date()));
-        System.out.println("[0] "+this.players[0].getClass()+": "+this.players[0].getName());
-        System.out.println("[1] "+this.players[1].getClass()+": "+this.players[1].getName());
+        System.out.println("[0] "+this.players[0].getClass().getSimpleName()+":"+this.players[0].getName());
+        System.out.println("[1] "+this.players[1].getClass().getSimpleName()+":"+this.players[1].getName());
         System.out.println("[Current] "+this.current_player);
         System.out.println("[GName] "+this.getGrid().getName());
         System.out.println("[Histo] " + this.getHistory().size());
         this.getHistory().stream().forEach(System.out::println);
         System.out.println("[Cancel] " + this.getCancelled_moves().size());
         this.getCancelled_moves().stream().forEach(System.out::println);
+        SaveParser_Writer myParser = new SaveParser_Writer(this, aSaveName);
+        myParser.save();
     }
 
     @Override
@@ -242,5 +245,9 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     public void changeNbTurns(int n){
         this.nbTurns += n;
         this.current_player = this.nbTurns%NB_PLAYERS;
+    }
+
+    public Player[] getPlayers() {
+        return players;
     }
 }
