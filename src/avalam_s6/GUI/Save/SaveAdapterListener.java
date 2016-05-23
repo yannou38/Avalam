@@ -60,6 +60,10 @@ public class SaveAdapterListener implements ComponentListener {
         size = this.page.getSlots(6).getPreferredSize();
         this.page.getSlots(6).setBounds((int) round((360 + insets.left) * ratioW), ((int) round((748 + insets.top) * ratioH)), size.width, size.height);
         this.page.getSlots(6).setSize((int) round(this.page.getSlots(6).getWidth() * ratioW), (int) round(this.page.getSlots(6).getHeight() * ratioH));
+        
+        size = this.page.getField().getPreferredSize();
+        this.page.getField().setBounds((int) round((810 + insets.left) * ratioW), ((int) round((788 + insets.top) * ratioH)), size.width, size.height);
+        this.page.getField().setSize((int) round(this.page.getField().getWidth() * ratioW), (int) round(this.page.getField().getHeight() * ratioH));
 
     }
 

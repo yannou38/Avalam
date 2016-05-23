@@ -20,8 +20,6 @@ import avalam_s6.GUI.Save.GUI_Save;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import static java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -93,6 +91,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         this.remove(this.panelList[this.wState.getValue()]);
         this.wState = wState;
         this.panelList[this.wState.getValue()].setVisible(true);
+        ((Gui_INTERFACE)this.panelList[this.wState.getValue()]).callResize();
         this.add(this.panelList[this.wState.getValue()]);
     }
 
