@@ -12,6 +12,7 @@ import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -41,6 +42,8 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
     private final NewGameAdapterListener listener;
     private Boolean callResize;
     private JButton preccolor1, preccolor2, supcolor1, supcolor2;
+    private JTextField name1;
+    private JTextField name2;
 
     public GUI_NewGame() {
         this.callResize = false;
@@ -176,12 +179,37 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         this.supcolor2.setFocusPainted(false);
         this.supcolor2.addMouseListener(new NewGameListener("sup", 2, this, "supcolor"));
 
+        Font localFont = new Font("Arial", Font.PLAIN, 60);
+        
+            /* Chargement de la police */
+        try {
+            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);                
+        } catch (IOException | FontFormatException ex) {
+            System.out.println("Error - " + GUI_NewGame.class.toString());
+            Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        this.name1 = new JTextField();
+        this.name1.setFont(localFont.deriveFont(2 * 25f));
+        this.name1.setBorder(BorderFactory.createEmptyBorder(0, 20, 20, 20));
+        this.name1.setSize(150,50);
+        this.name1.setText("Player 1's name");
+        
+        this.name2 = new JTextField();
+        this.name2.setFont(localFont.deriveFont(2 * 25f));
+        this.name2.setBorder(BorderFactory.createEmptyBorder(0, 20, 20, 20));
+        this.name2.setSize(150,50);
+        this.name2.setText("Player 2's name");
+        
         this.add(this.p1color);
         this.add(this.p2color);
         this.add(this.preccolor1);
         this.add(this.preccolor2);
         this.add(this.supcolor1);
         this.add(this.supcolor2);
+        this.add(this.name1);
+        this.add(this.name2);
 
     }
 
@@ -195,11 +223,11 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
     }
 
     public JButton getRetour() {
-        return retour;
+        return this.retour;
     }
 
     public JButton getStart() {
-        return start;
+        return this.start;
     }
 
     public JButton getLeftP1() {
@@ -219,19 +247,27 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
     }
 
     public JButton getPreccolor1() {
-        return preccolor1;
+        return this.preccolor1;
     }
 
     public JButton getPreccolor2() {
-        return preccolor2;
+        return this.preccolor2;
     }
 
     public JButton getSupcolor1() {
-        return supcolor1;
+        return this.supcolor1;
     }
 
     public JButton getSupcolor2() {
-        return supcolor2;
+        return this.supcolor2;
+    }
+    
+    public JTextField getName1() {
+        return this.name1;
+    }
+    
+    public JTextField getName2() {
+        return this.name2;
     }
 
     public void leftAI(int numplayer) {
