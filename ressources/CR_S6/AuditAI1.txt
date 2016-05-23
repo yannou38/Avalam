@@ -1,0 +1,7 @@
+Mixmax en début de partie ?
+Profondeur : Moins y a de coups possibles, plus on augmente ?
+Séparer les ilots et faire des alpha-beta séparés sur chaque, pas besoin de connaître les configs des autres ilots pour jouer dans un. Par contre faut considérer si TU commences ou si l'adversaire commences dans l'ilot.
+
+Chercher à amener l'adversaire vers une configuration favorable plutôt que de jouer des coups .. au hasard ?
+
+Tester IA sur petits exemples. Tests normalisés, leur temps, le nb coups, bref les paramètres entrés et sortants.
