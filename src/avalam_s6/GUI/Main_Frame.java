@@ -25,7 +25,7 @@ import javax.swing.JPanel;
  *
  * @author sazeratj
  */
-public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
+public class Main_Frame extends JFrame implements GuiContainer_INTERFACE, Runnable {
 
     private WindowState wState;
     private JPanel[] panelList;
