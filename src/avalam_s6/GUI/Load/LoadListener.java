@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package avalam_s6.GUI.Save;
+package avalam_s6.GUI.Load;
 
 import avalam_s6.Core.Globals.SetupManager;
-import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.Rules.RulesListener;
-import avalam_s6.GUI.WindowState;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -23,13 +21,13 @@ import javax.swing.JButton;
  *
  * @author ducruyy
  */
-public class SaveListener implements MouseListener {
+public class LoadListener implements MouseListener {
 
     private String name;
     private Image icon;
     private Image iconbase;
 
-    public SaveListener(String buttonname) {
+    public LoadListener(String buttonname) {
         this.name = buttonname;
         try {
             this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/" + this.name + "_h.png"));
@@ -43,12 +41,11 @@ public class SaveListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
-        GUI_Save Save = ((GUI_Save) source.getParent());
-        switch (this.name) {
-            case "save":
-                Save.getGame().save("./ressources/Saves/slot_1");
+        GUI_Load Save = ((GUI_Load) source.getParent());
+        switch (this.name) {            
+            case "load":
                 break;
-            case "return":
+            case "home":
                 Save.back();
                 break;
         }

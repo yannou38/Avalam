@@ -56,7 +56,8 @@ public class HomePageListener implements MouseListener {
                 mainFrame.setwState(WindowState.SETTINGS);
                 break;
             case "load":
-                mainFrame.setwState(WindowState.SAVE);
+                mainFrame.setGame(null);
+                mainFrame.setwState(WindowState.LOAD);
                 break;
             case "rules":
                 mainFrame.setwState(WindowState.RULES);

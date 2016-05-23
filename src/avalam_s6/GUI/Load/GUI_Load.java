@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package avalam_s6.GUI.Save;
+package avalam_s6.GUI.Load;
 
+import avalam_s6.GUI.Save.*;
 import avalam_s6.Core.Game_INTERFACE;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.GUI.Gui_INTERFACE;
@@ -25,53 +26,45 @@ import javax.swing.JPanel;
  *
  * @author ducruyy
  */
-public class GUI_Save extends JPanel implements Gui_INTERFACE {
+public class GUI_Load extends JPanel implements Gui_INTERFACE {
 
     private JButton homereturn, saveload;
-    private Image backgroundsave, saveI, returnI;
-    private final SaveAdapterListener listener;
-    private Game_INTERFACE game;
-
+    private Image backgroundload, homeI, loadI;
+    private final LoadAdapterListener listener;
     private boolean callResize;
 
-    public GUI_Save() {
-        this.listener = new SaveAdapterListener(this);
-        this.game = null;
+    public GUI_Load() {
+        this.listener = new LoadAdapterListener(this);
         initComponents();
     }
 
     private void initComponents() {
         try {
-            this.backgroundsave = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/background_save.png"));
-            this.saveI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/save.png"));
-            this.returnI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/return.png"));
+            this.backgroundload = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/background_load.png"));
+            this.homeI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/home.png"));
+            this.loadI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/load.png"));
         } catch (Exception ex) {
-            System.out.println("Error - " + GUI_Save.class.toString());
-            Logger.getLogger(GUI_Save.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error - " + GUI_Load.class.toString());
+            Logger.getLogger(GUI_Load.class.getName()).log(Level.SEVERE, null, ex);
         }
-        this.homereturn = new JButton(new ImageIcon(this.returnI));
+        this.homereturn = new JButton(new ImageIcon(this.homeI));
         this.homereturn.setBorder(BorderFactory.createEmptyBorder());
         this.homereturn.setContentAreaFilled(false);
         this.homereturn.setFocusPainted(false);
-        this.homereturn.addMouseListener(new SaveListener("return"));
+        this.homereturn.addMouseListener(new LoadListener("home"));
 
-        this.saveload = new JButton(new ImageIcon(this.saveI));
+        this.saveload = new JButton(new ImageIcon(this.loadI));
         this.saveload.setBorder(BorderFactory.createEmptyBorder());
         this.saveload.setContentAreaFilled(false);
         this.saveload.setFocusPainted(false);
-        this.saveload.addMouseListener(new SaveListener("save"));
+        this.saveload.addMouseListener(new LoadListener("load"));
         this.add(this.homereturn);
         this.add(this.saveload);
         this.addComponentListener(listener);
     }
-
-    public void setGame(Game_INTERFACE game) {
-        this.game = game;
-    }
-
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(this.backgroundsave, 0, 0, this.getWidth(), this.getHeight(), null);
+            g.drawImage(this.backgroundload, 0, 0, this.getWidth(), this.getHeight(), null);
 
         if (callResize == true) {
             this.listener.componentResized(null);
@@ -90,11 +83,11 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
     @Override
     public void back() {
         Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
-        mainFrame.setwState(WindowState.BOARD);
+        
+            mainFrame.setwState(WindowState.MAIN);
+        
     }
-
-    public Game_INTERFACE getGame() {
-        return game;
-    }
+    
+    
 
 }

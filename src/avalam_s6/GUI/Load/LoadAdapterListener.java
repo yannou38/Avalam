@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package avalam_s6.GUI.Save;
+package avalam_s6.GUI.Load;
 
+import avalam_s6.GUI.Save.*;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ComponentEvent;
@@ -15,11 +16,11 @@ import static java.lang.Math.round;
  *
  * @author dupageuyy
  */
-public class SaveAdapterListener implements ComponentListener {
+public class LoadAdapterListener implements ComponentListener {
 
-    private GUI_Save page;
+    private GUI_Load page;
 
-    public SaveAdapterListener(GUI_Save page) {
+    public LoadAdapterListener(GUI_Load page) {
         this.page = page;
     }
 

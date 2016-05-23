@@ -151,7 +151,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         if(this.players[this.current_player].isAI()) {
             ((AIPlayer)this.players[this.current_player]).setGame(this);
         }
-        System.out.println("Joueur : "+this.current_player);
+        //System.out.println("Joueur : "+this.current_player);
         Move m = this.players[this.current_player].play();
         if(m != null){
             if(this.players[this.current_player].isAI()) { // IA

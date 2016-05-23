@@ -14,6 +14,7 @@ import avalam_s6.GUI.LocalAvalamGame.GUI_LAG;
 import avalam_s6.GUI.NewGame.GUI_NewGame;
 import avalam_s6.GUI.Settings.GUI_Settings;
 import avalam_s6.GUI.Credits.GUI_Credits;
+import avalam_s6.GUI.Load.GUI_Load;
 import avalam_s6.GUI.Rules.GUI_Rules;
 import avalam_s6.GUI.Save.GUI_Save;
 import java.awt.Dimension;
@@ -67,7 +68,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
                 pElement.setVisible(false);
             }
         }
-        this.panelList = new JPanel[8];
+        this.panelList = new JPanel[9];
         this.panelList[0] = new GUI_HomePage();
         this.panelList[1] = new GUI_LAG();
         this.panelList[2] = new GUI_FinalScreen();
@@ -75,7 +76,8 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         this.panelList[4] = new GUI_Settings();
         this.panelList[5] = new GUI_Credits();
         this.panelList[6] = new GUI_Save();
-        this.panelList[7] = new GUI_Rules();
+        this.panelList[7] = new GUI_Load();
+        this.panelList[8] = new GUI_Rules();
         for (JPanel pElement : this.panelList) {
             //this.add(pElement);
             pElement.setVisible(false);
@@ -122,7 +124,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
     }
     
     public void setGame(Game_INTERFACE game){
-        ((GUI_Save) this.panelList[WindowState.SAVE.getValue()]).reload(1,game);
+        ((GUI_Save) this.panelList[WindowState.SAVE.getValue()]).setGame(game);
     }
 
     public void changeSettings(String Language, String FS, String Theme, String Sound) {
