@@ -58,6 +58,9 @@ public class HomePageListener implements MouseListener {
             case "load":
                 mainFrame.setwState(WindowState.SAVE);
                 break;
+            case "rules":
+                mainFrame.setwState(WindowState.RULES);
+                break;
         }
         ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }

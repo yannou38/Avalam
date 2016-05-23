@@ -13,6 +13,8 @@ import avalam_s6.GUI.LocalAvalamGame.GUI_LAG;
 import avalam_s6.GUI.NewGame.GUI_NewGame;
 import avalam_s6.GUI.Settings.GUI_Settings;
 import avalam_s6.GUI.Credits.GUI_Credits;
+import avalam_s6.GUI.Rules.GUI_Rules;
+import avalam_s6.GUI.Save.GUI_Save;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import static java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager;
@@ -64,13 +66,15 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
                 pElement.setVisible(false);
             }
         }
-        this.panelList = new JPanel[6];
+        this.panelList = new JPanel[8];
         this.panelList[0] = new GUI_HomePage();
         this.panelList[1] = new GUI_LAG();
         this.panelList[2] = new GUI_FinalScreen();
         this.panelList[3] = new GUI_NewGame();
         this.panelList[4] = new GUI_Settings();
         this.panelList[5] = new GUI_Credits();
+        this.panelList[6] = new GUI_Save();
+        this.panelList[7] = new GUI_Rules();
         for (JPanel pElement : this.panelList) {
             //this.add(pElement);
             pElement.setVisible(false);

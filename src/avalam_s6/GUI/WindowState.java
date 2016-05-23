@@ -16,9 +16,9 @@ public enum WindowState {
     PLAYERSELECT(3), //New Custom Game or Load Game
     SETTINGS(4), //Setting window
     ABOUT(5), //Credits
-    RULES(6), //Rules Page
-    TUTORIAL(7), //Tutorial window
-    SAVE(8); //Save/Load window
+    SAVE(6), //Save/Load window
+    RULES(7), //Rules Page
+    TUTORIAL(8); //Tutorial window
     
     
     private final int id;
