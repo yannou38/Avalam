@@ -8,6 +8,7 @@ package avalam_s6.GUI.LocalAvalamGame;
 import avalam_s6.Core.Globals.Input;
 import avalam_s6.Core.File_IO.Level_Parser;
 import avalam_s6.Core.*;
+import avalam_s6.Core.Globals.AvalamColor;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Exceptions.GridCharException;
 import avalam_s6.Exceptions.GridSizeException;
@@ -122,8 +123,8 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     public void initGame() {
         try {
-            Player p1 = new ControlledPlayer("Jon Doe", Color.WHITE, Owner.PLAYER_1);
-            Player p2 = new AIPlayerEasy("Bot_Frank", Color.BLACK, Owner.PLAYER_2);
+            Player p1 = new ControlledPlayer("Jon Doe", AvalamColor.WHITE, Owner.PLAYER_1);
+            Player p2 = new AIPlayerEasy("Bot_Frank", AvalamColor.BLACK, Owner.PLAYER_2);
             String gName = "default";
             Level_Parser myParser = new Level_Parser(gName);
             Grid g = new Grid(myParser.readLevel(),gName); // IOException | GridSizeException | GridCharException
@@ -139,61 +140,8 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     public void initGame(String[] player1, String[] player2) {
         try {
 
-            Color c1 = Color.white;
-            Color c2 = Color.black;
-
-            switch (player1[0]) {
-                case "white":
-                    c1 = Color.white;
-                    break;
-                case "black":
-                    c1 = Color.black;
-                    break;
-                case "blue":
-                    c1 = Color.blue;
-                    break;
-                case "yellow":
-                    c1 = Color.yellow;
-                    break;
-                case "red":
-                    c1 = Color.red;
-                    break;
-                case "green":
-                    c1 = Color.green;
-                    break;
-                case "purple  ":
-                    c1 = Color.magenta;
-                    break;
-                case "clearblue":
-                    c1 = Color.cyan;
-                    break;
-            }
-            switch (player2[0]) {
-                case "white":
-                    c2 = Color.white;
-                    break;
-                case "black":
-                    c2 = Color.black;
-                    break;
-                case "blue":
-                    c2 = Color.blue;
-                    break;
-                case "yellow":
-                    c2 = Color.yellow;
-                    break;
-                case "red":
-                    c2 = Color.red;
-                    break;
-                case "green":
-                    c2 = Color.green;
-                    break;
-                case "purple  ":
-                    c2 = Color.magenta;
-                    break;
-                case "clearblue":
-                    c2 = Color.cyan;
-                    break;
-            }
+            AvalamColor c1 = AvalamColor.valueOf(player1[0].toUpperCase());
+            AvalamColor c2 = AvalamColor.valueOf(player2[0].toUpperCase());
 
             Player p1 = new ControlledPlayer("John Doe", c1, Owner.PLAYER_1);
             switch (player1[1]) {

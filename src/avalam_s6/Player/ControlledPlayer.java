@@ -6,10 +6,10 @@
 package avalam_s6.Player;
 
 import avalam_s6.Core.Coordinate;
+import avalam_s6.Core.Globals.AvalamColor;
 import avalam_s6.Core.Globals.Input;
 import avalam_s6.Core.Move;
 import avalam_s6.Core.Owner;
-import java.awt.Color;
 
 /**
  *
@@ -17,7 +17,7 @@ import java.awt.Color;
  */
 public class ControlledPlayer extends Player{
 
-    public ControlledPlayer(String n, Color c, Owner owner) {
+    public ControlledPlayer(String n, AvalamColor c, Owner owner) {
         super(n,c,owner);
     }
     

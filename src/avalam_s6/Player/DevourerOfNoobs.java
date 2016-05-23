@@ -6,7 +6,7 @@
 package avalam_s6.Player;
 
 import avalam_s6.Core.*;
-import java.awt.Color;
+import avalam_s6.Core.Globals.AvalamColor;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -16,7 +16,7 @@ import java.util.Random;
  */
 public class DevourerOfNoobs extends AIPlayer {
 
-    public DevourerOfNoobs(String name, Color color, Owner owner) {
+    public DevourerOfNoobs(String name, AvalamColor color, Owner owner) {
         super(name, color, owner);
     }
 
