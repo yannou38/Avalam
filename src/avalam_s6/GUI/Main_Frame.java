@@ -36,7 +36,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         /* FUNCTION CALL */
         this.initFrame(WindowState.MAIN);
         /* ADD KB DISPATCHER */
-        getCurrentKeyboardFocusManager().addKeyEventDispatcher(new RenderKeyboardDispatcher(this));
+        getCurrentKeyboardFocusManager().addKeyEventDispatcher(new CustomKeyboardDispatcher(this));
     }
 
     public void setRenderMode() {
@@ -131,5 +131,10 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         SetupManager.setElement("Theme", Theme);
         SetupManager.setElement("Son", Sound);
         this.initFrame(WindowState.SETTINGS);
+    }
+
+    @Override
+    public void backWindow() {
+        ((Gui_INTERFACE)this.panelList[this.wState.getValue()]).back();
     }
 }

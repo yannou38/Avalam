@@ -16,4 +16,5 @@ public interface GuiManager_INTERFACE {
      *  Render the content of the current window.
      */
     public void render();
+    public void backWindow();
 }
