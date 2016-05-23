@@ -5,13 +5,15 @@
  */
 package avalam_s6.GUI.Save;
 
+import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import static java.lang.Math.round;
 
 /**
  *
- * @author ducruyy
+ * @author dupageuyy
  */
 public class SaveAdapterListener implements ComponentListener {
 
@@ -28,22 +30,30 @@ public class SaveAdapterListener implements ComponentListener {
         //1280*720 => taille de base
         double ratioW = (double) this.page.getWidth() / (double) 1280;
         double ratioH = (double) this.page.getHeight() / (double) 720;
+        
+        
+        Dimension size = this.page.getHomereturn().getPreferredSize();
+        this.page.getHomereturn().setBounds((int) round((30 + insets.left) * ratioW), ((int) round((600 + insets.top) * ratioH)), size.width, size.height);
+        this.page.getHomereturn().setSize((int) round(this.page.getHomereturn().getWidth() * ratioW), (int) round(this.page.getHomereturn().getHeight() * ratioH));
+        
+        size = this.page.getSaveload().getPreferredSize();
+        this.page.getSaveload().setBounds((int) round((250 + insets.left) * ratioW), ((int) round((600 + insets.top) * ratioH)), size.width, size.height);
+        this.page.getSaveload().setSize((int) round(this.page.getSaveload().getWidth() * ratioW), (int) round(this.page.getSaveload().getHeight() * ratioH));
+        
+        
     
     }
 
     @Override
     public void componentMoved(ComponentEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void componentShown(ComponentEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void componentHidden(ComponentEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

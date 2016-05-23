@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI;
 
+import avalam_s6.Core.Game_INTERFACE;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Core.Grid;
 import avalam_s6.GUI.FinalScreen.GUI_FinalScreen;
@@ -118,6 +119,10 @@ public class Main_Frame extends JFrame implements GUI_INTERFACE, Runnable {
         ((GUI_FinalScreen) this.panelList[WindowState.VICTORY.getValue()]).setGrid(g);
         ((GUI_FinalScreen) this.panelList[WindowState.VICTORY.getValue()]).setWinner(p);
         this.setwState(WindowState.VICTORY);
+    }
+    
+    public void setGame(Game_INTERFACE game){
+        ((GUI_Save) this.panelList[WindowState.SAVE.getValue()]).reload(1,game);
     }
 
     public void changeSettings(String Language, String FS, String Theme, String Sound) {

@@ -39,6 +39,7 @@ public class LAG_UI_MouseListener implements MouseListener {
         }
     }
 
+    
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
@@ -83,6 +84,8 @@ public class LAG_UI_MouseListener implements MouseListener {
                 }
                 break;                
             case "save" :
+                mainFrame.setGame(lag.getGame());
+                mainFrame.setwState(WindowState.SAVE);
                 break;
         }
         ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
