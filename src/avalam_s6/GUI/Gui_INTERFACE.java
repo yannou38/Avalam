@@ -14,4 +14,6 @@ public interface Gui_INTERFACE {
      *  Return to the precedent page
      */
     public void back();
+    
+    public void callResize();
 }
