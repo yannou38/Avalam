@@ -6,7 +6,7 @@
 package avalam_s6.Player;
 
 import avalam_s6.Core.*;
-import java.awt.Color;
+import avalam_s6.Core.Globals.AvalamColor;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -18,7 +18,7 @@ public class AIPlayerEasy extends AIPlayer {
     
     private final static int nerf = 87;
 
-    public AIPlayerEasy(String name, Color color, Owner owner) {
+    public AIPlayerEasy(String name, AvalamColor color, Owner owner) {
         super(name, color, owner);
     }
     
