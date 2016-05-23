@@ -28,6 +28,8 @@ public class GUI_Save extends JPanel {
     private Image backgroundload, backgroundsave, homeI, loadI, saveI, returnI;
     private SaveState etat;
     private final SaveAdapterListener listener;
+    
+    private SaveListener saveloadL, homereturnL;
 
     private enum SaveState {
 
@@ -38,6 +40,8 @@ public class GUI_Save extends JPanel {
     public GUI_Save() {
         this.listener = new SaveAdapterListener(this);
         this.etat = SaveState.SAVE;
+        saveloadL = new SaveListener("save");
+        homereturnL = new SaveListener("load");
         initComponents();
     }
 
@@ -57,13 +61,13 @@ public class GUI_Save extends JPanel {
         this.homereturn.setBorder(BorderFactory.createEmptyBorder());
         this.homereturn.setContentAreaFilled(false);
         this.homereturn.setFocusPainted(false);
-        this.homereturn.addMouseListener(new SaveListener("return"));
+        this.homereturn.addMouseListener(homereturnL);
         
         this.saveload = new JButton(new ImageIcon(this.saveI));        
         this.saveload.setBorder(BorderFactory.createEmptyBorder());
         this.saveload.setContentAreaFilled(false);
         this.saveload.setFocusPainted(false);
-        this.saveload.addMouseListener(new SaveListener("save"));
+        this.saveload.addMouseListener(saveloadL);
         
         
         this.add(this.homereturn);
@@ -77,11 +81,17 @@ public class GUI_Save extends JPanel {
             this.etat = SaveState.LOAD;
             this.homereturn.setIcon(new ImageIcon(this.homeI));
             this.saveload.setIcon(new ImageIcon(this.loadI));
+            this.saveload.removeMouseListener(saveloadL);
+            saveloadL = new SaveListener("load");
+            this.saveload.addMouseListener(this.saveloadL);
         } 
         else {
             this.etat = SaveState.SAVE;
             this.homereturn.setIcon(new ImageIcon(this.returnI));
             this.saveload.setIcon(new ImageIcon(this.saveI));
+            this.saveload.removeMouseListener(saveloadL);
+            saveloadL = new SaveListener("save");
+            this.saveload.addMouseListener(this.saveloadL);
         }
     }
 
