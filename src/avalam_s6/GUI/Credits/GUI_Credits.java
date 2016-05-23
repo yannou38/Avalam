@@ -6,6 +6,9 @@
 package avalam_s6.GUI.Credits;
 
 import avalam_s6.Core.Globals.SetupManager;
+import avalam_s6.GUI.Gui_INTERFACE;
+import avalam_s6.GUI.Main_Frame;
+import avalam_s6.GUI.WindowState;
 import java.awt.*;
 import java.io.File;
 import java.util.logging.Level;
@@ -17,7 +20,7 @@ import javax.swing.*;
  *
  * @author ducruyy
  */
-public class GUI_Credits extends JPanel {
+public class GUI_Credits extends JPanel implements Gui_INTERFACE {
     private JButton retour;
     private Image returnI,background;
     
@@ -56,7 +59,13 @@ public class GUI_Credits extends JPanel {
 
     public JButton getRetour() {
         return this.retour;
-    }  
+    }
+    
+    @Override
+    public void back() {
+        Main_Frame mainFrame = ((Main_Frame)this.getParent().getParent().getParent().getParent());
+            mainFrame.setwState(WindowState.MAIN);  
+    }
     
     
 }

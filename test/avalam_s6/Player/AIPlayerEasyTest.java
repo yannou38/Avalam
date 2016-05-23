@@ -8,7 +8,7 @@ package avalam_s6.Player;
 import avalam_s6.Core.Grid;
 import avalam_s6.Core.Move;
 import avalam_s6.Core.Owner;
-import avalam_s6.GUI.GuiContainer_INTERFACE;
+import avalam_s6.GUI.GuiManager_INTERFACE;
 import java.awt.Color;
 import org.junit.After;
 import org.junit.AfterClass;

@@ -41,8 +41,7 @@ public class CreditsListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
         GUI_Credits Credits = ((GUI_Credits)source.getParent());
-        Main_Frame mainFrame = ((Main_Frame)Credits.getParent().getParent().getParent().getParent());
-            mainFrame.setwState(WindowState.MAIN);   
+        Credits.back();
         ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 

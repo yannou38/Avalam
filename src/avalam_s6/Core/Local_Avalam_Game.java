@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Stack;
 import javax.swing.Timer;
-import avalam_s6.GUI.GuiContainer_INTERFACE;
+import avalam_s6.GUI.GuiManager_INTERFACE;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.Player.AIPlayer;
 import java.text.SimpleDateFormat;
@@ -24,7 +24,7 @@ import java.util.Date;
  */
 public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     private static final int NB_PLAYERS = 2;
-    private final GuiContainer_INTERFACE gui;
+    private final GuiManager_INTERFACE gui;
     private final Timer t;    
     private Grid grid;
     private Player[] players;
@@ -34,7 +34,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     private boolean isTurnFinished;
     private int nbTurns;
     
-    public Local_Avalam_Game(Grid gr, Player p1, Player p2, GuiContainer_INTERFACE gui) throws GridSizeException {
+    public Local_Avalam_Game(Grid gr, Player p1, Player p2, GuiManager_INTERFACE gui) throws GridSizeException {
         players = new Player[2];
         this.grid = gr;
         this.players[0] = p1;
