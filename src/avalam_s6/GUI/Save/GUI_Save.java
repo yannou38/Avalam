@@ -28,15 +28,17 @@ import javax.swing.JPanel;
 public class GUI_Save extends JPanel implements Gui_INTERFACE {
 
     private JButton homereturn, saveload;
-    private Image backgroundsave, saveI, returnI;
+    private JButton[] slots;
+    private int slotnumber;
+    private Image backgroundsave, saveI, returnI, slot;
     private final SaveAdapterListener listener;
     private Game_INTERFACE game;
-
-    private boolean callResize;
 
     public GUI_Save() {
         this.listener = new SaveAdapterListener(this);
         this.game = null;
+        this.slotnumber = 0;
+        this.slots = new JButton[6];
         initComponents();
     }
 
@@ -45,6 +47,7 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
             this.backgroundsave = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/background_save.png"));
             this.saveI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/save.png"));
             this.returnI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/return.png"));
+            this.slot = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/slot.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_Save.class.toString());
             Logger.getLogger(GUI_Save.class.getName()).log(Level.SEVERE, null, ex);
@@ -53,13 +56,22 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
         this.homereturn.setBorder(BorderFactory.createEmptyBorder());
         this.homereturn.setContentAreaFilled(false);
         this.homereturn.setFocusPainted(false);
-        this.homereturn.addMouseListener(new SaveListener("return"));
+        this.homereturn.addMouseListener(new SaveListener("return", this, 0));
 
         this.saveload = new JButton(new ImageIcon(this.saveI));
         this.saveload.setBorder(BorderFactory.createEmptyBorder());
         this.saveload.setContentAreaFilled(false);
         this.saveload.setFocusPainted(false);
-        this.saveload.addMouseListener(new SaveListener("save"));
+        this.saveload.addMouseListener(new SaveListener("save", this, 0));
+
+        for (int i = 0; i < this.slots.length; i++) {
+            this.slots[i] = new JButton(new ImageIcon(slot));
+            this.slots[i].setBorder(BorderFactory.createEmptyBorder());
+            this.slots[i].setContentAreaFilled(false);
+            this.slots[i].setFocusPainted(false);
+            this.slots[i].addMouseListener(new SaveListener("slot", this, i + 1));
+            this.add(this.slots[i]);
+        }
         this.add(this.homereturn);
         this.add(this.saveload);
         this.addComponentListener(listener);
@@ -72,11 +84,6 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(this.backgroundsave, 0, 0, this.getWidth(), this.getHeight(), null);
-
-        if (callResize == true) {
-            this.listener.componentResized(null);
-            this.callResize = false;
-        }
     }
 
     public JButton getHomereturn() {
@@ -95,6 +102,18 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
 
     public Game_INTERFACE getGame() {
         return game;
+    }
+
+    public int getSlotnumber() {
+        return slotnumber;
+    }
+
+    public void setSlotnumber(int slotnumber) {
+        this.slotnumber = slotnumber;
+    }
+
+    public JButton getSlots(int i) {
+        return this.slots[i-1];
     }
 
 }

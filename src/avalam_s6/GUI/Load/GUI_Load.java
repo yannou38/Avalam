@@ -31,7 +31,6 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
     private JButton homereturn, saveload;
     private Image backgroundload, homeI, loadI;
     private final LoadAdapterListener listener;
-    private boolean callResize;
 
     public GUI_Load() {
         this.listener = new LoadAdapterListener(this);
@@ -40,13 +39,14 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
 
     private void initComponents() {
         try {
-            this.backgroundload = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/background_load.png"));
-            this.homeI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/home.png"));
-            this.loadI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/load.png"));
+            this.backgroundload = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/load/background_load.png"));
+            this.homeI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/load/home.png"));
+            this.loadI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/load/load.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_Load.class.toString());
             Logger.getLogger(GUI_Load.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         this.homereturn = new JButton(new ImageIcon(this.homeI));
         this.homereturn.setBorder(BorderFactory.createEmptyBorder());
         this.homereturn.setContentAreaFilled(false);
@@ -58,18 +58,15 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         this.saveload.setContentAreaFilled(false);
         this.saveload.setFocusPainted(false);
         this.saveload.addMouseListener(new LoadListener("load"));
+        
         this.add(this.homereturn);
         this.add(this.saveload);
         this.addComponentListener(listener);
     }
+
     @Override
     public void paintComponent(Graphics g) {
-            g.drawImage(this.backgroundload, 0, 0, this.getWidth(), this.getHeight(), null);
-
-        if (callResize == true) {
-            this.listener.componentResized(null);
-            this.callResize = false;
-        }
+        g.drawImage(this.backgroundload, 0, 0, this.getWidth(), this.getHeight(), null);
     }
 
     public JButton getHomereturn() {
@@ -83,11 +80,7 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
     @Override
     public void back() {
         Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
-        
-            mainFrame.setwState(WindowState.MAIN);
-        
+        mainFrame.setwState(WindowState.MAIN);
     }
-    
-    
 
 }

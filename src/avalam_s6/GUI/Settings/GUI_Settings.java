@@ -73,7 +73,6 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
         this.credits.setFocusPainted(false);
         this.credits.addMouseListener(new SettingsListener("credits", this));
 
-        //private JButton leftLanguage, rightlanguage, laftFS, rightFS, leftTheme, rightTheme, leftSound, rightSound;
         this.leftLanguage = new JButton(new ImageIcon(this.leftI));
         this.leftLanguage.setBorder(BorderFactory.createEmptyBorder());
         this.leftLanguage.setContentAreaFilled(false);

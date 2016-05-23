@@ -6,9 +6,7 @@
 package avalam_s6.GUI.Save;
 
 import avalam_s6.Core.Globals.SetupManager;
-import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.Rules.RulesListener;
-import avalam_s6.GUI.WindowState;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -28,9 +26,14 @@ public class SaveListener implements MouseListener {
     private String name;
     private Image icon;
     private Image iconbase;
+    private GUI_Save page;
+    private int slotnumber;
+    private Boolean ishoverable;
 
-    public SaveListener(String buttonname) {
+    public SaveListener(String buttonname, GUI_Save page, int number) {
         this.name = buttonname;
+        this.page = page;
+        this.slotnumber = number;
         try {
             this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/" + this.name + "_h.png"));
             this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/" + this.name + ".png"));
@@ -46,10 +49,13 @@ public class SaveListener implements MouseListener {
         GUI_Save Save = ((GUI_Save) source.getParent());
         switch (this.name) {
             case "save":
-                Save.getGame().save("./ressources/Saves/slot_1");
+                Save.getGame().save("slot_"+this.page.getSlotnumber());
                 break;
             case "return":
                 Save.back();
+                break;
+            case "slot":
+                Save.setSlotnumber(this.slotnumber);
                 break;
         }
         ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));

@@ -30,8 +30,8 @@ public class LoadListener implements MouseListener {
     public LoadListener(String buttonname) {
         this.name = buttonname;
         try {
-            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/" + this.name + "_h.png"));
-            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/" + this.name + ".png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/load/" + this.name + "_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/load/" + this.name + ".png"));
         } catch (Exception ex) {
             System.out.println("Error - " + RulesListener.class.toString());
             Logger.getLogger(RulesListener.class.getName()).log(Level.SEVERE, null, ex);
