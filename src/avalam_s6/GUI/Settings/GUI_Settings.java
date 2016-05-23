@@ -8,6 +8,7 @@ package avalam_s6.GUI.Settings;
 import avalam_s6.Core.Globals.LanguageManager;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Core.Globals.ThemesLister;
+import avalam_s6.GUI.Gui_INTERFACE;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +21,7 @@ import javax.swing.*;
  *
  * @author ducruyy
  */
-public class GUI_Settings extends JPanel {
+public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     private Image applyI, background, creditsI, returnI, leftI, rightI;
     private JButton apply, retour, credits;
@@ -351,5 +352,10 @@ public class GUI_Settings extends JPanel {
     public String getSelectedSound() {
         return this.Sound[this.SoundSelected];
 
+    }
+
+    @Override
+    public void back() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

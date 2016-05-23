@@ -40,9 +40,8 @@ public class RulesListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
-        GUI_Rules Credits = ((GUI_Rules)source.getParent());
-        Main_Frame mainFrame = ((Main_Frame)Credits.getParent().getParent().getParent().getParent());
-            mainFrame.setwState(WindowState.MAIN);   
+        GUI_Rules rules = ((GUI_Rules)source.getParent());
+        rules.back();
         ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
