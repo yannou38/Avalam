@@ -11,7 +11,9 @@ import avalam_s6.Core.*;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Exceptions.GridCharException;
 import avalam_s6.Exceptions.GridSizeException;
+import avalam_s6.GUI.Gui_INTERFACE;
 import avalam_s6.GUI.Main_Frame;
+import avalam_s6.GUI.WindowState;
 import avalam_s6.Player.*;
 import java.awt.*;
 import java.io.*;
@@ -23,7 +25,7 @@ import javax.swing.*;
  *
  * @author sazeratj
  */
-public class GUI_LAG extends JPanel {
+public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     private Game_INTERFACE game;
     private final boolean player1IsPlaying;
@@ -364,5 +366,12 @@ public class GUI_LAG extends JPanel {
 
     public Game_INTERFACE getGame() {
         return this.game;
+    }
+
+    @Override
+    public void back() {
+        Main_Frame mainFrame = ((Main_Frame)this.getParent().getParent().getParent().getParent());
+        this.stop();
+        mainFrame.setwState(WindowState.MAIN);
     }
 }

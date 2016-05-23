@@ -7,6 +7,7 @@ package avalam_s6.GUI.Save;
 
 import avalam_s6.Core.Game_INTERFACE;
 import avalam_s6.Core.Globals.SetupManager;
+import avalam_s6.GUI.Gui_INTERFACE;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -22,7 +23,7 @@ import javax.swing.JPanel;
  *
  * @author ducruyy
  */
-public class GUI_Save extends JPanel {
+public class GUI_Save extends JPanel implements Gui_INTERFACE {
 
     private JButton homereturn, saveload;
     private Image backgroundload, backgroundsave, homeI, loadI, saveI, returnI;
@@ -33,8 +34,16 @@ public class GUI_Save extends JPanel {
 
     private enum SaveState {
 
-        SAVE,
-        LOAD;
+        SAVE(0),
+        LOAD(1);
+        
+        private final int value;
+        private SaveState(int value) {
+            this.value = value;
+        }
+        public int getValue() {
+            return this.value;
+        }
     }
 
     public GUI_Save() {
@@ -110,6 +119,11 @@ public class GUI_Save extends JPanel {
 
     public JButton getSaveload() {
         return saveload;
+    }
+    
+    @Override
+    public void back() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

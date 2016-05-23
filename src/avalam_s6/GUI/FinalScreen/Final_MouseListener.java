@@ -40,8 +40,7 @@ public class Final_MouseListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
         GUI_FinalScreen fs = ((GUI_FinalScreen)source.getParent());
-        Main_Frame mainFrame = ((Main_Frame)fs.getParent().getParent().getParent().getParent());
-        mainFrame.setwState(WindowState.MAIN);
+        fs.back();
         ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 

@@ -10,6 +10,9 @@ import avalam_s6.Core.CellState;
 import avalam_s6.Core.Coordinate;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Core.Grid;
+import avalam_s6.GUI.Gui_INTERFACE;
+import avalam_s6.GUI.Main_Frame;
+import avalam_s6.GUI.WindowState;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -32,7 +35,7 @@ import javax.swing.JPanel;
  *
  * @author sazeratj
  */
-public class GUI_FinalScreen extends JPanel {
+public class GUI_FinalScreen extends JPanel implements Gui_INTERFACE{
 
     private Image background, homeI, black, white, empty;
     private JLabel victoryText;
@@ -163,5 +166,11 @@ public class GUI_FinalScreen extends JPanel {
 
     public JPanel getGrille() {
         return this.grille;
+    }
+
+    @Override
+    public void back() {
+        Main_Frame mainFrame = ((Main_Frame)this.getParent().getParent().getParent().getParent());
+        mainFrame.setwState(WindowState.MAIN);
     }
 }

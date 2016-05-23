@@ -48,7 +48,6 @@ public class SaveListener implements MouseListener {
         mainFrame.setwState(WindowState.MAIN);
         switch (this.name) {
             case "save":
-                
                 break;
             case "load":
                 break;

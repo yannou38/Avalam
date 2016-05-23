@@ -7,6 +7,9 @@ package avalam_s6.GUI.NewGame;
 
 import avalam_s6.Core.Globals.LanguageManager;
 import avalam_s6.Core.Globals.SetupManager;
+import avalam_s6.GUI.Gui_INTERFACE;
+import avalam_s6.GUI.Main_Frame;
+import avalam_s6.GUI.WindowState;
 import java.awt.*;
 import java.io.File;
 import java.util.logging.Level;
@@ -18,7 +21,7 @@ import javax.swing.*;
  *
  * @author ducruyy
  */
-public class GUI_NewGame extends JPanel {
+public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
 
     private JButton prec1, sup1, prec2, sup2, retour, start;
     private Image background, precI, supI, returnI, startI;
@@ -357,6 +360,12 @@ public class GUI_NewGame extends JPanel {
         p2[0] = this.ColorList[this.p2colorselect];
         p2[1] = this.AIlist[this.p2select];
         return p2;
+    }
+
+    @Override
+    public void back() {
+        Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
+        mainFrame.setwState(WindowState.MAIN);
     }
 
 }

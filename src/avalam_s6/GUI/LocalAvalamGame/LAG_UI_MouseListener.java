@@ -48,8 +48,7 @@ public class LAG_UI_MouseListener implements MouseListener {
         Local_Avalam_Game game = ((Local_Avalam_Game) lag.getGame());
         switch (this.name){
             case "return" :
-                lag.stop();
-                mainFrame.setwState(WindowState.MAIN);                
+                lag.back();
                 break;
             case "redo" :
                 if(game.getCancelled_moves().size() > 0){

@@ -44,7 +44,7 @@ public class HomePageListener implements MouseListener {
         Main_Frame mainFrame = ((Main_Frame) homePage.getParent().getParent().getParent().getParent());
         switch (this.name) {
             case "quit":
-                mainFrame.dispose();
+                homePage.back();
                 break;
             case "quickgame":
                 mainFrame.initGame();

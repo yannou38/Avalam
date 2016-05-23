@@ -64,7 +64,7 @@ public class GUI_Credits extends JPanel implements Gui_INTERFACE {
     @Override
     public void back() {
         Main_Frame mainFrame = ((Main_Frame)this.getParent().getParent().getParent().getParent());
-            mainFrame.setwState(WindowState.MAIN);  
+        mainFrame.setwState(WindowState.MAIN);  
     }
     
     
