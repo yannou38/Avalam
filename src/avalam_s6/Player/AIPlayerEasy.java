@@ -16,7 +16,7 @@ import java.util.Random;
  */
 public class AIPlayerEasy extends AIPlayer {
     
-    private final static int nerf = 87;
+    private final static int nerf = 60;
 
     public AIPlayerEasy(String name, Color color, Owner owner) {
         super(name, color, owner);
