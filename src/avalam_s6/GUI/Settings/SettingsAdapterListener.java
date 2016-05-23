@@ -48,7 +48,7 @@ public class SettingsAdapterListener implements ComponentListener{
         this.page.getLabelLanguage().setSize((int) round(this.page.getLabelLanguage().getWidth() * ratioW), (int) round(this.page.getLabelLanguage().getHeight() * ratioH));
         
         size = this.page.getLabelFS().getPreferredSize();
-        this.page.getLabelFS().setBounds((int) round((1050 + insets.left) * ratioW), ((int) round((383 + insets.top) * ratioH)), size.width*3/2, size.height*3/2);
+        this.page.getLabelFS().setBounds((int) round((1050 + insets.left) * ratioW), ((int) round((380 + insets.top) * ratioH)), size.width*3/2, size.height*3/2);
         this.page.getLabelFS().setSize((int) round(this.page.getLabelFS().getWidth() * ratioW), (int) round(this.page.getLabelFS().getHeight() * ratioH));        
         
         size = this.page.getLabelTheme().getPreferredSize();
@@ -61,36 +61,36 @@ public class SettingsAdapterListener implements ComponentListener{
         
         //left & right
         size = this.page.getLeftLanguage().getPreferredSize();
-        this.page.getLeftLanguage().setBounds((int) round((300 + insets.left) * ratioW), ((int) round((225 + insets.top) * ratioH)), size.width*3/2, size.height*3/2);
+        this.page.getLeftLanguage().setBounds((int) round((340 + insets.left) * ratioW), ((int) round((215 + insets.top) * ratioH)), size.width*3/2-20, size.height*3/2-20);
         this.page.getLeftLanguage().setSize((int) round(this.page.getLeftLanguage().getWidth() * ratioW), (int) round(this.page.getLeftLanguage().getHeight() * ratioH));
         
         size = this.page.getLeftFS().getPreferredSize();
-        this.page.getLeftFS().setBounds((int) round((300 + insets.left) * ratioW), ((int) round((338 + insets.top) * ratioH)), size.width*3/2, size.height*3/2);
+        this.page.getLeftFS().setBounds((int) round((340 + insets.left) * ratioW), ((int) round((385 + insets.top) * ratioH)), size.width*3/2-20, size.height*3/2-20);
         this.page.getLeftFS().setSize((int) round(this.page.getLeftFS().getWidth() * ratioW), (int) round(this.page.getLeftFS().getHeight() * ratioH));        
         
         size = this.page.getLeftTheme().getPreferredSize();
-        this.page.getLeftTheme().setBounds((int) round((300 + insets.left) * ratioW), ((int) round((540 + insets.top) * ratioH)), size.width*3/2, size.height*3/2);
+        this.page.getLeftTheme().setBounds((int) round((340 + insets.left) * ratioW), ((int) round((550 + insets.top) * ratioH)), size.width*3/2-20, size.height*3/2-20);
         this.page.getLeftTheme().setSize((int) round(this.page.getLeftTheme().getWidth() * ratioW), (int) round(this.page.getLeftTheme().getHeight() * ratioH));
         
         size = this.page.getLeftSound().getPreferredSize();
-        this.page.getLeftSound().setBounds((int) round((300 + insets.left) * ratioW), ((int) round((698 + insets.top) * ratioH)), size.width*3/2, size.height*3/2);
+        this.page.getLeftSound().setBounds((int) round((340 + insets.left) * ratioW), ((int) round((715 + insets.top) * ratioH)), size.width*3/2-20, size.height*3/2-20);
         this.page.getLeftSound().setSize((int) round(this.page.getLeftSound().getWidth() * ratioW), (int) round(this.page.getLeftSound().getHeight() * ratioH));
         
         
         size = this.page.getRightLanguage().getPreferredSize();
-        this.page.getRightLanguage().setBounds((int) round((1470 + insets.left) * ratioW), ((int) round((225 + insets.top) * ratioH)), size.width*3/2, size.height*3/2);
+        this.page.getRightLanguage().setBounds((int) round((1510 + insets.left) * ratioW), ((int) round((215 + insets.top) * ratioH)), size.width*3/2-20, size.height*3/2-20);
         this.page.getRightLanguage().setSize((int) round(this.page.getRightLanguage().getWidth() * ratioW), (int) round(this.page.getRightLanguage().getHeight() * ratioH));
         
         size = this.page.getRightFS().getPreferredSize();
-        this.page.getRightFS().setBounds((int) round((1470 + insets.left) * ratioW), ((int) round((383 + insets.top) * ratioH)), size.width*3/2, size.height*3/2);
+        this.page.getRightFS().setBounds((int) round((1510 + insets.left) * ratioW), ((int) round((385 + insets.top) * ratioH)), size.width*3/2-20, size.height*3/2-20);
         this.page.getRightFS().setSize((int) round(this.page.getRightFS().getWidth() * ratioW), (int) round(this.page.getRightFS().getHeight() * ratioH));        
         
         size = this.page.getRightTheme().getPreferredSize();
-        this.page.getRightTheme().setBounds((int) round((1470 + insets.left) * ratioW), ((int) round((540 + insets.top) * ratioH)), size.width*3/2, size.height*3/2);
+        this.page.getRightTheme().setBounds((int) round((1510 + insets.left) * ratioW), ((int) round((550 + insets.top) * ratioH)), size.width*3/2-20, size.height*3/2-20);
         this.page.getRightTheme().setSize((int) round(this.page.getRightTheme().getWidth() * ratioW), (int) round(this.page.getRightTheme().getHeight() * ratioH));
         
         size = this.page.getRightSound().getPreferredSize();
-        this.page.getRightSound().setBounds((int) round((1470 + insets.left) * ratioW), ((int) round((698 + insets.top) * ratioH)), size.width*3/2, size.height*3/2);
+        this.page.getRightSound().setBounds((int) round((1510 + insets.left) * ratioW), ((int) round((715 + insets.top) * ratioH)), size.width*3/2-20, size.height*3/2-20);
         this.page.getRightSound().setSize((int) round(this.page.getRightSound().getWidth() * ratioW), (int) round(this.page.getRightSound().getHeight() * ratioH));
         
         
