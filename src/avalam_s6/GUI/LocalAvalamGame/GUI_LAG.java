@@ -34,11 +34,15 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     private JButton undoB, redoB, retourB, saveB;
     private Image background, cancel, player_playing, player_waiting, redo, retour, save, board, black, white, empty, restricted, w_selected, b_selected, w_possible, b_possible;
     private final JButton[][] buttonmap;
+    private boolean callResize;
+    private final LAG_AdapterListener listener;
 
     /**
      * Constructor.
      */
     public GUI_LAG() {
+        this.callResize = false;
+        this.listener = new LAG_AdapterListener(this);
         this.buttonmap = new JButton[9][9];
         this.initComponents();
         this.player1IsPlaying = true;
@@ -118,7 +122,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.saveB.addMouseListener(new LAG_UI_MouseListener("save"));
         this.add(this.saveB);
 
-        this.addComponentListener(new LAG_AdapterListener(this));
+        this.addComponentListener(this.listener);
     }
 
     public void initGame() {
@@ -290,6 +294,10 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                 this.buttonmap[i][j].setOpaque(false);
             }
         }
+        if(this.callResize){
+            this.listener.componentResized(null);
+            this.callResize = false;
+        }
     }
 
     public JButton getUndoB() {
@@ -321,5 +329,10 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         Main_Frame mainFrame = ((Main_Frame)this.getParent().getParent().getParent().getParent());
         this.stop();
         mainFrame.setwState(WindowState.MAIN);
+    }
+
+    @Override
+    public void callResize() {
+        this.callResize = true;
     }
 }

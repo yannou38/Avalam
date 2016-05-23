@@ -44,11 +44,15 @@ public class GUI_FinalScreen extends JPanel implements Gui_INTERFACE{
 
     private Grid finalGrid;
     JButton[][] buttonmap;
+    private boolean callResize;
+    private final Final_AdapterListener listener;
 
     public GUI_FinalScreen() {
         this.victoryText = new JLabel();
         this.finalGrid = null;
         this.buttonmap = new JButton[9][9];
+        this.callResize = false;
+        this.listener = new Final_AdapterListener(this);
         this.initComponents();
     }
 
@@ -105,7 +109,7 @@ public class GUI_FinalScreen extends JPanel implements Gui_INTERFACE{
         this.setLayout(null);
         this.add(this.victoryText);
         this.add(this.home);
-        this.addComponentListener(new Final_AdapterListener(this));
+        this.addComponentListener(this.listener);
     }
 
     public void setGrid(Grid g) {
@@ -152,8 +156,10 @@ public class GUI_FinalScreen extends JPanel implements Gui_INTERFACE{
             }
         }
         
-        
-
+        if(this.callResize){
+            this.listener.componentResized(null);
+            this.callResize = false;
+        }
     }
 
     public JLabel getVictoryText() {
@@ -172,5 +178,10 @@ public class GUI_FinalScreen extends JPanel implements Gui_INTERFACE{
     public void back() {
         Main_Frame mainFrame = ((Main_Frame)this.getParent().getParent().getParent().getParent());
         mainFrame.setwState(WindowState.MAIN);
+    }
+    
+    @Override
+    public void callResize(){
+        this.callResize = true;
     }
 }

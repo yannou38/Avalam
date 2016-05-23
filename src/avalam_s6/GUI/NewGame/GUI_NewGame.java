@@ -404,4 +404,9 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         mainFrame.setwState(WindowState.MAIN);
     }
 
+    @Override
+    public void callResize() {
+        this.callResize = true;
+    }
+
 }

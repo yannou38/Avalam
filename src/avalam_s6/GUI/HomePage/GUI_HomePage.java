@@ -27,8 +27,12 @@ public class GUI_HomePage extends JPanel implements Gui_INTERFACE {
 
     private JButton quick, play, settings, rules, exit, load;
     private Image background, quickI, playI, settingsI, rulesI, loadI, exitI;
+    private boolean callResize;
+    private final HomePageAdapterListener listener;
 
     public GUI_HomePage() {
+        this.callResize = false;
+        this.listener = new HomePageAdapterListener(this);
         initComponents();
     }
 
@@ -90,14 +94,17 @@ public class GUI_HomePage extends JPanel implements Gui_INTERFACE {
         this.add(this.settings);
         this.add(this.exit);
         this.add(load);
-        this.addComponentListener(new HomePageAdapterListener(this));
+        this.addComponentListener(this.listener);
 
     }
 
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
-
+        if(this.callResize){
+            this.listener.componentResized(null);
+            this.callResize = false;
+        }
     }
 
     public JButton getQuick() {
@@ -128,6 +135,11 @@ public class GUI_HomePage extends JPanel implements Gui_INTERFACE {
     public void back() {
         Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
         mainFrame.dispose();
+    }
+
+    @Override
+    public void callResize() {
+        this.callResize = true;
     }
     
     

@@ -31,8 +31,10 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
     private JButton homereturn, saveload;
     private Image backgroundload, homeI, loadI;
     private final LoadAdapterListener listener;
+    private boolean callResize;
 
     public GUI_Load() {
+        this.callResize = false;
         this.listener = new LoadAdapterListener(this);
         initComponents();
     }
@@ -67,6 +69,10 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(this.backgroundload, 0, 0, this.getWidth(), this.getHeight(), null);
+        if(this.callResize){
+            this.listener.componentResized(null);
+            this.callResize = false;
+        }
     }
 
     public JButton getHomereturn() {
@@ -82,5 +88,12 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
         mainFrame.setwState(WindowState.MAIN);
     }
+
+    @Override
+    public void callResize() {
+        this.callResize = true;
+    }
+    
+    
 
 }

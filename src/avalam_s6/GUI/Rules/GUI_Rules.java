@@ -23,9 +23,13 @@ import javax.swing.*;
 public class GUI_Rules extends JPanel implements Gui_INTERFACE {
     private JButton retour;
     private Image returnI,background;
+    private boolean callResize;
+    private final RulesAdapterListener listener;
     
     
     public GUI_Rules() {
+        this.callResize = false;
+        this.listener = new RulesAdapterListener(this);
         this.initComponents();
     }
 
@@ -47,13 +51,17 @@ public class GUI_Rules extends JPanel implements Gui_INTERFACE {
 
         this.setLayout(null);
         this.add(this.retour);    
-        this.addComponentListener(new RulesAdapterListener(this));
+        this.addComponentListener(this.listener);
         
     }
 
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(this.background, 0, 0, this.getWidth(),this.getHeight(),null);
+        if(this.callResize){
+            this.listener.componentResized(null);
+            this.callResize = false;
+        }
         
     }
 
@@ -67,5 +75,9 @@ public class GUI_Rules extends JPanel implements Gui_INTERFACE {
         mainFrame.setwState(WindowState.MAIN); 
     }
     
+    @Override
+    public void callResize(){
+        this.callResize = true;
+    }
     
 }

@@ -51,7 +51,7 @@ public class GUI_Credits extends JPanel implements Gui_INTERFACE {
 
         this.setLayout(null);
         this.add(this.retour);    
-        this.addComponentListener(new CreditsAdapterListener(this));
+        this.addComponentListener(this.listener);
         
     }
 

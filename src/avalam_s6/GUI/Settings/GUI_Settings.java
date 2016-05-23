@@ -169,7 +169,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
-        if (this.callResize == true) {
+        if (this.callResize) {
             this.listener.componentResized(null);
             this.callResize = false;
         }
@@ -330,6 +330,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
         this.callResize();
     }
 
+    @Override
     public void callResize() {
         this.callResize = true;
     }
