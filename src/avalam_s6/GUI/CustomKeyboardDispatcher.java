@@ -28,6 +28,8 @@ public class CustomKeyboardDispatcher implements KeyEventDispatcher {
             this.mainframe.toggleWRM();
         } else if (e.getID() == KeyEvent.KEY_RELEASED && e.getKeyCode() == VK_ESCAPE) {
             this.mainframe.backWindow();
+        } else {
+            return false;
         }
         return true;
     }

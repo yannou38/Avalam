@@ -20,6 +20,8 @@ import avalam_s6.GUI.Save.GUI_Save;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import static java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
