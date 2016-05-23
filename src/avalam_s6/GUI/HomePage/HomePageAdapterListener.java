@@ -29,29 +29,29 @@ public class HomePageAdapterListener implements ComponentListener {
         double ratioW = (double) this.hm.getWidth() / (double) 1920;
         double ratioH = (double) this.hm.getHeight() / (double) 1080;
         Dimension size = this.hm.getQuick().getPreferredSize();
-        this.hm.getQuick().setBounds((int) round((603 + insets.left) * ratioW), ((int) round((473 + insets.top) * ratioH)), size.width, size.height);
+        this.hm.getQuick().setBounds((int) round((453 + insets.left) * ratioW), ((int) round((453 + insets.top) * ratioH)), size.width*3/2, size.height*3/2);
         this.hm.getQuick().setSize((int) round(this.hm.getQuick().getWidth() * ratioW), (int) round(this.hm.getQuick().getHeight() * ratioH));
 
         size = this.hm.getPlay().getPreferredSize();
-        this.hm.getPlay().setBounds((int) round((603 + insets.left) * ratioW), ((int) round((623 + insets.top) * ratioH)), size.width, size.height);
+        this.hm.getPlay().setBounds((int) round((453 + insets.left) * ratioW), ((int) round((603 + insets.top) * ratioH)), size.width*3/2, size.height*3/2);
         this.hm.getPlay().setSize((int) round(this.hm.getPlay().getWidth() * ratioW), (int) round(this.hm.getPlay().getHeight() * ratioH));
 
         size = this.hm.getRules().getPreferredSize();
-        this.hm.getRules().setBounds((int) round((513 + insets.left) * ratioW), ((int) round((773 + insets.top) * ratioH)), size.width, size.height);
+        this.hm.getRules().setBounds((int) round((453 + insets.left) * ratioW), ((int) round((753 + insets.top) * ratioH)), size.width*3/2, size.height*3/2);
         this.hm.getRules().setSize((int) round(this.hm.getRules().getWidth() * ratioW), (int) round(this.hm.getRules().getHeight() * ratioH));
         
         
         size = this.hm.getLoad().getPreferredSize();
-        this.hm.getLoad().setBounds((int) round((852 + insets.left) * ratioW), ((int) round((773 + insets.top) * ratioH)), size.width, size.height);
+        this.hm.getLoad().setBounds((int) round((792 + insets.left) * ratioW), ((int) round((753 + insets.top) * ratioH)), size.width*3/2, size.height*3/2);
         this.hm.getLoad().setSize((int) round(this.hm.getLoad().getWidth() * ratioW), (int) round(this.hm.getLoad().getHeight() * ratioH));
 
 
         size = this.hm.getSettings().getPreferredSize();
-        this.hm.getSettings().setBounds((int) round((1180 + insets.left) * ratioW), ((int) round((773 + insets.top) * ratioH)), size.width, size.height);
+        this.hm.getSettings().setBounds((int) round((1130 + insets.left) * ratioW), ((int) round((753 + insets.top) * ratioH)), size.width*3/2, size.height*3/2);
         this.hm.getSettings().setSize((int) round(this.hm.getSettings().getWidth() * ratioW), (int) round(this.hm.getSettings().getHeight() * ratioH));
 
         size = this.hm.getExit().getPreferredSize();
-        this.hm.getExit().setBounds((int) round((1721 + insets.left) * ratioW), ((int) round((1000 + insets.top) * ratioH)), size.width, size.height);
+        this.hm.getExit().setBounds((int) round((1688 + insets.left) * ratioW), ((int) round((988 + insets.top) * ratioH)), size.width*3/2+2, size.height*3/2+2);
         this.hm.getExit().setSize((int) round(this.hm.getExit().getWidth() * ratioW), (int) round(this.hm.getExit().getHeight() * ratioH));
     }
 
