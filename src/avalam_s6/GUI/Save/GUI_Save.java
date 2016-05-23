@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI.Save;
 
+import avalam_s6.Core.Game_INTERFACE;
 import avalam_s6.Core.Globals.SetupManager;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -12,6 +13,8 @@ import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -27,6 +30,7 @@ public class GUI_Save extends JPanel {
     private final SaveAdapterListener listener;
 
     private enum SaveState {
+
         SAVE,
         LOAD;
     }
@@ -49,13 +53,35 @@ public class GUI_Save extends JPanel {
             System.out.println("Error - " + GUI_Save.class.toString());
             Logger.getLogger(GUI_Save.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.homereturn = new JButton(new ImageIcon(this.returnI));        
+        this.homereturn.setBorder(BorderFactory.createEmptyBorder());
+        this.homereturn.setContentAreaFilled(false);
+        this.homereturn.setFocusPainted(false);
+        this.homereturn.addMouseListener(new SaveListener("return"));
+        
+        this.saveload = new JButton(new ImageIcon(this.saveI));        
+        this.saveload.setBorder(BorderFactory.createEmptyBorder());
+        this.saveload.setContentAreaFilled(false);
+        this.saveload.setFocusPainted(false);
+        this.saveload.addMouseListener(new SaveListener("save"));
+        
+        
+        this.add(this.homereturn);
+        this.add(this.saveload);
+        this.addComponentListener(listener);
     }
 
-    public void setState(int etat) {
+    public void reload(int etat, Game_INTERFACE game) {
         //0 pour save, 1 pour load
-        this.etat = SaveState.SAVE;
         if (etat == 1) {
             this.etat = SaveState.LOAD;
+            this.homereturn.setIcon(new ImageIcon(this.homeI));
+            this.saveload.setIcon(new ImageIcon(this.loadI));
+        } 
+        else {
+            this.etat = SaveState.SAVE;
+            this.homereturn.setIcon(new ImageIcon(this.returnI));
+            this.saveload.setIcon(new ImageIcon(this.saveI));
         }
     }
 
@@ -67,4 +93,14 @@ public class GUI_Save extends JPanel {
             g.drawImage(this.backgroundload, 0, 0, this.getWidth(), this.getHeight(), null);
         }
     }
+
+    public JButton getHomereturn() {
+        return homereturn;
+    }
+
+    public JButton getSaveload() {
+        return saveload;
+    }
+    
+    
 }
