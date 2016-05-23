@@ -27,10 +27,10 @@ public class CreditsAdapterListener implements ComponentListener {
     public void componentResized(ComponentEvent e) {
         Insets insets = this.cr.getInsets();
         //1280*720 => taille de base
-        double ratioW = (double) this.cr.getWidth() / (double) 1280;
-        double ratioH = (double) this.cr.getHeight() / (double) 720;
+        double ratioW = (double) this.cr.getWidth() / (double) 1920;
+        double ratioH = (double) this.cr.getHeight() / (double) 1080;
         Dimension size = this.cr.getRetour().getPreferredSize();
-        this.cr.getRetour().setBounds((int) round((20 + insets.left) * ratioW), ((int) round((625 + insets.top) * ratioH)), size.width, size.height);
+        this.cr.getRetour().setBounds((int) round((20 + insets.left) * ratioW), ((int) round((930 + insets.top) * ratioH)), size.width, size.height);
         this.cr.getRetour().setSize((int) round(this.cr.getRetour().getWidth() * ratioW), (int) round(this.cr.getRetour().getHeight() * ratioH));
     }
 
