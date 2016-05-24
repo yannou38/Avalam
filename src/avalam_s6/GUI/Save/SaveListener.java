@@ -52,23 +52,22 @@ public class SaveListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
-        GUI_Save Save = ((GUI_Save) source.getParent());
         switch (this.name) {
             case "save":
                 if (this.page.getSlotnumber() == 0) {
                     //no slot selected, do nothing
                     break;
                 } else if (this.page.getSlotnumber() == 6) {
-                    Save.getGame().save(this.page.getField().getText());
+                    this.page.getGame().save(this.page.getField().getText());
                 } else {
-                    Save.getGame().save("slot_" + this.page.getSlotnumber());
+                    this.page.getGame().save("slot_" + this.page.getSlotnumber());
                 }
-                Save.back();
-                ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
+                this.page.back();
+                source.setIcon(new ImageIcon(this.iconbase));
                 break;
             case "return":
-                Save.back();
-                ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
+                this.page.back();
+                source.setIcon(new ImageIcon(this.iconbase));
                 break;
             case "slot":
                 for (int i = 1; i < this.page.getSlotslistener().length + 1; i++) {
@@ -83,7 +82,7 @@ public class SaveListener implements MouseListener {
 
                 }
                 source.setIcon(new ImageIcon(this.iconselect));
-                Save.setSlotnumber(this.slotnumber);
+                this.page.setSlotnumber(this.slotnumber);
                 break;
         }
 

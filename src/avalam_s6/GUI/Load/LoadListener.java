@@ -27,10 +27,19 @@ public class LoadListener implements MouseListener {
     private Image icon;
     private Image iconbase;
     private GUI_Load page;
+    private Boolean isSelected;
+    private int slotnumber;
+    private Image iconselect;
 
-    public LoadListener(String buttonname) {
+    public LoadListener(String buttonname, GUI_Load page, int number) {
         this.name = buttonname;
+        this.isSelected = false;
+        this.page = page;
+        this.slotnumber = number;
         try {
+            if (this.name.equals("slot")) {
+                this.iconselect = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/load/" + this.name + "_selected.png"));
+            }
             this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/load/" + this.name + "_h.png"));
             this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/load/" + this.name + ".png"));
         } catch (Exception ex) {
@@ -42,16 +51,30 @@ public class LoadListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
-        GUI_Load Save = ((GUI_Load) source.getParent());
-        switch (this.name) {            
+        switch (this.name) {
             case "load":
-                Save.getGame().load("slot_1");
+                //this.page.getGame().load("slot_"+this.page.getSlotnumber());
+                source.setIcon(new ImageIcon(this.iconbase));
                 break;
             case "home":
-                Save.back();
+                this.page.back();
+                source.setIcon(new ImageIcon(this.iconbase));
+                break;
+
+            case "slot":
+                for (int i = 1; i < this.page.getSlotslistener().length + 1; i++) {
+                    this.page.getSlotslistener(i).setIsSelected(false);
+                    this.page.getSlots(i).setIcon(new ImageIcon(this.iconbase));
+                }
+                this.isSelected = true;
+                if (this.slotnumber == 6) {
+                    this.page.getField().setText("");
+                    this.page.getField().requestFocus();
+                }
+                source.setIcon(new ImageIcon(this.iconselect));
+                this.page.setSlotnumber(this.slotnumber);
                 break;
         }
-        ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
     @Override
@@ -65,13 +88,21 @@ public class LoadListener implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         //replace the icon with another
-        ((JButton) e.getSource()).setIcon(new ImageIcon(this.icon));
+        if (this.isSelected == false) {
+            ((JButton) e.getSource()).setIcon(new ImageIcon(this.icon));
+        }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         //replace the icon with another
-        ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
+        if (this.isSelected == false) {
+            ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
+        }
+    }
+
+    public void setIsSelected(Boolean isSelected) {
+        this.isSelected = isSelected;
     }
 
 }
