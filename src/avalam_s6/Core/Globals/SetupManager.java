@@ -40,6 +40,8 @@ public class SetupManager {
         }
         LanguageManager.setLanguage(SetupManager.getElement("Langue"));
         DefaultLevelGenerator.generate();
+        SaveSlotsGenerator.generate();
+        SoundEngine.init();
     }
     
     public static String getElement(String s) {

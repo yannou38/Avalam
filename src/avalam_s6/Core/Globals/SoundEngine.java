@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package avalam_s6.Core.SoundEngine;
+package avalam_s6.Core.Globals;
 
 import java.io.File;
 import java.io.IOException;
