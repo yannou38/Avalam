@@ -7,6 +7,7 @@ package avalam_s6.GUI.Load;
 
 import avalam_s6.GUI.Save.*;
 import avalam_s6.Core.Game_INTERFACE;
+import avalam_s6.Core.Globals.SaveInfoLister;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.GUI.Gui_INTERFACE;
 import avalam_s6.GUI.Main_Frame;
@@ -24,6 +25,7 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -41,6 +43,7 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
     private int slotnumber;
     private final LoadAdapterListener listener;
     private boolean callResize;
+    private final JLabel[] slotlabels;
 
     public GUI_Load() {
         this.callResize = false;
@@ -48,6 +51,7 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         this.slotnumber = 0;
         this.slots = new JButton[6];
         this.slotslistener = new LoadListener[6];
+        this.slotlabels = new JLabel[5];
         initComponents();
     }
 
@@ -91,6 +95,13 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
             this.slotslistener[i] = new LoadListener("slot",this,i+1);
             this.slots[i].addMouseListener(this.slotslistener[i]);
             this.add(this.slots[i]);
+        }
+        for (int i = 0; i < this.slotlabels.length; i++) {
+            int j = i + 1;
+            this.slotlabels[i] = new JLabel("Slot " + j);
+            this.slotlabels[i].setBorder(BorderFactory.createEmptyBorder());
+            this.slotlabels[i].setFont(localFont.deriveFont(1 * 30f));
+            this.add(this.slotlabels[i]);
         }
 
         this.field = new JTextField();
@@ -157,8 +168,30 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
     public int getSlotnumber() {
         return slotnumber;
     }
+
+    public JLabel getSlotlabels(int i) {
+        return this.slotlabels[i-1];
+    }
     
-    
+    public void loadSlotText() {
+        SaveInfoLister sil;
+        int j;
+        for (int i = 0; i < this.slotlabels.length; i++) {
+            j = i + 1;
+            try {
+                sil = new SaveInfoLister("slot_" + j);
+                if (!sil.getEmptyslot()) {
+                    sil = new SaveInfoLister("slot_" + j);
+                    this.slotlabels[i].setFont(this.slotlabels[i].getFont().deriveFont(1 * 30f));
+                    this.slotlabels[i].setText(sil.getDate() + " " + sil.getPlayer1() + " VS " + sil.getPlayer2() + "  " + sil.getGrid());
+                }
+
+            } catch (IOException ex) {
+                //ne pas traiter => on laisse le texte par défaut
+            }
+        }
+        this.callResize();
+    }
 
     
 }

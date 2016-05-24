@@ -42,7 +42,7 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
     private Image backgroundsave, saveI, returnI, slot;
     private final SaveAdapterListener listener;
     private Boolean callResize;
-    private JLabel[] slotlabels;
+    private final JLabel[] slotlabels;
 
     public GUI_Save() {
         this.listener = new SaveAdapterListener(this);
@@ -102,8 +102,6 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
             this.slotlabels[i].setFont(localFont.deriveFont(1 * 30f));
             this.add(this.slotlabels[i]);
         }
-
-        this.slots[this.slots.length - 1].setText("");
 
         this.field = new JTextField();
         this.field.setFont(localFont.deriveFont(45f));

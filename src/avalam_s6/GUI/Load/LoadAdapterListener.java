@@ -65,6 +65,27 @@ public class LoadAdapterListener implements ComponentListener {
         this.page.getField().setBounds((int) round((810 + insets.left) * ratioW), ((int) round((788 + insets.top) * ratioH)), size.width, size.height);
         this.page.getField().setSize((int) round(this.page.getField().getWidth() * ratioW), (int) round(this.page.getField().getHeight() * ratioH));
 
+        
+         size = this.page.getSlotlabels(1).getPreferredSize();
+        this.page.getSlotlabels(1).setBounds((int) round((((this.page.getWidth() / 2) - size.getWidth() / 2) + insets.left)), ((int) round((255 + insets.top) * ratioH)), size.width, size.height);
+        this.page.getSlotlabels(1).setSize((int) round(this.page.getSlotlabels(1).getWidth() * ratioW), (int) round(this.page.getSlotlabels(1).getHeight() * ratioH));
+
+        size = this.page.getSlotlabels(2).getPreferredSize();
+        this.page.getSlotlabels(2).setBounds((int) round((((this.page.getWidth() / 2) - size.getWidth() / 2) + insets.left)), ((int) round((360 + insets.top) * ratioH)), size.width, size.height);
+        this.page.getSlotlabels(2).setSize((int) round(this.page.getSlotlabels(2).getWidth() * ratioW), (int) round(this.page.getSlotlabels(2).getHeight() * ratioH));
+
+        size = this.page.getSlotlabels(3).getPreferredSize();
+        this.page.getSlotlabels(3).setBounds((int) round((((this.page.getWidth() / 2) - size.getWidth() / 2) + insets.left)), ((int) round((465 + insets.top) * ratioH)), size.width, size.height);
+        this.page.getSlotlabels(3).setSize((int) round(this.page.getSlotlabels(3).getWidth() * ratioW), (int) round(this.page.getSlotlabels(3).getHeight() * ratioH));
+
+        size = this.page.getSlotlabels(4).getPreferredSize();
+        this.page.getSlotlabels(4).setBounds((int) round((((this.page.getWidth() / 2) - size.getWidth() / 2) + insets.left)), ((int) round((571 + insets.top) * ratioH)), size.width, size.height);
+        this.page.getSlotlabels(4).setSize((int) round(this.page.getSlotlabels(4).getWidth() * ratioW), (int) round(this.page.getSlotlabels(4).getHeight() * ratioH));
+
+        size = this.page.getSlotlabels(5).getPreferredSize();
+        this.page.getSlotlabels(5).setBounds((int) round((((this.page.getWidth() / 2) - size.getWidth() / 2) + insets.left)), ((int) round((677 + insets.top) * ratioH)), size.width, size.height);
+        this.page.getSlotlabels(5).setSize((int) round(this.page.getSlotlabels(5).getWidth() * ratioW), (int) round(this.page.getSlotlabels(5).getHeight() * ratioH));
+
     }
 
     @Override
@@ -73,6 +94,7 @@ public class LoadAdapterListener implements ComponentListener {
 
     @Override
     public void componentShown(ComponentEvent e) {
+        this.page.loadSlotText();
     }
 
     @Override
