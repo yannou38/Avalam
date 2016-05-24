@@ -240,7 +240,7 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
     public JButton getRightP1() {
         return this.sup1;
     }
-
+    
     public JButton getLeftP2() {
         return this.prec2;
     }
@@ -290,7 +290,7 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
             this.callResize = true;
         }
     }
-
+    
     public void rightAI(int numplayer) {
         if (numplayer == 1) {
             this.p1select = (this.p1select + 1) % this.AIlistsize;
@@ -388,16 +388,18 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
     }
 
     String[] loadP1Settings() {
-        String[] p1 = new String[2];
+        String[] p1 = new String[3];
         p1[0] = this.ColorList[this.p1colorselect];
         p1[1] = this.AIlist[this.p1select];
+        p1[2] = this.name1.getText();
         return p1;
     }
 
     String[] loadP2Settings() {
-        String[] p2 = new String[2];
+        String[] p2 = new String[3];
         p2[0] = this.ColorList[this.p2colorselect];
         p2[1] = this.AIlist[this.p2select];
+        p2[2] = this.name2.getText();
         return p2;
     }
 
