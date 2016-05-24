@@ -81,10 +81,10 @@ public class NewGameAdapterListener implements ComponentListener {
         this.ng.getSup2().setSize((int) round(this.ng.getSup2().getWidth() * ratioW), (int) round(this.ng.getSup2().getHeight() * ratioH));
         
         size = this.ng.getName1().getPreferredSize();
-        this.ng.getName1().setBounds((int) round((178 + insets.left) * ratioW), ((int) round((770 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getName1().setBounds((int) round((180 + insets.left) * ratioW), ((int) round((776 + insets.top) * ratioH)), size.width, size.height);
         this.ng.getName1().setSize((int) round(this.ng.getName1().getWidth() * ratioW), (int) round(this.ng.getName1().getHeight() * ratioH));
         size = this.ng.getName2().getPreferredSize();
-        this.ng.getName2().setBounds((int) round((1428 + insets.left) * ratioW), ((int) round((770 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getName2().setBounds((int) round((1432 + insets.left) * ratioW), ((int) round((776 + insets.top) * ratioH)), size.width, size.height);
         this.ng.getName2().setSize((int) round(this.ng.getName2().getWidth() * ratioW), (int) round(this.ng.getName2().getHeight() * ratioH));
         
         
