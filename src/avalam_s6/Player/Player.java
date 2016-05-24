@@ -14,25 +14,27 @@ import avalam_s6.Core.Owner;
  * @author TheDoctor
  */
 public abstract class Player implements Player_INTERFACE {
+
     protected String name;
     protected AvalamColor color;
     protected Owner owner;
-    
+
     public Player(String name, AvalamColor color, Owner owner) {
         this.name = name;
         this.color = color;
         this.owner = owner;
     }
-    
-    @Override
-    public abstract Move play();
-    
-    @Override
-    public abstract boolean isAI();
 
     public AvalamColor getColor() {
         return this.color;
     }
+
+    @Override
+    public abstract Move play();
+
+    @Override
+    public abstract boolean isAI();
+
     @Override
     public String getName() {
         return this.name;

@@ -40,7 +40,7 @@ public class GUI_HomePage extends JPanel implements Gui_INTERFACE {
 
         try {
             this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/main_bg.png"));
-            this.playI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme")+ "/main/customgame.png"));
+            this.playI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/customgame.png"));
             this.quickI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/quickgame.png"));
             this.settingsI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/options.png"));
             this.rulesI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/rules.png"));
@@ -68,7 +68,7 @@ public class GUI_HomePage extends JPanel implements Gui_INTERFACE {
         this.rules.setContentAreaFilled(false);
         this.rules.setFocusPainted(false);
         this.rules.addMouseListener(new HomePageListener("rules"));
-        
+
         this.load = new JButton(new ImageIcon(this.loadI));
         this.load.setBorder(BorderFactory.createEmptyBorder());
         this.load.setContentAreaFilled(false);
@@ -96,15 +96,6 @@ public class GUI_HomePage extends JPanel implements Gui_INTERFACE {
         this.add(load);
         this.addComponentListener(this.listener);
 
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
-        if(this.callResize){
-            this.listener.componentResized(null);
-            this.callResize = false;
-        }
     }
 
     public JButton getQuick() {
@@ -141,8 +132,14 @@ public class GUI_HomePage extends JPanel implements Gui_INTERFACE {
     public void callResize() {
         this.callResize = true;
     }
-    
-    
-    
-    
+
+    @Override
+    public void paintComponent(Graphics g) {
+        g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
+        if (this.callResize) {
+            this.listener.componentResized(null);
+            this.callResize = false;
+        }
+    }
+
 }

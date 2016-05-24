@@ -16,6 +16,7 @@ import static java.lang.Math.round;
  * @author sazeratj
  */
 public class Final_AdapterListener implements ComponentListener {
+
     private final GUI_FinalScreen page;
 
     public Final_AdapterListener(GUI_FinalScreen page) {
@@ -31,22 +32,25 @@ public class Final_AdapterListener implements ComponentListener {
         Dimension size = page.getHome().getPreferredSize();
         this.page.getHome().setBounds((int) round((3 + insets.left) * ratioW), ((int) round((620 + insets.top) * ratioH)), size.width, size.height);
         this.page.getHome().setSize((int) round(this.page.getHome().getWidth() * ratioW), (int) round(this.page.getHome().getHeight() * ratioH));
-        
+
         size = this.page.getVictoryText().getPreferredSize();
         this.page.getVictoryText().setBounds((int) round((500 + insets.left) * ratioW), ((int) round((50 + insets.top) * ratioH)), size.width, size.height);
         this.page.getVictoryText().setSize((int) round(this.page.getVictoryText().getWidth() * ratioW), (int) round(this.page.getVictoryText().getHeight() * ratioH));
-        
+
         size = this.page.getGrille().getPreferredSize();
         this.page.getGrille().setBounds((int) round((450 + insets.left) * ratioW), ((int) round((150 + insets.top) * ratioH)), size.width, size.height);
         this.page.getGrille().setSize((int) round(this.page.getGrille().getWidth() * ratioW), (int) round(this.page.getGrille().getHeight() * ratioH));
     }
 
     @Override
-    public void componentMoved(ComponentEvent e) {}
+    public void componentMoved(ComponentEvent e) {
+    }
 
     @Override
-    public void componentShown(ComponentEvent e) {}
+    public void componentShown(ComponentEvent e) {
+    }
 
     @Override
-    public void componentHidden(ComponentEvent e) {}
+    public void componentHidden(ComponentEvent e) {
+    }
 }

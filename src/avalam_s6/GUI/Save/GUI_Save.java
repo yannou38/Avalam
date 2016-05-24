@@ -115,13 +115,24 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
         this.addComponentListener(listener);
     }
 
-    @Override
-    public void paintComponent(Graphics g) {
-        g.drawImage(this.backgroundsave, 0, 0, this.getWidth(), this.getHeight(), null);
-        if (this.callResize == true) {
-            this.listener.componentResized(null);
-            this.callResize = false;
+    public void loadSlotText() {
+        SaveInfoLister sil;
+        int j;
+        for (int i = 0; i < this.slotlabels.length; i++) {
+            j = i + 1;
+            try {
+                sil = new SaveInfoLister("slot_" + j);
+                if (!sil.getEmptyslot()) {
+                    sil = new SaveInfoLister("slot_" + j);
+                    this.slotlabels[i].setFont(this.slotlabels[i].getFont().deriveFont(1 * 30f));
+                    this.slotlabels[i].setText(sil.getDate() + " " + sil.getPlayer1() + " VS " + sil.getPlayer2() + "  " + sil.getGrid());
+                }
+
+            } catch (IOException ex) {
+                //ne pas traiter => on laisse le texte par défaut
+            }
         }
+        this.callResize();
     }
 
     public JButton getHomereturn() {
@@ -130,12 +141,6 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
 
     public JButton getSaveload() {
         return saveload;
-    }
-
-    @Override
-    public void back() {
-        Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
-        mainFrame.setwState(WindowState.BOARD);
     }
 
     public int getSlotnumber() {
@@ -162,32 +167,28 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
         return field;
     }
 
+    public JLabel getSlotlabels(int i) {
+        return this.slotlabels[i - 1];
+    }
+
     @Override
     public void callResize() {
         this.callResize = true;
     }
 
-    public JLabel getSlotlabels(int i) {
-        return this.slotlabels[i - 1];
+    @Override
+    public void back() {
+        Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
+        mainFrame.setwState(WindowState.BOARD);
     }
 
-    public void loadSlotText() {
-        SaveInfoLister sil;
-        int j;
-        for (int i = 0; i < this.slotlabels.length; i++) {
-            j = i + 1;
-            try {
-                sil = new SaveInfoLister("slot_" + j);
-                if (!sil.getEmptyslot()) {
-                    sil = new SaveInfoLister("slot_" + j);
-                    this.slotlabels[i].setFont(this.slotlabels[i].getFont().deriveFont(1 * 30f));
-                    this.slotlabels[i].setText(sil.getDate() + " " + sil.getPlayer1() + " VS " + sil.getPlayer2() + "  " + sil.getGrid());
-                }
-
-            } catch (IOException ex) {
-                //ne pas traiter => on laisse le texte par défaut
-            }
+    @Override
+    public void paintComponent(Graphics g) {
+        g.drawImage(this.backgroundsave, 0, 0, this.getWidth(), this.getHeight(), null);
+        if (this.callResize == true) {
+            this.listener.componentResized(null);
+            this.callResize = false;
         }
-        this.callResize();
     }
+
 }

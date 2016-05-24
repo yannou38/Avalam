@@ -20,10 +20,15 @@ public enum WindowState {
     LOAD(7), //Save/Load window
     RULES(8), //Rules Page
     TUTORIAL(9); //Tutorial window
-    
-    
+
     private final int id;
-    WindowState(int id) { this.id = id; }
-    public int getValue() { return this.id; }
-    
+
+    WindowState(int id) {
+        this.id = id;
+    }
+
+    public int getValue() {
+        return this.id;
+    }
+
 }

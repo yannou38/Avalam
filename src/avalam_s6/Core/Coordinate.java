@@ -10,69 +10,77 @@ package avalam_s6.Core;
  * @author TheDoctor
  */
 public class Coordinate {
+
     private int x;
     private int y;
-    
-    public Coordinate(){
+
+    public Coordinate() {
         this(-1, -1);
     }
-    
+
     public Coordinate(int x, int y) {
         this.x = x;
         this.y = y;
-    }                    
-    
-    @Override
-    public String toString(){
-        return "("+this.x+" "+this.y+")";
     }
-    
+
+    @Override
+    public String toString() {
+        return "(" + this.x + " " + this.y + ")";
+    }
+
     /**
      * Getter x
+     *
      * @return x
      */
-    public int getX(){
+    public int getX() {
         return this.x;
     }
-    
+
     /**
      * Getter y
+     *
      * @return y
      */
-    public int getY(){
+    public int getY() {
         return this.y;
     }
-    
-    /**
-     * Setter x
-     * @param x 
-     */
-    public void setX(int x){
-        this.x = x;
-    }
-    
-    /**
-     * Setter y
-     * @param y 
-     */
-    public void setY(int y){
-        this.y = y;
-    }
-    
+
     /**
      * Compare two Coordinates
+     *
      * @param r coordinate to compare
      * @return true if it's equal to r, false otherwise
      */
-    public boolean equals(Coordinate r){
-        return(this.x == r.getX() && this.y == r.getY());
+    public boolean equals(Coordinate r) {
+        return (this.x == r.getX() && this.y == r.getY());
     }
-    
+
     /**
      * Test if the coordinate is valid on the grid
+     *
      * @return true if the coordinate is valid, false otherwise
      */
-    public boolean isValid(){
+    public boolean isValid() {
         return !(this.x < 0 || this.y < 0 || this.x > 8 || this.y > 8);
     }
+
+    /**
+     * Setter x
+     *
+     * @param x
+     */
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    /**
+     * Setter y
+     *
+     * @param y
+     */
+    public void setY(int y) {
+        this.y = y;
+    }
+
 }

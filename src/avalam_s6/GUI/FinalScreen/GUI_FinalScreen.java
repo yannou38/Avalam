@@ -35,7 +35,7 @@ import javax.swing.JPanel;
  *
  * @author sazeratj
  */
-public class GUI_FinalScreen extends JPanel implements Gui_INTERFACE{
+public class GUI_FinalScreen extends JPanel implements Gui_INTERFACE {
 
     private Image background, homeI, black, white, empty;
     private JLabel victoryText;
@@ -75,7 +75,8 @@ public class GUI_FinalScreen extends JPanel implements Gui_INTERFACE{
             this.white = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/white.png"));
             this.empty = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/empty.png"));
             /* Application Police */
-            this.victoryText.setFont(localFont.deriveFont(2 * 30f)); /* On peut appliquer un ratio a la police (ici 2) */
+            this.victoryText.setFont(localFont.deriveFont(2 * 30f));
+            /* On peut appliquer un ratio a la police (ici 2) */
 
         } catch (IOException | FontFormatException ex) {
             System.out.println("Error - " + GUI_FinalScreen.class.toString());
@@ -120,6 +121,18 @@ public class GUI_FinalScreen extends JPanel implements Gui_INTERFACE{
         this.victoryText.setText(p);
     }
 
+    public JLabel getVictoryText() {
+        return this.victoryText;
+    }
+
+    public JButton getHome() {
+        return this.home;
+    }
+
+    public JPanel getGrille() {
+        return this.grille;
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
@@ -155,33 +168,21 @@ public class GUI_FinalScreen extends JPanel implements Gui_INTERFACE{
                 }
             }
         }
-        
-        if(this.callResize){
+
+        if (this.callResize) {
             this.listener.componentResized(null);
             this.callResize = false;
         }
     }
 
-    public JLabel getVictoryText() {
-        return this.victoryText;
-    }
-    
-    public JButton getHome() {
-        return this.home;
-    }
-
-    public JPanel getGrille() {
-        return this.grille;
-    }
-
     @Override
     public void back() {
-        Main_Frame mainFrame = ((Main_Frame)this.getParent().getParent().getParent().getParent());
+        Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
         mainFrame.setwState(WindowState.MAIN);
     }
-    
+
     @Override
-    public void callResize(){
+    public void callResize() {
         this.callResize = true;
     }
 }

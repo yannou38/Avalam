@@ -25,17 +25,18 @@ import org.xml.sax.SAXException;
  * @author sazeratj
  */
 public class SetupManager {
+
     private static Document aDoc;
-    
+
     public static void load() {
         ConfigGenerator.generate();
         try {
             File xmlFile = new File("./ressources/config/config.xml");
-            SetupManager.aDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(xmlFile);		
+            SetupManager.aDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(xmlFile);
             //optional, but recommended by W3C
             aDoc.getDocumentElement().normalize();
         } catch (ParserConfigurationException | SAXException | IOException ex) {
-            System.out.println("Error - "+LanguageManager.class.toString());
+            System.out.println("Error - " + LanguageManager.class.toString());
             Logger.getLogger(LanguageManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         LanguageManager.setLanguage(SetupManager.getElement("Langue"));
@@ -43,11 +44,19 @@ public class SetupManager {
         SaveSlotsGenerator.generate();
         SoundEngine.init();
     }
-    
+
+    private static void save() throws TransformerConfigurationException, TransformerException {
+        // write the content into xml file
+        Transformer transformer = TransformerFactory.newInstance().newTransformer();
+        DOMSource source = new DOMSource(aDoc);
+        StreamResult result = new StreamResult(new File("./ressources/config/config.xml"));
+        transformer.transform(source, result);
+    }
+
     public static String getElement(String s) {
         return (aDoc.getElementsByTagName(s).item(0).getTextContent());
     }
-    
+
     public static void setElement(String name, String value) {
         aDoc.getElementsByTagName(name).item(0).setTextContent(value);
         try {
@@ -58,13 +67,5 @@ public class SetupManager {
         if (name.equals("Langue")) {
             LanguageManager.setLanguage(value);
         }
-    }
-    
-    private static void save() throws TransformerConfigurationException, TransformerException {
-        // write the content into xml file
-         Transformer transformer = TransformerFactory.newInstance().newTransformer();
-         DOMSource source = new DOMSource(aDoc);
-         StreamResult result = new StreamResult(new File("./ressources/config/config.xml"));
-         transformer.transform(source, result);
     }
 }

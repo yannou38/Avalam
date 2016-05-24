@@ -50,10 +50,14 @@ public class SaveListener implements MouseListener {
         }
     }
 
+    public void setIsSelected(Boolean isSelected) {
+        this.isSelected = isSelected;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
-        Main_Frame mFrame= ((Main_Frame) source.getParent().getParent().getParent().getParent().getParent());
+        Main_Frame mFrame = ((Main_Frame) source.getParent().getParent().getParent().getParent().getParent());
         switch (this.name) {
             case "save":
                 if (this.page.getSlotnumber() == 0) {
@@ -115,10 +119,6 @@ public class SaveListener implements MouseListener {
             ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
 
         }
-    }
-
-    public void setIsSelected(Boolean isSelected) {
-        this.isSelected = isSelected;
     }
 
 }

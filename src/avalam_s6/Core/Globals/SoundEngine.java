@@ -24,28 +24,29 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * @author TheDoctor
  */
 public class SoundEngine {
+
     private static boolean toMute;
     private static Mixer mixer;
     private static Clip clip;
-    
-    public static void init(){
+
+    public static void init() {
         Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
         SoundEngine.mixer = AudioSystem.getMixer(mixInfos[0]);
-        
+
         DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
-        try { 
+        try {
             SoundEngine.clip = (Clip) SoundEngine.mixer.getLine(dataInfo);
         } catch (LineUnavailableException ex) {
             System.out.println("Error - " + SoundEngine.class.toString());
             Logger.getLogger(SoundEngine.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public static void play(String filePath){
-        if(SoundEngine.clip.isActive()){
+
+    public static void play(String filePath) {
+        if (SoundEngine.clip.isActive()) {
             SoundEngine.stop();
         }
-        try{
+        try {
             File soundFile = new File(filePath);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
             SoundEngine.clip.open(audioStream);
@@ -55,17 +56,17 @@ public class SoundEngine {
         }
         SoundEngine.clip.start();
     }
-    
-    public static void stop(){
+
+    public static void stop() {
         SoundEngine.clip.stop();
     }
-    
-    public static void toggleMute(){
+
+    public static void toggleMute() {
         Line[] lines = SoundEngine.mixer.getSourceLines();
-        for(Line line : lines){
+        for (Line line : lines) {
             BooleanControl bc = (BooleanControl) line.getControl(BooleanControl.Type.MUTE);
             if (bc != null) {
-                if(SoundEngine.toMute){
+                if (SoundEngine.toMute) {
                     bc.setValue(true); // true to mute the line, false to unmute
                     SoundEngine.toMute = false;
                 } else {

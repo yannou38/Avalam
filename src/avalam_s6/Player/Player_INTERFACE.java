@@ -16,17 +16,19 @@ import avalam_s6.Core.Move;
 public interface Player_INTERFACE {
 
     /**
-     * Player play on a coordinate
-     * /!\ DON'T ASK A BOT FOR A PLAY THERE IS NO POSSIBLE PLAY LEFT /!\
-     * @return the coordinate chose 
+     * Player play on a coordinate /!\ DON'T ASK A BOT FOR A PLAY THERE IS NO
+     * POSSIBLE PLAY LEFT /!\
+     *
+     * @return the coordinate chose
      */
     public Move play();
-    
+
     /**
      * Tells if the player is a bot.
+     *
      * @return true if the player is an AI, false otherwise.
      */
     public boolean isAI();
-    
+
     public String getName();
 }

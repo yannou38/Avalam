@@ -13,36 +13,41 @@ import javax.swing.Timer;
  *
  * @author TheDoctor
  */
-public interface Game_INTERFACE {        
-    
+public interface Game_INTERFACE {
+
     /**
      * Undo the last move. You can undo plural times.
      */
     public void undo();
-    
+
     /**
-     * Redo the last canceled move. You can redo plural times, but not if you played a new move after a cancel.
+     * Redo the last canceled move. You can redo plural times, but not if you
+     * played a new move after a cancel.
      */
     public void redo();
 
+    public void addMoveToHistory(Move m);
+
     /**
      * Get the game's timer.
+     *
      * @return the game's timer.
      */
     public Timer getTimer();
-    
+
     /**
      * Get the game's grid.
+     *
      * @return the game's grid.
      */
     public Grid getGrid();
+
     public void setGrid(Grid g);
-    
+
     /**
      * Get the current Player.
+     *
      * @return the current player.
      */
     public Player_INTERFACE getCurrentPlayer();
-    
-    public void addMoveToHistory(Move m);
 }

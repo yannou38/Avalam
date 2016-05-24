@@ -25,14 +25,14 @@ public class RulesListener implements MouseListener {
     private String name;
     private Image icon;
     private Image iconbase;
-    
+
     public RulesListener(String buttonname) {
         this.name = buttonname;
         try {
             this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/rules/" + this.name + "_h.png"));
             this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/rules/" + this.name + ".png"));
         } catch (Exception ex) {
-            System.out.println("Error - "+RulesListener.class.toString());
+            System.out.println("Error - " + RulesListener.class.toString());
             Logger.getLogger(RulesListener.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -40,9 +40,9 @@ public class RulesListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
-        GUI_Rules rules = ((GUI_Rules)source.getParent());
+        GUI_Rules rules = ((GUI_Rules) source.getParent());
         rules.back();
-        ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
     @Override
@@ -56,13 +56,13 @@ public class RulesListener implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(this.icon));        
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.icon));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
 }

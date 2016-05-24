@@ -10,7 +10,8 @@ package avalam_s6.Exceptions;
  * @author sazeratj
  */
 public class GridCharException extends Exception {
+
     public GridCharException(char c, int pos) {
-        System.err.println("Grid contains an illegal character: "+c+" ["+pos+"]");
+        System.err.println("Grid contains an illegal character: " + c + " [" + pos + "]");
     }
 }

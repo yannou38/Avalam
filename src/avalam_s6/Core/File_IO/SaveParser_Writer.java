@@ -21,13 +21,15 @@ import java.util.logging.Logger;
  * @author sazeratj
  */
 public class SaveParser_Writer {
+
     private final Local_Avalam_Game aGame;
     private final String aPath;
-    
+
     public SaveParser_Writer(Local_Avalam_Game pGame, String pName) {
-        this.aGame = pGame; this.aPath = "./ressources/Saves/"+pName;
+        this.aGame = pGame;
+        this.aPath = "./ressources/Saves/" + pName;
     }
-    
+
     public void save() {
         try {
             File lFile = new File(aPath);
@@ -36,29 +38,29 @@ public class SaveParser_Writer {
             }
             BufferedWriter bw = new BufferedWriter(new FileWriter(lFile));
             /* Date */
-            SimpleDateFormat lDateFormat = new SimpleDateFormat ("dd/MM/yyyy - HH:mm");
-            bw.write("[Date] " + lDateFormat.format(new Date())+"\n");
+            SimpleDateFormat lDateFormat = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
+            bw.write("[Date] " + lDateFormat.format(new Date()) + "\n");
             /* Players */
-            bw.write("[Player_1] "+this.aGame.getPlayers()[0].getClass().getSimpleName()+" | "+ aGame.getPlayers()[0].getColor().name() +" | "+this.aGame.getPlayers()[0].getName()+"\n");
-            bw.write("[Player_2] "+this.aGame.getPlayers()[1].getClass().getSimpleName()+" | "+ aGame.getPlayers()[1].getColor().name() +" | "+this.aGame.getPlayers()[1].getName()+"\n");
+            bw.write("[Player_1] " + this.aGame.getPlayers()[0].getClass().getSimpleName() + " | " + aGame.getPlayers()[0].getColor().name() + " | " + this.aGame.getPlayers()[0].getName() + "\n");
+            bw.write("[Player_2] " + this.aGame.getPlayers()[1].getClass().getSimpleName() + " | " + aGame.getPlayers()[1].getColor().name() + " | " + this.aGame.getPlayers()[1].getName() + "\n");
             /* Current Player */
-            bw.write("[Current] "+this.aGame.getCurrentPlayer().getName()+"\n");
-            bw.write("[Turns] "+this.aGame.getTurns()+"\n");
+            bw.write("[Current] " + this.aGame.getCurrentPlayer().getName() + "\n");
+            bw.write("[Turns] " + this.aGame.getTurns() + "\n");
             /* Grid */
-            bw.write("[GName] " + this.aGame.getGrid().getName()+"\n");
+            bw.write("[GName] " + this.aGame.getGrid().getName() + "\n");
             /* Redo */
-            bw.write("[Histo] " + this.aGame.getHistory().size()+"\n");
-            for(Move m : this.aGame.getHistory()) {
-                bw.write(m+"\n");
+            bw.write("[Histo] " + this.aGame.getHistory().size() + "\n");
+            for (Move m : this.aGame.getHistory()) {
+                bw.write(m + "\n");
             }
             /* Undo */
-            bw.write("[Cancel] " + this.aGame.getCancelled_moves().size()+"\n");
-            for(Move m : this.aGame.getCancelled_moves()) {
-                bw.write(m+"\n");
+            bw.write("[Cancel] " + this.aGame.getCancelled_moves().size() + "\n");
+            for (Move m : this.aGame.getCancelled_moves()) {
+                bw.write(m + "\n");
             }
             bw.close();
         } catch (IOException ex) {
-            System.out.println("Error - "+SaveParser_Writer.class.getName());
+            System.out.println("Error - " + SaveParser_Writer.class.getName());
             Logger.getLogger(SaveParser_Writer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

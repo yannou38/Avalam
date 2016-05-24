@@ -12,7 +12,7 @@ import avalam_s6.Core.Owner;
  *
  * @author Seawolf
  */
-public class AIPlayerOnlyUndo extends AIPlayer{
+public class AIPlayerOnlyUndo extends AIPlayer {
 
     public AIPlayerOnlyUndo(String name, AvalamColor color, Owner owner) {
         super(name, color, owner);
@@ -20,13 +20,13 @@ public class AIPlayerOnlyUndo extends AIPlayer{
 
     @Override
     public Move play() {
-        Move m = new Move(null,1,null,1,this);
+        Move m = new Move(null, 1, null, 1, this);
         boolean lol = true;
-        while(lol){
-             game.undo();
-             game.redo();
+        while (lol) {
+            game.undo();
+            game.redo();
         }
-       return m;
+        return m;
     }
-    
+
 }

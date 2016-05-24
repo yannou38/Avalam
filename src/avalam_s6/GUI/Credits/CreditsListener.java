@@ -25,14 +25,14 @@ public class CreditsListener implements MouseListener {
     private String name;
     private Image icon;
     private Image iconbase;
-    
+
     public CreditsListener(String buttonname) {
         this.name = buttonname;
         try {
             this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/credits/" + this.name + "_h.png"));
             this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/credits/" + this.name + ".png"));
         } catch (Exception ex) {
-            System.out.println("Error - "+CreditsListener.class.toString());
+            System.out.println("Error - " + CreditsListener.class.toString());
             Logger.getLogger(CreditsListener.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -40,9 +40,9 @@ public class CreditsListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
-        GUI_Credits Credits = ((GUI_Credits)source.getParent());
+        GUI_Credits Credits = ((GUI_Credits) source.getParent());
         Credits.back();
-        ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
     @Override
@@ -56,13 +56,13 @@ public class CreditsListener implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(this.icon));        
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.icon));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         //replace the icon with another
-        ((JButton)e.getSource()).setIcon(new ImageIcon(this.iconbase));
+        ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
 }

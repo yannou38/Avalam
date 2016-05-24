@@ -49,6 +49,12 @@ public class LoadListener implements MouseListener {
         }
     }
 
+    
+
+    public void setIsSelected(Boolean isSelected) {
+        this.isSelected = isSelected;
+    }
+    
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
@@ -101,10 +107,6 @@ public class LoadListener implements MouseListener {
         if (this.isSelected == false) {
             ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
         }
-    }
-
-    public void setIsSelected(Boolean isSelected) {
-        this.isSelected = isSelected;
     }
 
 }

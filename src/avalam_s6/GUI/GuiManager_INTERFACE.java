@@ -5,16 +5,16 @@
  */
 package avalam_s6.GUI;
 
-
 /**
  *
  * @author TheDoctor
  */
-public interface GuiManager_INTERFACE {            
+public interface GuiManager_INTERFACE {
 
     /**
-     *  Render the content of the current window.
+     * Render the content of the current window.
      */
     public void render();
+
     public void backWindow();
 }

@@ -39,55 +39,52 @@ public class LAG_UI_MouseListener implements MouseListener {
         }
     }
 
-    
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
-        GUI_LAG lag = ((GUI_LAG)source.getParent());
-        Main_Frame mainFrame = ((Main_Frame)lag.getParent().getParent().getParent().getParent());
+        GUI_LAG lag = ((GUI_LAG) source.getParent());
+        Main_Frame mainFrame = ((Main_Frame) lag.getParent().getParent().getParent().getParent());
         Local_Avalam_Game game = ((Local_Avalam_Game) lag.getGame());
-        switch (this.name){
-            case "return" :
+        switch (this.name) {
+            case "return":
                 lag.back();
                 break;
-            case "redo" :
-                if(game.getCancelled_moves().size() > 0){
+            case "redo":
+                if (game.getCancelled_moves().size() > 0) {
                     game.redo();
-                        game.changeNbTurns(1);
-                    if(!lag.getUndoB().isEnabled()){
+                    game.changeNbTurns(1);
+                    if (!lag.getUndoB().isEnabled()) {
                         lag.getUndoB().setEnabled(true);
                     }
-                    if(game.getCancelled_moves().isEmpty()){
+                    if (game.getCancelled_moves().isEmpty()) {
                         lag.getRedoB().setEnabled(false);
-                    }
-                    else if (game.getCurrentPlayer().isAI()) {
+                    } else if (game.getCurrentPlayer().isAI()) {
                         game.redo();
                         game.changeNbTurns(1);
                     }
-                }                
+                }
                 break;
-            case "cancel" :
-                if(game.getHistory().size() > 0){
+            case "cancel":
+                if (game.getHistory().size() > 0) {
                     game.undo();
                     game.changeNbTurns(-1);
-                    if(!lag.getRedoB().isEnabled()){
+                    if (!lag.getRedoB().isEnabled()) {
                         lag.getRedoB().setEnabled(true);
                     }
-                    if(game.getHistory().isEmpty()){
+                    if (game.getHistory().isEmpty()) {
                         lag.getUndoB().setEnabled(false);
-                    }
-                    else if (game.getCurrentPlayer().isAI()) {
+                    } else if (game.getCurrentPlayer().isAI()) {
                         game.undo();
                         game.changeNbTurns(-1);
                     }
                 }
-                break;                
-            case "save" :
+                break;
+            case "save":
                 mainFrame.setwState(WindowState.SAVE);
                 break;
         }
         ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
-        
+
     }
 
     @Override

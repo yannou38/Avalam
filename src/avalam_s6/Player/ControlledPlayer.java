@@ -15,12 +15,12 @@ import avalam_s6.Core.Owner;
  *
  * @author TheDoctor
  */
-public class ControlledPlayer extends Player{
+public class ControlledPlayer extends Player {
 
     public ControlledPlayer(String n, AvalamColor c, Owner owner) {
-        super(n,c,owner);
+        super(n, c, owner);
     }
-    
+
     @Override
     public boolean isAI() {
         return false;
@@ -28,17 +28,17 @@ public class ControlledPlayer extends Player{
 
     @Override
     public Move play() {
-        if(Input.hasClicked()){
+        if (Input.hasClicked()) {
             Coordinate src = Input.getMouseSrcPosition();
             Coordinate dest = Input.getMouseDestPosition();
             int srcSize = Input.getSrcSize();
             int destSize = Input.getDestSize();
-            Move m = new Move(src,srcSize, dest, destSize,this);
+            Move m = new Move(src, srcSize, dest, destSize, this);
             Input.resetClick();
             Input.updateMouseDestPosition(new Coordinate());
             Input.updateMouseSrcPosition(new Coordinate());
             return m;
-        } else{
+        } else {
             return null;
         }
     }

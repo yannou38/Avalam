@@ -7,6 +7,7 @@ package avalam_s6.Core;
 
 /**
  * Define the state of the cell.
+ *
  * @author TheDoctor
  */
 public enum CellState {
@@ -14,13 +15,14 @@ public enum CellState {
     EMPTY(1), // Empty Cell
     RESTRICTED(0), // Game Board
     FULL(3); // Tower 5
-    
+
     private final int value;
-    
-    private CellState(int v){
+
+    private CellState(int v) {
         this.value = v;
     }
-    public int getValue(){
+
+    public int getValue() {
         return this.value;
     }
 }

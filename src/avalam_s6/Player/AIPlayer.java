@@ -29,11 +29,6 @@ public abstract class AIPlayer extends Player {
         super(name, color, owner);
     }
 
-    @Override
-    public boolean isAI() {
-        return true;
-    }
-
     /**
      * Max value
      *
@@ -92,9 +87,10 @@ public abstract class AIPlayer extends Player {
         }
         return false;
     }
-    
+
     /**
-     * meh- value, 3 seems to be a strong height if you don't have a 2 tower around
+     * meh- value, 3 seems to be a strong height if you don't have a 2 tower
+     * around
      */
     protected boolean suppressAPawnCreate3Op(Cell a, Cell b) {
         if (this.owner.getValue() != b.getOwner().getValue()) {
@@ -108,7 +104,7 @@ public abstract class AIPlayer extends Player {
     /**
      * check if a coordinate is alone
      *
-     * @param c0    coordinate
+     * @param c0 coordinate
      * @return true if the coordinate is alone (no move possible) else false
      */
     protected boolean alone(Coordinate c0) {
@@ -197,9 +193,9 @@ public abstract class AIPlayer extends Player {
     /**
      * bad, we give the Op a free point
      *
-     * @param c0     origin
-     * @param dest     destination
-     * @return         true if we create an alone for the Op, else false
+     * @param c0 origin
+     * @param dest destination
+     * @return true if we create an alone for the Op, else false
      */
     protected boolean createAloneOp(Coordinate c0, Coordinate dest) {
         Coordinate[] tabCoord = new Coordinate[8];
@@ -241,49 +237,38 @@ public abstract class AIPlayer extends Player {
         return false;
     }
 
-    public void setGame(Game_INTERFACE game) {
-        this.game = game;
-    }
-    
-    
-    public int nbCoupsJouables(){
+    public int nbCoupsJouables() {
         int res = 0;
         Coordinate[] tabCoord = new Coordinate[8];
-        for (int i = 0; i < this.game.getGrid().getWidth(); i++)
-        {
-            /**   
-             *    1 2 3
-             *    4 0 5
-             *    6 7 8
-             */   
-            for (int j = 0; j < this.game.getGrid().getHeight(); j++)
-            {
-                Coordinate c0 = new Coordinate(j,i);
-                Coordinate c1 = new Coordinate(j-1,i-1);		                    
-                Coordinate c2 = new Coordinate(j,i-1);		
-                Coordinate c3 = new Coordinate(j+1,i-1);		
-                Coordinate c4 = new Coordinate(j-1,i);		
-                Coordinate c5 = new Coordinate(j+1,i);		
-                Coordinate c6 = new Coordinate(j-1,i+1);		
-                Coordinate c7 = new Coordinate(j,i+1);		
-                Coordinate c8 = new Coordinate(j+1,i+1);		
-                tabCoord[0] = c1;		
-                tabCoord[1] = c2;		
-                tabCoord[2] = c3;		
-                tabCoord[3] = c4;		
-                tabCoord[4] = c5;		
-                tabCoord[5] = c6;		
-                tabCoord[6] = c7;		
+        for (int i = 0; i < this.game.getGrid().getWidth(); i++) {
+            /**
+             * 1 2 3
+             * 4 0 5
+             * 6 7 8
+             */
+            for (int j = 0; j < this.game.getGrid().getHeight(); j++) {
+                Coordinate c0 = new Coordinate(j, i);
+                Coordinate c1 = new Coordinate(j - 1, i - 1);
+                Coordinate c2 = new Coordinate(j, i - 1);
+                Coordinate c3 = new Coordinate(j + 1, i - 1);
+                Coordinate c4 = new Coordinate(j - 1, i);
+                Coordinate c5 = new Coordinate(j + 1, i);
+                Coordinate c6 = new Coordinate(j - 1, i + 1);
+                Coordinate c7 = new Coordinate(j, i + 1);
+                Coordinate c8 = new Coordinate(j + 1, i + 1);
+                tabCoord[0] = c1;
+                tabCoord[1] = c2;
+                tabCoord[2] = c3;
+                tabCoord[3] = c4;
+                tabCoord[4] = c5;
+                tabCoord[5] = c6;
+                tabCoord[6] = c7;
                 tabCoord[7] = c8;
-                
-                if (c0.isValid() && this.game.getGrid().getCellAt(c0).getState().getValue() == CellState.TOWER.getValue())
-                {
-                    for (int k = 0; k <8;k++)
-                    {
-                        if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue())
-                        {
-                            if(this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k])))
-                            {
+
+                if (c0.isValid() && this.game.getGrid().getCellAt(c0).getState().getValue() == CellState.TOWER.getValue()) {
+                    for (int k = 0; k < 8; k++) {
+                        if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()) {
+                            if (this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0), this.game.getGrid().getCellAt(tabCoord[k]))) {
                                 res++;
                             }
                         }
@@ -291,8 +276,16 @@ public abstract class AIPlayer extends Player {
                 }
             }
         }
-        
+
         return res;
     }
 
+    public void setGame(Game_INTERFACE game) {
+        this.game = game;
+    }
+
+    @Override
+    public boolean isAI() {
+        return true;
+    }
 }

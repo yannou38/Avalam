@@ -60,18 +60,18 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
             SetupManager.setElement("FullScreen", "Oui");
         }
         setRenderMode();
-        
+
         resetSettings();
     }
-    
+
     private void resetSettings() {
         this.panelList[WindowState.SETTINGS.getValue()].setVisible(false);
         this.remove(this.panelList[WindowState.SETTINGS.getValue()]);
         this.panelList[WindowState.SETTINGS.getValue()] = new GUI_Settings();
-        
+
         this.panelList[WindowState.SETTINGS.getValue()].setVisible(this.wState.getValue() == WindowState.SETTINGS.getValue());
-        
-        ((Gui_INTERFACE)this.panelList[WindowState.SETTINGS.getValue()]).callResize();
+
+        ((Gui_INTERFACE) this.panelList[WindowState.SETTINGS.getValue()]).callResize();
         this.add(this.panelList[WindowState.SETTINGS.getValue()]);
     }
 
@@ -105,7 +105,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         this.remove(this.panelList[this.wState.getValue()]);
         this.wState = wState;
         this.panelList[this.wState.getValue()].setVisible(true);
-        ((Gui_INTERFACE)this.panelList[this.wState.getValue()]).callResize();
+        ((Gui_INTERFACE) this.panelList[this.wState.getValue()]).callResize();
         this.add(this.panelList[this.wState.getValue()]);
     }
 
@@ -137,11 +137,11 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         ((GUI_FinalScreen) this.panelList[WindowState.VICTORY.getValue()]).setWinningText(p);
         this.setwState(WindowState.VICTORY);
     }
-    
-    public void save(String pSlotName){
+
+    public void save(String pSlotName) {
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).save(pSlotName);
     }
-    
+
     public void load(String pSlotName) {
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).load(pSlotName);
     }
@@ -156,6 +156,6 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
 
     @Override
     public void backWindow() {
-        ((Gui_INTERFACE)this.panelList[this.wState.getValue()]).back();
+        ((Gui_INTERFACE) this.panelList[this.wState.getValue()]).back();
     }
 }

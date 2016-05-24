@@ -166,28 +166,6 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
         this.addComponentListener(listener);
     }
 
-    @Override
-    public void paintComponent(Graphics g) {
-        g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
-        if (this.callResize) {
-            this.listener.componentResized(null);
-            this.callResize = false;
-        }
-
-    }
-
-    public JButton getApply() {
-        return this.apply;
-    }
-
-    public JButton getRetour() {
-        return this.retour;
-    }
-
-    public JButton getCredits() {
-        return this.credits;
-    }
-
     public void initOptions() {
 
         this.language = LanguageManager.getChildrensNameOf("Langue");
@@ -219,6 +197,78 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
                 this.ThemeSelected = x;
             }
         }
+    }
+
+    void leftLanguage() {
+        this.currentLanguage = (this.currentLanguage - 1);
+        if (this.currentLanguage == -1) {
+            this.currentLanguage = this.language.length - 1;
+        }
+        this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.currentLanguage]));
+        this.callResize();
+    }
+
+    void leftFS() {
+        this.fullScreenSelected = (this.fullScreenSelected - 1);
+        if (this.fullScreenSelected == -1) {
+            this.fullScreenSelected = 1;
+        }
+        this.LabelFS.setText(LanguageManager.getElement(this.fullScreen[this.fullScreenSelected]));
+        this.callResize();
+    }
+
+    void leftTheme() {
+        this.ThemeSelected = (this.ThemeSelected - 1);
+        if (this.ThemeSelected == -1) {
+            this.ThemeSelected = this.Theme.length;
+        }
+        this.LabelTheme.setText(this.Theme[this.ThemeSelected]);
+        this.callResize();
+    }
+
+    void leftSound() {
+        this.SoundSelected = (this.SoundSelected - 1);
+        if (this.SoundSelected == -1) {
+            this.SoundSelected = 1;
+        }
+        this.LabelSound.setText(LanguageManager.getElement(this.Sound[this.SoundSelected]));
+        this.callResize();
+    }
+
+    void rightLanguage() {
+        this.currentLanguage = (this.currentLanguage + 1) % 2;
+        this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.currentLanguage]));
+        this.callResize();
+    }
+
+    void rightFS() {
+        this.fullScreenSelected = (this.fullScreenSelected + 1) % 2;
+        this.LabelFS.setText(LanguageManager.getElement(this.fullScreen[this.fullScreenSelected]));
+        this.callResize();
+    }
+
+    void rightTheme() {
+        this.ThemeSelected = (this.ThemeSelected + 1) % this.Theme.length;
+        this.LabelTheme.setText(this.Theme[this.ThemeSelected]);
+        this.callResize();
+    }
+
+    void rightSound() {
+        this.SoundSelected = (this.SoundSelected + 1) % 2;
+        this.LabelSound.setText(LanguageManager.getElement(this.Sound[this.SoundSelected]));
+        this.callResize();
+    }
+
+    public JButton getApply() {
+        return this.apply;
+    }
+
+    public JButton getRetour() {
+        return this.retour;
+    }
+
+    public JButton getCredits() {
+        return this.credits;
     }
 
     public JLabel getLabelSound() {
@@ -269,71 +319,6 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
         return this.leftFS;
     }
 
-    void leftLanguage() {
-        this.currentLanguage = (this.currentLanguage - 1);
-        if (this.currentLanguage == -1) {
-            this.currentLanguage = this.language.length - 1;
-        }
-        this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.currentLanguage]));
-        this.callResize();
-    }
-
-    void leftFS() {
-        this.fullScreenSelected = (this.fullScreenSelected - 1);
-        if (this.fullScreenSelected == -1) {
-            this.fullScreenSelected = 1;
-        }
-        this.LabelFS.setText(LanguageManager.getElement(this.fullScreen[this.fullScreenSelected]));
-        this.callResize();
-    }
-
-    void leftTheme() {
-        this.ThemeSelected = (this.ThemeSelected - 1) ;
-        if (this.ThemeSelected == -1) {
-            this.ThemeSelected = this.Theme.length;
-        }
-        this.LabelTheme.setText(this.Theme[this.ThemeSelected]);
-        this.callResize();
-    }
-
-    void leftSound() {
-        this.SoundSelected = (this.SoundSelected - 1);
-        if (this.SoundSelected == -1) {
-            this.SoundSelected = 1;
-        }
-        this.LabelSound.setText(LanguageManager.getElement(this.Sound[this.SoundSelected]));
-        this.callResize();
-    }
-
-    void rightLanguage() {
-        this.currentLanguage = (this.currentLanguage + 1) % 2;
-        this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.currentLanguage]));
-        this.callResize();
-    }
-
-    void rightFS() {
-        this.fullScreenSelected = (this.fullScreenSelected + 1) % 2;
-        this.LabelFS.setText(LanguageManager.getElement(this.fullScreen[this.fullScreenSelected]));
-        this.callResize();
-    }
-
-    void rightTheme() {
-        this.ThemeSelected = (this.ThemeSelected + 1) % this.Theme.length;
-        this.LabelTheme.setText(this.Theme[this.ThemeSelected]);
-        this.callResize();
-    }
-
-    void rightSound() {
-        this.SoundSelected = (this.SoundSelected + 1) % 2;
-        this.LabelSound.setText(LanguageManager.getElement(this.Sound[this.SoundSelected]));
-        this.callResize();
-    }
-
-    @Override
-    public void callResize() {
-        this.callResize = true;
-    }
-
     public String getSelectedLanguage() {
         return this.language[this.currentLanguage];
     }
@@ -356,5 +341,20 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
     @Override
     public void back() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
+        if (this.callResize) {
+            this.listener.componentResized(null);
+            this.callResize = false;
+        }
+
+    }
+
+    @Override
+    public void callResize() {
+        this.callResize = true;
     }
 }

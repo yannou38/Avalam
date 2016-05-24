@@ -187,10 +187,10 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             }
             String gName = "default";
             Level_Parser myParser = new Level_Parser(gName);
-            Grid g = new Grid(myParser.readLevel(),gName); // IOException | GridSizeException | NumberFormatException
+            Grid g = new Grid(myParser.readLevel(), gName); // IOException | GridSizeException | NumberFormatException
             Container mainFrame = this.getParent().getParent().getParent().getParent();
             System.out.println(mainFrame.toString());
-            this.game = new Local_Avalam_Game((Main_Frame) mainFrame,g,p1,p2,new Stack<>(),new Stack<>(),0,0); // GridSizeException
+            this.game = new Local_Avalam_Game((Main_Frame) mainFrame, g, p1, p2, new Stack<>(), new Stack<>(), 0, 0); // GridSizeException
         } catch (IOException | GridSizeException | GridCharException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -202,6 +202,52 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     public void stop() {
         this.game.getTimer().stop();
+    }
+
+    public void save(String pSlotName) {
+        SaveParser_Writer myParser = new SaveParser_Writer((Local_Avalam_Game) this.game, pSlotName);
+        myParser.save();
+    }
+
+    public void load(String pSlotName) {
+        SaveParser_Reader lParser = new SaveParser_Reader((Main_Frame) this.getParent().getParent().getParent().getParent(), pSlotName);
+        this.game = lParser.generateGame();
+    }
+
+    public JButton getUndoB() {
+        return this.undoB;
+    }
+
+    public JButton getRedoB() {
+        return this.redoB;
+    }
+
+    public JButton getRetourB() {
+        return this.retourB;
+    }
+
+    public JButton getSaveB() {
+        return this.saveB;
+    }
+
+    public JPanel getGrille() {
+        return this.grille;
+    }
+
+    public Game_INTERFACE getGame() {
+        return this.game;
+    }
+
+    @Override
+    public void back() {
+        Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
+        this.stop();
+        mainFrame.setwState(WindowState.MAIN);
+    }
+
+    @Override
+    public void callResize() {
+        this.callResize = true;
     }
 
     @Override
@@ -289,55 +335,9 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                 this.buttonmap[i][j].setOpaque(false);
             }
         }
-        if(this.callResize){
+        if (this.callResize) {
             this.listener.componentResized(null);
             this.callResize = false;
         }
-    }
-
-    public JButton getUndoB() {
-        return this.undoB;
-    }
-
-    public JButton getRedoB() {
-        return this.redoB;
-    }
-
-    public JButton getRetourB() {
-        return this.retourB;
-    }
-
-    public JButton getSaveB() {
-        return this.saveB;
-    }
-
-    public JPanel getGrille() {
-        return this.grille;
-    }
-
-    public Game_INTERFACE getGame() {
-        return this.game;
-    }
-
-    @Override
-    public void back() {
-        Main_Frame mainFrame = ((Main_Frame)this.getParent().getParent().getParent().getParent());
-        this.stop();
-        mainFrame.setwState(WindowState.MAIN);
-    }
-
-    @Override
-    public void callResize() {
-        this.callResize = true;
-    }
-    
-    public void save(String pSlotName) {
-        SaveParser_Writer myParser = new SaveParser_Writer((Local_Avalam_Game)this.game, pSlotName);
-        myParser.save();
-    }
-    
-    public void load(String pSlotName) {
-        SaveParser_Reader lParser = new SaveParser_Reader((Main_Frame)this.getParent().getParent().getParent().getParent(),pSlotName);
-        this.game = lParser.generateGame();
     }
 }

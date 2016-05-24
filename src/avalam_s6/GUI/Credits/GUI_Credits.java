@@ -21,12 +21,12 @@ import javax.swing.*;
  * @author ducruyy
  */
 public class GUI_Credits extends JPanel implements Gui_INTERFACE {
+
     private JButton retour;
-    private Image returnI,background;
+    private Image returnI, background;
     private boolean callResize;
     private CreditsAdapterListener listener;
-    
-    
+
     public GUI_Credits() {
         this.callResize = false;
         this.listener = new CreditsAdapterListener(this);
@@ -38,10 +38,9 @@ public class GUI_Credits extends JPanel implements Gui_INTERFACE {
             this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/credits/background.png"));
             this.returnI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/credits/home.png"));
         } catch (Exception ex) {
-            System.out.println("Error - "+GUI_Credits.class.toString());
+            System.out.println("Error - " + GUI_Credits.class.toString());
             Logger.getLogger(GUI_Credits.class.getName()).log(Level.SEVERE, null, ex);
         }
-
 
         this.retour = new JButton(new ImageIcon(this.returnI));
         this.retour.setBorder(BorderFactory.createEmptyBorder());
@@ -50,34 +49,34 @@ public class GUI_Credits extends JPanel implements Gui_INTERFACE {
         this.retour.addMouseListener(new CreditsListener("home"));
 
         this.setLayout(null);
-        this.add(this.retour);    
+        this.add(this.retour);
         this.addComponentListener(this.listener);
-        
+
     }
 
     @Override
     public void paintComponent(Graphics g) {
-        g.drawImage(this.background, 0, 0, this.getWidth(),this.getHeight(),null);
-        if(this.callResize){
+        g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
+        if (this.callResize) {
             this.listener.componentResized(null);
             this.callResize = false;
         }
-        
+
+    }
+
+    @Override
+    public void back() {
+        Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
+        mainFrame.setwState(WindowState.MAIN);
+    }
+
+    @Override
+    public void callResize() {
+        this.callResize = true;
     }
 
     public JButton getRetour() {
         return this.retour;
     }
-    
-    @Override
-    public void back() {
-        Main_Frame mainFrame = ((Main_Frame)this.getParent().getParent().getParent().getParent());
-        mainFrame.setwState(WindowState.MAIN);  
-    }
-    
-    @Override
-    public void callResize(){
-        this.callResize = true;
-    }
-    
+
 }

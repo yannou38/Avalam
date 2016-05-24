@@ -15,19 +15,21 @@ import java.nio.file.Paths;
  * @author sazeratj
  */
 public class ThemesLister {
+
     public static String[] listThemes() {
         Path p = Paths.get("./ressources/Themes");
         if (Files.exists(p) && Files.isDirectory(p)) {
             File f = new File("./ressources/Themes");
             int x = f.list().length;
             for (String s : f.list()) {
-                if (s.contains("."))
+                if (s.contains(".")) {
                     x--;
+                }
             }
             String[] rStr = new String[x];
             x = 0;
             for (String s : f.list()) {
-                if (! s.contains(".")) {
+                if (!s.contains(".")) {
                     rStr[x] = s;
                     x++;
                 }

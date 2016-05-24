@@ -19,14 +19,15 @@ import java.util.logging.Logger;
  * @author sazeratj
  */
 public class SaveParser_Reader {
+
     private Local_Avalam_Game aGame;
     private final String aPath;
-    
+
     public SaveParser_Reader(Main_Frame pMainFrame, String pName) {
-        this.aPath = "./ressources/Saves/"+pName;
+        this.aPath = "./ressources/Saves/" + pName;
         this.load();
-    } 
-    
+    }
+
     private void load() {
         try {
             BufferedReader br = new BufferedReader(new FileReader(aPath));
@@ -41,7 +42,7 @@ public class SaveParser_Reader {
             Logger.getLogger(SaveParser_Reader.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public Local_Avalam_Game generateGame() {
         return null;
     }

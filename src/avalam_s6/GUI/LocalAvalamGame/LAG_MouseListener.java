@@ -14,47 +14,45 @@ import java.awt.event.MouseListener;
  *
  * @author TheDoctor
  */
-public class LAG_MouseListener implements MouseListener{
+public class LAG_MouseListener implements MouseListener {
 
     private Coordinate c;
-    
-    public LAG_MouseListener(Coordinate c){
-        this.c=c;
+
+    public LAG_MouseListener(Coordinate c) {
+        this.c = c;
     }
-    
+
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(!Input.isButtonClicked()) {
+        if (!Input.isButtonClicked()) {
             Input.setButtonClicked();
             Input.updateMouseSrcPosition(this.c);
+        } else if ((Math.abs(c.getX() - Input.getMouseSrcPosition().getX()) <= 1) && (Math.abs(c.getY() - Input.getMouseSrcPosition().getY()) <= 1) && (!(c.getX() == Input.getMouseSrcPosition().getX() && c.getY() == Input.getMouseSrcPosition().getY()))) {
+            Input.setButtonReleased();
+            Input.updateMouseDestPosition(this.c);
         } else {
-            if ((Math.abs(c.getX() - Input.getMouseSrcPosition().getX()) <=1) && (Math.abs(c.getY() - Input.getMouseSrcPosition().getY()) <=1) && (!(c.getX() == Input.getMouseSrcPosition().getX() && c.getY() == Input.getMouseSrcPosition().getY()))) {
-                Input.setButtonReleased();
-                Input.updateMouseDestPosition(this.c);
-            } else {
-                Input.resetClick();
-            }
+            Input.resetClick();
         }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        
+
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-    
+
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        
+
     }
-    
+
 }

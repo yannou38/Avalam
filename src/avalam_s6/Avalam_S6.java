@@ -5,14 +5,14 @@
  */
 package avalam_s6;
 
-
 import avalam_s6.GUI.Main_Frame;
 import javax.swing.SwingUtilities;
+
 /**
  *
  * @author TheDoctor
  */
-public class Avalam_S6{
+public class Avalam_S6 {
 
     /**
      * @param args the command line arguments

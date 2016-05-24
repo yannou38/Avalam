@@ -70,14 +70,14 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         this.homereturn.setBorder(BorderFactory.createEmptyBorder());
         this.homereturn.setContentAreaFilled(false);
         this.homereturn.setFocusPainted(false);
-        this.homereturn.addMouseListener(new LoadListener("home",this,0));
+        this.homereturn.addMouseListener(new LoadListener("home", this, 0));
 
         this.saveload = new JButton(new ImageIcon(this.loadI));
         this.saveload.setBorder(BorderFactory.createEmptyBorder());
         this.saveload.setContentAreaFilled(false);
         this.saveload.setFocusPainted(false);
-        this.saveload.addMouseListener(new LoadListener("load",this,0));
-        
+        this.saveload.addMouseListener(new LoadListener("load", this, 0));
+
         Font localFont = new Font("Arial", Font.PLAIN, 60);
         try {
             localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
@@ -92,7 +92,7 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
             this.slots[i].setBorder(BorderFactory.createEmptyBorder());
             this.slots[i].setContentAreaFilled(false);
             this.slots[i].setFocusPainted(false);
-            this.slotslistener[i] = new LoadListener("slot",this,i+1);
+            this.slotslistener[i] = new LoadListener("slot", this, i + 1);
             this.slots[i].addMouseListener(this.slotslistener[i]);
             this.add(this.slots[i]);
         }
@@ -109,70 +109,13 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         this.field.setBorder(BorderFactory.createEmptyBorder());
         this.field.setText("Nom de fichier");
         this.field.setOpaque(false);
-        
+
         this.add(this.homereturn);
         this.add(this.saveload);
         this.add(this.field);
         this.addComponentListener(listener);
     }
 
-    @Override
-    public void paintComponent(Graphics g) {
-        g.drawImage(this.backgroundload, 0, 0, this.getWidth(), this.getHeight(), null);
-        if (this.callResize) {
-            this.listener.componentResized(null);
-            this.callResize = false;
-        }
-    }
-
-    public JButton getHomereturn() {
-        return homereturn;
-    }
-
-    public JButton getSaveload() {
-        return saveload;
-    }
-
-    @Override
-    public void back() {
-        Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
-        mainFrame.setwState(WindowState.MAIN);
-    }
-
-    @Override
-    public void callResize() {
-        this.callResize = true;
-    }
-
-    public JButton getSlots(int i) {
-        return this.slots[i-1];
-    }
-
-    public JTextField getField() {
-        return field;
-    }
-
-    public LoadListener[] getSlotslistener() {
-        return slotslistener;
-    }
-    
-    
-    public void setSlotnumber(int slotnumber) {
-        this.slotnumber = slotnumber;
-    }
-
-    public LoadListener getSlotslistener(int i) {
-        return slotslistener[i - 1];
-    }
-
-    public int getSlotnumber() {
-        return slotnumber;
-    }
-
-    public JLabel getSlotlabels(int i) {
-        return this.slotlabels[i-1];
-    }
-    
     public void loadSlotText() {
         SaveInfoLister sil;
         int j;
@@ -193,5 +136,60 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         this.callResize();
     }
 
-    
+    public JButton getHomereturn() {
+        return homereturn;
+    }
+
+    public JButton getSaveload() {
+        return saveload;
+    }
+
+    public JButton getSlots(int i) {
+        return this.slots[i - 1];
+    }
+
+    public JTextField getField() {
+        return field;
+    }
+
+    public LoadListener[] getSlotslistener() {
+        return slotslistener;
+    }
+
+    public void setSlotnumber(int slotnumber) {
+        this.slotnumber = slotnumber;
+    }
+
+    public LoadListener getSlotslistener(int i) {
+        return slotslistener[i - 1];
+    }
+
+    public int getSlotnumber() {
+        return slotnumber;
+    }
+
+    public JLabel getSlotlabels(int i) {
+        return this.slotlabels[i - 1];
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        g.drawImage(this.backgroundload, 0, 0, this.getWidth(), this.getHeight(), null);
+        if (this.callResize) {
+            this.listener.componentResized(null);
+            this.callResize = false;
+        }
+    }
+
+    @Override
+    public void back() {
+        Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
+        mainFrame.setwState(WindowState.MAIN);
+    }
+
+    @Override
+    public void callResize() {
+        this.callResize = true;
+    }
+
 }

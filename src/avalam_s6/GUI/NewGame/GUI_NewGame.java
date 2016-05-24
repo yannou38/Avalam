@@ -180,11 +180,11 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         this.supcolor2.addMouseListener(new NewGameListener("sup", 2, this, "supcolor"));
 
         Font localFont = new Font("Arial", Font.PLAIN, 60);
-        
-            /* Chargement de la police */
+
+        /* Chargement de la police */
         try {
             localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
-            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);                
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
         } catch (IOException | FontFormatException ex) {
             System.out.println("Error - " + GUI_NewGame.class.toString());
             Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
@@ -194,17 +194,17 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         this.name1.setEditable(true);
         this.name1.setFont(localFont.deriveFont(45f));
         this.name1.setBorder(BorderFactory.createEmptyBorder());
-        this.name1.setSize(150,50);
+        this.name1.setSize(150, 50);
         this.name1.setText("Player 1's name");
         this.name1.setOpaque(false);
-        
+
         this.name2 = new JTextField();
         this.name2.setFont(localFont.deriveFont(45f));
         this.name2.setBorder(BorderFactory.createEmptyBorder());
-        this.name2.setSize(150,50);
+        this.name2.setSize(150, 50);
         this.name2.setText("Player 2's name");
         this.name2.setOpaque(false);
-        
+
         this.add(this.p1color);
         this.add(this.p2color);
         this.add(this.preccolor1);
@@ -214,125 +214,6 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         this.add(this.name1);
         this.add(this.name2);
 
-    }
-
-    @Override
-    public void paintComponent(Graphics g) {
-        g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
-        if (this.callResize == true) {
-            this.listener.componentResized(null);
-            this.callResize = false;
-        }
-    }
-
-    public JButton getRetour() {
-        return this.retour;
-    }
-
-    public JButton getStart() {
-        return this.start;
-    }
-
-    public JButton getLeftP1() {
-        return this.prec1;
-    }
-
-    public JButton getRightP1() {
-        return this.sup1;
-    }
-    
-    public JButton getLeftP2() {
-        return this.prec2;
-    }
-
-    public JButton getRightP2() {
-        return this.sup2;
-    }
-
-    public JButton getPreccolor1() {
-        return this.preccolor1;
-    }
-
-    public JButton getPreccolor2() {
-        return this.preccolor2;
-    }
-
-    public JButton getSupcolor1() {
-        return this.supcolor1;
-    }
-
-    public JButton getSupcolor2() {
-        return this.supcolor2;
-    }
-    
-    public JTextField getName1() {
-        return this.name1;
-    }
-    
-    public JTextField getName2() {
-        return this.name2;
-    }
-
-    public void leftAI(int numplayer) {
-        if (numplayer == 1) {
-            this.p1select = (this.p1select - 1);
-            if (this.p1select == -1) {
-                this.p1select = this.AIlistsize - 1;
-            }
-            this.p1button.setIcon(new ImageIcon(this.AIimgs[this.p1select]));
-            this.callResize = true;
-        } else {
-            this.p2select = (this.p2select - 1);
-            if (this.p2select == -1) {
-                this.p2select = this.AIlistsize - 1;
-            }
-            this.p2button.setIcon(new ImageIcon(this.AIimgs[this.p2select]));
-            this.callResize = true;
-        }
-    }
-    
-    public void rightAI(int numplayer) {
-        if (numplayer == 1) {
-            this.p1select = (this.p1select + 1) % this.AIlistsize;
-            this.p1button.setIcon(new ImageIcon(this.AIimgs[this.p1select]));
-            this.callResize = true;
-        } else {
-            this.p2select = (this.p2select + 1) % this.AIlistsize;
-            this.p2button.setIcon(new ImageIcon(this.AIimgs[this.p2select]));
-            this.callResize = true;
-        }
-    }
-
-    public JButton getP1button() {
-        return p1button;
-    }
-
-    public JButton getP2button() {
-        return p2button;
-    }
-
-    public JButton getPrec1() {
-        return prec1;
-    }
-
-    public JButton getSup1() {
-        return sup1;
-    }
-
-    public JButton getPrec2() {
-        return prec2;
-    }
-
-    public JButton getSup2() {
-        return sup2;
-    }
-
-    public JButton getP1color() {
-        return p1color;
-    }
-
-    public JButton getP2color() {
-        return p2color;
     }
 
     void leftColorAI(int numplayer) {
@@ -401,6 +282,125 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         p2[1] = this.AIlist[this.p2select];
         p2[2] = this.name2.getText();
         return p2;
+    }
+
+    public void leftAI(int numplayer) {
+        if (numplayer == 1) {
+            this.p1select = (this.p1select - 1);
+            if (this.p1select == -1) {
+                this.p1select = this.AIlistsize - 1;
+            }
+            this.p1button.setIcon(new ImageIcon(this.AIimgs[this.p1select]));
+            this.callResize = true;
+        } else {
+            this.p2select = (this.p2select - 1);
+            if (this.p2select == -1) {
+                this.p2select = this.AIlistsize - 1;
+            }
+            this.p2button.setIcon(new ImageIcon(this.AIimgs[this.p2select]));
+            this.callResize = true;
+        }
+    }
+
+    public void rightAI(int numplayer) {
+        if (numplayer == 1) {
+            this.p1select = (this.p1select + 1) % this.AIlistsize;
+            this.p1button.setIcon(new ImageIcon(this.AIimgs[this.p1select]));
+            this.callResize = true;
+        } else {
+            this.p2select = (this.p2select + 1) % this.AIlistsize;
+            this.p2button.setIcon(new ImageIcon(this.AIimgs[this.p2select]));
+            this.callResize = true;
+        }
+    }
+
+    public JButton getRetour() {
+        return this.retour;
+    }
+
+    public JButton getStart() {
+        return this.start;
+    }
+
+    public JButton getLeftP1() {
+        return this.prec1;
+    }
+
+    public JButton getRightP1() {
+        return this.sup1;
+    }
+
+    public JButton getLeftP2() {
+        return this.prec2;
+    }
+
+    public JButton getRightP2() {
+        return this.sup2;
+    }
+
+    public JButton getPreccolor1() {
+        return this.preccolor1;
+    }
+
+    public JButton getPreccolor2() {
+        return this.preccolor2;
+    }
+
+    public JButton getSupcolor1() {
+        return this.supcolor1;
+    }
+
+    public JButton getSupcolor2() {
+        return this.supcolor2;
+    }
+
+    public JTextField getName1() {
+        return this.name1;
+    }
+
+    public JTextField getName2() {
+        return this.name2;
+    }
+
+    public JButton getP1button() {
+        return p1button;
+    }
+
+    public JButton getP2button() {
+        return p2button;
+    }
+
+    public JButton getPrec1() {
+        return prec1;
+    }
+
+    public JButton getSup1() {
+        return sup1;
+    }
+
+    public JButton getPrec2() {
+        return prec2;
+    }
+
+    public JButton getSup2() {
+        return sup2;
+    }
+
+    public JButton getP1color() {
+        return p1color;
+    }
+
+    public JButton getP2color() {
+        return p2color;
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
+        if (this.callResize == true) {
+            this.listener.componentResized(null);
+            this.callResize = false;
+        }
     }
 
     @Override

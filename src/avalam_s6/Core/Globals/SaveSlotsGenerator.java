@@ -15,9 +15,10 @@ import java.util.logging.Logger;
  * @author sazeratj
  */
 public class SaveSlotsGenerator {
+
     public static void generate() {
-        for (int i=1;i<6;i++) {
-            File lFile = new File("./ressources/Saves/slot_"+i);
+        for (int i = 1; i < 6; i++) {
+            File lFile = new File("./ressources/Saves/slot_" + i);
             if (!lFile.exists()) {
                 try {
                     lFile.createNewFile();

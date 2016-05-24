@@ -10,10 +10,11 @@ package avalam_s6.GUI;
  * @author sazeratj
  */
 public interface Gui_INTERFACE {
+
     /**
-     *  Return to the precedent page
+     * Return to the precedent page
      */
     public void back();
-    
+
     public void callResize();
 }

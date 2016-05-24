@@ -18,13 +18,14 @@ public enum AvalamColor {
     GREEN("green"),
     PURPLE("purple"),
     CYAN("cyan");
-    
+
     private final String value;
-    
-    private AvalamColor(String v){
+
+    private AvalamColor(String v) {
         this.value = v;
     }
-    public String getValue(){
+
+    public String getValue() {
         return this.value;
     }
 }

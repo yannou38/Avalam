@@ -18,8 +18,9 @@ import java.util.logging.Logger;
  * @author sazeratj
  */
 public class DefaultLevelGenerator {
+
     public static void generate() {
-        if (! Files.exists(Paths.get("./ressources/Levels/default"))) {
+        if (!Files.exists(Paths.get("./ressources/Levels/default"))) {
             try (PrintWriter writer = new PrintWriter("./ressources/Levels/default", "UTF-8")) {
                 writer.print("RR1ARRRRR\nR1A1ARRRR\nRA1A1A1RR\nR1A1A1A1A\n1A1A0A1A1\nA1A1A1A1R\nRR1A1A1AR\nRRRRA1A1R\nRRRRRA1RR");
                 writer.close();
