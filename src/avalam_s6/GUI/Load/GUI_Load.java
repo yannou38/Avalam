@@ -41,11 +41,9 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
     private int slotnumber;
     private final LoadAdapterListener listener;
     private boolean callResize;
-    private Game_INTERFACE game;
 
     public GUI_Load() {
         this.callResize = false;
-        this.game = null;
         this.listener = new LoadAdapterListener(this);
         this.slotnumber = 0;
         this.slots = new JButton[6];
@@ -133,14 +131,6 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
     @Override
     public void callResize() {
         this.callResize = true;
-    }
-
-    public Game_INTERFACE getGame() {
-        return game;
-    }
-
-    public void setGame(Game_INTERFACE game) {
-        this.game = game;
     }
 
     public JButton getSlots(int i) {
