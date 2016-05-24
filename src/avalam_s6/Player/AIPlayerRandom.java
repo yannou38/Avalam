@@ -20,7 +20,10 @@ public class AIPlayerRandom extends AIPlayer{
     public AIPlayerRandom(String name, AvalamColor color, Owner owner) {
         super(name, color,owner);
     }
-    
+    /**
+     * 
+     * @return a random possible move
+     */
     @Override
     public Move play() {
         System.out.println("Je suis "+this.name+" je vais jouer des coups aléatoires");

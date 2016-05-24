@@ -17,6 +17,7 @@ public interface Player_INTERFACE {
 
     /**
      * Player play on a coordinate
+     * /!\ DON'T ASK A BOT FOR A PLAY THERE IS NO POSSIBLE PLAY LEFT /!\
      * @return the coordinate chose 
      */
     public Move play();

@@ -16,7 +16,8 @@ import java.util.Random;
  */
 public class AIPlayerEasy extends AIPlayer {
     
-    private final static int nerf = 60;
+    
+    private final static int NERF = 60;
 
     public AIPlayerEasy(String name, AvalamColor color, Owner owner) {
         super(name, color, owner);
@@ -25,7 +26,7 @@ public class AIPlayerEasy extends AIPlayer {
     /**
      * Prioritize move with high/ok value
      * ignore move with bad value unless it's impossible to not do so
-     * @return 
+     * @return  the move choosen by the algorithm
      */
     @Override
    public Move play() {
@@ -83,7 +84,7 @@ public class AIPlayerEasy extends AIPlayer {
                                 else if (completeTourUs(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k]))){
                                      mesCoupsOkValue.add(m);
                                 }
-                                
+                                //reduce the numbers of pawn
                                 else if(suppressAPawn(this.game.getGrid().getCellAt(c0),this.game.getGrid().getCellAt(tabCoord[k]))){
                                     mesCoupsMehValue.add(m);
                                 }
@@ -105,25 +106,25 @@ public class AIPlayerEasy extends AIPlayer {
         System.out.println(this.game.getGrid().toString());
         Random r = new Random();
         
-        
+        //select a move, from best to worst
         
         if (!mesCoupsHighValue.isEmpty()){
-            if(r.nextInt(100) < this.nerf){
+            if(r.nextInt(100) < this.NERF){
                 return mesCoupsHighValue.get(r.nextInt(mesCoupsHighValue.size()));
             }
         }
         if(!mesCoupsOkValue.isEmpty()){
-             if(r.nextInt(100) < this.nerf){
+             if(r.nextInt(100) < this.NERF){
                 return mesCoupsOkValue.get(r.nextInt(mesCoupsOkValue.size()));
              }
         }
         if(!mesCoupsMehValue.isEmpty()){
-            if(r.nextInt(100) < this.nerf){
+            if(r.nextInt(100) < this.NERF){
                 return mesCoupsMehValue.get(r.nextInt(mesCoupsMehValue.size()));
             }
         }
         if(!mesCoups.isEmpty()){
-            if(r.nextInt(100) < this.nerf){
+            if(r.nextInt(100) < this.NERF){
                 return mesCoups.get(r.nextInt(mesCoups.size()));
             }
         }
@@ -131,7 +132,7 @@ public class AIPlayerEasy extends AIPlayer {
             return mesCoupsBadValue.get(r.nextInt(mesCoupsBadValue.size()));
         }
         
-        //just in case
+        //just in case, redo it the "classic" way if we missed the play
         
          if (!mesCoupsHighValue.isEmpty()){
             return mesCoupsHighValue.get(r.nextInt(mesCoupsHighValue.size()));

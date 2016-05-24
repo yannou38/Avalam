@@ -25,6 +25,10 @@ public class AIPlayerMedium extends AIPlayer {
         super(name, color, owner);
     }
 
+    /**
+     * 
+     * @return the best play in an optimistict PoV
+     */
     @Override
     public Move play() {
         System.out.println("Je suis " + this.name + " je vais jouer des coups moyens");
@@ -86,6 +90,12 @@ public class AIPlayerMedium extends AIPlayer {
 
     }
 
+    /**
+     * give the most probable value of the move (optimistic, let the opponent outvalue us if he plays well)
+     * @param move   move
+     * @param profondeur    horizon
+     * @return  average value of the move
+     */
     private double miniMax(Move move, int profondeur) {
 
         Coordinate[] tabCoord = new Coordinate[8];
@@ -139,11 +149,10 @@ public class AIPlayerMedium extends AIPlayer {
                     tabCoord[6] = c7;
                     tabCoord[7] = c8;
                     for (int k = 0; k < 8; k++) {
-                        //un coup est possible
                         if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()) {
                             if (this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0), this.game.getGrid().getCellAt(tabCoord[k]))) {
+                                //un coup est possible
                                 Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), tabCoord[k], this.game.getGrid().getCellAt(tabCoord[k]).getSize(), this);
-                                //we gain a point for free, great !
                                 minmaxValue += 3-miniMax(m, profondeur - 1);
                                 nbCoups++;
                             }
