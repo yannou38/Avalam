@@ -128,7 +128,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     public void initGame() {
         try {
             Player p1 = new ControlledPlayer("Jon Doe", AvalamColor.WHITE, Owner.PLAYER_1);
-            Player p2 = new AIPlayerEasy("Bot_Frank", AvalamColor.BLACK, Owner.PLAYER_2);
+            Player p2 = new AIPlayerHard("Bot_Frank", AvalamColor.BLACK, Owner.PLAYER_2);
             String gName = "default";
             Level_Parser myParser = new Level_Parser(gName);
             Grid g = new Grid(myParser.readLevel(),gName); // IOException | GridSizeException | GridCharException
@@ -174,13 +174,13 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                     p2 = new ControlledPlayer("Bot Franck", c2, Owner.PLAYER_2);
                     break;
                 case "ia_easy":
-                    p2 = new AIPlayerEasy("Bot Franck", c2, Owner.PLAYER_2);
+                    p2 = new AIPlayerEasy("Bot Easy", c2, Owner.PLAYER_2);
                     break;
                 case "ia_mid":
-                    p2 = new AIPlayerMedium("Bot Franck", c2, Owner.PLAYER_2);
+                    p2 = new AIPlayerMedium("Bot Medium", c2, Owner.PLAYER_2);
                     break;
                 case "ia_hard":
-                    p2 = new AIPlayerMedium("Bot Franck", c2, Owner.PLAYER_2);
+                    p2 = new AIPlayerHard("Bot Hard", c2, Owner.PLAYER_2);
                     break;
                 case "ia_exp":
                     p2 = new AIPlayerMedium("Bot Franck", c2, Owner.PLAYER_2);
