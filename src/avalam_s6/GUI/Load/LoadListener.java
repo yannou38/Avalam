@@ -26,6 +26,7 @@ public class LoadListener implements MouseListener {
     private String name;
     private Image icon;
     private Image iconbase;
+    private GUI_Load page;
 
     public LoadListener(String buttonname) {
         this.name = buttonname;
@@ -44,6 +45,7 @@ public class LoadListener implements MouseListener {
         GUI_Load Save = ((GUI_Load) source.getParent());
         switch (this.name) {            
             case "load":
+                Save.getGame().load("slot_1");
                 break;
             case "home":
                 Save.back();

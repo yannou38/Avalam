@@ -32,9 +32,11 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
     private Image backgroundload, homeI, loadI;
     private final LoadAdapterListener listener;
     private boolean callResize;
+    private Game_INTERFACE game;
 
     public GUI_Load() {
         this.callResize = false;
+        this.game = null;
         this.listener = new LoadAdapterListener(this);
         initComponents();
     }
@@ -92,6 +94,14 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
     @Override
     public void callResize() {
         this.callResize = true;
+    }
+
+    public Game_INTERFACE getGame() {
+        return game;
+    }
+
+    public void setGame(Game_INTERFACE game) {
+        this.game = game;
     }
     
     
