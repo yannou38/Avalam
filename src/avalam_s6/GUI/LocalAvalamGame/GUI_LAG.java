@@ -169,13 +169,13 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                     p2 = new ControlledPlayer("Bot Franck", c2, Owner.PLAYER_2);
                     break;
                 case "ia_easy":
-                    p2 = new AIPlayerEasy("Bot Franck", c2, Owner.PLAYER_2);
+                    p2 = new AIPlayerEasy("Bot Easy", c2, Owner.PLAYER_2);
                     break;
                 case "ia_mid":
-                    p2 = new AIPlayerMedium("Bot Franck", c2, Owner.PLAYER_2);
+                    p2 = new AIPlayerMedium("Bot Medium", c2, Owner.PLAYER_2);
                     break;
                 case "ia_hard":
-                    p2 = new AIPlayerMedium("Bot Franck", c2, Owner.PLAYER_2);
+                    p2 = new AIPlayerHard("Bot Hard", c2, Owner.PLAYER_2);
                     break;
                 case "ia_exp":
                     p2 = new AIPlayerMedium("Bot Franck", c2, Owner.PLAYER_2);
