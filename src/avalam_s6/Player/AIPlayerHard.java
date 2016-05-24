@@ -15,9 +15,8 @@ import java.util.Random;
  */
 public class AIPlayerHard extends AIPlayer {
     
-    private int nbtours;
-    //On augmente la profondeur tous les BUFF tours
-    private final static int BUFF = 8;
+    //Increase the value to increase the difficulty of the AI
+    private final static int BUFF = 100;
 
     public AIPlayerHard(String name, AvalamColor color, Owner owner) {
         super(name, color, owner);
@@ -26,6 +25,7 @@ public class AIPlayerHard extends AIPlayer {
     @Override
     public Move play() {
         System.out.println("Je suis " + this.name + " je vais jouer des coups difficiles ");
+        int coups = nbCoupsJouables();
         ArrayList<Move> mesCoups = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];
         double maxvalue = 0;
@@ -62,7 +62,7 @@ public class AIPlayerHard extends AIPlayer {
                                 //un coup est possible, on l'évalue
                                 Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), tabCoord[k], this.game.getGrid().getCellAt(tabCoord[k]).getSize(), this);
                                 //On augmente l'horizon avec l'avancement de la partie (l'ia devient de plus en plus forte)
-                                value = miniMaxUs(m, 1+(nbtours/BUFF));
+                                value = miniMaxUs(m, 1+(BUFF/coups));
                                 if (value > maxvalue) {
                                     maxvalue = value;
                                     mesCoups.clear();
@@ -82,7 +82,6 @@ public class AIPlayerHard extends AIPlayer {
         int monrand = r.nextInt(mesCoups.size());
         System.out.println("Ce coup vaut " + maxvalue);
         System.out.println("" + mesCoups.get(monrand).getC_src().getX() + " " + mesCoups.get(monrand).getC_src().getY() + " " + mesCoups.get(monrand).getC_dst().getX() + " " + mesCoups.get(monrand).getC_dst().getY());
-        nbtours++;
         return mesCoups.get(monrand);
 
     }
