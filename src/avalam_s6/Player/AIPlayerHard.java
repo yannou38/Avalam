@@ -13,17 +13,19 @@ import java.util.Random;
  *
  * @author Seawolf
  */
-public class AIPlayerTestSum extends AIPlayer {
+public class AIPlayerHard extends AIPlayer {
     
     private int nbtours;
+    
+    private final static int BUFF = 8;
 
-    public AIPlayerTestSum(String name, AvalamColor color, Owner owner) {
+    public AIPlayerHard(String name, AvalamColor color, Owner owner) {
         super(name, color, owner);
     }
 
     @Override
     public Move play() {
-        System.out.println("Je suis " + this.name + " je vais jouer des coups moyens");
+        System.out.println("Je suis " + this.name + " je suis en état de test ");
         ArrayList<Move> mesCoups = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];
         double maxvalue = 0;
@@ -58,7 +60,7 @@ public class AIPlayerTestSum extends AIPlayer {
                         if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()) {
                             if (this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0), this.game.getGrid().getCellAt(tabCoord[k]))) {
                                 Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), tabCoord[k], this.game.getGrid().getCellAt(tabCoord[k]).getSize(), this);
-                                value = miniMaxUs(m, 1+(nbtours/3));
+                                value = miniMaxUs(m, 1+(nbtours/BUFF));
                                 if (value > maxvalue) {
                                     maxvalue = value;
                                     mesCoups.clear();
@@ -78,19 +80,22 @@ public class AIPlayerTestSum extends AIPlayer {
         int monrand = r.nextInt(mesCoups.size());
         System.out.println("Ce coup vaut " + maxvalue);
         System.out.println("" + mesCoups.get(monrand).getC_src().getX() + " " + mesCoups.get(monrand).getC_src().getY() + " " + mesCoups.get(monrand).getC_dst().getX() + " " + mesCoups.get(monrand).getC_dst().getY());
+        nbtours++;
         return mesCoups.get(monrand);
 
     }
 
-    private double miniMaxUs(Move move, int profondeur) {
+    private double miniMaxOp(Move move, int profondeur) {
 
         Coordinate[] tabCoord = new Coordinate[8];
+        double maxValue = 0;
         double value = 0;
         double minmaxValue = 0;
-        double nbCoups = 0;
 
-        if (completeTourUsVsOp(this.game.getGrid().getCellAt(move.getC_src()), this.game.getGrid().getCellAt(move.getC_dst())) || createAloneUs(move.getC_src(), move.getC_dst())) {
-            value = 1;
+       if (createAloneUs(move.getC_src(), move.getC_dst()))
+            value += 1;
+        if (completeTourUsVsOp(this.game.getGrid().getCellAt(move.getC_src()), this.game.getGrid().getCellAt(move.getC_dst()))) {
+            value += 1;
         } //we can secure a point
         else if (completeTourUs(this.game.getGrid().getCellAt(move.getC_src()), this.game.getGrid().getCellAt(move.getC_dst()))) {
             value = 0.9;
@@ -145,8 +150,9 @@ public class AIPlayerTestSum extends AIPlayer {
                             if (this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0), this.game.getGrid().getCellAt(tabCoord[k]))) {
                                 Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), tabCoord[k], this.game.getGrid().getCellAt(tabCoord[k]).getSize(), this);
                                 //we gain a point for free, great !
-                                minmaxValue += 3-miniMaxOp(m, profondeur - 1);
-                                nbCoups++;
+                                minmaxValue =miniMaxUs(m, profondeur - 1);
+                                if (minmaxValue > maxValue)
+                                    maxValue = minmaxValue;
                             }
                         }
                     }
@@ -154,18 +160,18 @@ public class AIPlayerTestSum extends AIPlayer {
             }
         }
         this.game.undo();
-        return (value + 2*(minmaxValue / nbCoups)/3);
+        return (value + maxValue);
     }
     
-    private double miniMaxOp(Move move, int profondeur) {
+    private double miniMaxUs(Move move, int profondeur) {
 
         Coordinate[] tabCoord = new Coordinate[8];
+        double minValue= 9999;
         double value = 0;
         double minmaxValue = 0;
-        double nbCoups = 0;
 
         if (createAloneUs(move.getC_src(), move.getC_dst()))
-            value += 0.95;
+            value += 1;
         if (completeTourUsVsOp(this.game.getGrid().getCellAt(move.getC_src()), this.game.getGrid().getCellAt(move.getC_dst()))) {
             value += 1;
         } //we can secure a point
@@ -220,9 +226,9 @@ public class AIPlayerTestSum extends AIPlayer {
                         if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()) {
                             if (this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0), this.game.getGrid().getCellAt(tabCoord[k]))) {
                                 Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), tabCoord[k], this.game.getGrid().getCellAt(tabCoord[k]).getSize(), this);
-                                //we gain a point for free, great !
-                                minmaxValue += 3-miniMaxUs(m, profondeur - 1);
-                                nbCoups++;
+                                minmaxValue =miniMaxOp(m, profondeur - 1);
+                                if (minmaxValue < minValue)
+                                    minValue = minmaxValue;
                             }
                         }
                     }
@@ -230,7 +236,7 @@ public class AIPlayerTestSum extends AIPlayer {
             }
         }
         this.game.undo();
-        return (value + 2*(minmaxValue / nbCoups)/3);
+        return (value + minValue);
     }
 
 }
