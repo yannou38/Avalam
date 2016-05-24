@@ -102,6 +102,7 @@ public class SettingsAdapterListener implements ComponentListener{
 
     @Override
     public void componentShown(ComponentEvent e) {
+        this.page.initOptions();
     }
 
     @Override
