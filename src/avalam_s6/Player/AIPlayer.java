@@ -92,7 +92,7 @@ public abstract class AIPlayer extends Player {
     }
     
     /**
-     * meh value
+     * meh- value, 3 seems to be a strong height if you don't have a 2 tower around
      */
     protected boolean suppressAPawnCreate3Op(Cell a, Cell b) {
         if (this.owner.getValue() != b.getOwner().getValue()) {
@@ -106,7 +106,7 @@ public abstract class AIPlayer extends Player {
     /**
      * check if a coordinate is alone
      *
-     * @param c0
+     * @param c0    coordinate
      * @return true if the coordinate is alone (no move possible) else false
      */
     protected boolean alone(Coordinate c0) {
@@ -193,11 +193,11 @@ public abstract class AIPlayer extends Player {
     }
 
     /**
-     * bad
+     * bad, we give the Op a free point
      *
-     * @param c0
-     * @param dest
-     * @return
+     * @param c0     origin
+     * @param dest     destination
+     * @return         true if we create an alone for the Op, else false
      */
     protected boolean createAloneOp(Coordinate c0, Coordinate dest) {
         Coordinate[] tabCoord = new Coordinate[8];

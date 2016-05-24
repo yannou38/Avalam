@@ -16,7 +16,7 @@ import java.util.Random;
 public class AIPlayerHard extends AIPlayer {
     
     private int nbtours;
-    
+    //On augmente la profondeur tous les BUFF tours
     private final static int BUFF = 8;
 
     public AIPlayerHard(String name, AvalamColor color, Owner owner) {
@@ -25,7 +25,7 @@ public class AIPlayerHard extends AIPlayer {
 
     @Override
     public Move play() {
-        System.out.println("Je suis " + this.name + " je suis en état de test ");
+        System.out.println("Je suis " + this.name + " je vais jouer des coups difficiles ");
         ArrayList<Move> mesCoups = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];
         double maxvalue = 0;
@@ -39,6 +39,7 @@ public class AIPlayerHard extends AIPlayer {
             for (int j = 0; j < this.game.getGrid().getHeight(); j++) {
                 Coordinate c0 = new Coordinate(j, i);
                 if (c0.isValid() && this.game.getGrid().getCellAt(c0).getState().getValue() == CellState.TOWER.getValue()) {
+                    //les destinations possibles (avant vérification)
                     Coordinate c1 = new Coordinate(j - 1, i - 1);
                     Coordinate c2 = new Coordinate(j, i - 1);
                     Coordinate c3 = new Coordinate(j + 1, i - 1);
@@ -56,10 +57,11 @@ public class AIPlayerHard extends AIPlayer {
                     tabCoord[6] = c7;
                     tabCoord[7] = c8;
                     for (int k = 0; k < 8; k++) {
-                        //un coup est possible
                         if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()) {
                             if (this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0), this.game.getGrid().getCellAt(tabCoord[k]))) {
+                                //un coup est possible, on l'évalue
                                 Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), tabCoord[k], this.game.getGrid().getCellAt(tabCoord[k]).getSize(), this);
+                                //On augmente l'horizon avec l'avancement de la partie (l'ia devient de plus en plus forte)
                                 value = miniMaxUs(m, 1+(nbtours/BUFF));
                                 if (value > maxvalue) {
                                     maxvalue = value;
@@ -84,7 +86,13 @@ public class AIPlayerHard extends AIPlayer {
         return mesCoups.get(monrand);
 
     }
-
+    
+    /**
+     * 
+     * @param move    expected move
+     * @param profondeur       horizon
+     * @return         max value (we do the best move)
+     */
     private double miniMaxOp(Move move, int profondeur) {
 
         Coordinate[] tabCoord = new Coordinate[8];
@@ -145,12 +153,12 @@ public class AIPlayerHard extends AIPlayer {
                     tabCoord[6] = c7;
                     tabCoord[7] = c8;
                     for (int k = 0; k < 8; k++) {
-                        //un coup est possible
                         if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()) {
                             if (this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0), this.game.getGrid().getCellAt(tabCoord[k]))) {
+                                //un coup est possible
                                 Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), tabCoord[k], this.game.getGrid().getCellAt(tabCoord[k]).getSize(), this);
-                                //we gain a point for free, great !
                                 minmaxValue =miniMaxUs(m, profondeur - 1);
+                                //on récupère le max
                                 if (minmaxValue > maxValue)
                                     maxValue = minmaxValue;
                             }
@@ -162,7 +170,12 @@ public class AIPlayerHard extends AIPlayer {
         this.game.undo();
         return (value + maxValue);
     }
-    
+    /**
+     * 
+     * @param move  expected move
+     * @param profondeur   horizon
+     * @return   min value (we expect the Op to do the best move)
+     */
     private double miniMaxUs(Move move, int profondeur) {
 
         Coordinate[] tabCoord = new Coordinate[8];
@@ -222,11 +235,12 @@ public class AIPlayerHard extends AIPlayer {
                     tabCoord[6] = c7;
                     tabCoord[7] = c8;
                     for (int k = 0; k < 8; k++) {
-                        //un coup est possible
                         if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()) {
                             if (this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0), this.game.getGrid().getCellAt(tabCoord[k]))) {
+                                //un coup est possible
                                 Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), tabCoord[k], this.game.getGrid().getCellAt(tabCoord[k]).getSize(), this);
                                 minmaxValue =miniMaxOp(m, profondeur - 1);
+                                //on récupère le min
                                 if (minmaxValue < minValue)
                                     minValue = minmaxValue;
                             }
