@@ -39,7 +39,6 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         this.initFrame(WindowState.MAIN);
         /* ADD KB DISPATCHER */
         getCurrentKeyboardFocusManager().addKeyEventDispatcher(new CustomKeyboardDispatcher(this));
-        SoundEngine.play("./ressources/Themes/Default/sounds/game_ambiant.wav");
     }
 
     public void setRenderMode() {
