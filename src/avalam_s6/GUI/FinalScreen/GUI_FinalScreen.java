@@ -116,8 +116,8 @@ public class GUI_FinalScreen extends JPanel implements Gui_INTERFACE{
         this.finalGrid = g;
     }
 
-    public void setWinner(String p) {
-        this.victoryText.setText(p + " a gagné!");
+    public void setWinningText(String p) {
+        this.victoryText.setText(p);
     }
 
     @Override

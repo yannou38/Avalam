@@ -8,6 +8,7 @@ package avalam_s6.GUI.LocalAvalamGame;
 import avalam_s6.Core.Globals.Input;
 import avalam_s6.Core.File_IO.Level_Parser;
 import avalam_s6.Core.*;
+import avalam_s6.Core.File_IO.SaveParser_Reader;
 import avalam_s6.Core.File_IO.SaveParser_Writer;
 import avalam_s6.Core.Globals.AvalamColor;
 import avalam_s6.Core.Globals.SetupManager;
@@ -190,7 +191,6 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             Container mainFrame = this.getParent().getParent().getParent().getParent();
             System.out.println(mainFrame.toString());
             this.game = new Local_Avalam_Game((Main_Frame) mainFrame,g,p1,p2,new Stack<>(),new Stack<>(),0,0); // GridSizeException
-            Input.setInputGame(this.game);
         } catch (IOException | GridSizeException | GridCharException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -337,7 +337,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     }
     
     public void load(String pSlotName) {
-        // NYI
-        // Charger les parametres et construire une game.
+        SaveParser_Reader lParser = new SaveParser_Reader((Main_Frame)this.getParent().getParent().getParent().getParent(),pSlotName);
+        this.game = lParser.generateGame();
     }
 }

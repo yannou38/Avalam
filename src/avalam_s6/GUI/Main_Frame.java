@@ -133,7 +133,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
 
     public void setVictoryScreen(String p, Grid g) {
         ((GUI_FinalScreen) this.panelList[WindowState.VICTORY.getValue()]).setGrid(g);
-        ((GUI_FinalScreen) this.panelList[WindowState.VICTORY.getValue()]).setWinner(p);
+        ((GUI_FinalScreen) this.panelList[WindowState.VICTORY.getValue()]).setWinningText(p);
         this.setwState(WindowState.VICTORY);
     }
     
