@@ -6,6 +6,7 @@
 package avalam_s6.GUI.Load;
 
 import avalam_s6.Core.Globals.SetupManager;
+import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.Rules.RulesListener;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -51,9 +52,10 @@ public class LoadListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
+        Main_Frame mFrame= ((Main_Frame) source.getParent().getParent().getParent().getParent().getParent());
         switch (this.name) {
             case "load":
-                //this.page.getGame().load("slot_"+this.page.getSlotnumber());
+                mFrame.load("slot_"+this.page.getSlotnumber());
                 source.setIcon(new ImageIcon(this.iconbase));
                 break;
             case "home":

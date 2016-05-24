@@ -5,8 +5,11 @@
  */
 package avalam_s6.Core;
 
+import avalam_s6.Core.File_IO.Level_Parser;
 import avalam_s6.Core.File_IO.SaveParser_Writer;
+import avalam_s6.Core.Globals.AvalamColor;
 import avalam_s6.Core.Globals.Input;
+import avalam_s6.Exceptions.GridCharException;
 import avalam_s6.Exceptions.GridSizeException;
 import avalam_s6.Player.Player;
 import java.awt.event.ActionEvent;
@@ -16,8 +19,11 @@ import javax.swing.Timer;
 import avalam_s6.GUI.GuiManager_INTERFACE;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.Player.AIPlayer;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import avalam_s6.Player.AIPlayerEasy;
+import avalam_s6.Player.ControlledPlayer;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,28 +32,39 @@ import java.util.Date;
 public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     private static final int NB_PLAYERS = 2;
     private final GuiManager_INTERFACE gui;
-    private final Timer t;    
     private Grid grid;
     private Player[] players;
     private Stack<Move> history;
     private Stack<Move> cancelled_moves;
     private int current_player;
-    private boolean isTurnFinished;
     private int nbTurns;
+    /* -- */
+    private boolean isTurnFinished;
+    private Timer t;
     
-    public Local_Avalam_Game(Grid gr, Player p1, Player p2, GuiManager_INTERFACE gui) throws GridSizeException {
-        players = new Player[2];
-        this.grid = gr;
-        this.players[0] = p1;
-        this.players[1] = p2;
-        this.history = new Stack<>();
-        this.cancelled_moves = new Stack<>();
-        this.current_player = 0;
+    public Local_Avalam_Game(GuiManager_INTERFACE pGui) throws GridSizeException, GridCharException, IOException {
+        this(pGui , new Grid( new Level_Parser("default").readLevel(), "default" ) , new ControlledPlayer("Jon Doe", AvalamColor.WHITE, Owner.PLAYER_1) , new AIPlayerEasy("Bot_Frank", AvalamColor.BLACK, Owner.PLAYER_2) ,new Stack<>(),new Stack<>(),0,0);
+    }
+    
+    public Local_Avalam_Game(GuiManager_INTERFACE pGui, Grid pGrid, Player pPlayer1, Player pPlayer2, Stack<Move> pUndo, Stack<Move> pRedo, int pCurrent, int pTurns) throws GridSizeException {
+        this.gui = pGui;
+        this.grid = pGrid;
+        this.players = new Player[2];
+        this.players[0] = pPlayer1;
+        this.players[1] = pPlayer2;
+        this.history = pUndo;
+        this.cancelled_moves = pRedo;
+        this.current_player = pCurrent;
+        this.nbTurns = pTurns;
+        
+        this.initGame();
+    }
+    
+    private void initGame() {
+        this.t = new Timer(100, (ActionListener) this);
         this.isTurnFinished = false;
-        this.gui = gui;
-        this.nbTurns = 0;
-        t = new Timer(100, (ActionListener) this);
         Input.resetClick();
+        Input.setInputGame(this);
     }
     
     //TODO: Check user is able to undo (GUI check if history is empty and call or not this function)
@@ -66,17 +83,6 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
             this.history.add(this.cancelled_moves.pop());
             this.grid.moveCell(this.history.lastElement().getC_src(), this.history.lastElement().getC_dst());
         }
-    }
-
-    @Override
-    public void save(String aSaveName) {
-        SaveParser_Writer myParser = new SaveParser_Writer(this, aSaveName);
-        myParser.save();
-    }
-
-    @Override
-    public void load(String filePath) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -238,6 +244,10 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     }
 
     public Player[] getPlayers() {
-        return players;
+        return this.players;
+    }
+    
+    public int getTurns() {
+        return this.nbTurns;
     }
 }

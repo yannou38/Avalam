@@ -83,7 +83,6 @@ public class LAG_UI_MouseListener implements MouseListener {
                 }
                 break;                
             case "save" :
-                mainFrame.setGame(lag.getGame());
                 mainFrame.setwState(WindowState.SAVE);
                 break;
         }

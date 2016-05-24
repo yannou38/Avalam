@@ -8,6 +8,7 @@ package avalam_s6.GUI.LocalAvalamGame;
 import avalam_s6.Core.Globals.Input;
 import avalam_s6.Core.File_IO.Level_Parser;
 import avalam_s6.Core.*;
+import avalam_s6.Core.File_IO.SaveParser_Writer;
 import avalam_s6.Core.Globals.AvalamColor;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Exceptions.GridCharException;
@@ -18,6 +19,7 @@ import avalam_s6.GUI.WindowState;
 import avalam_s6.Player.*;
 import java.awt.*;
 import java.io.*;
+import java.util.Stack;
 import java.util.logging.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -127,15 +129,8 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     public void initGame() {
         try {
-            Player p1 = new ControlledPlayer("Jon Doe", AvalamColor.WHITE, Owner.PLAYER_1);
-            Player p2 = new AIPlayerEasy("Bot_Frank", AvalamColor.BLACK, Owner.PLAYER_2);
-            String gName = "default";
-            Level_Parser myParser = new Level_Parser(gName);
-            Grid g = new Grid(myParser.readLevel(),gName); // IOException | GridSizeException | GridCharException
             Container mainFrame = this.getParent().getParent().getParent().getParent();
-            System.out.println(mainFrame.toString());
-            this.game = new Local_Avalam_Game(g, p1, p2, (Main_Frame) mainFrame); // GridSizeException
-            Input.setInputGame(this.game);
+            this.game = new Local_Avalam_Game((Main_Frame) mainFrame); // GridSizeException
         } catch (IOException | GridSizeException | GridCharException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -194,7 +189,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             Grid g = new Grid(myParser.readLevel(),gName); // IOException | GridSizeException | NumberFormatException
             Container mainFrame = this.getParent().getParent().getParent().getParent();
             System.out.println(mainFrame.toString());
-            this.game = new Local_Avalam_Game(g, p1, p2, (Main_Frame) mainFrame); // GridSizeException
+            this.game = new Local_Avalam_Game((Main_Frame) mainFrame,g,p1,p2,new Stack<>(),new Stack<>(),0,0); // GridSizeException
             Input.setInputGame(this.game);
         } catch (IOException | GridSizeException | GridCharException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
@@ -334,5 +329,15 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     @Override
     public void callResize() {
         this.callResize = true;
+    }
+    
+    public void save(String pSlotName) {
+        SaveParser_Writer myParser = new SaveParser_Writer((Local_Avalam_Game)this.game, pSlotName);
+        myParser.save();
+    }
+    
+    public void load(String pSlotName) {
+        // NYI
+        // Charger les parametres et construire une game.
     }
 }

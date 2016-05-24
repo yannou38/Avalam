@@ -6,6 +6,7 @@
 package avalam_s6.GUI.Save;
 
 import avalam_s6.Core.Globals.SetupManager;
+import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.Rules.RulesListener;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -52,15 +53,16 @@ public class SaveListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
+        Main_Frame mFrame= ((Main_Frame) source.getParent().getParent().getParent().getParent().getParent());
         switch (this.name) {
             case "save":
                 if (this.page.getSlotnumber() == 0) {
                     //no slot selected, do nothing
                     break;
                 } else if (this.page.getSlotnumber() == 6) {
-                    this.page.getGame().save(this.page.getField().getText());
+                    mFrame.save(this.page.getField().getText());
                 } else {
-                    this.page.getGame().save("slot_" + this.page.getSlotnumber());
+                    mFrame.save("slot_" + this.page.getSlotnumber());
                 }
                 this.page.back();
                 source.setIcon(new ImageIcon(this.iconbase));

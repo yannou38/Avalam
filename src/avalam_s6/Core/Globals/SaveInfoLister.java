@@ -30,7 +30,8 @@ public class SaveInfoLister {
             this.aDate = br.readLine();
             this.aJ1 = br.readLine();
             this.aJ2 = br.readLine();
-            br.readLine();
+            br.readLine(); // Current Plyaer
+            br.readLine(); // NB Turns
             this.aGrid = br.readLine();
             br.close();
             this.cleanStrings();

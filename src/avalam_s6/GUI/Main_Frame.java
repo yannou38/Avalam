@@ -124,8 +124,12 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         this.setwState(WindowState.VICTORY);
     }
     
-    public void setGame(Game_INTERFACE game){
-        ((GUI_Save) this.panelList[WindowState.SAVE.getValue()]).setGame(game);
+    public void save(String pSlotName){
+        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).save(pSlotName);
+    }
+    
+    public void load(String pSlotName) {
+        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).load(pSlotName);
     }
 
     public void changeSettings(String Language, String FS, String Theme, String Sound) {

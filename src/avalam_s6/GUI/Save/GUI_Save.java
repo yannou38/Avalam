@@ -40,11 +40,9 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
     private Image backgroundsave, saveI, returnI, slot;
     private final SaveAdapterListener listener;
     private Boolean callResize;
-    private Game_INTERFACE game;
 
     public GUI_Save() {
         this.listener = new SaveAdapterListener(this);
-        this.game = null;
         this.callResize = false;
         this.slotnumber = 0;
         this.slots = new JButton[6];
@@ -105,10 +103,6 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
         this.addComponentListener(listener);
     }
 
-    public void setGame(Game_INTERFACE game) {
-        this.game = game;
-    }
-
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(this.backgroundsave, 0, 0, this.getWidth(), this.getHeight(), null);
@@ -130,10 +124,6 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
     public void back() {
         Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
         mainFrame.setwState(WindowState.BOARD);
-    }
-
-    public Game_INTERFACE getGame() {
-        return game;
     }
 
     public int getSlotnumber() {
