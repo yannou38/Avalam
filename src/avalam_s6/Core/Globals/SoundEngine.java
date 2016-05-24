@@ -42,17 +42,14 @@ public class SoundEngine {
     }
     
     public static void play(String filePath){
+        if(SoundEngine.clip.isActive()){
+            SoundEngine.stop();
+        }
         try{
             File soundFile = new File(filePath);
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
             SoundEngine.clip.open(audioStream);
-        } catch (UnsupportedAudioFileException ex) {
-            System.out.println("Error - " + SoundEngine.class.toString());
-            Logger.getLogger(SoundEngine.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            System.out.println("Error - " + SoundEngine.class.toString());
-            Logger.getLogger(SoundEngine.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (LineUnavailableException ex) {
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
             System.out.println("Error - " + SoundEngine.class.toString());
             Logger.getLogger(SoundEngine.class.getName()).log(Level.SEVERE, null, ex);
         }

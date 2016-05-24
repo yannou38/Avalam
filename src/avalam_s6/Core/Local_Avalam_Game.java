@@ -9,6 +9,7 @@ import avalam_s6.Core.File_IO.Level_Parser;
 import avalam_s6.Core.File_IO.SaveParser_Writer;
 import avalam_s6.Core.Globals.AvalamColor;
 import avalam_s6.Core.Globals.Input;
+import avalam_s6.Core.Globals.LanguageManager;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Exceptions.GridCharException;
 import avalam_s6.Exceptions.GridSizeException;
@@ -228,9 +229,9 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     private void winningProcedure(int i) {
         /* Appel à GUI */
         if(i<3) {
-            ((Main_Frame)this.gui).setVictoryScreen(this.players[i-1].getName()+" "+SetupManager.getElement("Fin"),this.grid);
+            ((Main_Frame)this.gui).setVictoryScreen(this.players[i-1].getName()+" "+LanguageManager.getElement("Fin"),this.grid);
         } else {
-            ((Main_Frame)this.gui).setVictoryScreen(SetupManager.getElement("Egalité"),this.grid);
+            ((Main_Frame)this.gui).setVictoryScreen(LanguageManager.getElement("Egalité"),this.grid);
         }
     }
 

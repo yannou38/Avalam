@@ -7,6 +7,7 @@ package avalam_s6.GUI;
 
 import avalam_s6.Core.Game_INTERFACE;
 import avalam_s6.Core.Globals.SetupManager;
+import avalam_s6.Core.Globals.SoundEngine;
 import avalam_s6.Core.Grid;
 import avalam_s6.GUI.FinalScreen.GUI_FinalScreen;
 import avalam_s6.GUI.HomePage.GUI_HomePage;
@@ -38,6 +39,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         this.initFrame(WindowState.MAIN);
         /* ADD KB DISPATCHER */
         getCurrentKeyboardFocusManager().addKeyEventDispatcher(new CustomKeyboardDispatcher(this));
+        SoundEngine.play("./ressources/Themes/Default/sounds/game_ambiant.wav");
     }
 
     public void setRenderMode() {

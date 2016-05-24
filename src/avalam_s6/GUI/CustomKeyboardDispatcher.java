@@ -5,10 +5,12 @@
  */
 package avalam_s6.GUI;
 
+import avalam_s6.Core.Globals.SoundEngine;
 import java.awt.KeyEventDispatcher;
 import java.awt.event.KeyEvent;
 import static java.awt.event.KeyEvent.VK_ESCAPE;
 import static java.awt.event.KeyEvent.VK_F11;
+import static java.awt.event.KeyEvent.VK_M;
 
 /**
  *
@@ -28,6 +30,8 @@ public class CustomKeyboardDispatcher implements KeyEventDispatcher {
             this.mainframe.toggleWRM();
         } else if (e.getID() == KeyEvent.KEY_RELEASED && e.getKeyCode() == VK_ESCAPE) {
             this.mainframe.backWindow();
+        } else if (e.getID() == KeyEvent.KEY_RELEASED && e.getKeyCode() == VK_M) {
+            SoundEngine.toggleMute();
         } else {
             return false;
         }
