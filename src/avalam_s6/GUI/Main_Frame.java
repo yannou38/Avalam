@@ -59,6 +59,19 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
             SetupManager.setElement("FullScreen", "Oui");
         }
         setRenderMode();
+        
+        resetSettings();
+    }
+    
+    private void resetSettings() {
+        this.panelList[WindowState.SETTINGS.getValue()].setVisible(false);
+        this.remove(this.panelList[WindowState.SETTINGS.getValue()]);
+        this.panelList[WindowState.SETTINGS.getValue()] = new GUI_Settings();
+        
+        this.panelList[WindowState.SETTINGS.getValue()].setVisible(this.wState.getValue() == WindowState.SETTINGS.getValue());
+        
+        ((Gui_INTERFACE)this.panelList[WindowState.SETTINGS.getValue()]).callResize();
+        this.add(this.panelList[WindowState.SETTINGS.getValue()]);
     }
 
     public void initFrame(WindowState wState) {
@@ -69,15 +82,15 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
             }
         }
         this.panelList = new JPanel[9];
-        this.panelList[0] = new GUI_HomePage();
-        this.panelList[1] = new GUI_LAG();
-        this.panelList[2] = new GUI_FinalScreen();
-        this.panelList[3] = new GUI_NewGame();
-        this.panelList[4] = new GUI_Settings();
-        this.panelList[5] = new GUI_Credits();
-        this.panelList[6] = new GUI_Save();
-        this.panelList[7] = new GUI_Load();
-        this.panelList[8] = new GUI_Rules();
+        this.panelList[WindowState.MAIN.getValue()] = new GUI_HomePage();
+        this.panelList[WindowState.BOARD.getValue()] = new GUI_LAG();
+        this.panelList[WindowState.VICTORY.getValue()] = new GUI_FinalScreen();
+        this.panelList[WindowState.PLAYERSELECT.getValue()] = new GUI_NewGame();
+        this.panelList[WindowState.SETTINGS.getValue()] = new GUI_Settings();
+        this.panelList[WindowState.ABOUT.getValue()] = new GUI_Credits();
+        this.panelList[WindowState.SAVE.getValue()] = new GUI_Save();
+        this.panelList[WindowState.LOAD.getValue()] = new GUI_Load();
+        this.panelList[WindowState.RULES.getValue()] = new GUI_Rules();
         for (JPanel pElement : this.panelList) {
             //this.add(pElement);
             pElement.setVisible(false);

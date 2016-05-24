@@ -188,8 +188,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
         return this.credits;
     }
 
-    private void initOptions() {
-        String themeDefault = "Default";
+    public void initOptions() {
 
         this.language = LanguageManager.getChildrensNameOf("Langue");
         for (int x = 0; x < this.language.length; x++) {
