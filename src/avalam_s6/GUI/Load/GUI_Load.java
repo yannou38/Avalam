@@ -6,7 +6,6 @@
 package avalam_s6.GUI.Load;
 
 import avalam_s6.GUI.Save.*;
-import avalam_s6.Core.Game_INTERFACE;
 import avalam_s6.Core.Globals.SaveInfoLister;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.GUI.Gui_INTERFACE;

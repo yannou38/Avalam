@@ -96,6 +96,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
             //this.add(pElement);
             pElement.setVisible(false);
         }
+        ((GUI_HomePage) this.panelList[WindowState.MAIN.getValue()]).callResize();
         this.setwState(WindowState.MAIN);
         this.setRenderMode();
     }
@@ -133,6 +134,10 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
     }
 
     public void setVictoryScreen(String p, Grid g) {
+        
+        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).stop();
+        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).deleteGame();
+        
         ((GUI_FinalScreen) this.panelList[WindowState.VICTORY.getValue()]).setGrid(g);
         ((GUI_FinalScreen) this.panelList[WindowState.VICTORY.getValue()]).setWinningText(p);
         this.setwState(WindowState.VICTORY);

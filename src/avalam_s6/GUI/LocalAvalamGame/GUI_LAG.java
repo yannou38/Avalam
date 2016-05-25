@@ -195,6 +195,12 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void deleteGame(){
+        this.game.clean();
+        this.game=null;
+        System.gc();
+    }
 
     public void start() {
         this.game.getTimer().start();

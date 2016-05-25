@@ -6,11 +6,9 @@
 package avalam_s6.Core;
 
 import avalam_s6.Core.File_IO.Level_Parser;
-import avalam_s6.Core.File_IO.SaveParser_Writer;
 import avalam_s6.Core.Globals.AvalamColor;
 import avalam_s6.Core.Globals.Input;
 import avalam_s6.Core.Globals.LanguageManager;
-import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Exceptions.GridCharException;
 import avalam_s6.Exceptions.GridSizeException;
 import avalam_s6.Player.Player;
@@ -98,6 +96,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         if (this.isTurnFinished) {
             this.changeNbTurns(1);
             int w = winCheck();
+        System.gc();
             switch (w) {
                 case 1:
                 case 2:
@@ -122,13 +121,15 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
                 this.grid.moveCell(m.getC_src(), m.getC_dst());
                 this.history.add(m);
                 this.isTurnFinished = true;
-            } else // JOUEUR
-            if (this.grid.canStack(this.grid.getCellAt(m.getC_src()), this.grid.getCellAt(m.getC_dst()))) { // MOVE OK
+            } else if (this.grid.canStack(this.grid.getCellAt(m.getC_src()), this.grid.getCellAt(m.getC_dst()))) {
+                // JOUEUR
+                // MOVE OK
                 this.grid.moveCell(m.getC_src(), m.getC_dst());
                 this.history.add(m);
                 this.isTurnFinished = true;
             } else {
-                //TODO                   /* Afficher warning de deplacement */
+                //TODO                   
+                /* Afficher warning de deplacement */
             }
             this.cancelled_moves.clear();
         }
@@ -237,7 +238,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     public Player getCurrentPlayer() {
         return this.players[this.current_player];
     }
-    
+
     public int getCurrent() {
         return this.current_player;
     }
@@ -266,5 +267,17 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
 
     public int getTurns() {
         return this.nbTurns;
+    }
+
+    @Override
+    public void clean() {
+        this.players[0] = null;
+        this.players[1] = null;
+        this.history = null;
+        this.cancelled_moves = null;
+        this.grid = null;
+
+        System.gc();
+
     }
 }

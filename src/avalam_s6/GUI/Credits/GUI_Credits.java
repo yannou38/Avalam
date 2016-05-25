@@ -25,7 +25,7 @@ public class GUI_Credits extends JPanel implements Gui_INTERFACE {
     private JButton retour;
     private Image returnI, background;
     private boolean callResize;
-    private CreditsAdapterListener listener;
+    private final CreditsAdapterListener listener;
 
     public GUI_Credits() {
         this.callResize = false;
@@ -54,6 +54,10 @@ public class GUI_Credits extends JPanel implements Gui_INTERFACE {
 
     }
 
+    public JButton getRetour() {
+        return this.retour;
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
@@ -61,7 +65,6 @@ public class GUI_Credits extends JPanel implements Gui_INTERFACE {
             this.listener.componentResized(null);
             this.callResize = false;
         }
-
     }
 
     @Override
@@ -73,10 +76,6 @@ public class GUI_Credits extends JPanel implements Gui_INTERFACE {
     @Override
     public void callResize() {
         this.callResize = true;
-    }
-
-    public JButton getRetour() {
-        return this.retour;
     }
 
 }

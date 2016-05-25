@@ -38,7 +38,7 @@ import javax.swing.JPanel;
 public class GUI_FinalScreen extends JPanel implements Gui_INTERFACE {
 
     private Image background, homeI, black, white, empty;
-    private JLabel victoryText;
+    private final JLabel victoryText;
     private JButton home;
     private JPanel grille;
 
