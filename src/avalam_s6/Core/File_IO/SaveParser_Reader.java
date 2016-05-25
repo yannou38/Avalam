@@ -11,6 +11,8 @@ import avalam_s6.Core.Grid;
 import avalam_s6.Core.Local_Avalam_Game;
 import avalam_s6.Core.Move;
 import avalam_s6.Core.Owner;
+import avalam_s6.Exceptions.GridCharException;
+import avalam_s6.Exceptions.GridSizeException;
 import avalam_s6.GUI.GuiManager_INTERFACE;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.Player.*;
@@ -33,7 +35,7 @@ public class SaveParser_Reader {
     private final String aPath;
     
     /* -- Attributes to create a LAG -- */
-    private GuiManager_INTERFACE aMainFrame;
+    private final GuiManager_INTERFACE aMainFrame;
     private Grid aGrid; private String aGridName;
     private Player aPlayer1;
     private Player aPlayer2;
@@ -43,7 +45,7 @@ public class SaveParser_Reader {
     private int aTurns;
     /* -------------------------------- */
     
-    public SaveParser_Reader(Main_Frame pMainFrame, String pName) {
+    public SaveParser_Reader(GuiManager_INTERFACE pMainFrame, String pName) {
         this.aPath = "./ressources/Saves/" + pName;
         this.aMainFrame = pMainFrame;
         this.load();
@@ -83,7 +85,7 @@ public class SaveParser_Reader {
             /* Turns */
             String lTurns = br.readLine();
             lTurns = lTurns.substring(lTurns.indexOf("[Turns] ")+8);
-            this.aCurrentPlayer = Integer.parseInt(lTurns);
+            this.aTurns = Integer.parseInt(lTurns);
             /* Grid Name */
             String lGName = br.readLine();
             this.aGridName = lGName.substring(lGName.indexOf("[GName] ")+8);
@@ -93,23 +95,85 @@ public class SaveParser_Reader {
             this.aUndo = new Stack<>();
             for (int i=0;i<lHistoSize;i++) {
                 String lMoveStr = br.readLine();
-                int xSrc = Integer.parseInt(lMoveStr.substring(lMoveStr.indexOf("(")+1,lMoveStr.indexOf("(")+2));
-                int xDst = Integer.parseInt(lMoveStr.substring(lMoveStr.lastIndexOf("(")+1,lMoveStr.lastIndexOf("(")+2));
-                int ySrc = Integer.parseInt(lMoveStr.substring(lMoveStr.indexOf(")")-1,lMoveStr.indexOf(")")));
-                int yDst = Integer.parseInt(lMoveStr.substring(lMoveStr.lastIndexOf(")")-1,lMoveStr.lastIndexOf(")")));
+                Coordinate src = new Coordinate(Integer.parseInt(lMoveStr.substring(lMoveStr.indexOf("(")+1,lMoveStr.indexOf("(")+2)),Integer.parseInt(lMoveStr.substring(lMoveStr.indexOf(")")-1,lMoveStr.indexOf(")"))));
+                Coordinate dst = new Coordinate(Integer.parseInt(lMoveStr.substring(lMoveStr.lastIndexOf("(")+1,lMoveStr.lastIndexOf("(")+2)),Integer.parseInt(lMoveStr.substring(lMoveStr.lastIndexOf(")")-1,lMoveStr.lastIndexOf(")"))));
                 int hSrc = Integer.parseInt(lMoveStr.substring(lMoveStr.indexOf(")")+2,lMoveStr.indexOf(")")+3));
                 int hDst = Integer.parseInt(lMoveStr.substring(lMoveStr.lastIndexOf(")")+2,lMoveStr.lastIndexOf(")")+3));
-                //Move m = new Move(new Coordinate(Integer.parseInt(lMoveStr.substring(lMoveStr.indexOf("(")+1,lMoveStr.indexOf("(")+2)),Integer.parseInt(lMoveStr.substring(lMoveStr.indexOf(")")-1,lMoveStr.indexOf(")")))),Integer.parseInt(lMoveStr.substring(lMoveStr.indexOf(")")+2,lMoveStr.indexOf(")")+3)),new Coordinate(xDst,yDst),hDst,this.aPlayer1);
-                //System.out.println(m);
+                if (this.aPlayer1.getName().equals(lMoveStr.substring(lMoveStr.lastIndexOf("|")+2))) {
+                    this.aUndo.add( new Move(src,hSrc,dst,hDst,this.aPlayer1) );
+                } else if (this.aPlayer2.getName().equals(lMoveStr.substring(lMoveStr.lastIndexOf("|")+2))){
+                    this.aUndo.add( new Move(src,hSrc,dst,hDst,this.aPlayer2) );
+                }
             }
-            
+            /* Redo */
+            String lredo = br.readLine();
+            int lredoSize = Integer.parseInt(lredo.substring(lredo.indexOf("[Cancel] ")+9));
+            this.aRedo = new Stack<>();
+            for (int i=0;i<lredoSize;i++) {
+                String lMoveStr = br.readLine();
+                Coordinate src = new Coordinate(Integer.parseInt(lMoveStr.substring(lMoveStr.indexOf("(")+1,lMoveStr.indexOf("(")+2)),Integer.parseInt(lMoveStr.substring(lMoveStr.indexOf(")")-1,lMoveStr.indexOf(")"))));
+                Coordinate dst = new Coordinate(Integer.parseInt(lMoveStr.substring(lMoveStr.lastIndexOf("(")+1,lMoveStr.lastIndexOf("(")+2)),Integer.parseInt(lMoveStr.substring(lMoveStr.lastIndexOf(")")-1,lMoveStr.lastIndexOf(")"))));
+                int hSrc = Integer.parseInt(lMoveStr.substring(lMoveStr.indexOf(")")+2,lMoveStr.indexOf(")")+3));
+                int hDst = Integer.parseInt(lMoveStr.substring(lMoveStr.lastIndexOf(")")+2,lMoveStr.lastIndexOf(")")+3));
+                if (this.aPlayer1.getName().equals(lMoveStr.substring(lMoveStr.lastIndexOf("|")+2))) {
+                    Move m = new Move(src,hSrc,dst,hDst,this.aPlayer1);
+                    System.out.println(m);
+                    this.aRedo.add( m );
+                } else if (this.aPlayer2.getName().equals(lMoveStr.substring(lMoveStr.lastIndexOf("|")+2))){
+                    this.aRedo.add( new Move(src,hSrc,dst,hDst,this.aPlayer2) );
+                }
+            }
+            /* Creation de la grille */
+            try {
+                Level_Parser myParser = new Level_Parser(this.aGridName);
+                this.aGrid = new Grid(myParser.readLevel(), this.aGridName);
+                for (Move m : this.aUndo) {
+                    this.aGrid.moveCell(m.getC_src(), m.getC_dst());
+                }
+            } catch (GridSizeException | GridCharException ex) {
+                Logger.getLogger(SaveParser_Reader.class.getName()).log(Level.SEVERE, null, ex);
+            }
             br.close();
         } catch (IOException ex) {
             Logger.getLogger(SaveParser_Reader.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public Local_Avalam_Game generateGame() {
-        return new Local_Avalam_Game(aMainFrame,aGrid,aPlayer1,aPlayer2,aUndo,aRedo,aCurrentPlayer,aTurns);
+    /*public Local_Avalam_Game generateGame() {
+        return new Local_Avalam_Game((Main_Frame)aMainFrame,aGrid,aPlayer1,aPlayer2,aUndo,aRedo,aCurrentPlayer,aTurns);
+    }*/
+
+    public GuiManager_INTERFACE getaMainFrame() {
+        return aMainFrame;
     }
+
+    public Grid getaGrid() {
+        return aGrid;
+    }
+
+    public Player getaPlayer1() {
+        return aPlayer1;
+    }
+
+    public Player getaPlayer2() {
+        return aPlayer2;
+    }
+
+    public Stack<Move> getaUndo() {
+        return aUndo;
+    }
+
+    public Stack<Move> getaRedo() {
+        return aRedo;
+    }
+
+    public int getaCurrentPlayer() {
+        return aCurrentPlayer;
+    }
+
+    public int getaTurns() {
+        return aTurns;
+    }
+    
+    
 }

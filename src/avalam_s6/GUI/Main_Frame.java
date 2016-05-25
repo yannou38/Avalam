@@ -121,9 +121,12 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
     }
 
     public void initGame() {
-        this.setwState(WindowState.BOARD);
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).initGame();
+    }
+    
+    public void startGame() {
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).start();
+        this.setwState(WindowState.BOARD);
     }
 
     public void initGame(String[] p1, String[] p2) {
@@ -143,7 +146,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
     }
 
     public void load(String pSlotName) {
-        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).load(pSlotName);
+        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).load(this,pSlotName);
     }
 
     public void changeSettings(String Language, String FS, String Theme, String Sound) {

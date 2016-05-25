@@ -14,6 +14,7 @@ import avalam_s6.Core.Globals.AvalamColor;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Exceptions.GridCharException;
 import avalam_s6.Exceptions.GridSizeException;
+import avalam_s6.GUI.GuiManager_INTERFACE;
 import avalam_s6.GUI.Gui_INTERFACE;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;
@@ -189,7 +190,6 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             Level_Parser myParser = new Level_Parser(gName);
             Grid g = new Grid(myParser.readLevel(), gName); // IOException | GridSizeException | NumberFormatException
             Container mainFrame = this.getParent().getParent().getParent().getParent();
-            System.out.println(mainFrame.toString());
             this.game = new Local_Avalam_Game((Main_Frame) mainFrame, g, p1, p2, new Stack<>(), new Stack<>(), 0, 0); // GridSizeException
         } catch (IOException | GridSizeException | GridCharException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
@@ -209,9 +209,10 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         myParser.save();
     }
 
-    public void load(String pSlotName) {
-        SaveParser_Reader lParser = new SaveParser_Reader((Main_Frame) this.getParent(), pSlotName);
-        this.game = lParser.generateGame();
+    public void load(GuiManager_INTERFACE mFrame,String pSlotName) {
+        //Container mainFrame = this.getParent().getParent().getParent().getParent();
+        SaveParser_Reader lParser = new SaveParser_Reader((Main_Frame)mFrame, pSlotName);
+        this.game = new Local_Avalam_Game((Main_Frame)mFrame,lParser.getaGrid(),lParser.getaPlayer1(),lParser.getaPlayer2(),lParser.getaUndo(),lParser.getaRedo(),lParser.getaCurrentPlayer(),lParser.getaTurns());
     }
 
     public JButton getUndoB() {

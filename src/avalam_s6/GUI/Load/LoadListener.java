@@ -63,6 +63,7 @@ public class LoadListener implements MouseListener {
             case "load":
                 mFrame.load("slot_"+this.page.getSlotnumber());
                 source.setIcon(new ImageIcon(this.iconbase));
+                mFrame.startGame();
                 break;
             case "home":
                 this.page.back();

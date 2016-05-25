@@ -48,6 +48,7 @@ public class HomePageListener implements MouseListener {
                 break;
             case "quickgame":
                 mainFrame.initGame();
+                mainFrame.startGame();
                 break;
             case "customgame":
                 mainFrame.setwState(WindowState.PLAYERSELECT);
