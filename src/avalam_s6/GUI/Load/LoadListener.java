@@ -49,21 +49,22 @@ public class LoadListener implements MouseListener {
         }
     }
 
-    
-
     public void setIsSelected(Boolean isSelected) {
         this.isSelected = isSelected;
     }
-    
+
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
-        Main_Frame mFrame= ((Main_Frame) source.getParent().getParent().getParent().getParent().getParent());
+        Main_Frame mFrame = ((Main_Frame) source.getParent().getParent().getParent().getParent().getParent());
         switch (this.name) {
             case "load":
-                mFrame.load("slot_"+this.page.getSlotnumber());
+                if (!this.page.getSlotlabels(this.page.getSlotnumber()).getText().equals("Slot " + this.page.getSlotnumber() + " : vide")) {
+
+                    mFrame.load("slot_" + this.page.getSlotnumber());
+                    mFrame.startGame();
+                }
                 source.setIcon(new ImageIcon(this.iconbase));
-                mFrame.startGame();
                 break;
             case "home":
                 this.page.back();

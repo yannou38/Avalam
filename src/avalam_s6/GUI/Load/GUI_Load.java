@@ -97,7 +97,7 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         }
         for (int i = 0; i < this.slotlabels.length; i++) {
             int j = i + 1;
-            this.slotlabels[i] = new JLabel("Slot " + j);
+            this.slotlabels[i] = new JLabel("Slot " + j + " : vide");
             this.slotlabels[i].setBorder(BorderFactory.createEmptyBorder());
             this.slotlabels[i].setFont(localFont.deriveFont(1 * 30f));
             this.add(this.slotlabels[i]);
