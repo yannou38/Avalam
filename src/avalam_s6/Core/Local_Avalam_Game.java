@@ -24,8 +24,6 @@ import avalam_s6.Player.AIPlayer;
 import avalam_s6.Player.AIPlayerEasy;
 import avalam_s6.Player.ControlledPlayer;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -49,7 +47,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         this(pGui, new Grid(new Level_Parser("default").readLevel(), "default"), new ControlledPlayer("Jon Doe", AvalamColor.WHITE, Owner.PLAYER_1), new AIPlayerEasy("Bot_Frank", AvalamColor.BLACK, Owner.PLAYER_2), new Stack<>(), new Stack<>(), 0, 0);
     }
 
-    public Local_Avalam_Game(GuiManager_INTERFACE pGui, Grid pGrid, Player pPlayer1, Player pPlayer2, Stack<Move> pUndo, Stack<Move> pRedo, int pCurrent, int pTurns) throws GridSizeException {
+    public Local_Avalam_Game(GuiManager_INTERFACE pGui, Grid pGrid, Player pPlayer1, Player pPlayer2, Stack<Move> pUndo, Stack<Move> pRedo, int pCurrent, int pTurns) {
         this.gui = pGui;
         this.grid = pGrid;
         this.players = new Player[2];
@@ -238,6 +236,10 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     @Override
     public Player getCurrentPlayer() {
         return this.players[this.current_player];
+    }
+    
+    public int getCurrent() {
+        return this.current_player;
     }
 
     /**

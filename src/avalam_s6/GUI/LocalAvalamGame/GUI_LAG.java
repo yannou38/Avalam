@@ -210,7 +210,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     }
 
     public void load(String pSlotName) {
-        SaveParser_Reader lParser = new SaveParser_Reader((Main_Frame) this.getParent().getParent().getParent().getParent(), pSlotName);
+        SaveParser_Reader lParser = new SaveParser_Reader((Main_Frame) this.getParent(), pSlotName);
         this.game = lParser.generateGame();
     }
 
