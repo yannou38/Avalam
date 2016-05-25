@@ -7,8 +7,6 @@ package avalam_s6.Player;
 
 import avalam_s6.Core.*;
 import avalam_s6.Core.Globals.AvalamColor;
-import java.util.ArrayList;
-import java.util.Random;
 
 /**
  *
