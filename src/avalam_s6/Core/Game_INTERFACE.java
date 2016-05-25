@@ -50,4 +50,6 @@ public interface Game_INTERFACE {
      * @return the current player.
      */
     public Player_INTERFACE getCurrentPlayer();
+
+    public void clean();
 }

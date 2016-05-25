@@ -9,6 +9,8 @@ import avalam_s6.Core.Globals.LanguageManager;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Core.Globals.ThemesLister;
 import avalam_s6.GUI.Gui_INTERFACE;
+import avalam_s6.GUI.Main_Frame;
+import avalam_s6.GUI.WindowState;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
@@ -340,7 +342,8 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     @Override
     public void back() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
+        mainFrame.setwState(WindowState.MAIN);
     }
 
     @Override

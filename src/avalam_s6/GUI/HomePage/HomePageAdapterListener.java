@@ -6,9 +6,11 @@
 package avalam_s6.GUI.HomePage;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.*;
 import static java.lang.Math.round;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -40,6 +42,10 @@ public class HomePageAdapterListener implements ComponentListener {
         this.hm.getRules().setBounds((int) round((453 + insets.left) * ratioW), ((int) round((753 + insets.top) * ratioH)), size.width * 3 / 2, size.height * 3 / 2);
         this.hm.getRules().setSize((int) round(this.hm.getRules().getWidth() * ratioW), (int) round(this.hm.getRules().getHeight() * ratioH));
 
+        /*ImageIcon icon = (ImageIcon) this.hm.getLoad().getIcon();
+        Image img = icon.getImage();
+        Image newimg = img.getScaledInstance(((int) round(222 * ratioW)), ((int) round(96 * ratioH)), java.awt.Image.sca);
+        this.hm.getLoad().setIcon(new ImageIcon(newimg));*/
         size = this.hm.getLoad().getPreferredSize();
         this.hm.getLoad().setBounds((int) round((792 + insets.left) * ratioW), ((int) round((753 + insets.top) * ratioH)), size.width * 3 / 2, size.height * 3 / 2);
         this.hm.getLoad().setSize((int) round(this.hm.getLoad().getWidth() * ratioW), (int) round(this.hm.getLoad().getHeight() * ratioH));
