@@ -15,7 +15,7 @@ import java.util.Random;
 public class AIPlayerHard extends AIPlayer {
 
     //Increase the value to increase the difficulty of the AI
-    private final static int BUFF = 100;
+    private final static int BUFF = 85;
 
     public AIPlayerHard(String name, AvalamColor color, Owner owner) {
         super(name, color, owner);
@@ -27,7 +27,7 @@ public class AIPlayerHard extends AIPlayer {
         int coups = nbCoupsJouables();
         ArrayList<Move> mesCoups = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];
-        double maxvalue = 0;
+        double maxvalue = -999999;
         double value;
         for (int i = 0; i < this.game.getGrid().getWidth(); i++) {
             /**
