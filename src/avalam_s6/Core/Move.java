@@ -42,7 +42,7 @@ public class Move {
 
     @Override
     public String toString() {
-        return (this.c_src + " " + this.h_src + " " + this.c_dst + " " + this.h_dst + " " + this.playedBy.getName());
+        return (this.c_src + " " + this.h_src + " " + this.c_dst + " " + this.h_dst + " | " + this.playedBy.getName());
     }
 
     /**

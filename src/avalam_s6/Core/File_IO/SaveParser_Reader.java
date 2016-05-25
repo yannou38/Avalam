@@ -5,6 +5,7 @@
  */
 package avalam_s6.Core.File_IO;
 
+import avalam_s6.Core.Coordinate;
 import avalam_s6.Core.Globals.AvalamColor;
 import avalam_s6.Core.Grid;
 import avalam_s6.Core.Local_Avalam_Game;
@@ -33,7 +34,7 @@ public class SaveParser_Reader {
     
     /* -- Attributes to create a LAG -- */
     private GuiManager_INTERFACE aMainFrame;
-    private Grid aGrid;
+    private Grid aGrid; private String aGridName;
     private Player aPlayer1;
     private Player aPlayer2;
     private Stack<Move> aUndo;
@@ -48,6 +49,7 @@ public class SaveParser_Reader {
         this.load();
     }
 
+@SuppressWarnings("unchecked")
     private void load() {
         try {
             BufferedReader br = new BufferedReader(new FileReader(aPath));
@@ -78,8 +80,29 @@ public class SaveParser_Reader {
             String lCurrent = br.readLine();
             lCurrent = lCurrent.substring(lCurrent.indexOf("[Current] ")+10);
             this.aCurrentPlayer = Integer.parseInt(lCurrent);
+            /* Turns */
+            String lTurns = br.readLine();
+            lTurns = lTurns.substring(lTurns.indexOf("[Turns] ")+8);
+            this.aCurrentPlayer = Integer.parseInt(lTurns);
+            /* Grid Name */
+            String lGName = br.readLine();
+            this.aGridName = lGName.substring(lGName.indexOf("[GName] ")+8);
+            /* Undo */
+            String lHisto = br.readLine();
+            int lHistoSize = Integer.parseInt(lHisto.substring(lHisto.indexOf("[Histo] ")+8));
+            this.aUndo = new Stack<>();
+            for (int i=0;i<lHistoSize;i++) {
+                String lMoveStr = br.readLine();
+                int xSrc = Integer.parseInt(lMoveStr.substring(lMoveStr.indexOf("(")+1,lMoveStr.indexOf("(")+2));
+                int xDst = Integer.parseInt(lMoveStr.substring(lMoveStr.lastIndexOf("(")+1,lMoveStr.lastIndexOf("(")+2));
+                int ySrc = Integer.parseInt(lMoveStr.substring(lMoveStr.indexOf(")")-1,lMoveStr.indexOf(")")));
+                int yDst = Integer.parseInt(lMoveStr.substring(lMoveStr.lastIndexOf(")")-1,lMoveStr.lastIndexOf(")")));
+                int hSrc = Integer.parseInt(lMoveStr.substring(lMoveStr.indexOf(")")+2,lMoveStr.indexOf(")")+3));
+                int hDst = Integer.parseInt(lMoveStr.substring(lMoveStr.lastIndexOf(")")+2,lMoveStr.lastIndexOf(")")+3));
+                //Move m = new Move(new Coordinate(Integer.parseInt(lMoveStr.substring(lMoveStr.indexOf("(")+1,lMoveStr.indexOf("(")+2)),Integer.parseInt(lMoveStr.substring(lMoveStr.indexOf(")")-1,lMoveStr.indexOf(")")))),Integer.parseInt(lMoveStr.substring(lMoveStr.indexOf(")")+2,lMoveStr.indexOf(")")+3)),new Coordinate(xDst,yDst),hDst,this.aPlayer1);
+                //System.out.println(m);
+            }
             
-            //System.out.println(this.aPlayer1.getName()+" vs "+this.aPlayer2.getName());
             br.close();
         } catch (IOException ex) {
             Logger.getLogger(SaveParser_Reader.class.getName()).log(Level.SEVERE, null, ex);
