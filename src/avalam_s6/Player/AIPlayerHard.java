@@ -61,9 +61,9 @@ public class AIPlayerHard extends AIPlayer {
                                 //un coup est possible, on l'évalue
                                 Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), tabCoord[k], this.game.getGrid().getCellAt(tabCoord[k]).getSize(), this);
                                 //On augmente l'horizon avec l'avancement de la partie (l'ia devient de plus en plus forte)
-                                System.out.println("Ma pronfondeur actuelle est de " + (1+(BUFF / coups)));
+                                //System.out.println("Ma pronfondeur actuelle est de " + (1+(BUFF / coups)));
                                 value = miniMaxUs(m, 1 + (BUFF / coups));
-                                System.out.println("Je considère le coup " + c0.getX()+ " " + c0.getY() + " "+tabCoord[k].getX() + " " + tabCoord[k].getY()+ " il vaut " +value);
+                                //System.out.println("Je considère le coup " + c0.getX()+ " " + c0.getY() + " "+tabCoord[k].getX() + " " + tabCoord[k].getY()+ " il vaut " +value);
                                 if (value > maxvalue) {
                                     maxvalue = value;
                                     mesCoups.clear();
@@ -80,8 +80,8 @@ public class AIPlayerHard extends AIPlayer {
         }
         Random r = new Random();
         int monrand = r.nextInt(mesCoups.size());
-        System.out.println("Ce coup vaut " + maxvalue);
-        System.out.println("" + mesCoups.get(monrand).getC_src().getX() + " " + mesCoups.get(monrand).getC_src().getY() + " " + mesCoups.get(monrand).getC_dst().getX() + " " + mesCoups.get(monrand).getC_dst().getY());
+        //System.out.println("Ce coup vaut " + maxvalue);
+        //System.out.println("" + mesCoups.get(monrand).getC_src().getX() + " " + mesCoups.get(monrand).getC_src().getY() + " " + mesCoups.get(monrand).getC_dst().getX() + " " + mesCoups.get(monrand).getC_dst().getY());
         return mesCoups.get(monrand);
 
     }
