@@ -129,16 +129,15 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.addComponentListener(this.listener);
     }
 
-    public void initGame() {
+    public void initGame(GuiManager_INTERFACE pGui) {
         try {
-            Container mainFrame = this.getParent().getParent().getParent().getParent();
-            this.game = new Local_Avalam_Game((Main_Frame) mainFrame); // GridSizeException
+            this.game = new Local_Avalam_Game((Main_Frame) pGui); // GridSizeException
         } catch (IOException | GridSizeException | GridCharException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void initGame(String[] player1, String[] player2) {
+    public void initGame(GuiManager_INTERFACE pGui, String[] player1, String[] player2) {
         try {
 
             AvalamColor c1 = AvalamColor.valueOf(player1[0].toUpperCase());
@@ -189,8 +188,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             String gName = "default";
             Level_Parser myParser = new Level_Parser(gName);
             Grid g = new Grid(myParser.readLevel(), gName); // IOException | GridSizeException | NumberFormatException
-            Container mainFrame = this.getParent().getParent().getParent().getParent();
-            this.game = new Local_Avalam_Game((Main_Frame) mainFrame, g, p1, p2, new Stack<>(), new Stack<>(), 0, 0); // GridSizeException
+            this.game = new Local_Avalam_Game((Main_Frame) pGui, g, p1, p2, new Stack<>(), new Stack<>(), 0, 0); // GridSizeException
         } catch (IOException | GridSizeException | GridCharException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }

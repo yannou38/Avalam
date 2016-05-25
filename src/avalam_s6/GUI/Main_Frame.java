@@ -122,7 +122,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
     }
 
     public void initGame() {
-        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).initGame();
+        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).initGame(this);
     }
     
     public void startGame() {
@@ -132,7 +132,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
 
     public void initGame(String[] p1, String[] p2) {
         this.setwState(WindowState.BOARD);
-        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).initGame(p1, p2);
+        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).initGame(this,p1, p2);
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).start();
     }
 
