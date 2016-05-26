@@ -60,9 +60,8 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             this.player_waiting = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/player_waiting.png"));
             this.restricted = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/restricted.png"));
             this.redo = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/redo.png"));
-            this.retour = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/return.png"));
+            this.retour = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/home.png"));
             this.save = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/save.png"));
-            this.board = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/board.png"));
             this.black = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/black.png"));
             this.white = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/white.png"));
             this.empty = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/empty.png"));
