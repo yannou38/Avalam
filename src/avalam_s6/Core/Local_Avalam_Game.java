@@ -28,7 +28,7 @@ import java.io.IOException;
  * @author sazeratj
  */
 public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
-
+    /* - LAG Builder - */
     private static final int NB_PLAYERS = 2;
     private final GuiManager_INTERFACE gui;
     private Grid grid;
@@ -37,9 +37,11 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     private Stack<Move> cancelled_moves;
     private int current_player;
     private int nbTurns;
-    /* -- */
+    /* - Game Logic - */
     private boolean isTurnFinished;
     private Timer t;
+    private boolean isGameFinished;
+    private boolean isGamePaused;
 
     public Local_Avalam_Game(GuiManager_INTERFACE pGui) throws GridSizeException, GridCharException, IOException {
         this(pGui, new Grid(new Level_Parser("default").readLevel(), "default"), new ControlledPlayer("Jon Doe", AvalamColor.WHITE, Owner.PLAYER_1), new AIPlayerEasy("Bot_Frank", AvalamColor.BLACK, Owner.PLAYER_2), new Stack<>(), new Stack<>(), 0, 0);
@@ -62,6 +64,8 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     private void initGame() {
         this.t = new Timer(100, (ActionListener) this);
         this.isTurnFinished = false;
+        this.isGameFinished = false;
+        this.isGamePaused = false;
         Input.resetClick();
         Input.setInputGame(this);
     }
@@ -93,17 +97,19 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
      * Turn Logic
      */
     private void playATurn() {
+        /* Gestion Fin d'un tour */
         if (this.isTurnFinished) {
             this.changeNbTurns(1);
             int w = winCheck();
-        System.gc();
+            System.gc();
             switch (w) {
                 case 1:
                 case 2:
                 case 3:
                     t.stop();
+                    this.isGameFinished = true;
+                    this.isGamePaused = true;
                     this.winningProcedure(w);
-//                    this.gui.render();
                     return;
                 case 0:
                 default:
@@ -111,27 +117,31 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
                     break;
             }
         }
+        /* Gestion d'un tour de jeu */
         if (this.players[this.current_player].isAI()) {
             ((AIPlayer) this.players[this.current_player]).setGame(this);
         }
         //System.out.println("Joueur : "+this.current_player);
-        Move m = this.players[this.current_player].play();
-        if (m != null) {
-            if (this.players[this.current_player].isAI()) { // IA
-                this.grid.moveCell(m.getC_src(), m.getC_dst());
-                this.history.add(m);
-                this.isTurnFinished = true;
-            } else if (this.grid.canStack(this.grid.getCellAt(m.getC_src()), this.grid.getCellAt(m.getC_dst()))) {
-                // JOUEUR
-                // MOVE OK
-                this.grid.moveCell(m.getC_src(), m.getC_dst());
-                this.history.add(m);
-                this.isTurnFinished = true;
-            } else {
-                //TODO                   
-                /* Afficher warning de deplacement */
+        if(!this.isPaused()) {
+           Move m = this.players[this.current_player].play(); 
+        
+            if (m != null) {
+                if (this.players[this.current_player].isAI()) { // IA
+                    this.grid.moveCell(m.getC_src(), m.getC_dst());
+                    this.history.add(m);
+                    this.isTurnFinished = true;
+                } else if (this.grid.canStack(this.grid.getCellAt(m.getC_src()), this.grid.getCellAt(m.getC_dst()))) {
+                    // JOUEUR
+                    // MOVE OK
+                    this.grid.moveCell(m.getC_src(), m.getC_dst());
+                    this.history.add(m);
+                    this.isTurnFinished = true;
+                } else {
+                    //TODO                   
+                    /* Afficher warning de deplacement */
+                }
+                this.cancelled_moves.clear();
             }
-            this.cancelled_moves.clear();
         }
         this.gui.render();
     }
@@ -218,6 +228,14 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         this.nbTurns += n;
         this.current_player = this.nbTurns % NB_PLAYERS;
     }
+    
+    public void togglePause() {
+        this.isGamePaused = ! this.isGamePaused;
+    }
+    
+    public boolean isPaused() {
+        return this.isGamePaused;
+    }
 
     @Override
     public Timer getTimer() {
@@ -243,20 +261,10 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         return this.current_player;
     }
 
-    /**
-     * Getter
-     *
-     * @return history
-     */
     public Stack<Move> getHistory() {
         return this.history;
     }
 
-    /**
-     * Getter
-     *
-     * @return cancelled_moves
-     */
     public Stack<Move> getCancelled_moves() {
         return this.cancelled_moves;
     }
@@ -278,6 +286,5 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         this.grid = null;
 
         System.gc();
-
     }
 }

@@ -51,15 +51,15 @@ public class LAG_UI_MouseListener implements MouseListener {
                 lag.back();
                 break;
             case "redo":
-                if (game.getCancelled_moves().size() > 0) {
+                if (game.getCancelled_moves().size() > 0) { // REDO Possible
                     game.redo();
-                    game.changeNbTurns(1);
-                    if (!lag.getUndoB().isEnabled()) {
+                    game.changeNbTurns(1); // Action Redo
+                    if (!lag.getUndoB().isEnabled()) { // Affiche UNDO Possible
                         lag.getUndoB().setEnabled(true);
                     }
-                    if (game.getCancelled_moves().isEmpty()) {
+                    if (game.getCancelled_moves().isEmpty()) { // Retire REDO au besoin
                         lag.getRedoB().setEnabled(false);
-                    } else if (game.getCurrentPlayer().isAI()) {
+                    } else if (!game.isPaused() && game.getCurrentPlayer().isAI()) { // Redo encore si ennemi = IA et le jeu n'est pas en pause
                         game.redo();
                         game.changeNbTurns(1);
                     }
