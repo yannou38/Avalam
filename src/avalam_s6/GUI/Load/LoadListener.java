@@ -59,16 +59,22 @@ public class LoadListener implements MouseListener {
         Main_Frame mFrame = ((Main_Frame) source.getParent().getParent().getParent().getParent().getParent());
         switch (this.name) {
             case "load":
-                if (!this.page.getSlotlabels(this.page.getSlotnumber()).getText().equals("Slot " + this.page.getSlotnumber() + " : vide")) {
-
+                if (this.page.getSlotnumber() == 0) {
+                    //no slot selected, do nothing
+                    break;
+                } else if (this.page.getSlotnumber() == 6) {
+                    mFrame.load(this.page.getField().getText());
+                } else {
                     mFrame.load("slot_" + this.page.getSlotnumber());
-                    mFrame.startGame();
                 }
                 source.setIcon(new ImageIcon(this.iconbase));
+                this.page.resetSlotSelection();
+                mFrame.startGame();
                 break;
             case "home":
-                this.page.back();
                 source.setIcon(new ImageIcon(this.iconbase));
+                this.page.resetSlotSelection();
+                this.page.back();
                 break;
 
             case "slot":

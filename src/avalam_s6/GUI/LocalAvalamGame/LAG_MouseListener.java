@@ -16,7 +16,7 @@ import java.awt.event.MouseListener;
  */
 public class LAG_MouseListener implements MouseListener {
 
-    private Coordinate c;
+    private final Coordinate c;
 
     public LAG_MouseListener(Coordinate c) {
         this.c = c;
