@@ -8,13 +8,11 @@ package avalam_s6.Core.File_IO;
 import avalam_s6.Core.Coordinate;
 import avalam_s6.Core.Globals.AvalamColor;
 import avalam_s6.Core.Grid;
-import avalam_s6.Core.Local_Avalam_Game;
 import avalam_s6.Core.Move;
 import avalam_s6.Core.Owner;
 import avalam_s6.Exceptions.GridCharException;
 import avalam_s6.Exceptions.GridSizeException;
 import avalam_s6.GUI.GuiManager_INTERFACE;
-import avalam_s6.GUI.Main_Frame;
 import avalam_s6.Player.*;
 
 import java.io.BufferedReader;

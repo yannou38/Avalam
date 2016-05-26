@@ -46,7 +46,7 @@ public class LAG_UI_MouseListener implements MouseListener {
         Main_Frame mainFrame = ((Main_Frame) lag.getParent().getParent().getParent().getParent());
         Local_Avalam_Game game = ((Local_Avalam_Game) lag.getGame());
         switch (this.name) {
-            case "return":
+            case "home":
                 lag.back();
                 break;
             case "redo":

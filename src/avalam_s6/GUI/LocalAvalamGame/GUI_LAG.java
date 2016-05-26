@@ -64,13 +64,8 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             this.redo = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/redo.png"));
             this.retour = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/home.png"));
             this.save = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/save.png"));
-            this.board = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/board.png"));
             this.initPawnColors(AvalamColor.WHITE,AvalamColor.BLACK);
             this.empty = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/empty.png"));
-            this.w_selected = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/white_selected.png"));
-            this.b_selected = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/black_selected.png"));
-            this.w_possible = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/white_possible.png"));
-            this.b_possible = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/black_possible.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_LAG.class.toString());
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
@@ -110,7 +105,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.retourB.setBorder(BorderFactory.createEmptyBorder());
         this.retourB.setContentAreaFilled(false);
         this.retourB.setFocusPainted(false);
-        this.retourB.addMouseListener(new LAG_UI_MouseListener("return"));
+        this.retourB.addMouseListener(new LAG_UI_MouseListener("home"));
         this.add(this.retourB);
 
         this.redoB = new JButton(new ImageIcon(this.redo));
@@ -134,6 +129,10 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         try {
             this.white = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/"+pWhite.getValue()+".png"));
             this.black = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/"+pBlack.getValue()+".png"));
+            this.w_selected = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/"+pWhite.getValue()+"_selected.png"));
+            this.b_selected = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/"+pBlack.getValue()+"_selected.png"));
+            this.w_possible = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/"+pWhite.getValue()+"_possible.png"));
+            this.b_possible = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/"+pBlack.getValue()+"_possible.png"));
         } catch (IOException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -147,6 +146,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public void initGame(GuiManager_INTERFACE pGui, String pClassP1, String pNameP1, String pColorP1, String pClassP2, String pNameP2, String pColorP2, String pGridName) {
 
             try {
