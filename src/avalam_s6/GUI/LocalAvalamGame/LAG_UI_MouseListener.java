@@ -91,8 +91,8 @@ public class LAG_UI_MouseListener implements MouseListener {
                 double ratioW = (double) lag.getWidth() / (double) 1920;
                 double ratioH = (double) lag.getHeight() / (double) 1080;
                 g.togglePause();
-                this.page.setPlaypause(1 - this.page.getPlaypause());
-                if (this.page.getPlaypause() == 0) {
+                this.page.setPlaypause(!this.page.getPlaypause());
+                if (this.page.getPlaypause() == true) {
                     newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
                 } else {
                     newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
@@ -124,7 +124,7 @@ public class LAG_UI_MouseListener implements MouseListener {
         ((JButton) e.getSource()).setIcon(new ImageIcon(newimg));
         
         if(this.name.equals("play")){
-                if (this.page.getPlaypause() == 0) {
+                if (this.page.getPlaypause() == true) {
                     newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
                 } else {
                     newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
@@ -146,7 +146,7 @@ public class LAG_UI_MouseListener implements MouseListener {
         
         
         if(this.name.equals("play")){
-                if (this.page.getPlaypause() == 0) {
+                if (this.page.getPlaypause() == true) {
                     newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
                 } else {
                     newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);

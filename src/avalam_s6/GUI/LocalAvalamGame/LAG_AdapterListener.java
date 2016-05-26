@@ -7,6 +7,8 @@ package avalam_s6.GUI.LocalAvalamGame;
 
 import avalam_s6.Core.CellState;
 import avalam_s6.Core.Coordinate;
+import avalam_s6.Core.Game_INTERFACE;
+import avalam_s6.Core.Local_Avalam_Game;
 import avalam_s6.Core.Owner;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -46,7 +48,27 @@ public class LAG_AdapterListener implements ComponentListener {
         this.page.getUndoB().setBounds((int) round((360 + insets.left) * ratioW), ((int) round((505 + insets.top) * ratioH)), (int) round(252 * ratioW), (int) round(111 * ratioH));
         this.page.getUndoB().setSize((int) round(252 * ratioW), (int) round(111 * ratioH));
 
-        if (this.page.getPlaypause() == 0) {
+        if (((Local_Avalam_Game) this.page.getGame()).getTurns() % 2 == 0) {
+            newimg = this.page.getPlayer_playing().getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        } else {
+            newimg = this.page.getPlayer_waiting().getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        }
+
+        this.page.getGauche().setIcon(new ImageIcon(newimg));
+        this.page.getGauche().setBounds((int) round((20 + insets.left) * ratioW), ((int) round((237 + insets.top) * ratioH)), (int) round(284 * ratioW), (int) round(671 * ratioH));
+        this.page.getGauche().setSize((int) round(284 * ratioW), (int) round(671 * ratioH));
+
+        if (((Local_Avalam_Game) this.page.getGame()).getTurns() % 2 == 0) {
+            newimg = this.page.getPlayer_waiting().getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        } else {
+            newimg = this.page.getPlayer_playing().getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        }
+
+        this.page.getDroite().setIcon(new ImageIcon(newimg));
+        this.page.getDroite().setBounds((int) round((1616 + insets.left) * ratioW), ((int) round((237 + insets.top) * ratioH)), (int) round(284 * ratioW), (int) round(671 * ratioH));
+        this.page.getDroite().setSize((int) round(284 * ratioW), (int) round(671 * ratioH));
+
+        if (this.page.getPlaypause() == true) {
             newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         } else {
             newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
@@ -85,11 +107,13 @@ public class LAG_AdapterListener implements ComponentListener {
                 }
                 newimg = newimg.getScaledInstance(((int) round(92 * ratioW)), ((int) round(92 * ratioH)), java.awt.Image.SCALE_SMOOTH);
                 this.page.getButtonmap()[i][j].setIcon(new ImageIcon(newimg));
-                this.page.getButtonmap()[i][j].setBounds((int) round((680 + i * 92 + insets.left) * ratioW), ((int) round((275 + j * 92 + insets.top) * ratioH)), (int) round(92 * ratioW), (int) round(92 * ratioH));
+                this.page.getButtonmap()[i][j].setBounds((int) round((650 + i * 92 + insets.left) * ratioW), ((int) round((260 + j * 92 + insets.top) * ratioH)), (int) round(92 * ratioW), (int) round(92 * ratioH));
                 this.page.getButtonmap()[i][j].setSize((int) round(92 * ratioW), (int) round(92 * ratioH));
 
             }
         }
+        
+        this.page.callResize();
     }
 
     @Override

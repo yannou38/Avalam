@@ -21,6 +21,7 @@ import avalam_s6.GUI.WindowState;
 import avalam_s6.Player.*;
 import java.awt.*;
 import java.io.*;
+import static java.lang.Math.round;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Stack;
@@ -36,13 +37,15 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     private Game_INTERFACE game;
     private final boolean player1IsPlaying;
-    private JButton undoB, redoB, retourB, saveB, pauseB, playB;
+    private JButton undoB, redoB, retourB, saveB, playB, gauche, droite;
     private Image background, cancel, player_playing, player_waiting, play, pause, redo, retour, save, board, black, white, empty, restricted, w_selected, b_selected, w_possible, b_possible;
     private final JButton[][] buttonmap;
     private boolean callResize;
     private final LAG_AdapterListener listener;
     private JLabel titre;
-    private int playpause;
+    private Boolean playpause;
+
+    ImageIcon wh, bl, em, re, wsel, bsel, wpos, bpos;
 
     /**
      * Constructor.
@@ -51,7 +54,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.callResize = false;
         this.listener = new LAG_AdapterListener(this);
         this.buttonmap = new JButton[9][9];
-        this.playpause = 0;
+        this.playpause = false;
         this.initComponents();
         this.player1IsPlaying = true;
     }
@@ -134,12 +137,24 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.saveB.addMouseListener(new LAG_UI_MouseListener("save", this));
         this.add(this.saveB);
 
-        this.playB = new JButton(new ImageIcon(this.play));
+        this.playB = new JButton(new ImageIcon(this.pause));
         this.playB.setBorder(BorderFactory.createEmptyBorder());
         this.playB.setContentAreaFilled(false);
         this.playB.setFocusPainted(false);
         this.playB.addMouseListener(new LAG_UI_MouseListener("play", this));
         this.add(this.playB);
+
+        this.gauche = new JButton(new ImageIcon(this.player_playing));
+        this.gauche.setBorder(BorderFactory.createEmptyBorder());
+        this.gauche.setContentAreaFilled(false);
+        this.gauche.setFocusPainted(false);
+        this.add(this.gauche);
+
+        this.droite = new JButton(new ImageIcon(this.player_waiting));
+        this.droite.setBorder(BorderFactory.createEmptyBorder());
+        this.droite.setContentAreaFilled(false);
+        this.droite.setFocusPainted(false);
+        this.add(this.droite);
 
         this.addComponentListener(this.listener);
     }
@@ -168,7 +183,6 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     @SuppressWarnings("unchecked")
     public void initGame(GuiManager_INTERFACE pGui, String pClassP1, String pNameP1, String pColorP1, String pClassP2, String pNameP2, String pColorP2, String pGridName) {
-
         try {
             Class lClass1 = Class.forName("avalam_s6.Player." + pClassP1);
             Class lClass2 = Class.forName("avalam_s6.Player." + pClassP2);
@@ -258,11 +272,11 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         return pause;
     }
 
-    public int getPlaypause() {
+    public Boolean getPlaypause() {
         return playpause;
     }
 
-    public void setPlaypause(int playpause) {
+    public void setPlaypause(Boolean playpause) {
         this.playpause = playpause;
     }
 
@@ -290,6 +304,22 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         return save;
     }
 
+    public JButton getGauche() {
+        return gauche;
+    }
+
+    public JButton getDroite() {
+        return droite;
+    }
+
+    public Image getPlayer_playing() {
+        return player_playing;
+    }
+
+    public Image getPlayer_waiting() {
+        return player_waiting;
+    }
+
     @Override
     public void back() {
         Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
@@ -305,29 +335,39 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
+        double ratioW = (double) this.getWidth() / (double) 1920;
+        double ratioH = (double) this.getHeight() / (double) 1080;
 
-        int scaleW = this.getWidth() / 8;
-        int scaleH = 2 * (this.getHeight() / 3);
-        if (this.player1IsPlaying) {
-            g.drawImage(this.player_playing, 3, this.getHeight() / 5, scaleW, scaleH, null);
-            g.drawImage(this.player_waiting, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
-        } else {
-            g.drawImage(this.player_waiting, 3, this.getHeight() / 5, scaleW, scaleH, null);
-            g.drawImage(this.player_playing, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
-        }
-        int bScaleW = 2 * (this.getWidth() / 3);
-        int bScaleH = 2 * (this.getHeight() / 3);
-        g.drawImage(this.board, (this.getWidth() / 2) - (bScaleW / 2), this.getHeight() / 5, bScaleW, bScaleH, null);
+        /*if (this.player1IsPlaying) {
+         g.drawImage(this.player_playing, 20, (int) round(240 * ratioH), (int) round(this.player_playing.getWidth(null) * ratioW), (int) round((this.player_playing.getHeight(null)-7) * ratioH), null);
+         g.drawImage(this.player_waiting, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
+         } else {
+         g.drawImage(this.player_waiting, 3, 216, 240, 360, null);
+         g.drawImage(this.player_playing, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
+         }*/
         Grid gr = this.game.getGrid();
         Coordinate c = new Coordinate();
-        ImageIcon wh = new ImageIcon(this.white);
-        ImageIcon bl = new ImageIcon(this.black);
-        ImageIcon em = new ImageIcon(this.empty);
-        ImageIcon re = new ImageIcon(this.restricted);
-        ImageIcon wsel = new ImageIcon(this.w_selected);
-        ImageIcon bsel = new ImageIcon(this.b_selected);
-        ImageIcon wpos = new ImageIcon(this.w_possible);
-        ImageIcon bpos = new ImageIcon(this.b_possible);
+        if (this.callResize) {
+            wh = new ImageIcon(this.white.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+            bl = new ImageIcon(this.black.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+            em = new ImageIcon(this.empty.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+            re = new ImageIcon(this.restricted.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+            wsel = new ImageIcon(this.w_selected.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+            bsel = new ImageIcon(this.b_selected.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+            wpos = new ImageIcon(this.w_possible.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+            bpos = new ImageIcon(this.b_possible.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+        }
+
+        //this.gauche.setIcon(new ImageIcon(this.player_playing.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
+        //this.gauche.setIcon(new ImageIcon(this.player_waiting.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
+        if (((Local_Avalam_Game) this.getGame()).getTurns() % 2 == 0) {
+            this.gauche.setIcon(new ImageIcon(this.player_playing.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
+            this.droite.setIcon(new ImageIcon(this.player_waiting.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
+        } else {
+            this.gauche.setIcon(new ImageIcon(this.player_waiting.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
+            this.droite.setIcon(new ImageIcon(this.player_playing.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
+        }
+
         for (int i = 0; i < gr.getWidth(); i++) {
             for (int j = 0; j < gr.getHeight(); j++) {
                 c.setX(i);
@@ -356,7 +396,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                                 break;
                             case NO_OWNER:
                                 if (gr.getCellAt(c).getState().getValue() == CellState.RESTRICTED.getValue()) {
-                                    this.buttonmap[i][j].setOpaque(false);//setIcon(re);
+                                    this.buttonmap[i][j].setOpaque(false);
                                 } else {
                                     this.buttonmap[i][j].setIcon(em);
                                     this.buttonmap[i][j].setText("");
@@ -384,6 +424,8 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                             break;
                     }
                 }
+                this.buttonmap[i][j].setBounds((int) round((660 + i * 66) * ratioW), ((int) round((260 + j * 66) * ratioH)), (int) round(66 * ratioW), (int) round(66 * ratioH));
+                this.buttonmap[i][j].setSize((int) round(66 * ratioW), (int) round(66 * ratioH));
                 this.buttonmap[i][j].setOpaque(false);
             }
         }
