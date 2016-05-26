@@ -15,6 +15,10 @@ import avalam_s6.Core.Globals.AvalamColor;
 public abstract class AIPlayer extends Player {
 
     protected Game_INTERFACE game;
+    
+    private final Coordinate setInvalid;
+    
+    protected Coordinate[][] coord;
 
     /**
      * Constructor.
@@ -25,6 +29,7 @@ public abstract class AIPlayer extends Player {
      */
     public AIPlayer(String name, AvalamColor color, Owner owner) {
         super(name, color, owner);
+        setInvalid = new Coordinate(-1,-1);
     }
 
     /**
@@ -115,22 +120,7 @@ public abstract class AIPlayer extends Player {
          * 6 7 8
          */
 
-        Coordinate c1 = new Coordinate(j - 1, i - 1);
-        Coordinate c2 = new Coordinate(j, i - 1);
-        Coordinate c3 = new Coordinate(j + 1, i - 1);
-        Coordinate c4 = new Coordinate(j - 1, i);
-        Coordinate c5 = new Coordinate(j + 1, i);
-        Coordinate c6 = new Coordinate(j - 1, i + 1);
-        Coordinate c7 = new Coordinate(j, i + 1);
-        Coordinate c8 = new Coordinate(j + 1, i + 1);
-        tabCoord[0] = c1;
-        tabCoord[1] = c2;
-        tabCoord[2] = c3;
-        tabCoord[3] = c4;
-        tabCoord[4] = c5;
-        tabCoord[5] = c6;
-        tabCoord[6] = c7;
-        tabCoord[7] = c8;
+        doCoord(i,j,tabCoord);
         for (int k = 0; k < 8; k++) {
             if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()) {
                 if (this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0), this.game.getGrid().getCellAt(tabCoord[k]))) {
@@ -157,22 +147,7 @@ public abstract class AIPlayer extends Player {
          * 4 0 5
          * 6 7 8
          */
-        Coordinate c1 = new Coordinate(j - 1, i - 1);
-        Coordinate c2 = new Coordinate(j, i - 1);
-        Coordinate c3 = new Coordinate(j + 1, i - 1);
-        Coordinate c4 = new Coordinate(j - 1, i);
-        Coordinate c5 = new Coordinate(j + 1, i);
-        Coordinate c6 = new Coordinate(j - 1, i + 1);
-        Coordinate c7 = new Coordinate(j, i + 1);
-        Coordinate c8 = new Coordinate(j + 1, i + 1);
-        tabCoord[0] = c1;
-        tabCoord[1] = c2;
-        tabCoord[2] = c3;
-        tabCoord[3] = c4;
-        tabCoord[4] = c5;
-        tabCoord[5] = c6;
-        tabCoord[6] = c7;
-        tabCoord[7] = c8;
+        doCoord(i,j,tabCoord);
         for (int k = 0; k < 8; k++) {
             Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), dest, this.game.getGrid().getCellAt(dest).getSize(), this);
             this.game.getGrid().moveCell(c0, dest);
@@ -204,22 +179,7 @@ public abstract class AIPlayer extends Player {
          * 4 0 5
          * 6 7 8
          */
-        Coordinate c1 = new Coordinate(j - 1, i - 1);
-        Coordinate c2 = new Coordinate(j, i - 1);
-        Coordinate c3 = new Coordinate(j + 1, i - 1);
-        Coordinate c4 = new Coordinate(j - 1, i);
-        Coordinate c5 = new Coordinate(j + 1, i);
-        Coordinate c6 = new Coordinate(j - 1, i + 1);
-        Coordinate c7 = new Coordinate(j, i + 1);
-        Coordinate c8 = new Coordinate(j + 1, i + 1);
-        tabCoord[0] = c1;
-        tabCoord[1] = c2;
-        tabCoord[2] = c3;
-        tabCoord[3] = c4;
-        tabCoord[4] = c5;
-        tabCoord[5] = c6;
-        tabCoord[6] = c7;
-        tabCoord[7] = c8;
+        doCoord(i,j,tabCoord);
         for (int k = 0; k < 8; k++) {
             Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), dest, this.game.getGrid().getCellAt(dest).getSize(), this);
             this.game.getGrid().moveCell(c0, dest);
@@ -246,22 +206,7 @@ public abstract class AIPlayer extends Player {
              */
             for (int j = 0; j < this.game.getGrid().getHeight(); j++) {
                 Coordinate c0 = new Coordinate(j, i);
-                Coordinate c1 = new Coordinate(j - 1, i - 1);
-                Coordinate c2 = new Coordinate(j, i - 1);
-                Coordinate c3 = new Coordinate(j + 1, i - 1);
-                Coordinate c4 = new Coordinate(j - 1, i);
-                Coordinate c5 = new Coordinate(j + 1, i);
-                Coordinate c6 = new Coordinate(j - 1, i + 1);
-                Coordinate c7 = new Coordinate(j, i + 1);
-                Coordinate c8 = new Coordinate(j + 1, i + 1);
-                tabCoord[0] = c1;
-                tabCoord[1] = c2;
-                tabCoord[2] = c3;
-                tabCoord[3] = c4;
-                tabCoord[4] = c5;
-                tabCoord[5] = c6;
-                tabCoord[6] = c7;
-                tabCoord[7] = c8;
+                doCoord(i,j,tabCoord);
 
                 if (c0.isValid() && this.game.getGrid().getCellAt(c0).getState().getValue() == CellState.TOWER.getValue()) {
                     for (int k = 0; k < 8; k++) {
@@ -285,5 +230,59 @@ public abstract class AIPlayer extends Player {
     @Override
     public boolean isAI() {
         return true;
+    }
+    
+    private boolean coordValid(int i, int j)
+    {
+        return !(i < 0 || j<0 || this.game.getGrid().getHeight()-1 < j || this.game.getGrid().getWidth()-1 < i);
+    }
+    
+    protected void doCoord(int i,int j, Coordinate[] tabCoord){
+        Coordinate c1 = setInvalid;
+        Coordinate c2 = setInvalid;
+        Coordinate c3 = setInvalid;
+        Coordinate c4 = setInvalid;
+        Coordinate c5 = setInvalid;
+        Coordinate c6 = setInvalid;
+        Coordinate c7 = setInvalid;
+        Coordinate c8 = setInvalid;
+        
+        /**
+             * 1 2 3
+             * 4 0 5
+             * 6 7 8
+             */
+        if (coordValid(j-1,i-1)){
+            c1 = coord[j-1][i-1];
+        }
+        if (coordValid(j,i-1)){
+            c2 = coord[j][i-1];
+        }
+        if (coordValid(j+1,i-1)){
+            c3 = coord[j+1][i-1];
+        }
+        if (coordValid(j-1,i)){
+            c4 = coord[j-1][i];
+        }
+        if (coordValid(j+1,i)){
+            c5 = coord[j+1][i];
+        }
+        if (coordValid(j-1,i+1)){
+            c6 = coord[j-1][i+1];
+        }
+        if (coordValid(j,i+1)){
+            c7 = coord[j][i+1];
+        }
+        if (coordValid(j+1,i+1)){
+            c8 = coord[j+1][i+1];
+        }
+        tabCoord[0] = c1;
+        tabCoord[1] = c2;
+        tabCoord[2] = c3;
+        tabCoord[3] = c4;
+        tabCoord[4] = c5;
+        tabCoord[5] = c6;
+        tabCoord[6] = c7;
+        tabCoord[7] = c8;
     }
 }

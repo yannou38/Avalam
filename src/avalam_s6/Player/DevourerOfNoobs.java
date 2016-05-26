@@ -35,7 +35,12 @@ public class DevourerOfNoobs extends AIPlayer {
         ArrayList<Move> mesCoupsMehValue = new ArrayList<>();
         ArrayList<Move> mesCoupsBadValue = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];
-        Grid g = this.game.getGrid();
+        coord = new Coordinate[this.game.getGrid().getHeight()][this.game.getGrid().getWidth()];
+        for (int i = 0; i < this.game.getGrid().getWidth(); i++) {
+            for (int j = 0; j < this.game.getGrid().getHeight(); j++) {
+                coord[j][i] = new Coordinate(j,i);
+            }
+        }
         for (int i = 0; i < this.game.getGrid().getWidth(); i++) {
             /**
              * 1 2 3
@@ -44,23 +49,7 @@ public class DevourerOfNoobs extends AIPlayer {
              */
             for (int j = 0; j < this.game.getGrid().getHeight(); j++) {
                 Coordinate c0 = new Coordinate(j, i);
-                Coordinate c1 = new Coordinate(j - 1, i - 1);
-                Coordinate c2 = new Coordinate(j, i - 1);
-                Coordinate c3 = new Coordinate(j + 1, i - 1);
-                Coordinate c4 = new Coordinate(j - 1, i);
-                Coordinate c5 = new Coordinate(j + 1, i);
-                Coordinate c6 = new Coordinate(j - 1, i + 1);
-                Coordinate c7 = new Coordinate(j, i + 1);
-                Coordinate c8 = new Coordinate(j + 1, i + 1);
-                tabCoord[0] = c1;
-                tabCoord[1] = c2;
-                tabCoord[2] = c3;
-                tabCoord[3] = c4;
-                tabCoord[4] = c5;
-                tabCoord[5] = c6;
-                tabCoord[6] = c7;
-                tabCoord[7] = c8;
-
+                doCoord(i,j,tabCoord);
                 if (c0.isValid() && this.game.getGrid().getCellAt(c0).getState().getValue() == CellState.TOWER.getValue()) {
 
                     for (int k = 0; k < 8; k++) {
@@ -87,7 +76,6 @@ public class DevourerOfNoobs extends AIPlayer {
                 }
             }
         }
-        this.game.setGrid(g);
         Random r = new Random();
         if (!mesCoupsHighValue.isEmpty()) {
             System.out.println("Je joue un coup genial");
