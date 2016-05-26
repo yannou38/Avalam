@@ -122,6 +122,32 @@ public class GUI_HomePage extends JPanel implements Gui_INTERFACE {
         return load;
     }
 
+    public Image getQuickI() {
+        return quickI;
+    }
+
+    public Image getPlayI() {
+        return playI;
+    }
+
+    public Image getSettingsI() {
+        return settingsI;
+    }
+
+    public Image getRulesI() {
+        return rulesI;
+    }
+
+    public Image getLoadI() {
+        return loadI;
+    }
+
+    public Image getExitI() {
+        return exitI;
+    }
+    
+    
+
     @Override
     public void back() {
         Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
