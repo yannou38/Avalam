@@ -29,9 +29,11 @@ public class LAG_UI_MouseListener implements MouseListener {
     private String name;
     private Image icon;
     private Image iconbase;
+    private GUI_LAG page;
 
-    public LAG_UI_MouseListener(String buttonname) {
+    public LAG_UI_MouseListener(String buttonname, GUI_LAG page) {
         this.name = buttonname;
+        this.page = page;
         try {
             this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/" + this.name + "_h.png"));
             this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/" + this.name + ".png"));
@@ -83,6 +85,21 @@ public class LAG_UI_MouseListener implements MouseListener {
             case "save":
                 mainFrame.setwState(WindowState.SAVE);
                 break;
+            case "play":
+                Local_Avalam_Game g = (Local_Avalam_Game) this.page.getGame();
+                Image newimg;
+                double ratioW = (double) lag.getWidth() / (double) 1920;
+                double ratioH = (double) lag.getHeight() / (double) 1080;
+                g.togglePause();
+                this.page.setPlaypause(1 - this.page.getPlaypause());
+                if (this.page.getPlaypause() == 0) {
+                    newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+                } else {
+                    newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+                }
+                this.page.getPlayB().setIcon(new ImageIcon(newimg));
+                this.page.repaint();
+                break;
         }
         ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
 
@@ -105,6 +122,16 @@ public class LAG_UI_MouseListener implements MouseListener {
         double ratioH = (double) lag.getHeight() / (double) 1080;
         Image newimg = this.icon.getScaledInstance(((int) round(icon.getWidth(null) * ratioW)), ((int) round(icon.getHeight(null) * ratioH)), java.awt.Image.SCALE_SMOOTH);
         ((JButton) e.getSource()).setIcon(new ImageIcon(newimg));
+        
+        if(this.name.equals("play")){
+                if (this.page.getPlaypause() == 0) {
+                    newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+                } else {
+                    newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+                }
+                this.page.getPlayB().setIcon(new ImageIcon(newimg));
+            
+        }
     }
 
     @Override
@@ -116,6 +143,17 @@ public class LAG_UI_MouseListener implements MouseListener {
         double ratioH = (double) lag.getHeight() / (double) 1080;
         Image newimg = this.iconbase.getScaledInstance(((int) round(iconbase.getWidth(null) * ratioW)), ((int) round(iconbase.getHeight(null) * ratioH)), java.awt.Image.SCALE_SMOOTH);
         ((JButton) e.getSource()).setIcon(new ImageIcon(newimg));
+        
+        
+        if(this.name.equals("play")){
+                if (this.page.getPlaypause() == 0) {
+                    newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+                } else {
+                    newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+                }
+                this.page.getPlayB().setIcon(new ImageIcon(newimg));
+            
+        }
     }
 
 }
