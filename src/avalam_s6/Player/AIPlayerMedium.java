@@ -113,6 +113,12 @@ public class AIPlayerMedium extends AIPlayer {
         Coordinate[] tabCoord = new Coordinate[8];
         double maxvalue = 0;
         double value;
+         coord = new Coordinate[this.game.getGrid().getHeight()][this.game.getGrid().getWidth()];
+        for (int i = 0; i < this.game.getGrid().getWidth(); i++) {
+            for (int j = 0; j < this.game.getGrid().getHeight(); j++) {
+                coord[j][i] = new Coordinate(j,i);
+            }
+        }
         for (int i = 0; i < this.game.getGrid().getWidth(); i++) {
             /**
              * 1 2 3
