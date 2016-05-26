@@ -194,6 +194,70 @@ public abstract class AIPlayer extends Player {
 
         return false;
     }
+    
+    /**
+     * best value
+     *
+     * @param c0
+     * @param dest
+     * @return
+     */
+    protected int nbCreateAloneUs(Coordinate c0, Coordinate dest) {
+        Coordinate[] tabCoord = new Coordinate[8];
+        int nb = 0;
+        int i = c0.getY();
+        int j = c0.getX();
+        /**
+         * 1 2 3
+         * 4 0 5
+         * 6 7 8
+         */
+        doCoord(i,j,tabCoord);
+        for (int k = 0; k < 8; k++) {
+            Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), dest, this.game.getGrid().getCellAt(dest).getSize(), this);
+            this.game.getGrid().moveCell(c0, dest);
+            this.game.addMoveToHistory(m);
+            if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
+                    && this.owner.getValue() == this.game.getGrid().getCellAt(tabCoord[k]).getOwner().getValue() && alone(tabCoord[k])) {
+                nb++;
+            }
+            this.game.undo();
+        }
+
+        return nb;
+    }
+
+    /**
+     * bad, we give the Op a free point
+     *
+     * @param c0 origin
+     * @param dest destination
+     * @return true if we create an alone for the Op, else false
+     */
+    protected int nbCreateAloneOp(Coordinate c0, Coordinate dest) {
+        Coordinate[] tabCoord = new Coordinate[8];
+        int nb = 0;
+        int i = c0.getY();
+        int j = c0.getX();
+        /**
+         * 1 2 3
+         * 4 0 5
+         * 6 7 8
+         */
+        doCoord(i,j,tabCoord);
+        for (int k = 0; k < 8; k++) {
+            Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), dest, this.game.getGrid().getCellAt(dest).getSize(), this);
+            this.game.getGrid().moveCell(c0, dest);
+            this.game.addMoveToHistory(m);
+            if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
+                    && this.owner.getValue() != this.game.getGrid().getCellAt(tabCoord[k]).getOwner().getValue() && alone(tabCoord[k])) {
+                nb++;
+            }
+            this.game.undo();
+        }
+
+        return nb;
+    }
 
     public int nbCoupsJouables() {
         int res = 0;
