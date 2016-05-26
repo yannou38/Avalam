@@ -7,14 +7,6 @@
     <Oui>Oui</Oui>
     <Non>Non</Non>
     <Joueur>
-        <JoueurIRL>Joueur</JoueurIRL>
-        <IA>
-            <Facile>IA Facile</Facile>
-            <Moyen>IA Moyenne</Moyen>
-            <Difficle>IA Difficile</Difficle>
-            <Expert>IA Experte</Expert>
-            <Légende>IA Légendaire</Légende>           
-        </IA>
         <IAImages>
             <JoueurIRL>player</JoueurIRL>
             <Facile>ia_easy</Facile>
@@ -31,7 +23,7 @@
             <Rouge>red</Rouge>
             <Vert>green</Vert>
             <Violet>purple</Violet>   
-            <Cyan>clearblue</Cyan>         
+            <Cyan>cyan</Cyan>         
         </Colors>
     </Joueur>
     <Nom>Nom</Nom>
