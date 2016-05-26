@@ -36,12 +36,14 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     private Game_INTERFACE game;
     private final boolean player1IsPlaying;
-    private JButton undoB, redoB, retourB, saveB;
-    private Image background, cancel, player_playing, player_waiting, redo, retour, save, board, black, white, empty, restricted, w_selected, b_selected, w_possible, b_possible;
+    private JButton undoB, redoB, retourB, saveB, pauseB, playB;
+    private Image background, cancel, player_playing, player_waiting, play, pause, redo, retour, save, board, black, white, empty, restricted, w_selected, b_selected, w_possible, b_possible;
     private final JButton[][] buttonmap;
     private boolean callResize;
     private final LAG_AdapterListener listener;
     private JLabel titre;
+    private int playpause;
+
     /**
      * Constructor.
      */
@@ -49,6 +51,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.callResize = false;
         this.listener = new LAG_AdapterListener(this);
         this.buttonmap = new JButton[9][9];
+        this.playpause = 0;
         this.initComponents();
         this.player1IsPlaying = true;
     }
@@ -62,8 +65,10 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             this.restricted = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/restricted.png"));
             this.redo = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/redo.png"));
             this.retour = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/home.png"));
+            this.play = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/play.png"));
+            this.pause = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/pause.png"));
             this.save = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/save.png"));
-            this.initPawnColors(AvalamColor.WHITE,AvalamColor.BLACK);
+            this.initPawnColors(AvalamColor.WHITE, AvalamColor.BLACK);
             this.empty = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/empty.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_LAG.class.toString());
@@ -86,8 +91,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             }
         }
         this.setLayout(null);
-        
-        
+
         Font localFont = new Font("Arial", Font.PLAIN, 60);
         try {
             localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
@@ -96,8 +100,8 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             System.out.println("Error - " + GUI_LAG.class.toString());
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        this.titre = new JLabel("test d'un titre long");        
+
+        this.titre = new JLabel("test d'un titre long");
         this.titre.setBorder(BorderFactory.createEmptyBorder());
         this.titre.setFont(localFont.deriveFont(1 * 30f));
         this.add(this.titre);
@@ -106,42 +110,49 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.undoB.setBorder(BorderFactory.createEmptyBorder());
         this.undoB.setContentAreaFilled(false);
         this.undoB.setFocusPainted(false);
-        this.undoB.addMouseListener(new LAG_UI_MouseListener("cancel"));
+        this.undoB.addMouseListener(new LAG_UI_MouseListener("cancel", this));
         this.add(this.undoB);
 
         this.retourB = new JButton(new ImageIcon(this.retour));
         this.retourB.setBorder(BorderFactory.createEmptyBorder());
         this.retourB.setContentAreaFilled(false);
         this.retourB.setFocusPainted(false);
-        this.retourB.addMouseListener(new LAG_UI_MouseListener("home"));
+        this.retourB.addMouseListener(new LAG_UI_MouseListener("home", this));
         this.add(this.retourB);
 
         this.redoB = new JButton(new ImageIcon(this.redo));
         this.redoB.setBorder(BorderFactory.createEmptyBorder());
         this.redoB.setContentAreaFilled(false);
         this.redoB.setFocusPainted(false);
-        this.redoB.addMouseListener(new LAG_UI_MouseListener("redo"));
+        this.redoB.addMouseListener(new LAG_UI_MouseListener("redo", this));
         this.add(this.redoB);
 
         this.saveB = new JButton(new ImageIcon(this.save));
         this.saveB.setBorder(BorderFactory.createEmptyBorder());
         this.saveB.setContentAreaFilled(false);
         this.saveB.setFocusPainted(false);
-        this.saveB.addMouseListener(new LAG_UI_MouseListener("save"));
+        this.saveB.addMouseListener(new LAG_UI_MouseListener("save", this));
         this.add(this.saveB);
+
+        this.playB = new JButton(new ImageIcon(this.play));
+        this.playB.setBorder(BorderFactory.createEmptyBorder());
+        this.playB.setContentAreaFilled(false);
+        this.playB.setFocusPainted(false);
+        this.playB.addMouseListener(new LAG_UI_MouseListener("play", this));
+        this.add(this.playB);
 
         this.addComponentListener(this.listener);
     }
-    
+
     public void initPawnColors(AvalamColor pWhite, AvalamColor pBlack) {
         try {
-            
-            this.white = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/"+pWhite.getValue()+".png"));
-            this.black = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/"+pBlack.getValue()+".png"));
-            this.w_selected = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/"+pWhite.getValue()+"_selected.png"));
-            this.b_selected = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/"+pBlack.getValue()+"_selected.png"));
-            this.w_possible = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/"+pWhite.getValue()+"_possible.png"));
-            this.b_possible = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/"+pBlack.getValue()+"_possible.png"));
+
+            this.white = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/" + pWhite.getValue() + ".png"));
+            this.black = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/" + pBlack.getValue() + ".png"));
+            this.w_selected = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/" + pWhite.getValue() + "_selected.png"));
+            this.b_selected = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/" + pBlack.getValue() + "_selected.png"));
+            this.w_possible = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/" + pWhite.getValue() + "_possible.png"));
+            this.b_possible = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/" + pBlack.getValue() + "_possible.png"));
         } catch (IOException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -158,25 +169,25 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     @SuppressWarnings("unchecked")
     public void initGame(GuiManager_INTERFACE pGui, String pClassP1, String pNameP1, String pColorP1, String pClassP2, String pNameP2, String pColorP2, String pGridName) {
 
-            try {
-                Class lClass1 = Class.forName("avalam_s6.Player."+pClassP1);
-                Class lClass2 = Class.forName("avalam_s6.Player."+pClassP2);
-                Constructor lConst1 = lClass1.getConstructor(String.class, AvalamColor.class, Owner.class);
-                Constructor lConst2 = lClass2.getConstructor(String.class, AvalamColor.class, Owner.class);
-                Player p1 = (Player) lConst1.newInstance(new Object[] {pNameP1,AvalamColor.valueOf(pColorP1.toUpperCase()),Owner.PLAYER_1});
-                Player p2 = (Player) lConst2.newInstance(new Object[] {pNameP2,AvalamColor.valueOf(pColorP2.toUpperCase()),Owner.PLAYER_2});
-                Level_Parser myParser = new Level_Parser(pGridName);
-                Grid g = new Grid(myParser.readLevel(), pGridName); // IOException | GridSizeException | NumberFormatException
-                this.game = new Local_Avalam_Game((Main_Frame) pGui, g, p1, p2, new Stack<>(), new Stack<>(), 0, 0); // GridSizeException
-                this.initPawnColors(p1.getColor(),p2.getColor());    
-            } catch (NoSuchMethodException | SecurityException | ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | GridCharException | IOException | GridSizeException ex) {
-                Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
-            }        
+        try {
+            Class lClass1 = Class.forName("avalam_s6.Player." + pClassP1);
+            Class lClass2 = Class.forName("avalam_s6.Player." + pClassP2);
+            Constructor lConst1 = lClass1.getConstructor(String.class, AvalamColor.class, Owner.class);
+            Constructor lConst2 = lClass2.getConstructor(String.class, AvalamColor.class, Owner.class);
+            Player p1 = (Player) lConst1.newInstance(new Object[]{pNameP1, AvalamColor.valueOf(pColorP1.toUpperCase()), Owner.PLAYER_1});
+            Player p2 = (Player) lConst2.newInstance(new Object[]{pNameP2, AvalamColor.valueOf(pColorP2.toUpperCase()), Owner.PLAYER_2});
+            Level_Parser myParser = new Level_Parser(pGridName);
+            Grid g = new Grid(myParser.readLevel(), pGridName); // IOException | GridSizeException | NumberFormatException
+            this.game = new Local_Avalam_Game((Main_Frame) pGui, g, p1, p2, new Stack<>(), new Stack<>(), 0, 0); // GridSizeException
+            this.initPawnColors(p1.getColor(), p2.getColor());
+        } catch (NoSuchMethodException | SecurityException | ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | GridCharException | IOException | GridSizeException ex) {
+            Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
-    public void deleteGame(){
+
+    public void deleteGame() {
         this.game.clean();
-        this.game=null;
+        this.game = null;
         System.gc();
     }
 
@@ -193,10 +204,10 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         myParser.save();
     }
 
-    public void load(GuiManager_INTERFACE mFrame,String pSlotName) {
+    public void load(GuiManager_INTERFACE mFrame, String pSlotName) {
         //Container mainFrame = this.getParent().getParent().getParent().getParent();
-        SaveParser_Reader lParser = new SaveParser_Reader((Main_Frame)mFrame, pSlotName);
-        this.game = new Local_Avalam_Game((Main_Frame)mFrame,lParser.getaGrid(),lParser.getaPlayer1(),lParser.getaPlayer2(),lParser.getaUndo(),lParser.getaRedo(),lParser.getaCurrentPlayer(),lParser.getaTurns());
+        SaveParser_Reader lParser = new SaveParser_Reader((Main_Frame) mFrame, pSlotName);
+        this.game = new Local_Avalam_Game((Main_Frame) mFrame, lParser.getaGrid(), lParser.getaPlayer1(), lParser.getaPlayer2(), lParser.getaUndo(), lParser.getaRedo(), lParser.getaCurrentPlayer(), lParser.getaTurns());
     }
 
     public JButton getUndoB() {
@@ -234,8 +245,26 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     public JLabel getTitre() {
         return titre;
     }
-    
-    
+
+    public JButton getPlayB() {
+        return playB;
+    }
+
+    public Image getPlay() {
+        return play;
+    }
+
+    public Image getPause() {
+        return pause;
+    }
+
+    public int getPlaypause() {
+        return playpause;
+    }
+
+    public void setPlaypause(int playpause) {
+        this.playpause = playpause;
+    }
 
     public Image getEmpty() {
         return empty;
@@ -260,10 +289,6 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     public Image getSave() {
         return save;
     }
-    
-    
-    
-    
 
     @Override
     public void back() {
