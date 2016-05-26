@@ -18,7 +18,7 @@ import javax.swing.ImageIcon;
  */
 public class HomePageAdapterListener implements ComponentListener {
 
-    private GUI_HomePage hm;
+    private final GUI_HomePage hm;
 
     public HomePageAdapterListener(GUI_HomePage homepage) {
         this.hm = homepage;
@@ -28,7 +28,6 @@ public class HomePageAdapterListener implements ComponentListener {
     public void componentResized(ComponentEvent e) {
         Insets insets = this.hm.getInsets();
         Image newimg;
-        Dimension size;
         //1280*720 => taille de base
         double ratioW = (double) this.hm.getWidth() / (double) 1920;
         double ratioH = (double) this.hm.getHeight() / (double) 1080;
@@ -62,10 +61,6 @@ public class HomePageAdapterListener implements ComponentListener {
         this.hm.getExit().setIcon(new ImageIcon(newimg));
         this.hm.getExit().setBounds((int) round((1688 + insets.left) * ratioW), ((int) round((988 + insets.top) * ratioH)), (int) round(200 * ratioW), (int) round(80*ratioH));
         this.hm.getExit().setSize((int) round(200 * ratioW), (int) round(80 * ratioH));
-        
-        /*size = this.hm.getExit().getPreferredSize();
-        this.hm.getExit().setBounds((int) round((1688 + insets.left) * ratioW), ((int) round((988 + insets.top) * ratioH)), size.width * 3 / 2 + 2, size.height * 3 / 2 + 2);
-        this.hm.getExit().setSize((int) round(this.hm.getExit().getWidth() * ratioW), (int) round(this.hm.getExit().getHeight() * ratioH));*/
     }
 
     @Override

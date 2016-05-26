@@ -36,13 +36,11 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     private Game_INTERFACE game;
     private final boolean player1IsPlaying;
-    private JPanel grille;
     private JButton undoB, redoB, retourB, saveB;
     private Image background, cancel, player_playing, player_waiting, redo, retour, save, board, black, white, empty, restricted, w_selected, b_selected, w_possible, b_possible;
     private final JButton[][] buttonmap;
     private boolean callResize;
     private final LAG_AdapterListener listener;
-
     /**
      * Constructor.
      */
@@ -72,9 +70,6 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         }
 
         ImageIcon base = new ImageIcon(this.empty);
-        JPanel panel = new JPanel();
-        panel.setBackground(new Color(0, 0, 0, 0));
-        panel.setLayout(new GridLayout(9, 9, 2, 2));
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 Coordinate c = new Coordinate(j, i);
@@ -85,14 +80,11 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                 b.setHorizontalTextPosition(JButton.CENTER);
                 b.setVerticalTextPosition(JButton.CENTER);
                 this.buttonmap[j][i] = b;
-                b.setOpaque(false);
-                panel.add(b);
+                //b.setOpaque(false);
+                this.add(b);
             }
         }
         this.setLayout(null);
-        this.grille = panel;
-        this.grille.setOpaque(false);
-        this.add(panel);
 
         this.undoB = new JButton(new ImageIcon(this.cancel));
         this.undoB.setBorder(BorderFactory.createEmptyBorder());
@@ -127,6 +119,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     
     public void initPawnColors(AvalamColor pWhite, AvalamColor pBlack) {
         try {
+            
             this.white = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/"+pWhite.getValue()+".png"));
             this.black = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/"+pBlack.getValue()+".png"));
             this.w_selected = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/"+pWhite.getValue()+"_selected.png"));
@@ -206,13 +199,49 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         return this.saveB;
     }
 
-    public JPanel getGrille() {
-        return this.grille;
-    }
-
     public Game_INTERFACE getGame() {
         return this.game;
     }
+
+    public JButton[][] getButtonmap() {
+        return buttonmap;
+    }
+
+    public Image getBlack() {
+        return black;
+    }
+
+    public Image getWhite() {
+        return white;
+    }
+
+    public Image getEmpty() {
+        return empty;
+    }
+
+    public Image getRestricted() {
+        return restricted;
+    }
+
+    public Image getCancel() {
+        return cancel;
+    }
+
+    public Image getRedo() {
+        return redo;
+    }
+
+    public Image getRetour() {
+        return retour;
+    }
+
+    public Image getSave() {
+        return save;
+    }
+    
+    
+    
+    
 
     @Override
     public void back() {
