@@ -52,8 +52,9 @@ public class NewGameListener implements MouseListener {
             case "start":
                 String[] p1 = this.page.loadP1Settings();
                 String[] p2 = this.page.loadP2Settings();
+                String gridName = this.page.loadGridName();
                 ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
-                mainFrame.initGame(p1, p2);
+                mainFrame.initGame(p1, p2, gridName);
                 mainFrame.startGame();
                 break;
             case "home":

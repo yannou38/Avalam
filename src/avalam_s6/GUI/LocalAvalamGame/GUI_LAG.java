@@ -21,6 +21,8 @@ import avalam_s6.GUI.WindowState;
 import avalam_s6.Player.*;
 import java.awt.*;
 import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Stack;
 import java.util.logging.*;
 import javax.imageio.ImageIO;
@@ -63,8 +65,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             this.retour = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/return.png"));
             this.save = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/save.png"));
             this.board = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/board.png"));
-            this.black = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/black.png"));
-            this.white = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/white.png"));
+            this.initPawnColors(AvalamColor.WHITE,AvalamColor.BLACK);
             this.empty = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/empty.png"));
             this.w_selected = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/white_selected.png"));
             this.b_selected = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/black_selected.png"));
@@ -128,6 +129,15 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
         this.addComponentListener(this.listener);
     }
+    
+    public void initPawnColors(AvalamColor pWhite, AvalamColor pBlack) {
+        try {
+            this.white = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/"+pWhite.getValue()+".png"));
+            this.black = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/"+pBlack.getValue()+".png"));
+        } catch (IOException ex) {
+            Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public void initGame(GuiManager_INTERFACE pGui) {
         try {
@@ -137,61 +147,22 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         }
     }
 
-    public void initGame(GuiManager_INTERFACE pGui, String[] player1, String[] player2) {
-        try {
+    public void initGame(GuiManager_INTERFACE pGui, String pClassP1, String pNameP1, String pColorP1, String pClassP2, String pNameP2, String pColorP2, String pGridName) {
 
-            AvalamColor c1 = AvalamColor.valueOf(player1[0].toUpperCase());
-            AvalamColor c2 = AvalamColor.valueOf(player2[0].toUpperCase());
-
-            Player p1 = new ControlledPlayer(player1[2], c1, Owner.PLAYER_1);
-            switch (player1[1]) {
-                case "player":
-                    p1 = new ControlledPlayer(player1[2], c1, Owner.PLAYER_1);
-                    break;
-                case "ia_easy":
-                    p1 = new AIPlayerEasy(player1[2], c1, Owner.PLAYER_1);
-                    break;
-                case "ia_mid":
-                    p1 = new AIPlayerMedium(player1[2], c1, Owner.PLAYER_1);
-                    break;
-                case "ia_hard":
-                    p1 = new AIPlayerHard(player1[2], c1, Owner.PLAYER_1);
-                    break;
-                case "ia_exp":
-                    p1 = new AIPlayerMedium(player1[2], c1, Owner.PLAYER_1);
-                    break;
-                case "ia_leg":
-                    p1 = new AIPlayerMedium(player1[2], c1, Owner.PLAYER_1);
-                    break;
-            }
-            Player p2 = new ControlledPlayer(player2[2], c2, Owner.PLAYER_2);
-            switch (player2[1]) {
-                case "player":
-                    p2 = new ControlledPlayer(player2[2], c2, Owner.PLAYER_2);
-                    break;
-                case "ia_easy":
-                    p2 = new AIPlayerEasy(player2[2], c2, Owner.PLAYER_2);
-                    break;
-                case "ia_mid":
-                    p2 = new AIPlayerMedium(player2[2], c2, Owner.PLAYER_2);
-                    break;
-                case "ia_hard":
-                    p2 = new AIPlayerHard(player2[2], c2, Owner.PLAYER_2);
-                    break;
-                case "ia_exp":
-                    p2 = new AIPlayerMedium(player2[2], c2, Owner.PLAYER_2);
-                    break;
-                case "ia_leg":
-                    p2 = new AIPlayerMedium(player2[2], c2, Owner.PLAYER_2);
-                    break;
-            }
-            String gName = "default";
-            Level_Parser myParser = new Level_Parser(gName);
-            Grid g = new Grid(myParser.readLevel(), gName); // IOException | GridSizeException | NumberFormatException
-            this.game = new Local_Avalam_Game((Main_Frame) pGui, g, p1, p2, new Stack<>(), new Stack<>(), 0, 0); // GridSizeException
-        } catch (IOException | GridSizeException | GridCharException ex) {
-            Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            try {
+                Class lClass1 = Class.forName("avalam_s6.Player."+pClassP1);
+                Class lClass2 = Class.forName("avalam_s6.Player."+pClassP2);
+                Constructor lConst1 = lClass1.getConstructor(String.class, AvalamColor.class, Owner.class);
+                Constructor lConst2 = lClass2.getConstructor(String.class, AvalamColor.class, Owner.class);
+                Player p1 = (Player) lConst1.newInstance(new Object[] {pNameP1,AvalamColor.valueOf(pColorP1.toUpperCase()),Owner.PLAYER_1});
+                Player p2 = (Player) lConst2.newInstance(new Object[] {pNameP2,AvalamColor.valueOf(pColorP2.toUpperCase()),Owner.PLAYER_2});
+                Level_Parser myParser = new Level_Parser(pGridName);
+                Grid g = new Grid(myParser.readLevel(), pGridName); // IOException | GridSizeException | NumberFormatException
+                this.game = new Local_Avalam_Game((Main_Frame) pGui, g, p1, p2, new Stack<>(), new Stack<>(), 0, 0); // GridSizeException
+                this.initPawnColors(p1.getColor(),p2.getColor());    
+            } catch (NoSuchMethodException | SecurityException | ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | GridCharException | IOException | GridSizeException ex) {
+                Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
+            }        
     }
     
     public void deleteGame(){

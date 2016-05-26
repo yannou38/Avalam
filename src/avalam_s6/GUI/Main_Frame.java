@@ -18,6 +18,7 @@ import avalam_s6.GUI.Credits.GUI_Credits;
 import avalam_s6.GUI.Load.GUI_Load;
 import avalam_s6.GUI.Rules.GUI_Rules;
 import avalam_s6.GUI.Save.GUI_Save;
+import avalam_s6.Player.ControlledPlayer;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import static java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager;
@@ -130,10 +131,37 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         this.setwState(WindowState.BOARD);
     }
 
-    public void initGame(String[] p1, String[] p2) {
-        this.setwState(WindowState.BOARD);
-        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).initGame(this,p1, p2);
+    /**
+     * Initialize the Game with custom parameters
+     * @param p1 Player_1 [Class, Name, Color]
+     * @param p2 Player_2 [Class, Name, Color]
+     * @param gridName  Name of the Grid
+     */
+    public void initGame(String[] p1, String[] p2, String gridName) {
+        p1[0] = createClass(p1[0]);
+        p2[0] = createClass(p2[0]);
+        //System.out.println(p1[0]+" - "+p2[0]);
+        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).initGame(this,p1[0], p1[1], p1[2], p2[0], p2[1], p2[2], gridName);
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).start();
+        this.setwState(WindowState.BOARD);
+    }
+    
+    public String createClass(String xmlChoice) {
+        switch (xmlChoice) {
+            case "player":
+                return "ControlledPlayer";
+            case "ia_easy":
+                return "AIPlayerEasy";
+            case "ia_mid":
+                return "AIPlayerMedium";
+            case "ia_hard":
+                return "AIPlayerHard";
+            case "ia_exp":
+                return "ControlledPlayer";
+            case "ia_leg":
+                return "ControlledPlayer";
+        }
+        return null;
     }
 
     public void setVictoryScreen(String p, Grid g) {

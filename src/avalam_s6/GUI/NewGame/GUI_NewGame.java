@@ -268,20 +268,24 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         }
     }
 
-    String[] loadP1Settings() {
+    public String[] loadP1Settings() {
         String[] p1 = new String[3];
-        p1[0] = this.ColorList[this.p1colorselect];
-        p1[1] = this.AIlist[this.p1select];
-        p1[2] = this.name1.getText();
+        p1[0] = this.AIlist[this.p1select];
+        p1[1] = this.name1.getText();
+        p1[2] = this.ColorList[this.p1colorselect];
         return p1;
     }
 
-    String[] loadP2Settings() {
+    public String[] loadP2Settings() {
         String[] p2 = new String[3];
-        p2[0] = this.ColorList[this.p2colorselect];
-        p2[1] = this.AIlist[this.p2select];
-        p2[2] = this.name2.getText();
+        p2[0] = this.AIlist[this.p2select];
+        p2[1] = this.name2.getText();
+        p2[2] = this.ColorList[this.p2colorselect];
         return p2;
+    }
+    
+    public String loadGridName() {
+        return "default";
     }
 
     public void leftAI(int numplayer) {
