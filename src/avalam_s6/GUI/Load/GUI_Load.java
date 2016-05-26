@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI.Load;
 
+import avalam_s6.Core.Globals.LanguageManager;
 import avalam_s6.GUI.Save.*;
 import avalam_s6.Core.Globals.SaveInfoLister;
 import avalam_s6.Core.Globals.SetupManager;
@@ -125,7 +126,7 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
                 if (!sil.getEmptyslot()) {
                     sil = new SaveInfoLister("slot_" + j);
                     this.slotlabels[i].setFont(this.slotlabels[i].getFont().deriveFont(1 * 30f));
-                    this.slotlabels[i].setText(sil.getDate() + " " + sil.getPlayer1() + " VS " + sil.getPlayer2() + "  " + sil.getGrid());
+                    this.slotlabels[i].setText(sil.getDate() + " " + sil.getPlayer1() + " VS " + sil.getPlayer2() + " "+LanguageManager.getElement("Sur")+" " + sil.getGrid());
                 }
 
             } catch (IOException ex) {
