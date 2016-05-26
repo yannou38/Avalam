@@ -58,6 +58,10 @@ public class GUI_Rules extends JPanel implements Gui_INTERFACE {
         return this.retour;
     }
 
+    public Image getReturnI() {
+        return returnI;
+    }
+    
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);

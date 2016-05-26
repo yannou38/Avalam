@@ -11,6 +11,7 @@ import avalam_s6.GUI.WindowState;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import static java.lang.Math.round;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -56,13 +57,23 @@ public class RulesListener implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         //replace the icon with another
-        ((JButton) e.getSource()).setIcon(new ImageIcon(this.icon));
+        JButton source = (JButton) e.getSource();
+        GUI_Rules rules = ((GUI_Rules) source.getParent());
+        double ratioW = (double) rules.getWidth() / (double) 1920;
+        double ratioH = (double) rules.getHeight() / (double) 1080;
+        Image newimg = this.icon.getScaledInstance(((int) round(icon.getWidth(null) * ratioW)), ((int) round(icon.getHeight(null) * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        ((JButton) e.getSource()).setIcon(new ImageIcon(newimg));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         //replace the icon with another
-        ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
+        JButton source = (JButton) e.getSource();
+        GUI_Rules rules = ((GUI_Rules) source.getParent());
+        double ratioW = (double) rules.getWidth() / (double) 1920;
+        double ratioH = (double) rules.getHeight() / (double) 1080;
+        Image newimg = this.iconbase.getScaledInstance(((int) round(iconbase.getWidth(null) * ratioW)), ((int) round(iconbase.getHeight(null) * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        ((JButton) e.getSource()).setIcon(new ImageIcon(newimg));
     }
 
 }
