@@ -6,9 +6,11 @@
 package avalam_s6.GUI.Credits;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.*;
 import static java.lang.Math.round;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -26,12 +28,15 @@ public class CreditsAdapterListener implements ComponentListener {
     @Override
     public void componentResized(ComponentEvent e) {
         Insets insets = this.cr.getInsets();
+        Image newimg;
         //1280*720 => taille de base
         double ratioW = (double) this.cr.getWidth() / (double) 1920;
         double ratioH = (double) this.cr.getHeight() / (double) 1080;
-        Dimension size = this.cr.getRetour().getPreferredSize();
-        this.cr.getRetour().setBounds((int) round((20 + insets.left) * ratioW), ((int) round((930 + insets.top) * ratioH)), size.width, size.height);
-        this.cr.getRetour().setSize((int) round(this.cr.getRetour().getWidth() * ratioW), (int) round(this.cr.getRetour().getHeight() * ratioH));
+        
+        newimg = this.cr.getReturnI().getScaledInstance(((int) round(263 * ratioW)), ((int) round(123 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        this.cr.getRetour().setIcon(new ImageIcon(newimg));
+        this.cr.getRetour().setBounds((int) round((20 + insets.left) * ratioW), ((int) round((930 + insets.top) * ratioH)), (int) round(263 * ratioW), (int) round(123*ratioH));
+        this.cr.getRetour().setSize((int) round(263 * ratioW), (int) round(123 * ratioH));    
     }
 
     @Override
