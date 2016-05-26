@@ -1,0 +1,9 @@
+Fabriquer les objects en avance car on connait la profondeur de l'IA.
+Tableau de praram/config plutôt que poids des choix de l'IA codés en dur dans l'IA même.
+
+Musique : Buffer. Chercher les traces des inputs dans la console.
+
+Charger image en dehors bouton et les size au bouton après le chargement. Set en image d'icône.
+
+Le bloquant est mieux que le polling. Pas de timer tant que l'IA joue pas (trop tard pour changer ?)
+Device (?) Swing est censé boucler déjà. Mieux vaut pas y toucher sauf s'il n'y a pas d'autre travail à réaliser.
