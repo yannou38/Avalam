@@ -41,6 +41,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     private final JButton[][] buttonmap;
     private boolean callResize;
     private final LAG_AdapterListener listener;
+    private JLabel titre;
     /**
      * Constructor.
      */
@@ -85,6 +86,21 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             }
         }
         this.setLayout(null);
+        
+        
+        Font localFont = new Font("Arial", Font.PLAIN, 60);
+        try {
+            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
+        } catch (IOException | FontFormatException ex) {
+            System.out.println("Error - " + GUI_LAG.class.toString());
+            Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        this.titre = new JLabel("test d'un titre long");        
+        this.titre.setBorder(BorderFactory.createEmptyBorder());
+        this.titre.setFont(localFont.deriveFont(1 * 30f));
+        this.add(this.titre);
 
         this.undoB = new JButton(new ImageIcon(this.cancel));
         this.undoB.setBorder(BorderFactory.createEmptyBorder());
@@ -214,6 +230,12 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     public Image getWhite() {
         return white;
     }
+
+    public JLabel getTitre() {
+        return titre;
+    }
+    
+    
 
     public Image getEmpty() {
         return empty;
