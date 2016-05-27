@@ -148,18 +148,18 @@ public abstract class AIPlayer extends Player {
          * 6 7 8
          */
         doCoord(i,j,tabCoord);
+        Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), dest, this.game.getGrid().getCellAt(dest).getSize(), this);
+        this.game.getGrid().moveCell(c0, dest);
+        this.game.addMoveToHistory(m);
         for (int k = 0; k < 8; k++) {
-            Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), dest, this.game.getGrid().getCellAt(dest).getSize(), this);
-            this.game.getGrid().moveCell(c0, dest);
-            this.game.addMoveToHistory(m);
+            
             if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
                     && this.owner.getValue() == this.game.getGrid().getCellAt(tabCoord[k]).getOwner().getValue() && alone(tabCoord[k])) {
                 this.game.undo();
                 return true;
             }
-            this.game.undo();
         }
-
+        this.game.undo();
         return false;
     }
 
@@ -180,22 +180,21 @@ public abstract class AIPlayer extends Player {
          * 6 7 8
          */
         doCoord(i,j,tabCoord);
+        Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), dest, this.game.getGrid().getCellAt(dest).getSize(), this);
+        this.game.getGrid().moveCell(c0, dest);
+        this.game.addMoveToHistory(m);
         for (int k = 0; k < 8; k++) {
-            Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), dest, this.game.getGrid().getCellAt(dest).getSize(), this);
-            this.game.getGrid().moveCell(c0, dest);
-            this.game.addMoveToHistory(m);
             if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
                     && this.owner.getValue() != this.game.getGrid().getCellAt(tabCoord[k]).getOwner().getValue() && alone(tabCoord[k])) {
                 this.game.undo();
                 return true;
             }
-            this.game.undo();
         }
-
+        this.game.undo();
         return false;
     }
     
-    /**
+   /**
      * best value
      *
      * @param c0
@@ -213,15 +212,15 @@ public abstract class AIPlayer extends Player {
          * 6 7 8
          */
         doCoord(i,j,tabCoord);
+        Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), dest, this.game.getGrid().getCellAt(dest).getSize(), this);
+        this.game.getGrid().moveCell(c0, dest);
+        this.game.addMoveToHistory(m);
         for (int k = 0; k < 8; k++) {
-            Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), dest, this.game.getGrid().getCellAt(dest).getSize(), this);
-            this.game.getGrid().moveCell(c0, dest);
-            this.game.addMoveToHistory(m);
             if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
                     && this.owner.getValue() == this.game.getGrid().getCellAt(tabCoord[k]).getOwner().getValue() && alone(tabCoord[k])) {
                 nb++;
             }
-            this.game.undo();
+        this.game.undo();
         }
 
         return nb;
@@ -232,7 +231,7 @@ public abstract class AIPlayer extends Player {
      *
      * @param c0 origin
      * @param dest destination
-     * @return true if we create an alone for the Op, else false
+     * @return nb of alone created for us 
      */
     protected int nbCreateAloneOp(Coordinate c0, Coordinate dest) {
         Coordinate[] tabCoord = new Coordinate[8];
@@ -348,5 +347,107 @@ public abstract class AIPlayer extends Player {
         tabCoord[5] = c6;
         tabCoord[6] = c7;
         tabCoord[7] = c8;
+    }
+    
+    /**
+     * best value
+     *
+     * @param c0
+     * @param dest
+     * @return
+     */
+    protected int nbCreateAloneUsV2(Coordinate c0, Coordinate dest) {
+        Coordinate[] tabCoord = new Coordinate[8];
+        int nb = 0;
+        int i = c0.getY();
+        int j = c0.getX();
+        /**
+         * 1 2 3
+         * 4 0 5
+         * 6 7 8
+         */
+        int nbBeforeMove = 0;
+        int nbAfterMove = 0;
+        doCoord(dest.getY(),dest.getX(),tabCoord);
+        
+        for (int k = 0; k < 8; k++) {
+            if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
+                    && this.owner.getValue() == this.game.getGrid().getCellAt(tabCoord[k]).getOwner().getValue() && alone(tabCoord[k])) {
+                nbBeforeMove++;
+            }
+        }
+        
+        Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), dest, this.game.getGrid().getCellAt(dest).getSize(), this);
+        this.game.getGrid().moveCell(c0, dest);
+        this.game.addMoveToHistory(m);
+        
+        doCoord(dest.getY(),dest.getX(),tabCoord);
+        for (int k = 0; k < 8; k++) {
+            if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
+                    && this.owner.getValue() == this.game.getGrid().getCellAt(tabCoord[k]).getOwner().getValue() && alone(tabCoord[k])) {
+                nbAfterMove++;
+            }
+        }
+        
+        doCoord(i,j,tabCoord);
+        for (int k = 0; k < 8; k++) {
+            if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
+                    && this.owner.getValue() == this.game.getGrid().getCellAt(tabCoord[k]).getOwner().getValue() && alone(tabCoord[k])) {
+                nb++;
+            }
+        }
+        this.game.undo();
+        return (nb+(nbAfterMove-nbBeforeMove));
+    }
+
+    /**
+     * bad, we give the Op a free point
+     *
+     * @param c0 origin
+     * @param dest destination
+     * @return nb of alone created for us 
+     */
+    protected int nbCreateAloneOpV2(Coordinate c0, Coordinate dest) {
+        Coordinate[] tabCoord = new Coordinate[8];
+        int nb = 0;
+        int i = c0.getY();
+        int j = c0.getX();
+        /**
+         * 1 2 3
+         * 4 0 5
+         * 6 7 8
+         */
+        int nbBeforeMove = 0;
+        int nbAfterMove = 0;
+        doCoord(dest.getY(),dest.getX(),tabCoord);
+        
+        for (int k = 0; k < 8; k++) {
+            if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
+                    && this.owner.getValue() != this.game.getGrid().getCellAt(tabCoord[k]).getOwner().getValue() && alone(tabCoord[k])) {
+                nbBeforeMove++;
+            }
+        }
+        
+        Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), dest, this.game.getGrid().getCellAt(dest).getSize(), this);
+        this.game.getGrid().moveCell(c0, dest);
+        this.game.addMoveToHistory(m);
+        
+        doCoord(dest.getY(),dest.getX(),tabCoord);
+        for (int k = 0; k < 8; k++) {
+            if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
+                    && this.owner.getValue() != this.game.getGrid().getCellAt(tabCoord[k]).getOwner().getValue() && alone(tabCoord[k])) {
+                nbAfterMove++;
+            }
+        }
+        
+        doCoord(i,j,tabCoord);
+        for (int k = 0; k < 8; k++) {
+            if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()
+                    && this.owner.getValue() != this.game.getGrid().getCellAt(tabCoord[k]).getOwner().getValue() && alone(tabCoord[k])) {
+                nb++;
+            }
+        }
+        this.game.undo();
+        return (nb+(nbAfterMove-nbBeforeMove));
     }
 }
