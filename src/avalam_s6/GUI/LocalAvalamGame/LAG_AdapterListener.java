@@ -7,6 +7,8 @@ package avalam_s6.GUI.LocalAvalamGame;
 
 import avalam_s6.Core.CellState;
 import avalam_s6.Core.Coordinate;
+import avalam_s6.Core.Game_INTERFACE;
+import avalam_s6.Core.Local_Avalam_Game;
 import avalam_s6.Core.Owner;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -46,14 +48,25 @@ public class LAG_AdapterListener implements ComponentListener {
         this.page.getUndoB().setBounds((int) round((360 + insets.left) * ratioW), ((int) round((505 + insets.top) * ratioH)), (int) round(252 * ratioW), (int) round(111 * ratioH));
         this.page.getUndoB().setSize((int) round(252 * ratioW), (int) round(111 * ratioH));
 
-        if (this.page.getPlaypause() == 0) {
-            newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        if (((Local_Avalam_Game) this.page.getGame()).getTurns() % 2 == 0) {
+            newimg = this.page.getPlayer_playing().getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         } else {
-            newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+            newimg = this.page.getPlayer_waiting().getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         }
-        this.page.getPlayB().setIcon(new ImageIcon(newimg));
-        this.page.getPlayB().setBounds((int) round((200 + insets.left) * ratioW), ((int) round((505 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
-        this.page.getPlayB().setSize((int) round(80 * ratioW), (int) round(80 * ratioH));
+
+        this.page.getGauche().setIcon(new ImageIcon(newimg));
+        this.page.getGauche().setBounds((int) round((20 + insets.left) * ratioW), ((int) round((237 + insets.top) * ratioH)), (int) round(284 * ratioW), (int) round(671 * ratioH));
+        this.page.getGauche().setSize((int) round(284 * ratioW), (int) round(671 * ratioH));
+
+        if (((Local_Avalam_Game) this.page.getGame()).getTurns() % 2 == 0) {
+            newimg = this.page.getPlayer_waiting().getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        } else {
+            newimg = this.page.getPlayer_playing().getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        }
+
+        this.page.getDroite().setIcon(new ImageIcon(newimg));
+        this.page.getDroite().setBounds((int) round((1616 + insets.left) * ratioW), ((int) round((237 + insets.top) * ratioH)), (int) round(284 * ratioW), (int) round(671 * ratioH));
+        this.page.getDroite().setSize((int) round(284 * ratioW), (int) round(671 * ratioH));
 
         newimg = this.page.getRedo().getScaledInstance(((int) round(252 * ratioW)), ((int) round(111 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         this.page.getRedoB().setIcon(new ImageIcon(newimg));
@@ -70,6 +83,30 @@ public class LAG_AdapterListener implements ComponentListener {
         this.page.getRetourB().setBounds((int) round((25 + insets.left) * ratioW), ((int) round((940 + insets.top) * ratioH)), (int) round(251 * ratioW), (int) round(111 * ratioH));
         this.page.getRetourB().setSize((int) round(251 * ratioW), (int) round(111 * ratioH));
 
+        if (this.page.getPlaypause() == true) {
+            newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        } else {
+            newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        }
+        this.page.getPlayB().setIcon(new ImageIcon(newimg));
+        this.page.getPlayB().setBounds((int) round((398 + insets.left) * ratioW), ((int) round((277 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
+        this.page.getPlayB().setSize((int) round(80 * ratioW), (int) round(80 * ratioH));
+        
+        newimg = this.page.getFullscreen().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        this.page.getFullscreenB().setIcon(new ImageIcon(newimg));
+        this.page.getFullscreenB().setBounds((int) round((1445 + insets.left) * ratioW), ((int) round((277 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
+        this.page.getFullscreenB().setSize((int) round(80 * ratioW), (int) round(80 * ratioH));
+        
+        newimg = this.page.getMute().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        this.page.getMuteB().setIcon(new ImageIcon(newimg));
+        this.page.getMuteB().setBounds((int) round((1342 + insets.left) * ratioW), ((int) round((277 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
+        this.page.getMuteB().setSize((int) round(80 * ratioW), (int) round(80 * ratioH));
+        
+        newimg = this.page.getHelp().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        this.page.getHelpB().setIcon(new ImageIcon(newimg));
+        this.page.getHelpB().setBounds((int) round((502 + insets.left) * ratioW), ((int) round((277 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
+        this.page.getHelpB().setSize((int) round(80 * ratioW), (int) round(80 * ratioH));
+
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (this.page.getGame().getGrid().getCellAt(new Coordinate(i, j)).getOwner().getValue() == Owner.PLAYER_1.getValue()) {
@@ -85,11 +122,13 @@ public class LAG_AdapterListener implements ComponentListener {
                 }
                 newimg = newimg.getScaledInstance(((int) round(92 * ratioW)), ((int) round(92 * ratioH)), java.awt.Image.SCALE_SMOOTH);
                 this.page.getButtonmap()[i][j].setIcon(new ImageIcon(newimg));
-                this.page.getButtonmap()[i][j].setBounds((int) round((680 + i * 92 + insets.left) * ratioW), ((int) round((275 + j * 92 + insets.top) * ratioH)), (int) round(92 * ratioW), (int) round(92 * ratioH));
+                this.page.getButtonmap()[i][j].setBounds((int) round((650 + i * 92 + insets.left) * ratioW), ((int) round((260 + j * 92 + insets.top) * ratioH)), (int) round(92 * ratioW), (int) round(92 * ratioH));
                 this.page.getButtonmap()[i][j].setSize((int) round(92 * ratioW), (int) round(92 * ratioH));
 
             }
         }
+
+        this.page.callResize();
     }
 
     @Override

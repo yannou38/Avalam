@@ -68,6 +68,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         this.isGamePaused = false;
         Input.resetClick();
         Input.setInputGame(this);
+        this.updateTitle();
     }
 
     //TODO: Check user is able to undo (GUI check if history is empty and call or not this function)
@@ -92,11 +93,21 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.playATurn();
     }
-
+    
+    public void updateTitle() {
+        if (!this.isGameFinished) {
+            if (this.isGamePaused) {
+                ((Main_Frame) this.gui).setGameTitle("Pause");
+            } else {
+                ((Main_Frame) this.gui).setGameTitle(this.getCurrentPlayer().getName()+" "+LanguageManager.getElement("Joue"));
+            }
+        }
+    }
     /**
      * Turn Logic
      */
     private void playATurn() {
+        this.updateTitle();
         /* Gestion Fin d'un tour */
         if (this.isTurnFinished) {
             this.changeNbTurns(1);
@@ -211,11 +222,10 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
      * @param i the id of the winner (3 if null match).
      */
     private void winningProcedure(int i) {
-        /* Appel à GUI */
         if (i < 3) {
-            ((Main_Frame) this.gui).setVictoryScreen(this.players[i - 1].getName() + " " + LanguageManager.getElement("Fin"), this.grid);
+            ((Main_Frame) this.gui).setVictory(this.players[i - 1].getName() + " " + LanguageManager.getElement("Fin"));
         } else {
-            ((Main_Frame) this.gui).setVictoryScreen(LanguageManager.getElement("Egalité"), this.grid);
+            ((Main_Frame) this.gui).setVictory(LanguageManager.getElement("Egalité"));
         }
     }
 

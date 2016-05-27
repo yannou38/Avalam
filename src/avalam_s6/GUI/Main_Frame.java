@@ -5,11 +5,7 @@
  */
 package avalam_s6.GUI;
 
-import avalam_s6.Core.Game_INTERFACE;
 import avalam_s6.Core.Globals.SetupManager;
-import avalam_s6.Core.Globals.SoundEngine;
-import avalam_s6.Core.Grid;
-import avalam_s6.GUI.FinalScreen.GUI_FinalScreen;
 import avalam_s6.GUI.HomePage.GUI_HomePage;
 import avalam_s6.GUI.LocalAvalamGame.GUI_LAG;
 import avalam_s6.GUI.NewGame.GUI_NewGame;
@@ -18,7 +14,6 @@ import avalam_s6.GUI.Credits.GUI_Credits;
 import avalam_s6.GUI.Load.GUI_Load;
 import avalam_s6.GUI.Rules.GUI_Rules;
 import avalam_s6.GUI.Save.GUI_Save;
-import avalam_s6.Player.ControlledPlayer;
 import java.awt.Dimension;
 import java.awt.GraphicsEnvironment;
 import static java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager;
@@ -83,10 +78,9 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
                 pElement.setVisible(false);
             }
         }
-        this.panelList = new JPanel[9];
+        this.panelList = new JPanel[8];
         this.panelList[WindowState.MAIN.getValue()] = new GUI_HomePage();
         this.panelList[WindowState.BOARD.getValue()] = new GUI_LAG();
-        this.panelList[WindowState.VICTORY.getValue()] = new GUI_FinalScreen();
         this.panelList[WindowState.PLAYERSELECT.getValue()] = new GUI_NewGame();
         this.panelList[WindowState.SETTINGS.getValue()] = new GUI_Settings();
         this.panelList[WindowState.ABOUT.getValue()] = new GUI_Credits();
@@ -164,14 +158,19 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         return null;
     }
 
-    public void setVictoryScreen(String p, Grid g) {
+    public void setVictory(String s) {
         
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).stop();
-        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).deleteGame();
+        this.setGameTitle(s);
+        //((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).deleteGame();
         
-        ((GUI_FinalScreen) this.panelList[WindowState.VICTORY.getValue()]).setGrid(g);
-        ((GUI_FinalScreen) this.panelList[WindowState.VICTORY.getValue()]).setWinningText(p);
-        this.setwState(WindowState.VICTORY);
+        //((GUI_FinalScreen) this.panelList[WindowState.VICTORY.getValue()]).setGrid(g);
+        //((GUI_FinalScreen) this.panelList[WindowState.VICTORY.getValue()]).setWinningText(p);
+        //this.setwState(WindowState.VICTORY);
+    }
+    
+    public void setGameTitle(String s) {
+        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).setTitle(s);
     }
 
     public void save(String pSlotName) {

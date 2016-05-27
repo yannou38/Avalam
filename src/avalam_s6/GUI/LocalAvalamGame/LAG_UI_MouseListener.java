@@ -68,15 +68,15 @@ public class LAG_UI_MouseListener implements MouseListener {
                 }
                 break;
             case "cancel":
-                if (game.getHistory().size() > 0) {
+                if (game.getHistory().size() > 0) { // Undo Possible
                     game.undo();
-                    game.changeNbTurns(-1);
-                    if (!lag.getRedoB().isEnabled()) {
+                    game.changeNbTurns(-1); // Action Undo
+                    if (!lag.getRedoB().isEnabled()) {  // Affichage Undo
                         lag.getRedoB().setEnabled(true);
                     }
-                    if (game.getHistory().isEmpty()) {
+                    if (game.getHistory().isEmpty()) {  // Retire Undo si besoin
                         lag.getUndoB().setEnabled(false);
-                    } else if (game.getCurrentPlayer().isAI()) {
+                    } else if (!game.isPaused() && game.getCurrentPlayer().isAI()) { // Undo encore si on joue contre une IA
                         game.undo();
                         game.changeNbTurns(-1);
                     }
@@ -85,14 +85,23 @@ public class LAG_UI_MouseListener implements MouseListener {
             case "save":
                 mainFrame.setwState(WindowState.SAVE);
                 break;
+            case "fullscreen":
+                mainFrame.toggleWRM();
+                break;
+            case "mute":
+                //TODO
+                break;
+            case "help":
+                //TODO suggestion de coup
+                break;
             case "play":
                 Local_Avalam_Game g = (Local_Avalam_Game) this.page.getGame();
                 Image newimg;
                 double ratioW = (double) lag.getWidth() / (double) 1920;
                 double ratioH = (double) lag.getHeight() / (double) 1080;
                 g.togglePause();
-                this.page.setPlaypause(1 - this.page.getPlaypause());
-                if (this.page.getPlaypause() == 0) {
+                this.page.setPlaypause(!this.page.getPlaypause());
+                if (this.page.getPlaypause() == true) {
                     newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
                 } else {
                     newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
@@ -124,7 +133,7 @@ public class LAG_UI_MouseListener implements MouseListener {
         ((JButton) e.getSource()).setIcon(new ImageIcon(newimg));
         
         if(this.name.equals("play")){
-                if (this.page.getPlaypause() == 0) {
+                if (this.page.getPlaypause() == true) {
                     newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
                 } else {
                     newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
@@ -146,7 +155,7 @@ public class LAG_UI_MouseListener implements MouseListener {
         
         
         if(this.name.equals("play")){
-                if (this.page.getPlaypause() == 0) {
+                if (this.page.getPlaypause() == true) {
                     newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
                 } else {
                     newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);

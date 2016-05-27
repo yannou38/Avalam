@@ -12,14 +12,13 @@ package avalam_s6.GUI;
 public enum WindowState {
     MAIN(0), // Homepage with access to other windows
     BOARD(1), //Game window
-    VICTORY(2), //Game Victory 
-    PLAYERSELECT(3), //New Custom Game or Load Game
-    SETTINGS(4), //Setting window
-    ABOUT(5), //Credits
-    SAVE(6), //Save/Load window
-    LOAD(7), //Save/Load window
-    RULES(8), //Rules Page
-    TUTORIAL(9); //Tutorial window
+    PLAYERSELECT(2), //New Custom Game or Load Game
+    SETTINGS(3), //Setting window
+    ABOUT(4), //Credits
+    SAVE(5), //Save/Load window
+    LOAD(6), //Save/Load window
+    RULES(7), //Rules Page
+    TUTORIAL(8); //Tutorial window
 
     private final int id;
 
