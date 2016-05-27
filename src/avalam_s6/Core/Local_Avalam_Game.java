@@ -255,6 +255,10 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     public boolean isPaused() {
         return this.isGamePaused;
     }
+    
+    public Move getHint() {
+        return null; // NYI
+    }
 
     @Override
     public Timer getTimer() {
