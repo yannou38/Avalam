@@ -85,6 +85,15 @@ public class LAG_UI_MouseListener implements MouseListener {
             case "save":
                 mainFrame.setwState(WindowState.SAVE);
                 break;
+            case "fullscreen":
+                mainFrame.toggleWRM();
+                break;
+            case "mute":
+                //TODO
+                break;
+            case "help":
+                //TODO suggestion de coup
+                break;
             case "play":
                 Local_Avalam_Game g = (Local_Avalam_Game) this.page.getGame();
                 Image newimg;

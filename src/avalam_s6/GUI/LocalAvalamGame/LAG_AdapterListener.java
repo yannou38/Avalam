@@ -68,15 +68,6 @@ public class LAG_AdapterListener implements ComponentListener {
         this.page.getDroite().setBounds((int) round((1616 + insets.left) * ratioW), ((int) round((237 + insets.top) * ratioH)), (int) round(284 * ratioW), (int) round(671 * ratioH));
         this.page.getDroite().setSize((int) round(284 * ratioW), (int) round(671 * ratioH));
 
-        if (this.page.getPlaypause() == true) {
-            newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
-        } else {
-            newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
-        }
-        this.page.getPlayB().setIcon(new ImageIcon(newimg));
-        this.page.getPlayB().setBounds((int) round((200 + insets.left) * ratioW), ((int) round((505 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
-        this.page.getPlayB().setSize((int) round(80 * ratioW), (int) round(80 * ratioH));
-
         newimg = this.page.getRedo().getScaledInstance(((int) round(252 * ratioW)), ((int) round(111 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         this.page.getRedoB().setIcon(new ImageIcon(newimg));
         this.page.getRedoB().setBounds((int) round((1313 + insets.left) * ratioW), ((int) round((505 + insets.top) * ratioH)), (int) round(252 * ratioW), (int) round(111 * ratioH));
@@ -91,6 +82,30 @@ public class LAG_AdapterListener implements ComponentListener {
         this.page.getRetourB().setIcon(new ImageIcon(newimg));
         this.page.getRetourB().setBounds((int) round((25 + insets.left) * ratioW), ((int) round((940 + insets.top) * ratioH)), (int) round(251 * ratioW), (int) round(111 * ratioH));
         this.page.getRetourB().setSize((int) round(251 * ratioW), (int) round(111 * ratioH));
+
+        if (this.page.getPlaypause() == true) {
+            newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        } else {
+            newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        }
+        this.page.getPlayB().setIcon(new ImageIcon(newimg));
+        this.page.getPlayB().setBounds((int) round((398 + insets.left) * ratioW), ((int) round((277 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
+        this.page.getPlayB().setSize((int) round(80 * ratioW), (int) round(80 * ratioH));
+        
+        newimg = this.page.getFullscreen().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        this.page.getFullscreenB().setIcon(new ImageIcon(newimg));
+        this.page.getFullscreenB().setBounds((int) round((1445 + insets.left) * ratioW), ((int) round((277 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
+        this.page.getFullscreenB().setSize((int) round(80 * ratioW), (int) round(80 * ratioH));
+        
+        newimg = this.page.getMute().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        this.page.getMuteB().setIcon(new ImageIcon(newimg));
+        this.page.getMuteB().setBounds((int) round((1342 + insets.left) * ratioW), ((int) round((277 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
+        this.page.getMuteB().setSize((int) round(80 * ratioW), (int) round(80 * ratioH));
+        
+        newimg = this.page.getHelp().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        this.page.getHelpB().setIcon(new ImageIcon(newimg));
+        this.page.getHelpB().setBounds((int) round((502 + insets.left) * ratioW), ((int) round((277 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
+        this.page.getHelpB().setSize((int) round(80 * ratioW), (int) round(80 * ratioH));
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -112,7 +127,7 @@ public class LAG_AdapterListener implements ComponentListener {
 
             }
         }
-        
+
         this.page.callResize();
     }
 

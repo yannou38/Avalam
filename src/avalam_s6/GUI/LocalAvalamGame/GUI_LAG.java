@@ -20,6 +20,7 @@ import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;
 import avalam_s6.Player.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import static java.lang.Math.round;
 import java.lang.reflect.Constructor;
@@ -37,8 +38,8 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     private Game_INTERFACE game;
     private final boolean player1IsPlaying;
-    private JButton undoB, redoB, retourB, saveB, playB, gauche, droite;
-    private Image background, cancel, player_playing, player_waiting, play, pause, redo, retour, save, board, black, white, empty, restricted, w_selected, b_selected, w_possible, b_possible;
+    private JButton undoB, redoB, retourB, saveB, playB, gauche, droite,fullscreenB,helpB,muteB;
+    private Image background, cancel, fullscreen,mute,help,player_playing, player_waiting, play, pause, redo, retour, save, board, black, white, empty, restricted, w_selected, b_selected, w_possible, b_possible;
     private final JButton[][] buttonmap;
     private boolean callResize;
     private final LAG_AdapterListener listener;
@@ -71,6 +72,9 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             this.play = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/play.png"));
             this.pause = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/pause.png"));
             this.save = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/save.png"));
+            this.fullscreen = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/fullscreen.png"));
+            this.help = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/help.png"));
+            this.mute = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/mute.png"));
             this.initPawnColors(AvalamColor.WHITE, AvalamColor.BLACK);
             this.empty = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/empty.png"));
         } catch (Exception ex) {
@@ -143,6 +147,27 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.playB.setFocusPainted(false);
         this.playB.addMouseListener(new LAG_UI_MouseListener("play", this));
         this.add(this.playB);
+        
+        this.fullscreenB = new JButton(new ImageIcon(this.fullscreen));
+        this.fullscreenB.setBorder(BorderFactory.createEmptyBorder());
+        this.fullscreenB.setContentAreaFilled(false);
+        this.fullscreenB.setFocusPainted(false);
+        this.fullscreenB.addMouseListener(new LAG_UI_MouseListener("fullscreen", this));
+        this.add(this.fullscreenB);
+        
+        this.muteB = new JButton(new ImageIcon(this.mute));
+        this.muteB.setBorder(BorderFactory.createEmptyBorder());
+        this.muteB.setContentAreaFilled(false);
+        this.muteB.setFocusPainted(false);
+        this.muteB.addMouseListener(new LAG_UI_MouseListener("mute", this));
+        this.add(this.muteB);
+        
+        this.helpB = new JButton(new ImageIcon(this.help));
+        this.helpB.setBorder(BorderFactory.createEmptyBorder());
+        this.helpB.setContentAreaFilled(false);
+        this.helpB.setFocusPainted(false);
+        this.helpB.addMouseListener(new LAG_UI_MouseListener("help", this));
+        this.add(this.helpB);
 
         this.gauche = new JButton(new ImageIcon(this.player_playing));
         this.gauche.setBorder(BorderFactory.createEmptyBorder());
@@ -318,6 +343,30 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     public Image getPlayer_waiting() {
         return player_waiting;
+    }
+
+    public JButton getFullscreenB() {
+        return fullscreenB;
+    }
+
+    public JButton getHelpB() {
+        return helpB;
+    }
+
+    public JButton getMuteB() {
+        return muteB;
+    }
+
+    public Image getFullscreen() {
+        return fullscreen;
+    }
+
+    public Image getMute() {
+        return mute;
+    }
+
+    public Image getHelp() {
+        return help;
     }
 
     @Override
