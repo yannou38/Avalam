@@ -44,7 +44,6 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     private boolean callResize;
     private final LAG_AdapterListener listener;
     private JLabel titre;
-    private Boolean playpause;
 
     ImageIcon wh, bl, em, re, wsel, bsel, wpos, bpos;
 
@@ -55,7 +54,6 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.callResize = false;
         this.listener = new LAG_AdapterListener(this);
         this.buttonmap = new JButton[9][9];
-        this.playpause = false;
         this.initComponents();
         this.player1IsPlaying = true;
     }
@@ -297,14 +295,6 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         return pause;
     }
 
-    public Boolean getPlaypause() {
-        return playpause;
-    }
-
-    public void setPlaypause(Boolean playpause) {
-        this.playpause = playpause;
-    }
-
     public Image getEmpty() {
         return empty;
     }
@@ -398,6 +388,8 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
          g.drawImage(this.player_waiting, 3, 216, 240, 360, null);
          g.drawImage(this.player_playing, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
          }*/
+        
+        /* --- GRILLE --- */
         Grid gr = this.game.getGrid();
         Coordinate c = new Coordinate();
         if (this.callResize) {
@@ -482,6 +474,15 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                 this.buttonmap[i][j].setOpaque(false);
             }
         }
+        /* -- BOUTON PAUSE -- */
+        Image newimg;
+        if (((Local_Avalam_Game)this.game).isPaused()) {
+            newimg = getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        } else {
+            newimg = getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        }
+        getPlayB().setIcon(new ImageIcon(newimg));
+        /* -- Resize -- */
         if (this.callResize) {
             this.listener.componentResized(null);
             this.callResize = false;

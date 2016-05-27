@@ -6,6 +6,7 @@
 package avalam_s6.GUI.LocalAvalamGame;
 
 import avalam_s6.Core.Globals.SetupManager;
+import avalam_s6.Core.Globals.SoundEngine;
 import avalam_s6.Core.Local_Avalam_Game;
 import avalam_s6.GUI.HomePage.GUI_HomePage;
 import avalam_s6.GUI.Main_Frame;
@@ -89,24 +90,14 @@ public class LAG_UI_MouseListener implements MouseListener {
                 mainFrame.toggleWRM();
                 break;
             case "mute":
-                //TODO
+                SoundEngine.toggleMute();
                 break;
             case "help":
                 //TODO suggestion de coup
                 break;
             case "play":
                 Local_Avalam_Game g = (Local_Avalam_Game) this.page.getGame();
-                Image newimg;
-                double ratioW = (double) lag.getWidth() / (double) 1920;
-                double ratioH = (double) lag.getHeight() / (double) 1080;
                 g.togglePause();
-                this.page.setPlaypause(!this.page.getPlaypause());
-                if (this.page.getPlaypause() == true) {
-                    newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
-                } else {
-                    newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
-                }
-                this.page.getPlayB().setIcon(new ImageIcon(newimg));
                 this.page.repaint();
                 break;
         }
@@ -133,7 +124,7 @@ public class LAG_UI_MouseListener implements MouseListener {
         ((JButton) e.getSource()).setIcon(new ImageIcon(newimg));
         
         if(this.name.equals("play")){
-                if (this.page.getPlaypause() == true) {
+                if (((Local_Avalam_Game)this.page.getGame()).isPaused()) {
                     newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
                 } else {
                     newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
@@ -155,7 +146,7 @@ public class LAG_UI_MouseListener implements MouseListener {
         
         
         if(this.name.equals("play")){
-                if (this.page.getPlaypause() == true) {
+                if (((Local_Avalam_Game)this.page.getGame()).isPaused()) {
                     newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
                 } else {
                     newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
