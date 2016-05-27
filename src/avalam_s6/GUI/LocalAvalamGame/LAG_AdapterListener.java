@@ -83,7 +83,7 @@ public class LAG_AdapterListener implements ComponentListener {
         this.page.getRetourB().setBounds((int) round((25 + insets.left) * ratioW), ((int) round((940 + insets.top) * ratioH)), (int) round(251 * ratioW), (int) round(111 * ratioH));
         this.page.getRetourB().setSize((int) round(251 * ratioW), (int) round(111 * ratioH));
 
-        if (this.page.getPlaypause() == true) {
+        if (((Local_Avalam_Game)this.page.getGame()).isPaused()) {
             newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         } else {
             newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
