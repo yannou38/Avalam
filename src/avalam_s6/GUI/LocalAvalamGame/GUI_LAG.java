@@ -368,6 +368,10 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     public Image getHelp() {
         return help;
     }
+    
+    public void setTitle(String s) {
+        this.titre.setText(s);
+    }
 
     @Override
     public void back() {

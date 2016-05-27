@@ -68,15 +68,15 @@ public class LAG_UI_MouseListener implements MouseListener {
                 }
                 break;
             case "cancel":
-                if (game.getHistory().size() > 0) {
+                if (game.getHistory().size() > 0) { // Undo Possible
                     game.undo();
-                    game.changeNbTurns(-1);
-                    if (!lag.getRedoB().isEnabled()) {
+                    game.changeNbTurns(-1); // Action Undo
+                    if (!lag.getRedoB().isEnabled()) {  // Affichage Undo
                         lag.getRedoB().setEnabled(true);
                     }
-                    if (game.getHistory().isEmpty()) {
+                    if (game.getHistory().isEmpty()) {  // Retire Undo si besoin
                         lag.getUndoB().setEnabled(false);
-                    } else if (game.getCurrentPlayer().isAI()) {
+                    } else if (!game.isPaused() && game.getCurrentPlayer().isAI()) { // Undo encore si on joue contre une IA
                         game.undo();
                         game.changeNbTurns(-1);
                     }
