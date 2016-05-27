@@ -15,7 +15,7 @@ import java.util.Random;
 public class AIPlayerHard extends AIPlayer {
 
     //Increase the value to increase the difficulty of the AI
-    private final static int BUFF = 85;
+    private final static int BUFF = 105;
 
     public AIPlayerHard(String name, AvalamColor color, Owner owner) {
         super(name, color, owner);
