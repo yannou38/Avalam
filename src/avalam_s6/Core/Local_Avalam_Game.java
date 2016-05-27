@@ -110,7 +110,8 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         this.updateTitle();
         /* Gestion Fin d'un tour */
         if (this.isTurnFinished) {
-            this.changeNbTurns(1);
+            if (!this.isGamePaused && !this.isGameFinished)
+                this.changeNbTurns(1);
             int w = winCheck();
             System.gc();
             switch (w) {
@@ -124,6 +125,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
                     return;
                 case 0:
                 default:
+                    this.isGameFinished = false;
                     this.isTurnFinished = false;
                     break;
             }
@@ -240,7 +242,14 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     }
     
     public void togglePause() {
-        this.isGamePaused = ! this.isGamePaused;
+        this.isGamePaused = !this.isGamePaused;
+        this.updateTitle();
+        if (this.isGamePaused)
+            this.t.stop();
+        else {
+            Input.resetClick();
+            this.t.start();
+        }
     }
     
     public boolean isPaused() {
