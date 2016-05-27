@@ -20,7 +20,6 @@ import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;
 import avalam_s6.Player.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import static java.lang.Math.round;
 import java.lang.reflect.Constructor;
@@ -38,12 +37,13 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     private Game_INTERFACE game;
     private final boolean player1IsPlaying;
-    private JButton undoB, redoB, retourB, saveB, playB, gauche, droite,fullscreenB,helpB,muteB;
-    private Image background, cancel, fullscreen,mute,help,player_playing, player_waiting, play, pause, redo, retour, save, board, black, white, empty, restricted, w_selected, b_selected, w_possible, b_possible;
+    private JButton undoB, redoB, retourB, saveB, playB, gauche, droite, fullscreenB, helpB, muteB;
+    private Image background, cancel, fullscreen, mute, help, player_playing, player_waiting, play, pause, redo, retour, save, board, black, white, empty, restricted, w_selected, b_selected, w_possible, b_possible;
     private final JButton[][] buttonmap;
     private boolean callResize;
     private final LAG_AdapterListener listener;
     private JLabel titre;
+    private final Font font;
 
     ImageIcon wh, bl, em, re, wsel, bsel, wpos, bpos;
 
@@ -54,6 +54,16 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.callResize = false;
         this.listener = new LAG_AdapterListener(this);
         this.buttonmap = new JButton[9][9];
+        Font localFont = new Font("Arial", Font.PLAIN, 60);
+        try {
+            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
+        } catch (IOException | FontFormatException ex) {
+            System.out.println("Error - " + GUI_LAG.class.toString());
+            Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        this.font = localFont;
         this.initComponents();
         this.player1IsPlaying = true;
     }
@@ -97,18 +107,11 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         }
         this.setLayout(null);
 
-        Font localFont = new Font("Arial", Font.PLAIN, 60);
-        try {
-            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
-            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
-        } catch (IOException | FontFormatException ex) {
-            System.out.println("Error - " + GUI_LAG.class.toString());
-            Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
 
         this.titre = new JLabel("test d'un titre long");
         this.titre.setBorder(BorderFactory.createEmptyBorder());
-        this.titre.setFont(localFont.deriveFont(1 * 30f));
+        this.titre.setFont(this.font.deriveFont(1 * 30f));
         this.add(this.titre);
 
         this.undoB = new JButton(new ImageIcon(this.cancel));
@@ -145,21 +148,21 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.playB.setFocusPainted(false);
         this.playB.addMouseListener(new LAG_UI_MouseListener("play", this));
         this.add(this.playB);
-        
+
         this.fullscreenB = new JButton(new ImageIcon(this.fullscreen));
         this.fullscreenB.setBorder(BorderFactory.createEmptyBorder());
         this.fullscreenB.setContentAreaFilled(false);
         this.fullscreenB.setFocusPainted(false);
         this.fullscreenB.addMouseListener(new LAG_UI_MouseListener("fullscreen", this));
         this.add(this.fullscreenB);
-        
+
         this.muteB = new JButton(new ImageIcon(this.mute));
         this.muteB.setBorder(BorderFactory.createEmptyBorder());
         this.muteB.setContentAreaFilled(false);
         this.muteB.setFocusPainted(false);
         this.muteB.addMouseListener(new LAG_UI_MouseListener("mute", this));
         this.add(this.muteB);
-        
+
         this.helpB = new JButton(new ImageIcon(this.help));
         this.helpB.setBorder(BorderFactory.createEmptyBorder());
         this.helpB.setContentAreaFilled(false);
@@ -358,11 +361,16 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     public Image getHelp() {
         return help;
     }
-    
+
     public void setTitle(String s) {
         this.titre.setText(s);
     }
 
+    public Font getLabelFont(){
+        return this.font;
+    }
+    
+    
     @Override
     public void back() {
         Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
@@ -388,7 +396,6 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
          g.drawImage(this.player_waiting, 3, 216, 240, 360, null);
          g.drawImage(this.player_playing, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
          }*/
-        
         /* --- GRILLE --- */
         Grid gr = this.game.getGrid();
         Coordinate c = new Coordinate();
@@ -476,7 +483,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         }
         /* -- BOUTON PAUSE -- */
         Image newimg;
-        if (((Local_Avalam_Game)this.game).isPaused()) {
+        if (((Local_Avalam_Game) this.game).isPaused()) {
             newimg = getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         } else {
             newimg = getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);

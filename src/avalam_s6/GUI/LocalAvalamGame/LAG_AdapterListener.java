@@ -40,8 +40,13 @@ public class LAG_AdapterListener implements ComponentListener {
         double ratioH = (double) this.page.getHeight() / (double) 1080;
 
         Dimension size = this.page.getTitre().getPreferredSize();
-        this.page.getTitre().setBounds((int) round((420 + insets.left) * ratioW), ((int) round((50 + insets.top) * ratioH)), size.width, size.height);
-        this.page.getTitre().setSize((int) round(this.page.getTitre().getWidth() * ratioW), (int) round(this.page.getTitre().getHeight() * ratioH));
+        System.out.println(size.height+" "+size.width);
+        
+        
+        System.out.println(this.page.getTitre().getWidth() + " " + this.page.getTitre().getHeight() + " " + this.page.getTitre().getText().length());
+        //this.page.getTitre().setFont(this.page.getLabelFont().deriveFont((int) round(this.page.getLabelFont().getSize2D() * ratioH)));
+        this.page.getTitre().setBounds((int) round(((this.page.getWidth() / 2) - (this.page.getTitre().getWidth() / 2) + insets.left) * ratioW), ((int) round((50 + insets.top) * ratioH)), (int) round(this.page.getTitre().getText().length() * 15 * ratioW), (int) round(45 * ratioH));
+        this.page.getTitre().setSize((int) round(this.page.getTitre().getText().length() * 25 * ratioW), (int) round(45 * ratioH));
 
         newimg = this.page.getCancel().getScaledInstance(((int) round(252 * ratioW)), ((int) round(111 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         this.page.getUndoB().setIcon(new ImageIcon(newimg));
@@ -83,7 +88,7 @@ public class LAG_AdapterListener implements ComponentListener {
         this.page.getRetourB().setBounds((int) round((25 + insets.left) * ratioW), ((int) round((940 + insets.top) * ratioH)), (int) round(251 * ratioW), (int) round(111 * ratioH));
         this.page.getRetourB().setSize((int) round(251 * ratioW), (int) round(111 * ratioH));
 
-        if (((Local_Avalam_Game)this.page.getGame()).isPaused()) {
+        if (((Local_Avalam_Game) this.page.getGame()).isPaused()) {
             newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         } else {
             newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
@@ -91,17 +96,17 @@ public class LAG_AdapterListener implements ComponentListener {
         this.page.getPlayB().setIcon(new ImageIcon(newimg));
         this.page.getPlayB().setBounds((int) round((398 + insets.left) * ratioW), ((int) round((277 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
         this.page.getPlayB().setSize((int) round(80 * ratioW), (int) round(80 * ratioH));
-        
+
         newimg = this.page.getFullscreen().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         this.page.getFullscreenB().setIcon(new ImageIcon(newimg));
         this.page.getFullscreenB().setBounds((int) round((1445 + insets.left) * ratioW), ((int) round((277 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
         this.page.getFullscreenB().setSize((int) round(80 * ratioW), (int) round(80 * ratioH));
-        
+
         newimg = this.page.getMute().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         this.page.getMuteB().setIcon(new ImageIcon(newimg));
         this.page.getMuteB().setBounds((int) round((1342 + insets.left) * ratioW), ((int) round((277 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
         this.page.getMuteB().setSize((int) round(80 * ratioW), (int) round(80 * ratioH));
-        
+
         newimg = this.page.getHelp().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         this.page.getHelpB().setIcon(new ImageIcon(newimg));
         this.page.getHelpB().setBounds((int) round((502 + insets.left) * ratioW), ((int) round((277 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
