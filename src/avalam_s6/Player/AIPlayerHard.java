@@ -92,8 +92,8 @@ public class AIPlayerHard extends AIPlayer {
         double value = 0;
         double minmaxValue = 0;
         
-        value += 1*nbCreateAloneUs(move.getC_src(), move.getC_dst());
-        value -= 1*nbCreateAloneOp(move.getC_src(), move.getC_dst());
+        value += 1*nbCreateAloneUsV2(move.getC_src(), move.getC_dst());
+        value -= 1*nbCreateAloneOpV2(move.getC_src(), move.getC_dst());
 
         if (completeTourUsVsOp(this.game.getGrid().getCellAt(move.getC_src()), this.game.getGrid().getCellAt(move.getC_dst()))) {
             value += 1;
@@ -166,8 +166,8 @@ public class AIPlayerHard extends AIPlayer {
         double minmaxValue = 0;
         boolean coupjoue = false;
 
-        value += 1*nbCreateAloneUs(move.getC_src(), move.getC_dst());
-        value -= 1*nbCreateAloneOp(move.getC_src(), move.getC_dst());
+        value += 1*nbCreateAloneUsV2(move.getC_src(), move.getC_dst());
+        value -= 1*nbCreateAloneOpV2(move.getC_src(), move.getC_dst());
         
         if (completeTourUsVsOp(this.game.getGrid().getCellAt(move.getC_src()), this.game.getGrid().getCellAt(move.getC_dst()))) {
             value += 1;
