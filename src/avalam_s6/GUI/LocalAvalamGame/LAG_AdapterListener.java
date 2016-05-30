@@ -43,8 +43,8 @@ public class LAG_AdapterListener implements ComponentListener {
         
         
         System.out.println(this.page.getTitre().getWidth() + " " + this.page.getTitre().getHeight() + " " + this.page.getTitre().getText().length());
-        this.page.getTitre().setBounds((int) round(((this.page.getWidth() / 2) - (this.page.getTitre().getText().length() * 25  / 2) + insets.left) * ratioW), ((int) round((50 + insets.top) * ratioH)), (int) round(this.page.getTitre().getText().length() * 25 * ratioW), (int) round(45 * ratioH));
-        this.page.getTitre().setSize((int) round(this.page.getTitre().getText().length() * 25 * ratioW), (int) round(45 * ratioH));
+        this.page.getTitre().setBounds(0,50, this.page.getWidth(), (int) round(50 * ratioH));
+        this.page.getTitre().setSize(this.page.getWidth(),(int) round(50 * ratioH));
 
         newimg = this.page.getCancel().getScaledInstance(((int) round(252 * ratioW)), ((int) round(111 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         this.page.getUndoB().setIcon(new ImageIcon(newimg));
