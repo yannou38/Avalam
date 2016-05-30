@@ -93,9 +93,6 @@ public class LAG_UI_MouseListener implements MouseListener {
                 SoundEngine.toggleMute();
                 break;
             case "help":
-                double ratioW = (double) lag.getWidth() / (double) 1920;
-                double ratioH = (double) lag.getHeight() / (double) 1080;
-                //source.setIcon(new ImageIcon(this.iconbase.getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
                 //TODO suggestion de coup
                 break;
             case "play":
@@ -104,7 +101,6 @@ public class LAG_UI_MouseListener implements MouseListener {
                 this.page.repaint();
                 break;
         }
-        //((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
 
     }
     

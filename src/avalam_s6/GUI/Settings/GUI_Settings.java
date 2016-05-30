@@ -199,6 +199,14 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
                 this.ThemeSelected = x;
             }
         }
+        
+    }
+    
+    public void retextLabels(){        
+        this.LabelFS.setText(LanguageManager.getElement(this.fullScreen[this.fullScreenSelected]));
+        this.LabelTheme.setText(this.Theme[this.ThemeSelected]);
+        this.LabelSound.setText(LanguageManager.getElement(this.Sound[this.SoundSelected]));
+        this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.currentLanguage]));
     }
 
     void leftLanguage() {

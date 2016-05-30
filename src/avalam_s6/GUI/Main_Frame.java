@@ -33,7 +33,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
 
     public Main_Frame() {
         SetupManager.load();
-        EnumsLister.init();        
+        EnumsLister.init();
         /* FUNCTION CALL */
         this.initFrame(WindowState.MAIN);
         /* ADD KB DISPATCHER */
@@ -41,10 +41,10 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
     }
 
     public void setRenderMode() {
-        GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
         if (SetupManager.getElement("FullScreen").equals("Oui")) {
             GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(this);
         } else {
+            GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
             this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         }
         this.setMinimumSize(new Dimension(960, 540));
@@ -58,20 +58,13 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         } else {
             SetupManager.setElement("FullScreen", "Oui");
         }
-        setRenderMode();
-
-        resetSettings();
+        this.setRenderMode();
+        this.resetSettings();
     }
-
-    private void resetSettings() {
-        this.panelList[WindowState.SETTINGS.getValue()].setVisible(false);
-        this.remove(this.panelList[WindowState.SETTINGS.getValue()]);
-        this.panelList[WindowState.SETTINGS.getValue()] = new GUI_Settings();
-
-        this.panelList[WindowState.SETTINGS.getValue()].setVisible(this.wState.getValue() == WindowState.SETTINGS.getValue());
-
-        ((Gui_INTERFACE) this.panelList[WindowState.SETTINGS.getValue()]).callResize();
-        this.add(this.panelList[WindowState.SETTINGS.getValue()]);
+    
+    private void resetSettings(){
+        ((GUI_Settings) this.panelList[WindowState.SETTINGS.getValue()]).initOptions();
+        ((GUI_Settings) this.panelList[WindowState.SETTINGS.getValue()]).retextLabels();
     }
 
     public void initFrame(WindowState wState) {

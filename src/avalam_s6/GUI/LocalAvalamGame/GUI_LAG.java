@@ -110,6 +110,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.setLayout(null);
 
         this.titre = new JLabel("test d'un titre long");
+        this.titre.setHorizontalAlignment(JTextField.CENTER);
         this.titre.setBorder(BorderFactory.createEmptyBorder());
         this.titre.setFont(this.font.deriveFont(1 * 30f));
         this.add(this.titre);
