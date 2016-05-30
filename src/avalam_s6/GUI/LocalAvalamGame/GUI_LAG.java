@@ -44,6 +44,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     private final LAG_AdapterListener listener;
     private JLabel titre;
     private final Font font;
+    private int currentTurn;
 
     ImageIcon wh, bl, em, re, wsel, bsel, wpos, bpos;
 
@@ -54,6 +55,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.callResize = false;
         this.listener = new LAG_AdapterListener(this);
         this.buttonmap = new JButton[9][9];
+        this.currentTurn = 0;
         Font localFont = new Font("Arial", Font.PLAIN, 60);
         try {
             localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
@@ -106,8 +108,6 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             }
         }
         this.setLayout(null);
-
-        
 
         this.titre = new JLabel("test d'un titre long");
         this.titre.setBorder(BorderFactory.createEmptyBorder());
@@ -367,11 +367,10 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.titre.setText(s);
     }
 
-    public Font getLabelFont(){
+    public Font getLabelFont() {
         return this.font;
     }
-    
-    
+
     @Override
     public void back() {
         Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
@@ -413,12 +412,18 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
         //this.gauche.setIcon(new ImageIcon(this.player_playing.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
         //this.gauche.setIcon(new ImageIcon(this.player_waiting.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
-        if (((Local_Avalam_Game) this.getGame()).getTurns() % 2 == 0) {
-            this.gauche.setIcon(new ImageIcon(this.player_playing.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
-            this.droite.setIcon(new ImageIcon(this.player_waiting.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
-        } else {
-            this.gauche.setIcon(new ImageIcon(this.player_waiting.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
-            this.droite.setIcon(new ImageIcon(this.player_playing.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
+        if (this.currentTurn != ((Local_Avalam_Game) this.getGame()).getTurns()) {
+
+            if (((Local_Avalam_Game) this.getGame()).getTurns() % 2 == 0) {
+                this.gauche.setIcon(new ImageIcon(this.player_playing.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
+                this.droite.setIcon(new ImageIcon(this.player_waiting.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
+            } else {
+                this.gauche.setIcon(new ImageIcon(this.player_waiting.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
+                this.droite.setIcon(new ImageIcon(this.player_playing.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
+            }
+
+            this.currentTurn = ((Local_Avalam_Game) this.getGame()).getTurns();
+
         }
 
         for (int i = 0; i < gr.getWidth(); i++) {
