@@ -388,14 +388,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
         double ratioW = (double) this.getWidth() / (double) 1920;
         double ratioH = (double) this.getHeight() / (double) 1080;
-
-        /*if (this.player1IsPlaying) {
-         g.drawImage(this.player_playing, 20, (int) round(240 * ratioH), (int) round(this.player_playing.getWidth(null) * ratioW), (int) round((this.player_playing.getHeight(null)-7) * ratioH), null);
-         g.drawImage(this.player_waiting, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
-         } else {
-         g.drawImage(this.player_waiting, 3, 216, 240, 360, null);
-         g.drawImage(this.player_playing, this.getWidth() - (scaleW + 3), this.getHeight() / 5, scaleW, scaleH, null);
-         }*/
+        
         /* --- GRILLE --- */
         Grid gr = this.game.getGrid();
         Coordinate c = new Coordinate();
@@ -409,9 +402,6 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             wpos = new ImageIcon(this.w_possible.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
             bpos = new ImageIcon(this.b_possible.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
         }
-
-        //this.gauche.setIcon(new ImageIcon(this.player_playing.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
-        //this.gauche.setIcon(new ImageIcon(this.player_waiting.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
         if (this.currentTurn != ((Local_Avalam_Game) this.getGame()).getTurns()) {
 
             if (((Local_Avalam_Game) this.getGame()).getTurns() % 2 == 0) {

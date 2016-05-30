@@ -7,6 +7,7 @@ package avalam_s6.GUI;
 
 import avalam_s6.Core.Globals.EnumsLister;
 import avalam_s6.Core.Globals.SetupManager;
+import avalam_s6.Core.Globals.SoundEngine;
 import avalam_s6.GUI.HomePage.GUI_HomePage;
 import avalam_s6.GUI.LocalAvalamGame.GUI_LAG;
 import avalam_s6.GUI.NewGame.GUI_NewGame;
@@ -33,6 +34,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
     public Main_Frame() {
         SetupManager.load();
         EnumsLister.init();
+        //SoundEngine.play("./ressources/Themes/Default/sounds/game_ambient.wav");
         /* FUNCTION CALL */
         this.initFrame(WindowState.MAIN);
         /* ADD KB DISPATCHER */

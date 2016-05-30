@@ -7,7 +7,6 @@ package avalam_s6.GUI.LocalAvalamGame;
 
 import avalam_s6.Core.CellState;
 import avalam_s6.Core.Coordinate;
-import avalam_s6.Core.Game_INTERFACE;
 import avalam_s6.Core.Local_Avalam_Game;
 import avalam_s6.Core.Owner;
 import java.awt.Dimension;
@@ -44,8 +43,7 @@ public class LAG_AdapterListener implements ComponentListener {
         
         
         System.out.println(this.page.getTitre().getWidth() + " " + this.page.getTitre().getHeight() + " " + this.page.getTitre().getText().length());
-        //this.page.getTitre().setFont(this.page.getLabelFont().deriveFont((int) round(this.page.getLabelFont().getSize2D() * ratioH)));
-        this.page.getTitre().setBounds((int) round(((this.page.getWidth() / 2) - (this.page.getTitre().getWidth() / 2) + insets.left) * ratioW), ((int) round((50 + insets.top) * ratioH)), (int) round(this.page.getTitre().getText().length() * 15 * ratioW), (int) round(45 * ratioH));
+        this.page.getTitre().setBounds((int) round(((this.page.getWidth() / 2) - (this.page.getTitre().getText().length() * 25  / 2) + insets.left) * ratioW), ((int) round((50 + insets.top) * ratioH)), (int) round(this.page.getTitre().getText().length() * 25 * ratioW), (int) round(45 * ratioH));
         this.page.getTitre().setSize((int) round(this.page.getTitre().getText().length() * 25 * ratioW), (int) round(45 * ratioH));
 
         newimg = this.page.getCancel().getScaledInstance(((int) round(252 * ratioW)), ((int) round(111 * ratioH)), java.awt.Image.SCALE_SMOOTH);
