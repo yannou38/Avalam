@@ -14,12 +14,12 @@ import java.util.Random;
  *
  * @author Seawolf
  */
-public class AIPlayerHardAB extends AIPlayer {
+public class AIPlayerHardMC extends AIPlayer {
 
     //Increase the value to increase the difficulty of the AI
     private final static int BUFF = 160;
 
-    public AIPlayerHardAB(String name, AvalamColor color, Owner owner) {
+    public AIPlayerHardMC(String name, AvalamColor color, Owner owner) {
         super(name, color, owner);
         
     }
@@ -243,4 +243,43 @@ public class AIPlayerHardAB extends AIPlayer {
         this.game.undo();
         return (value + maxValue);
     }
+        
+        private Move monteCarlo()
+        {
+            //jouer des parties random, retenir le premier coup
+            //faire la moyenne des résultats pour chaque coups
+            //renvoyer le coup avec la meilleure moyenne
+            
+            Move m = new Move(null, 0, null, 0, this);
+            return m;
+        }
+        
+        
+        private Move coupRandom(){
+        ArrayList<Move> mesCoups = new ArrayList<>();
+        Coordinate[] tabCoord = new Coordinate[8];
+        for (int i = 0; i < this.game.getGrid().getWidth(); i++) {
+            /**
+             * 1 2 3
+             * 4 0 5
+             * 6 7 8
+             */
+            for (int j = 0; j < this.game.getGrid().getHeight(); j++) {
+                Coordinate c0 = new Coordinate(j, i);
+                if (c0.isValid() && this.game.getGrid().getCellAt(c0).getState() == CellState.TOWER) {
+                    doCoord(i,j,tabCoord);
+                    for (int k = 0; k < 8; k++) {
+                        if (tabCoord[k].isValid() && this.game.getGrid().getCellAt(tabCoord[k]).getState().getValue() == CellState.TOWER.getValue()) {
+                            if (this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0), this.game.getGrid().getCellAt(tabCoord[k]))) {
+                                Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), tabCoord[k], this.game.getGrid().getCellAt(tabCoord[k]).getSize(), this);
+                                mesCoups.add(m);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        Random r = new Random();
+        return mesCoups.get(r.nextInt(mesCoups.size()));
+        }
 }
