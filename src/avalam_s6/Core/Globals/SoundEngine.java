@@ -28,11 +28,13 @@ public class SoundEngine {
     private static boolean toMute;
     private static Mixer mixer;
     private static Clip clip;
+    private static long clipTime;
 
     public static void init() {
         Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
         SoundEngine.mixer = AudioSystem.getMixer(mixInfos[0]);
-
+        SoundEngine.toMute = true;
+        SoundEngine.clipTime = 0;
         DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
         try {
             SoundEngine.clip = (Clip) SoundEngine.mixer.getLine(dataInfo);
@@ -62,6 +64,8 @@ public class SoundEngine {
     }
 
     public static void toggleMute() {
+        SoundEngine.clipTime = SoundEngine.clip.getMicrosecondPosition();
+        SoundEngine.clip.stop();
         Line[] lines = SoundEngine.mixer.getSourceLines();
         for (Line line : lines) {
             BooleanControl bc = (BooleanControl) line.getControl(BooleanControl.Type.MUTE);
@@ -75,5 +79,7 @@ public class SoundEngine {
                 }
             }
         }
+        SoundEngine.clip.setMicrosecondPosition(SoundEngine.clipTime);
+        SoundEngine.clip.start();
     }
 }

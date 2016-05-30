@@ -6,6 +6,7 @@
 package avalam_s6.GUI.HomePage;
 
 import avalam_s6.Core.Globals.SetupManager;
+import avalam_s6.Core.Globals.SoundEngine;
 import avalam_s6.GUI.Gui_INTERFACE;
 import avalam_s6.GUI.Main_Frame;
 import java.awt.*;
@@ -96,6 +97,7 @@ public class GUI_HomePage extends JPanel implements Gui_INTERFACE {
         this.add(load);
         this.addComponentListener(this.listener);
 
+        //SoundEngine.play("./ressources/Themes/Default/sounds/game_ambiant.wav");
     }
 
     public JButton getQuick() {
