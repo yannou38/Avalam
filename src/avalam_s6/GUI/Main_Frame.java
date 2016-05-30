@@ -158,7 +158,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
             case "ia_hard":
                 return "AIPlayerHard";
             case "ia_exp":
-                return "ControlledPlayer";
+                return "AIPlayerHardAB";
             case "ia_leg":
                 return "ControlledPlayer";
         }
