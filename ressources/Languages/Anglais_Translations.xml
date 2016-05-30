@@ -7,26 +7,6 @@
     <Sur>on</Sur>
     <Oui>Yes</Oui>
     <Non>No</Non>
-    <Joueur>
-        <IAImages>
-            <JoueurIRL>player</JoueurIRL>
-            <Facile>ia_easy</Facile>
-            <Moyen>ia_mid</Moyen>
-            <Difficle>ia_hard</Difficle>
-            <Expert>ia_exp</Expert>
-            <Légende>ia_leg</Légende>           
-        </IAImages>
-        <Colors>   
-            <Blanc>white</Blanc>  
-            <Noir>black</Noir>
-            <Bleu>blue</Bleu>
-            <Jaune>yellow</Jaune>
-            <Rouge>red</Rouge>
-            <Vert>green</Vert>
-            <Violet>purple</Violet>   
-            <Cyan>cyan</Cyan>         
-        </Colors>
-    </Joueur>
     <Nom>Name</Nom>
     <Couleur>Color</Couleur>
     <Fin>won!</Fin>

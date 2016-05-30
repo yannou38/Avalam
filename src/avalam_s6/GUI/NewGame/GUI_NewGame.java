@@ -5,6 +5,7 @@
  */
 package avalam_s6.GUI.NewGame;
 
+import avalam_s6.Core.Globals.EnumsLister;
 import avalam_s6.Core.Globals.LanguageManager;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.GUI.Gui_INTERFACE;
@@ -108,7 +109,7 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         this.add(this.start);
         this.addComponentListener(this.listener);
 
-        this.AIlist = LanguageManager.getChildrensOf("IAImages");
+        this.AIlist = EnumsLister.getChildrensOf("IAImages");
         this.AIlistsize = this.AIlist.length;
         this.AIimgs = new Image[this.AIlistsize];
         for (int i = 0; i < this.AIlistsize; i++) {
@@ -132,7 +133,7 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         this.add(this.p1button);
         this.add(this.p2button);
 
-        this.ColorList = LanguageManager.getChildrensOf("Colors");
+        this.ColorList = EnumsLister.getChildrensOf("Colors");
         this.ColorListSize = this.ColorList.length;
         this.ColorImgs = new Image[this.ColorListSize];
         for (int i = 0; i < this.ColorListSize; i++) {

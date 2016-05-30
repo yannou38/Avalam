@@ -172,7 +172,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
         this.language = LanguageManager.getChildrensNameOf("Langue");
         for (int x = 0; x < this.language.length; x++) {
-            if (this.language[x].equals(SetupManager.getElement("Langue"))) {
+            if (this.language[x].equals(LanguageManager.getElement("Langue"))) {
                 this.currentLanguage = x;
             }
         }

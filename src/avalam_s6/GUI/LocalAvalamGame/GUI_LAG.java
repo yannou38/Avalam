@@ -202,6 +202,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     public void initGame(GuiManager_INTERFACE pGui) {
         try {
             this.game = new Local_Avalam_Game((Main_Frame) pGui); // GridSizeException
+            this.initPawnColors(AvalamColor.WHITE, AvalamColor.BLACK);
         } catch (IOException | GridSizeException | GridCharException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
