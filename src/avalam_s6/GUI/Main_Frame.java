@@ -33,8 +33,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
 
     public Main_Frame() {
         SetupManager.load();
-        EnumsLister.init();
-        //SoundEngine.play("./ressources/Themes/Default/sounds/game_ambient.wav");
+        EnumsLister.init();        
         /* FUNCTION CALL */
         this.initFrame(WindowState.MAIN);
         /* ADD KB DISPATCHER */
@@ -98,6 +97,10 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         ((GUI_HomePage) this.panelList[WindowState.MAIN.getValue()]).callResize();
         this.setwState(WindowState.MAIN);
         this.setRenderMode();
+        SoundEngine.play("./ressources/Themes/Default/sounds/game_ambient.wav");                    
+        if(SoundEngine.isMuted() && SetupManager.getElement("Son").equals("Oui") || SetupManager.getElement("Son").equals("Non") && !SoundEngine.isMuted()){
+            SoundEngine.toggleMute();
+        }        
     }
 
     public void setwState(WindowState wState) {

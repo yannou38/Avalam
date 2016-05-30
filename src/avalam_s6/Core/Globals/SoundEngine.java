@@ -29,11 +29,13 @@ public class SoundEngine {
     private static Mixer mixer;
     private static Clip clip;
     private static long clipTime;
+    private static boolean isMute;
 
     public static void init() {
         Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
         SoundEngine.mixer = AudioSystem.getMixer(mixInfos[0]);
         SoundEngine.toMute = true;
+        SoundEngine.isMute = false;
         SoundEngine.clipTime = 0;
         DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
         try {
@@ -45,41 +47,52 @@ public class SoundEngine {
     }
 
     public static void play(String filePath) {
-        if (SoundEngine.clip.isActive()) {
-            SoundEngine.stop();
+        if (!SoundEngine.clip.isActive()) {
+            try {
+                File soundFile = new File(filePath);
+                AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
+                SoundEngine.clip.open(audioStream);
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
+                System.out.println("Error - " + SoundEngine.class.toString());
+                Logger.getLogger(SoundEngine.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            SoundEngine.clip.start();
         }
-        try {
-            File soundFile = new File(filePath);
-            AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile);
-            SoundEngine.clip.open(audioStream);
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
-            System.out.println("Error - " + SoundEngine.class.toString());
-            Logger.getLogger(SoundEngine.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        SoundEngine.clip.start();
     }
+        
 
     public static void stop() {
         SoundEngine.clip.stop();
     }
 
     public static void toggleMute() {
-        SoundEngine.clipTime = SoundEngine.clip.getMicrosecondPosition();
-        SoundEngine.clip.stop();
-        Line[] lines = SoundEngine.mixer.getSourceLines();
-        for (Line line : lines) {
-            BooleanControl bc = (BooleanControl) line.getControl(BooleanControl.Type.MUTE);
-            if (bc != null) {
-                if (SoundEngine.toMute) {
-                    bc.setValue(true); // true to mute the line, false to unmute
-                    SoundEngine.toMute = false;
-                } else {
-                    bc.setValue(false);
-                    SoundEngine.toMute = true;
+        if(SoundEngine.clip.isActive()){
+            SoundEngine.clipTime = SoundEngine.clip.getMicrosecondPosition();
+            SoundEngine.clip.stop();
+            Line[] lines = SoundEngine.mixer.getSourceLines();
+            for (Line line : lines) {
+                BooleanControl bc = (BooleanControl) line.getControl(BooleanControl.Type.MUTE);
+                if (bc != null) {
+                    if (SoundEngine.toMute) {
+                        bc.setValue(true); // true to mute the line, false to unmute
+                        SoundEngine.toMute = false;
+                        SoundEngine.isMute = true;
+                    } else {
+                        bc.setValue(false);
+                        SoundEngine.toMute = true;
+                        SoundEngine.isMute = false;
+                    }
                 }
             }
+            SoundEngine.clip.setMicrosecondPosition(SoundEngine.clipTime);
+            SoundEngine.clip.start();
         }
-        SoundEngine.clip.setMicrosecondPosition(SoundEngine.clipTime);
-        SoundEngine.clip.start();
+        else {
+            SoundEngine.clip.start();
+        }
+    }
+    
+    public static boolean isMuted(){
+        return SoundEngine.isMute;
     }
 }
