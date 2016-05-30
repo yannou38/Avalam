@@ -97,7 +97,7 @@ public class GUI_HomePage extends JPanel implements Gui_INTERFACE {
         this.add(load);
         this.addComponentListener(this.listener);
 
-        //SoundEngine.play("./ressources/Themes/Default/sounds/game_ambiant.wav");
+        SoundEngine.play("./ressources/Themes/Default/sounds/game_ambient.wav");
     }
 
     public JButton getQuick() {
