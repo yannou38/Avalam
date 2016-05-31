@@ -58,6 +58,7 @@ public class SoundEngine {
                 System.out.println("Error - " + SoundEngine.class.toString());
                 Logger.getLogger(SoundEngine.class.getName()).log(Level.SEVERE, null, ex);
             }
+            SoundEngine.clip.loop(Clip.LOOP_CONTINUOUSLY);
             SoundEngine.clip.start();
         }
     }
@@ -68,7 +69,6 @@ public class SoundEngine {
     }
 
     public static void toggleMute() {
-        if(SoundEngine.clip.isActive()){
             SoundEngine.clipTime = SoundEngine.clip.getMicrosecondPosition();
             SoundEngine.clip.stop();
             Line[] lines = SoundEngine.mixer.getSourceLines();
@@ -87,11 +87,9 @@ public class SoundEngine {
                 }
             }
             SoundEngine.clip.setMicrosecondPosition(SoundEngine.clipTime);
+            SoundEngine.clip.loop(Clip.LOOP_CONTINUOUSLY);
             SoundEngine.clip.start();
-        }
-        else {
-            SoundEngine.clip.start();
-        }
+        
     }
     
     public static boolean isMuted(){
