@@ -26,7 +26,7 @@ public class AIPlayerHardMC extends AIPlayer {
     
     @Override
     public Move play() {
-        System.out.println("Je suis " + this.name + " je vais jouer des coups difficiles ");
+        System.out.println("Je suis " + this.name + " je vais jouer des coups très difficiles ");
         coord = new Coordinate[this.game.getGrid().getHeight()][this.game.getGrid().getWidth()];
         for (int i = 0; i < this.game.getGrid().getWidth(); i++) {
             for (int j = 0; j < this.game.getGrid().getHeight(); j++) {
@@ -34,10 +34,17 @@ public class AIPlayerHardMC extends AIPlayer {
             }
         }
         int coups = nbCoupsJouables();
+        int profondeur = 1 + (BUFF / coups);
         ArrayList<Move> mesCoups = new ArrayList<>();
         double maxvalue = -999999;
         double value;
         Coordinate[] tabCoord = new Coordinate[8];
+        
+        if(profondeur >0){
+            return monteCarlo();
+        }
+        
+        
         for (int i = 0; i < this.game.getGrid().getWidth(); i++) {
             /**
              * 1 2 3
@@ -56,7 +63,7 @@ public class AIPlayerHardMC extends AIPlayer {
                                 Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), tabCoord[k], this.game.getGrid().getCellAt(tabCoord[k]).getSize(), this);
                                 //On augmente l'horizon avec l'avancement de la partie (l'ia devient de plus en plus forte)
                                 //System.out.println("Ma pronfondeur actuelle est de " + (1+(BUFF / coups)));
-                                value = miniMaxUs(m, 1 + (BUFF / coups),-99999,99999);
+                                value = miniMaxUs(m, profondeur,-99999,99999);
                                 System.out.println("Je considère le coup " + c0.getY()+ " " + c0.getX() + " "+tabCoord[k].getY() + " " + tabCoord[k].getX()+ " il vaut " +value);
                                 if (value > maxvalue) {
                                     maxvalue = value;
@@ -248,10 +255,76 @@ public class AIPlayerHardMC extends AIPlayer {
         {
             //jouer des parties random, retenir le premier coup
             //faire la moyenne des résultats pour chaque coups
-            //renvoyer le coup avec la meilleure moyenne
+            //renvoyer le coup le meilleur résultat
+            int [][][][] tab = new int[9][9][9][9];
+            for (int sx = 0; sx < 9; sx++){
+                for (int sy = 0; sy < 9; sy++){
+                    for (int dx = 0; dx < 9; dx++){
+                        for (int dy = 0; dy < 9; dy++){
+                            tab[sx][sy][dx][dy] = -10000;
+                        }
+                    }
+                }
+            }
+            ArrayList<Move> mesCoups = new ArrayList<>();
+            Move m = null;
+            Move mInit = null;
+            int compteur = 0;
+            for(int k = 0; k<15000;k++)
+            {
+                if(winCheck() == 1337){
+                    mInit = coupRandom();
+                    this.game.getGrid().moveCell(mInit.getC_src(), mInit.getC_dst());
+                    this.game.addMoveToHistory(mInit);
+                    compteur++;
+                }
+                while(winCheck() == 1337)
+                {
+                    m = coupRandom();
+                    this.game.getGrid().moveCell(m.getC_src(), m.getC_dst());
+                    this.game.addMoveToHistory(m);
+                    compteur++;
+                }
+                if (compteur == 0)
+                    return null;
+                if (tab[mInit.getC_src().getY()][mInit.getC_src().getX()][(mInit.getC_dst().getY())][(mInit.getC_dst().getX())] == -10000)
+                    tab[mInit.getC_src().getY()][mInit.getC_src().getX()][(mInit.getC_dst().getY())][(mInit.getC_dst().getX())] = 0;
+                tab[mInit.getC_src().getY()][mInit.getC_src().getX()][(mInit.getC_dst().getY())][(mInit.getC_dst().getX())] += winCheck();
+                while(compteur != 0)
+                {
+                    this.game.undo();
+                    compteur--;
+                }
+            }
+            int max = -9999;
             
-            Move m = new Move(null, 0, null, 0, this);
-            return m;
+            for (int sx = 0; sx < 9; sx++){
+                for (int sy = 0; sy < 9; sy++){
+                    for (int dx = 0; dx < 9; dx++){
+                        for (int dy = 0; dy < 9; dy++){
+                            if(tab[sx][sy][dx][dy] > max){
+                                max = tab[sx][sy][dx][dy];
+                                mesCoups.clear();
+                                Coordinate c0 = new Coordinate(sy,sx);
+                                Coordinate c1 = new Coordinate(dy,dx);
+                                m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), c1, this.game.getGrid().getCellAt(c1).getSize(), this);
+                                mesCoups.add(m);
+                            }
+                            else if(tab[sx][sy][dx][dy] ==  max){
+                                Coordinate c0 = new Coordinate(sy,sx);
+                                Coordinate c1 = new Coordinate(dy,dx);
+                                m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), c1, this.game.getGrid().getCellAt(c1).getSize(), this);
+                                mesCoups.add(m);
+                            }
+                                
+                        }
+                    }
+                }
+            }
+            Random r = new Random();
+            int monrand = r.nextInt(mesCoups.size());
+            System.out.println("" + mesCoups.get(monrand).getC_src().getX() + " " + mesCoups.get(monrand).getC_src().getY() + " " + mesCoups.get(monrand).getC_dst().getX() + " " + mesCoups.get(monrand).getC_dst().getY());
+            return mesCoups.get(monrand);
         }
         
         
@@ -282,4 +355,57 @@ public class AIPlayerHardMC extends AIPlayer {
         Random r = new Random();
         return mesCoups.get(r.nextInt(mesCoups.size()));
         }
+        
+        private int winCheck() {
+        Coordinate[] c = new Coordinate[9];
+        for (int i = 0; i < 9; i++) {
+            c[i] = new Coordinate();
+        }
+        int score_p1 = 0;
+
+        for (int x = 0; x < 9; x++) {
+            for (int y = 0; y < 9; y++) {
+                c[0].setX(x);
+                c[0].setY(y);
+                c[1].setX(x - 1);
+                c[1].setY(y - 1);
+                c[2].setX(x - 1);
+                c[2].setY(y);
+                c[3].setX(x - 1);
+                c[3].setY(y + 1);
+                c[4].setX(x);
+                c[4].setY(y - 1);
+                c[5].setX(x);
+                c[5].setY(y + 1);
+                c[6].setX(x + 1);
+                c[6].setY(y - 1);
+                c[7].setX(x + 1);
+                c[7].setY(y);
+                c[8].setX(x + 1);
+                c[8].setY(y + 1);
+                for (int i = 1; i < 9; i++) {
+                    if (this.game.getGrid().getCellAt(c[0]).getState().getValue() != CellState.RESTRICTED.getValue() || this.game.getGrid().getCellAt(c[0]).getState().getValue() != CellState.EMPTY.getValue()) {
+                        if (c[i].isValid() && this.game.getGrid().getCellAt(c[i]).getState().getValue() != CellState.RESTRICTED.getValue() && this.game.getGrid().getCellAt(c[i]).getState().getValue() != CellState.EMPTY.getValue()) {
+                            if (this.game.getGrid().canStack(this.game.getGrid().getCellAt(c[0]), this.game.getGrid().getCellAt(c[i]))) {
+//                                System.out.println("x = "+ x+ ", y = "+y+", c[0] = "+ c[0]+", cell = "+this.grid.getCellAt(c[0]).getState().getValue()+"c["+i+"] = "+c[i]+", cell = "+this.grid.getCellAt(c[i]).getState().getValue()+".");
+                                return 1337;
+                            }
+                        }
+                    }
+                }
+                if (this.game.getGrid().getCellAt(c[0]).getOwner().getValue() == this.owner.getValue()) {
+                    score_p1++;
+                } else if (this.game.getGrid().getCellAt(c[0]).getOwner().getValue() != this.owner.getValue()) {
+                    score_p1--;
+                }
+            }
+        }
+        if (score_p1 > 0) {
+            return 1;
+        } else if (score_p1 == 0) {
+            return 0;
+        } else {
+            return -1;
+        }
+    }
 }
