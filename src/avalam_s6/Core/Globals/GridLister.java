@@ -14,7 +14,7 @@ import java.nio.file.Paths;
  *
  * @author sazeratj
  */
-public class GridLister {
+public class GridLister { 
     public static String[] listGrids() {
         Path p = Paths.get("./ressources/Levels");
         if (Files.exists(p) && Files.isDirectory(p)) {
