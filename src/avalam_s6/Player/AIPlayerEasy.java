@@ -40,7 +40,7 @@ public class AIPlayerEasy extends AIPlayer {
         coord = new Coordinate[this.game.getGrid().getHeight()][this.game.getGrid().getWidth()];
         for (int i = 0; i < this.game.getGrid().getWidth(); i++) {
             for (int j = 0; j < this.game.getGrid().getHeight(); j++) {
-                coord[j][i] = new Coordinate(j,i);
+                coord[j][i] = new Coordinate(j, i);
             }
         }
         for (int i = 0; i < this.game.getGrid().getWidth(); i++) {
@@ -51,7 +51,7 @@ public class AIPlayerEasy extends AIPlayer {
              */
             for (int j = 0; j < this.game.getGrid().getHeight(); j++) {
                 Coordinate c0 = new Coordinate(j, i);
-                doCoord(i,j,tabCoord);
+                doCoord(i, j, tabCoord);
                 if (c0.isValid() && this.game.getGrid().getCellAt(c0).getState().getValue() == CellState.TOWER.getValue()) {
 
                     for (int k = 0; k < 8; k++) {
@@ -120,7 +120,10 @@ public class AIPlayerEasy extends AIPlayer {
         if (!mesCoups.isEmpty()) {
             return mesCoups.get(r.nextInt(mesCoups.size()));
         }
-        return mesCoupsBadValue.get(r.nextInt(mesCoupsBadValue.size()));
+        if (!mesCoupsBadValue.isEmpty()) {
+            return mesCoupsBadValue.get(r.nextInt(mesCoupsBadValue.size()));
+        }
+        return null;
     }
 
 }
