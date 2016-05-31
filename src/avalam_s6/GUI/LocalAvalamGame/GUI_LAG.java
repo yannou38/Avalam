@@ -144,7 +144,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.p2color.setHorizontalAlignment(JTextField.CENTER);
         this.p2color.setBorder(BorderFactory.createEmptyBorder());
         this.add(this.p2color);
-        
+
         this.titre = new JLabel("test d'un titre long");
         this.titre.setHorizontalAlignment(JTextField.CENTER);
         this.titre.setBorder(BorderFactory.createEmptyBorder());
@@ -219,8 +219,6 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.droite.setFocusPainted(false);
         this.add(this.droite);
 
-        
-
         this.addComponentListener(this.listener);
     }
 
@@ -250,7 +248,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         try {
             this.game = new Local_Avalam_Game((Main_Frame) pGui); // GridSizeException
             this.initPawnColors(AvalamColor.WHITE, AvalamColor.BLACK);
-            this.initPlayerInfos(((Local_Avalam_Game)this.game).getPlayers()[0], ((Local_Avalam_Game)this.game).getPlayers()[1]);
+            this.initPlayerInfos(((Local_Avalam_Game) this.game).getPlayers()[0], ((Local_Avalam_Game) this.game).getPlayers()[1]);
         } catch (IOException | GridSizeException | GridCharException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -488,7 +486,9 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                 this.droite.setIcon(new ImageIcon(this.player_playing.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
             }
 
+            this.updateScore();
             this.currentTurn = ((Local_Avalam_Game) this.getGame()).getTurns();
+
 
         }
 
@@ -561,10 +561,16 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             newimg = getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         }
         getPlayB().setIcon(new ImageIcon(newimg));
-        /* -- Resize -- */        
+        /* -- Resize -- */
         if (this.callResize) {
             this.listener.componentResized(null);
             this.callResize = false;
         }
     }
+
+    private void updateScore() {
+        this.p1score.setText("Score : " + ((Local_Avalam_Game)this.game).getScore(1));
+        this.p2score.setText("Score : " + ((Local_Avalam_Game)this.game).getScore(2));
+    }
+
 }
