@@ -31,7 +31,7 @@ public class CustomKeyboardDispatcher implements KeyEventDispatcher {
         } else if (e.getID() == KeyEvent.KEY_RELEASED && e.getKeyCode() == VK_ESCAPE) {
             this.mainframe.backWindow();
         } else if (e.getID() == KeyEvent.KEY_RELEASED && e.getKeyCode() == VK_M) {
-            SoundEngine.toggleMute();
+            this.mainframe.toggleMute();
         } else {
             return false;
         }

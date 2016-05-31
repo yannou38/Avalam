@@ -46,6 +46,8 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     private final Font font;
     private int currentTurn;
 
+    private JLabel p1name, p2name, p1score, p2score, p1color, p2color;
+
     ImageIcon wh, bl, em, re, wsel, bsel, wpos, bpos;
 
     /**
@@ -108,6 +110,40 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             }
         }
         this.setLayout(null);
+
+        this.p1name = new JLabel();
+        this.p1name.setHorizontalAlignment(JTextField.CENTER);
+        this.p1name.setBorder(BorderFactory.createEmptyBorder());
+        this.p1name.setFont(this.font.deriveFont(1 * 30f));
+        this.add(this.p1name);
+
+        this.p2name = new JLabel();
+        this.p2name.setHorizontalAlignment(JTextField.CENTER);
+        this.p2name.setBorder(BorderFactory.createEmptyBorder());
+        this.p2name.setFont(this.font.deriveFont(1 * 30f));
+        this.add(this.p2name);
+
+        this.p1score = new JLabel("Score : 0");
+        this.p1score.setHorizontalAlignment(JTextField.CENTER);
+        this.p1score.setBorder(BorderFactory.createEmptyBorder());
+        this.p1score.setFont(this.font.deriveFont(1 * 30f));
+        this.add(this.p1score);
+
+        this.p2score = new JLabel("Score : 0");
+        this.p2score.setHorizontalAlignment(JTextField.CENTER);
+        this.p2score.setBorder(BorderFactory.createEmptyBorder());
+        this.p2score.setFont(this.font.deriveFont(1 * 30f));
+        this.add(this.p2score);
+
+        this.p1color = new JLabel();
+        this.p1color.setHorizontalAlignment(JTextField.CENTER);
+        this.p1color.setBorder(BorderFactory.createEmptyBorder());
+        this.add(this.p1color);
+
+        this.p2color = new JLabel();
+        this.p2color.setHorizontalAlignment(JTextField.CENTER);
+        this.p2color.setBorder(BorderFactory.createEmptyBorder());
+        this.add(this.p2color);
 
         this.titre = new JLabel("test d'un titre long");
         this.titre.setHorizontalAlignment(JTextField.CENTER);
@@ -200,10 +236,19 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         }
     }
 
+    private void initPlayerInfos(Player p1, Player p2) {
+        System.out.println("truc");
+        this.p1name.setText(p1.getName());
+        this.p2name.setText(p2.getName());
+        this.p1color.setIcon(new ImageIcon(this.white));
+        this.p2color.setIcon(new ImageIcon(this.black));
+    }
+
     public void initGame(GuiManager_INTERFACE pGui) {
         try {
             this.game = new Local_Avalam_Game((Main_Frame) pGui); // GridSizeException
             this.initPawnColors(AvalamColor.WHITE, AvalamColor.BLACK);
+            this.initPlayerInfos(((Local_Avalam_Game) this.game).getPlayers()[0], ((Local_Avalam_Game) this.game).getPlayers()[1]);
         } catch (IOException | GridSizeException | GridCharException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -222,6 +267,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             Grid g = new Grid(myParser.readLevel(), pGridName); // IOException | GridSizeException | NumberFormatException
             this.game = new Local_Avalam_Game((Main_Frame) pGui, g, p1, p2, new Stack<>(), new Stack<>(), 0, 0); // GridSizeException
             this.initPawnColors(p1.getColor(), p2.getColor());
+            this.initPlayerInfos(p1, p2);
         } catch (NoSuchMethodException | SecurityException | ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | GridCharException | IOException | GridSizeException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -262,6 +308,30 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     public JButton getRetourB() {
         return this.retourB;
+    }
+
+    public JLabel getP1name() {
+        return p1name;
+    }
+
+    public JLabel getP2name() {
+        return p2name;
+    }
+
+    public JLabel getP1score() {
+        return p1score;
+    }
+
+    public JLabel getP2score() {
+        return p2score;
+    }
+
+    public JLabel getP1color() {
+        return p1color;
+    }
+
+    public JLabel getP2color() {
+        return p2color;
     }
 
     public JButton getSaveB() {
@@ -389,7 +459,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
         double ratioW = (double) this.getWidth() / (double) 1920;
         double ratioH = (double) this.getHeight() / (double) 1080;
-        
+
         /* --- GRILLE --- */
         Grid gr = this.game.getGrid();
         Coordinate c = new Coordinate();
@@ -402,6 +472,9 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             bsel = new ImageIcon(this.b_selected.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
             wpos = new ImageIcon(this.w_possible.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
             bpos = new ImageIcon(this.b_possible.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+            this.p1color.setIcon(wh);
+            this.p2color.setIcon(bl);
+
         }
         if (this.currentTurn != ((Local_Avalam_Game) this.getGame()).getTurns()) {
 
@@ -413,7 +486,9 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                 this.droite.setIcon(new ImageIcon(this.player_playing.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
             }
 
+            this.updateScore();
             this.currentTurn = ((Local_Avalam_Game) this.getGame()).getTurns();
+
 
         }
 
@@ -492,4 +567,10 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             this.callResize = false;
         }
     }
+
+    private void updateScore() {
+        this.p1score.setText("Score : " + ((Local_Avalam_Game)this.game).getScore(1));
+        this.p2score.setText("Score : " + ((Local_Avalam_Game)this.game).getScore(2));
+    }
+
 }

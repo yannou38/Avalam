@@ -25,7 +25,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class SoundEngine {
 
-    private static boolean toMute;
     private static Mixer mixer;
     private static Clip clip;
     private static long clipTime;
@@ -34,7 +33,6 @@ public class SoundEngine {
     public static void init() {
         Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
         SoundEngine.mixer = AudioSystem.getMixer(mixInfos[0]);
-        SoundEngine.toMute = true;
         SoundEngine.isMute = false;
         SoundEngine.clipTime = 0;
         DataLine.Info dataInfo = new DataLine.Info(Clip.class, null);
@@ -43,6 +41,10 @@ public class SoundEngine {
         } catch (LineUnavailableException ex) {
             System.out.println("Error - " + SoundEngine.class.toString());
             Logger.getLogger(SoundEngine.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        SoundEngine.play("./ressources/Themes/Default/sounds/game_ambient.wav");
+        if (SetupManager.getElement("Son").equals("Non")) {
+            SoundEngine.toggleMute();
         }
     }
 
@@ -56,6 +58,7 @@ public class SoundEngine {
                 System.out.println("Error - " + SoundEngine.class.toString());
                 Logger.getLogger(SoundEngine.class.getName()).log(Level.SEVERE, null, ex);
             }
+            SoundEngine.clip.loop(Clip.LOOP_CONTINUOUSLY);
             SoundEngine.clip.start();
         }
     }
@@ -66,30 +69,27 @@ public class SoundEngine {
     }
 
     public static void toggleMute() {
-        if(SoundEngine.clip.isActive()){
             SoundEngine.clipTime = SoundEngine.clip.getMicrosecondPosition();
             SoundEngine.clip.stop();
             Line[] lines = SoundEngine.mixer.getSourceLines();
             for (Line line : lines) {
                 BooleanControl bc = (BooleanControl) line.getControl(BooleanControl.Type.MUTE);
                 if (bc != null) {
-                    if (SoundEngine.toMute) {
+                    if (!SoundEngine.isMute) {
                         bc.setValue(true); // true to mute the line, false to unmute
-                        SoundEngine.toMute = false;
                         SoundEngine.isMute = true;
+                        SetupManager.setElement("Son", "Non");
                     } else {
                         bc.setValue(false);
-                        SoundEngine.toMute = true;
                         SoundEngine.isMute = false;
+                        SetupManager.setElement("Son", "Oui");
                     }
                 }
             }
             SoundEngine.clip.setMicrosecondPosition(SoundEngine.clipTime);
+            SoundEngine.clip.loop(Clip.LOOP_CONTINUOUSLY);
             SoundEngine.clip.start();
-        }
-        else {
-            SoundEngine.clip.start();
-        }
+        
     }
     
     public static boolean isMuted(){

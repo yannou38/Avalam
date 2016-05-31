@@ -37,14 +37,8 @@ public class LAG_AdapterListener implements ComponentListener {
         //1280*720 => taille de base
         double ratioW = (double) this.page.getWidth() / (double) 1920;
         double ratioH = (double) this.page.getHeight() / (double) 1080;
-
-        Dimension size = this.page.getTitre().getPreferredSize();
-        System.out.println(size.height+" "+size.width);
-        
-        
-        System.out.println(this.page.getTitre().getWidth() + " " + this.page.getTitre().getHeight() + " " + this.page.getTitre().getText().length());
-        this.page.getTitre().setBounds(0,(int) round(40 * ratioH), this.page.getWidth(), 50);
-        this.page.getTitre().setSize(this.page.getWidth(),50);
+        this.page.getTitre().setBounds(0, (int) round(40 * ratioH), this.page.getWidth(), 50);
+        this.page.getTitre().setSize(this.page.getWidth(), 50);
 
         newimg = this.page.getCancel().getScaledInstance(((int) round(252 * ratioW)), ((int) round(111 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         this.page.getUndoB().setIcon(new ImageIcon(newimg));
@@ -130,6 +124,31 @@ public class LAG_AdapterListener implements ComponentListener {
 
             }
         }
+
+        this.page.getP1name().setBounds((int) round((20 + insets.left) * ratioW), ((int) round((257 + insets.top) * ratioH)), (int) round(284 * ratioW), 50);
+        this.page.getP1name().setSize((int) round(284 * ratioW), 50);
+
+        this.page.getP2name().setBounds((int) round((1616 + insets.left) * ratioW), ((int) round((257 + insets.top) * ratioH)), (int) round(284 * ratioW), 50);
+        this.page.getP2name().setSize((int) round(284 * ratioW), 50);
+        
+        this.page.getP1score().setBounds((int) round((20 + insets.left) * ratioW), ((int) round((457 + insets.top) * ratioH)), (int) round(284 * ratioW), 50);
+        this.page.getP1score().setSize((int) round(284 * ratioW), 50);
+
+        this.page.getP2score().setBounds((int) round((1616 + insets.left) * ratioW), ((int) round((457 + insets.top) * ratioH)), (int) round(284 * ratioW), 50);
+        this.page.getP2score().setSize((int) round(284 * ratioW), 50);
+        
+        
+        newimg = this.page.getWhite().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        this.page.getP1color().setIcon(new ImageIcon(newimg));
+        this.page.getP1color().setBounds((int) round((122 + insets.left) * ratioW), ((int) round((367 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
+        this.page.getP1color().setSize((int) round(80 * ratioW), (int) round(80 * ratioH));
+
+        newimg = this.page.getBlack().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        this.page.getP2color().setIcon(new ImageIcon(newimg));
+        this.page.getP2color().setBounds((int) round((1718 + insets.left) * ratioW), ((int) round((367 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
+        this.page.getP2color().setSize((int) round(80 * ratioW), (int) round(80 * ratioH));
+        
+        System.out.println(this.page.getP1name().getText());
 
         this.page.callResize();
     }
