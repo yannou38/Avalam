@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><config>
 	<Langue>Français</Langue>
-	<FullScreen>Oui</FullScreen>
+	<FullScreen>Non</FullScreen>
 	<Theme>Default</Theme>
-	<Son>Oui</Son>
+	<Son>Non</Son>
 </config>

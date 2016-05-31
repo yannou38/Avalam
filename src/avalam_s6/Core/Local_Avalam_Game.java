@@ -310,9 +310,11 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         }
         int score_p1 = 0;
         int score_p2 = 0;
+        boolean test;
 
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
+                test = true;
                 c[0].setX(x);
                 c[0].setY(y);
                 c[1].setX(x - 1);
@@ -335,16 +337,17 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
                     if (this.grid.getCellAt(c[0]).getState().getValue() != CellState.RESTRICTED.getValue() || this.grid.getCellAt(c[0]).getState().getValue() != CellState.EMPTY.getValue()) {
                         if (c[i].isValid() && this.grid.getCellAt(c[i]).getState().getValue() != CellState.RESTRICTED.getValue() && this.grid.getCellAt(c[i]).getState().getValue() != CellState.EMPTY.getValue()) {
                             if (this.grid.canStack(this.grid.getCellAt(c[0]), this.grid.getCellAt(c[i]))) {
-//                                System.out.println("x = "+ x+ ", y = "+y+", c[0] = "+ c[0]+", cell = "+this.grid.getCellAt(c[0]).getState().getValue()+"c["+i+"] = "+c[i]+", cell = "+this.grid.getCellAt(c[i]).getState().getValue()+".");
-                                return 0;
+                                test = false;
                             }
                         }
                     }
                 }
-                if (this.grid.getCellAt(c[0]).getOwner().getValue() == Owner.PLAYER_1.getValue()) {
-                    score_p1++;
-                } else if (this.grid.getCellAt(c[0]).getOwner().getValue() == Owner.PLAYER_2.getValue()) {
-                    score_p2++;
+                if (test == true) {
+                    if (this.grid.getCellAt(c[0]).getOwner().getValue() == Owner.PLAYER_1.getValue()) {
+                        score_p1++;
+                    } else if (this.grid.getCellAt(c[0]).getOwner().getValue() == Owner.PLAYER_2.getValue()) {
+                        score_p2++;
+                    }
                 }
             }
         }
