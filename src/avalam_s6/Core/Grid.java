@@ -21,6 +21,7 @@ public class Grid {
      * Constructor
      *
      * @param textGrid the text version of the grid. SIZE MUST BE 81.
+     * @param name the name of the grid
      * @throws avalam_s6.Exceptions.GridCharException Illegal Character in the
      * grid
      */

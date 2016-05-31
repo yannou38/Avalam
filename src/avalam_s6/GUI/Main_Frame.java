@@ -62,6 +62,12 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         this.resetSettings();
     }
     
+    public void toggleMute() {
+        SoundEngine.toggleMute();
+        this.resetSettings();
+        ((GUI_Settings) this.panelList[WindowState.SETTINGS.getValue()]).callResize();
+    }
+    
     private void resetSettings(){
         ((GUI_Settings) this.panelList[WindowState.SETTINGS.getValue()]).initOptions();
         ((GUI_Settings) this.panelList[WindowState.SETTINGS.getValue()]).retextLabels();
@@ -89,11 +95,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         }
         ((GUI_HomePage) this.panelList[WindowState.MAIN.getValue()]).callResize();
         this.setwState(WindowState.MAIN);
-        this.setRenderMode();
-        SoundEngine.play("./ressources/Themes/Default/sounds/game_ambient.wav");                    
-        if(SoundEngine.isMuted() && SetupManager.getElement("Son").equals("Oui") || SetupManager.getElement("Son").equals("Non") && !SoundEngine.isMuted()){
-            SoundEngine.toggleMute();
-        }        
+        this.setRenderMode();                     
     }
 
     public void setwState(WindowState wState) {

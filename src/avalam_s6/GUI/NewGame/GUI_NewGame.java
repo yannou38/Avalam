@@ -5,15 +5,23 @@
  */
 package avalam_s6.GUI.NewGame;
 
+import avalam_s6.Core.Cell;
+import avalam_s6.Core.CellState;
+import avalam_s6.Core.Coordinate;
+import avalam_s6.Core.File_IO.Level_Parser;
 import avalam_s6.Core.Globals.EnumsLister;
-import avalam_s6.Core.Globals.LanguageManager;
+import avalam_s6.Core.Globals.Input;
 import avalam_s6.Core.Globals.SetupManager;
+import avalam_s6.Core.Grid;
+import avalam_s6.Exceptions.GridCharException;
+import avalam_s6.Exceptions.GridSizeException;
 import avalam_s6.GUI.Gui_INTERFACE;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import static java.lang.Math.round;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -45,16 +53,27 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
     private JButton preccolor1, preccolor2, supcolor1, supcolor2;
     private JTextField name1;
     private JTextField name2;
+    
+    /* -- GRID -- */
+    private JButton[][] buttonmap; 
+    private ImageIcon wh, bl, em, re;
+    private Image[] pawnList;
+    private String[] gridNameList;
+    private int selectedGrid;
+    private Grid[] gridList;
 
     public GUI_NewGame() {
         this.callResize = false;
         this.listener = new NewGameAdapterListener(this);
+        this.buttonmap = new JButton[9][9];
         this.initComponents();
     }
 
     private void initComponents() {
         try {
+            // BackGround
             this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/playerselect/background.png"));
+            // Buttons
             this.precI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/playerselect/prec.png"));
             this.supI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/playerselect/sup.png"));
             this.returnI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/playerselect/home.png"));
@@ -64,6 +83,20 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
             Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                Coordinate c = new Coordinate(j, i);
+                JButton b = new JButton();
+                b.setBorder(BorderFactory.createEmptyBorder());
+                b.setContentAreaFilled(false);
+                b.setHorizontalTextPosition(JButton.CENTER);
+                b.setVerticalTextPosition(JButton.CENTER);
+                this.buttonmap[j][i] = b;
+                //b.setOpaque(false);
+                this.add(b);
+            }
+        }
+        
         this.prec1 = new JButton(new ImageIcon(this.precI));
         this.prec1.setBorder(BorderFactory.createEmptyBorder());
         this.prec1.setContentAreaFilled(false);
@@ -109,6 +142,7 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         this.add(this.start);
         this.addComponentListener(this.listener);
 
+        // AI List
         this.AIlist = EnumsLister.getChildrensOf("IAImages");
         this.AIlistsize = this.AIlist.length;
         this.AIimgs = new Image[this.AIlistsize];
@@ -133,6 +167,7 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         this.add(this.p1button);
         this.add(this.p2button);
 
+        // Color List
         this.ColorList = EnumsLister.getChildrensOf("Colors");
         this.ColorListSize = this.ColorList.length;
         this.ColorImgs = new Image[this.ColorListSize];
@@ -180,6 +215,35 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         this.supcolor2.setFocusPainted(false);
         this.supcolor2.addMouseListener(new NewGameListener("sup", 2, this, "supcolor"));
 
+        // Grid
+        this.selectedGrid = 0;
+        this.gridNameList = new String[1];
+        this.gridNameList[0] = "default";
+        
+        this.gridList = new Grid[gridNameList.length];
+        try {
+            for(int i=0;i<gridNameList.length;i++) {
+                Level_Parser lParser = new Level_Parser(gridNameList[i]);
+                gridList[i] = new Grid(lParser.readLevel(),gridNameList[i]);
+            }
+        } catch (IOException | GridSizeException | GridCharException ex) {
+            System.out.println("Error - " + GUI_NewGame.class.toString());
+            Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // Grid Content
+        this.pawnList = new Image[ColorList.length+2];
+        try {
+            this.pawnList[0] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/empty.png"));
+            this.pawnList[1] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/restricted.png"));
+            for (int i=0;i<ColorList.length;i++) {
+                this.pawnList[2+i] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/" + ColorList[i] + ".png"));;
+            }
+         } catch (Exception  ex) {
+            System.out.println("Error - " + GUI_NewGame.class.toString());
+            Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
         Font localFont = new Font("Arial", Font.PLAIN, 60);
 
         /* Chargement de la police */
@@ -196,14 +260,14 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         this.name1.setFont(localFont.deriveFont(45f));
         this.name1.setBorder(BorderFactory.createEmptyBorder());
         this.name1.setSize(150, 50);
-        this.name1.setText("Player 1's name");
+        this.name1.setText("Name_1");
         this.name1.setOpaque(false);
 
         this.name2 = new JTextField();
         this.name2.setFont(localFont.deriveFont(45f));
         this.name2.setBorder(BorderFactory.createEmptyBorder());
         this.name2.setSize(150, 50);
-        this.name2.setText("Player 2's name");
+        this.name2.setText("Name_2");
         this.name2.setOpaque(false);
 
         this.add(this.p1color);
@@ -286,7 +350,7 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
     }
     
     public String loadGridName() {
-        return "default";
+        return this.gridNameList[this.selectedGrid];
     }
 
     public void leftAI(int numplayer) {
@@ -401,7 +465,49 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
 
     @Override
     public void paintComponent(Graphics g) {
+        // Affichage Background
         g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
+        // Calcul des ratios
+        double ratioW = (double) this.getWidth() / (double) 1920;
+        double ratioH = (double) this.getHeight() / (double) 1080;
+        // Resize au besoin
+        if (this.callResize) {
+            wh = new ImageIcon(this.pawnList[2+this.p1colorselect].getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+            bl = new ImageIcon(this.pawnList[2+this.p2colorselect].getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+            em = new ImageIcon(this.pawnList[0].getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+            re = new ImageIcon(this.pawnList[1].getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+        }
+        Grid gr = this.gridList[this.selectedGrid];
+        Coordinate c = new Coordinate();
+        for (int i = 0; i < gr.getWidth(); i++) {
+            for (int j = 0; j < gr.getHeight(); j++) {
+                c.setX(i);
+                c.setY(j);
+                Cell ce = gr.getCellAt(c);
+                switch (ce.getOwner()) {
+                    case PLAYER_1:
+                        this.buttonmap[i][j].setIcon(wh);
+                        this.buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
+                        break;
+                    case PLAYER_2:
+                        this.buttonmap[i][j].setIcon(bl);
+                        this.buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
+                        break;
+                    case NO_OWNER:
+                        if (gr.getCellAt(c).getState().getValue() == CellState.RESTRICTED.getValue()) {
+                            this.buttonmap[i][j].setIcon(re);
+                        } else {
+                            this.buttonmap[i][j].setIcon(em);
+                            this.buttonmap[i][j].setText("");
+                        }
+                        break;
+                }
+                this.buttonmap[i][j].setBounds((int) round((660 + i * 66) * ratioW), ((int) round((260 + j * 66) * ratioH)), (int) round(66 * ratioW), (int) round(66 * ratioH));
+                this.buttonmap[i][j].setSize((int) round(66 * ratioW), (int) round(66 * ratioH));
+                this.buttonmap[i][j].setOpaque(false);
+            }
+        }
+        // Stopper resize au besoin
         if (this.callResize == true) {
             this.listener.componentResized(null);
             this.callResize = false;
