@@ -95,7 +95,9 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         }
         ((GUI_HomePage) this.panelList[WindowState.MAIN.getValue()]).callResize();
         this.setwState(WindowState.MAIN);
-        this.setRenderMode();                     
+        this.setRenderMode();
+        if ((SoundEngine.isMuted() && SetupManager.getElement("Son").equals("Oui")) || (!SoundEngine.isMuted() && SetupManager.getElement("Son").equals("Non")))
+            SoundEngine.toggleMute();
     }
 
     public void setwState(WindowState wState) {
