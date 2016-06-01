@@ -171,6 +171,18 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
     public JLabel getSlotlabels(int i) {
         return this.slotlabels[i - 1];
     }
+    
+    public Image getHomeReturnI(){
+        return this.homeI;
+    }
+    
+    public Image getLoadI(){
+        return this.loadI;
+    }
+    
+    public Image getSlotI(){
+        return this.slot;
+    }
 
     @Override
     public void paintComponent(Graphics g) {
