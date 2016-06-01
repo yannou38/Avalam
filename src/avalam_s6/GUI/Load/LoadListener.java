@@ -12,6 +12,7 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import static java.lang.Math.round;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -67,13 +68,17 @@ public class LoadListener implements MouseListener {
                 } else {
                     mFrame.load("slot_" + this.page.getSlotnumber());
                 }
+                for (int i = 1; i < this.page.getSlotslistener().length + 1; i++) {
+                    this.page.getSlotslistener(i).setIsSelected(false);
+                    this.page.getSlots(i).setIcon(new ImageIcon(this.iconbase));
+                }
                 source.setIcon(new ImageIcon(this.iconbase));
-                this.page.resetSlotSelection();
+                this.page.resetSlots();
                 mFrame.startGame();
                 break;
             case "home":
                 source.setIcon(new ImageIcon(this.iconbase));
-                this.page.resetSlotSelection();
+                this.page.resetSlots();
                 this.page.back();
                 break;
 
@@ -105,7 +110,10 @@ public class LoadListener implements MouseListener {
     public void mouseEntered(MouseEvent e) {
         //replace the icon with another
         if (this.isSelected == false) {
-            ((JButton) e.getSource()).setIcon(new ImageIcon(this.icon));
+            double ratioW = (double) this.page.getWidth() / (double) 1920;
+            double ratioH = (double) this.page.getHeight() / (double) 1080;
+            Image newimg = this.icon.getScaledInstance(((int) round(icon.getWidth(null) * ratioW)), ((int) round(icon.getHeight(null) * ratioH)), java.awt.Image.SCALE_SMOOTH);
+            ((JButton) e.getSource()).setIcon(new ImageIcon(newimg));
         }
     }
 
@@ -113,8 +121,11 @@ public class LoadListener implements MouseListener {
     public void mouseExited(MouseEvent e) {
         //replace the icon with another
         if (this.isSelected == false) {
-            ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
+            double ratioW = (double) this.page.getWidth() / (double) 1920;
+            double ratioH = (double) this.page.getHeight() / (double) 1080;
+            Image newimg = this.iconbase.getScaledInstance(((int) round(iconbase.getWidth(null) * ratioW)), ((int) round(iconbase.getHeight(null) * ratioH)), java.awt.Image.SCALE_SMOOTH);
+            ((JButton) e.getSource()).setIcon(new ImageIcon(newimg));
         }
     }
-
+    
 }

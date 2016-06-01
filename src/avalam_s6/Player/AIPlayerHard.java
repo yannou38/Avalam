@@ -55,7 +55,6 @@ public class AIPlayerHard extends AIPlayer {
                                 //On augmente l'horizon avec l'avancement de la partie (l'ia devient de plus en plus forte)
                                 //System.out.println("Ma pronfondeur actuelle est de " + (1+(BUFF / coups)));
                                 value = miniMaxUs(m, 1 + (BUFF / coups));
-                                System.out.println("Je considère le coup " + c0.getY()+ " " + c0.getX() + " "+tabCoord[k].getY() + " " + tabCoord[k].getX()+ " il vaut " +value);
                                 if (value > maxvalue) {
                                     maxvalue = value;
                                     mesCoups.clear();

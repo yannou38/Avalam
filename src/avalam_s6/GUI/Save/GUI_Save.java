@@ -191,4 +191,12 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
         }
     }
 
+    public void resetSlots() {
+        this.slotnumber = 0;
+        for (int i = 0; i < this.slots.length; i++) {
+            this.slotslistener[i].setIsSelected(false);
+            this.slots[i].setIcon(new ImageIcon(this.slot));
+        }
+    }
+
 }
