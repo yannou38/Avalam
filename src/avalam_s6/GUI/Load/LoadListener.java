@@ -67,13 +67,17 @@ public class LoadListener implements MouseListener {
                 } else {
                     mFrame.load("slot_" + this.page.getSlotnumber());
                 }
+                for (int i = 1; i < this.page.getSlotslistener().length + 1; i++) {
+                    this.page.getSlotslistener(i).setIsSelected(false);
+                    this.page.getSlots(i).setIcon(new ImageIcon(this.iconbase));
+                }
                 source.setIcon(new ImageIcon(this.iconbase));
-                this.page.resetSlotSelection();
+                this.page.resetSlots();
                 mFrame.startGame();
                 break;
             case "home":
                 source.setIcon(new ImageIcon(this.iconbase));
-                this.page.resetSlotSelection();
+                this.page.resetSlots();
                 this.page.back();
                 break;
 
