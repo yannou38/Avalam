@@ -654,19 +654,22 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             }
         }
         /* Hint */
-        if (hintSrc != null) {
+        if (hintSrc != null && (Math.abs(hintSrc.getX() - Input.getMouseSrcPosition().getX()) > 1 || Math.abs(hintSrc.getY() - Input.getMouseSrcPosition().getY()) > 1)) {
             if(gr.getCellAt(hintSrc).getOwner().getValue() == Owner.PLAYER_1.getValue()) {
                 this.buttonmap[hintSrc.getX()][hintSrc.getY()].setIcon(wsel);
             } else {
                 this.buttonmap[hintSrc.getX()][hintSrc.getY()].setIcon(bsel);
             }
         }
-        if (hintDst != null) {
+        if (hintDst != null && (Math.abs(hintDst.getX() - Input.getMouseSrcPosition().getX()) > 1 || Math.abs(hintDst.getY() - Input.getMouseSrcPosition().getY()) > 1)) {
             if(gr.getCellAt(hintDst).getOwner().getValue() == Owner.PLAYER_1.getValue()) {
-                this.buttonmap[hintDst.getX()][hintDst.getY()].setIcon(wpos);
+                this.buttonmap[hintDst.getX()][hintDst.getY()].setIcon(wIADst);
             } else {
-                this.buttonmap[hintDst.getX()][hintDst.getY()].setIcon(bpos);
+                this.buttonmap[hintDst.getX()][hintDst.getY()].setIcon(bIADst);
             }
+        }
+        if (hintSrc != null && hintDst != null && hintSrc.getX() == Input.getMouseSrcPosition().getX() && hintSrc.getY() == Input.getMouseSrcPosition().getY() && (Math.abs(hintDst.getX() - Input.getMouseDestPosition().getX()) <= 1 || Math.abs(hintDst.getY() - Input.getMouseDestPosition().getY()) > 1)) {
+            this.buttonmap[hintDst.getX()][hintDst.getY()].setIcon(bIADst);
         }
         /* -- BOUTON PAUSE -- */
         Image newimg;
