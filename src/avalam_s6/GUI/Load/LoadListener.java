@@ -92,7 +92,10 @@ public class LoadListener implements MouseListener {
                     this.page.getField().setText("");
                     this.page.getField().requestFocus();
                 }
-                source.setIcon(new ImageIcon(this.iconselect));
+                double ratioW = (double) this.page.getWidth() / (double) 1920;
+                double ratioH = (double) this.page.getHeight() / (double) 1080;
+                Image newimg = this.iconselect.getScaledInstance(((int) round(iconbase.getWidth(null) * ratioW)), ((int) round(iconbase.getHeight(null) * ratioH)), java.awt.Image.SCALE_SMOOTH);
+                source.setIcon(new ImageIcon(newimg));
                 this.page.setSlotnumber(this.slotnumber);
                 break;
         }
@@ -112,6 +115,7 @@ public class LoadListener implements MouseListener {
         if (this.isSelected == false) {
             double ratioW = (double) this.page.getWidth() / (double) 1920;
             double ratioH = (double) this.page.getHeight() / (double) 1080;
+            System.out.println((int) round(icon.getHeight(null) * ratioH));
             Image newimg = this.icon.getScaledInstance(((int) round(icon.getWidth(null) * ratioW)), ((int) round(icon.getHeight(null) * ratioH)), java.awt.Image.SCALE_SMOOTH);
             ((JButton) e.getSource()).setIcon(new ImageIcon(newimg));
         }
@@ -127,5 +131,5 @@ public class LoadListener implements MouseListener {
             ((JButton) e.getSource()).setIcon(new ImageIcon(newimg));
         }
     }
-    
+
 }
