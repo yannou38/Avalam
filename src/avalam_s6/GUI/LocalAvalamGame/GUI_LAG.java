@@ -244,8 +244,16 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     private void initPlayerInfos(Player p1, Player p2) {
         //System.out.println("truc");
-        this.p1name.setText(p1.getName());
-        this.p2name.setText(p2.getName());
+        if (p1.isAI()) {
+            this.p1name.setText(p1.getName() + " (AI)");
+        } else {
+            this.p1name.setText(p1.getName());
+        }
+        if (p2.isAI()) {
+            this.p2name.setText(p2.getName() + " (AI)");
+        } else {
+            this.p2name.setText(p2.getName());
+        }
         this.p1color.setIcon(new ImageIcon(this.white));
         this.p2color.setIcon(new ImageIcon(this.black));
     }
@@ -617,7 +625,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                     this.buttonmap[IADst.getX()][IADst.getY()].setForeground(Color.WHITE);
                 } else {
                     this.buttonmap[IADst.getX()][IADst.getY()].setForeground(Color.BLACK);
-                } 
+                }
             }
         }
         /* -- BOUTON PAUSE -- */
