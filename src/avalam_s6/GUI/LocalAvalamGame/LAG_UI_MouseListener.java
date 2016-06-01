@@ -95,11 +95,10 @@ public class LAG_UI_MouseListener implements MouseListener {
                 SoundEngine.toggleMute();
                 break;
             case "help":
-                //TODO suggestion de coup
+                lag.setHint(game.getHint());
                 break;
             case "play":
-                Local_Avalam_Game g = (Local_Avalam_Game) this.page.getGame();
-                g.togglePause();
+                game.togglePause();
                 this.page.repaint();
                 break;
         }

@@ -7,6 +7,7 @@ package avalam_s6.Core.Globals;
 
 import avalam_s6.Core.Coordinate;
 import avalam_s6.Core.Game_INTERFACE;
+import avalam_s6.Core.Local_Avalam_Game;
 import avalam_s6.Core.Owner;
 
 /**

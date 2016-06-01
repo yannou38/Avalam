@@ -7,8 +7,11 @@ package avalam_s6.GUI.LocalAvalamGame;
 
 import avalam_s6.Core.Coordinate;
 import avalam_s6.Core.Globals.Input;
+import avalam_s6.Core.Local_Avalam_Game;
+import avalam_s6.GUI.Main_Frame;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JButton;
 
 /**
  *
