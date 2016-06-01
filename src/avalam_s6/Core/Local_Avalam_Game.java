@@ -150,6 +150,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         }
         //System.out.println("Joueur : "+this.current_player);
         if (!this.isPaused()) {
+            this.updateTitle();
             Move m = this.players[this.current_player].play();
 
             if (m != null) {
