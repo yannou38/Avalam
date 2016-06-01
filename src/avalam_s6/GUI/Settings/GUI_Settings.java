@@ -348,7 +348,27 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
         return this.Sound[this.SoundSelected];
 
     }
+    
+    Image getApplyI() {
+        return this.applyI;
+    }
 
+    Image getRetourI() {
+        return this.returnI;
+    }
+
+    Image getCreditsI() {
+        return this.creditsI;
+    }
+
+    Image getLeftI() {
+        return this.leftI;
+    }
+    
+    Image getRightI() {
+        return this.rightI;
+    }
+    
     @Override
     public void back() {
         Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());

@@ -8,6 +8,7 @@ package avalam_s6.GUI.Settings;
 import java.awt.*;
 import java.awt.event.*;
 import static java.lang.Math.round;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -24,23 +25,28 @@ public class SettingsAdapterListener implements ComponentListener {
     @Override
     public void componentResized(ComponentEvent e) {
 
+        Dimension size;
+        Image newimg;
         Insets insets = this.page.getInsets();
         //1280*720 => taille de base
         double ratioW = (double) this.page.getWidth() / (double) 1920;
         double ratioH = (double) this.page.getHeight() / (double) 1080;
 
         //boutons
-        Dimension size = this.page.getRetour().getPreferredSize();
-        this.page.getRetour().setBounds((int) round((20 + insets.left) * ratioW), ((int) round((935 + insets.top) * ratioH)), size.width, size.height);
-        this.page.getRetour().setSize((int) round(this.page.getRetour().getWidth() * ratioW), (int) round(this.page.getRetour().getHeight() * ratioH));
+        newimg = this.page.getRetourI().getScaledInstance((int) round(263 * ratioW), (int) round(123 * ratioH), java.awt.Image.SCALE_SMOOTH);
+        this.page.getRetour().setIcon(new ImageIcon(newimg));
+        this.page.getRetour().setBounds((int) round((20 + insets.left) * ratioW), ((int) round((935 + insets.top) * ratioH)), (int) round(263 * ratioW), (int) round(123 * ratioH));
+        this.page.getRetour().setSize((int) round(263 * ratioW), (int) round(123 * ratioH));
 
-        size = this.page.getApply().getPreferredSize();
-        this.page.getApply().setBounds((int) round((860 + insets.left) * ratioW), ((int) round((935 + insets.top) * ratioH)), size.width, size.height);
-        this.page.getApply().setSize((int) round(this.page.getApply().getWidth() * ratioW), (int) round(this.page.getApply().getHeight() * ratioH));
+        newimg = this.page.getApplyI().getScaledInstance((int) round(251 * ratioW), (int) round(111 * ratioH), java.awt.Image.SCALE_SMOOTH);
+        this.page.getApply().setIcon(new ImageIcon(newimg));
+        this.page.getApply().setBounds((int) round((860 + insets.left) * ratioW), ((int) round((935 + insets.top) * ratioH)), (int) round(251 * ratioW), (int) round(111 * ratioH));
+        this.page.getApply().setSize((int) round(251 * ratioW), (int) round(111 * ratioH));
 
-        size = this.page.getCredits().getPreferredSize();
-        this.page.getCredits().setBounds((int) round((1640 + insets.left) * ratioW), ((int) round((935 + insets.top) * ratioH)), size.width, size.height);
-        this.page.getCredits().setSize((int) round(this.page.getCredits().getWidth() * ratioW), (int) round(this.page.getCredits().getHeight() * ratioH));
+        newimg = this.page.getCreditsI().getScaledInstance((int) round(251 * ratioW), (int) round(111 * ratioH), java.awt.Image.SCALE_SMOOTH);
+        this.page.getCredits().setIcon(new ImageIcon(newimg));
+        this.page.getCredits().setBounds((int) round((1640 + insets.left) * ratioW), ((int) round((935 + insets.top) * ratioH)), (int) round(251 * ratioW), (int) round(111 * ratioH));
+        this.page.getCredits().setSize((int) round(251 * ratioW), (int) round(111 * ratioH));
 
         //labels
         size = this.page.getLabelLanguage().getPreferredSize();
@@ -60,38 +66,41 @@ public class SettingsAdapterListener implements ComponentListener {
         this.page.getLabelSound().setSize((int) round(this.page.getLabelSound().getWidth() * ratioW), (int) round(this.page.getLabelSound().getHeight() * ratioH));
 
         //left & right
-        size = this.page.getLeftLanguage().getPreferredSize();
-        this.page.getLeftLanguage().setBounds((int) round((340 + insets.left) * ratioW), ((int) round((215 + insets.top) * ratioH)), size.width * 3 / 2 - 20, size.height * 3 / 2 - 20);
-        this.page.getLeftLanguage().setSize((int) round(this.page.getLeftLanguage().getWidth() * ratioW), (int) round(this.page.getLeftLanguage().getHeight() * ratioH));
+        newimg = this.page.getLeftI().getScaledInstance((int) round(117 * ratioW), (int) round(117 * ratioH), java.awt.Image.SCALE_SMOOTH);
+        this.page.getLeftLanguage().setIcon(new ImageIcon(newimg));        
+        this.page.getLeftLanguage().setBounds((int) round((350 + insets.left) * ratioW), ((int) round((235 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
+        this.page.getLeftLanguage().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
 
-        size = this.page.getLeftFS().getPreferredSize();
-        this.page.getLeftFS().setBounds((int) round((340 + insets.left) * ratioW), ((int) round((385 + insets.top) * ratioH)), size.width * 3 / 2 - 20, size.height * 3 / 2 - 20);
-        this.page.getLeftFS().setSize((int) round(this.page.getLeftFS().getWidth() * ratioW), (int) round(this.page.getLeftFS().getHeight() * ratioH));
+        this.page.getLeftFS().setIcon(new ImageIcon(newimg));
+        this.page.getLeftFS().setBounds((int) round((350 + insets.left) * ratioW), ((int) round((400 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
+        this.page.getLeftFS().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
 
-        size = this.page.getLeftTheme().getPreferredSize();
-        this.page.getLeftTheme().setBounds((int) round((340 + insets.left) * ratioW), ((int) round((550 + insets.top) * ratioH)), size.width * 3 / 2 - 20, size.height * 3 / 2 - 20);
-        this.page.getLeftTheme().setSize((int) round(this.page.getLeftTheme().getWidth() * ratioW), (int) round(this.page.getLeftTheme().getHeight() * ratioH));
+        this.page.getLeftTheme().setIcon(new ImageIcon(newimg));
+        this.page.getLeftTheme().setBounds((int) round((350 + insets.left) * ratioW), ((int) round((565 + insets.top) * ratioH)),(int) round(117 * ratioW), (int) round(117 * ratioH));
+        this.page.getLeftTheme().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
 
-        size = this.page.getLeftSound().getPreferredSize();
-        this.page.getLeftSound().setBounds((int) round((340 + insets.left) * ratioW), ((int) round((715 + insets.top) * ratioH)), size.width * 3 / 2 - 20, size.height * 3 / 2 - 20);
-        this.page.getLeftSound().setSize((int) round(this.page.getLeftSound().getWidth() * ratioW), (int) round(this.page.getLeftSound().getHeight() * ratioH));
+        this.page.getLeftSound().setIcon(new ImageIcon(newimg));
+        this.page.getLeftSound().setBounds((int) round((350 + insets.left) * ratioW), ((int) round((730 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
+        this.page.getLeftSound().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
 
-        size = this.page.getRightLanguage().getPreferredSize();
-        this.page.getRightLanguage().setBounds((int) round((1510 + insets.left) * ratioW), ((int) round((215 + insets.top) * ratioH)), size.width * 3 / 2 - 20, size.height * 3 / 2 - 20);
-        this.page.getRightLanguage().setSize((int) round(this.page.getRightLanguage().getWidth() * ratioW), (int) round(this.page.getRightLanguage().getHeight() * ratioH));
+        newimg = this.page.getRightI().getScaledInstance((int) round(117 * ratioW), (int) round(117 * ratioH), java.awt.Image.SCALE_SMOOTH);
+        this.page.getRightLanguage().setIcon( new ImageIcon(newimg));
+        this.page.getRightLanguage().setBounds((int) round((1525 + insets.left) * ratioW), ((int) round((235 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
+        this.page.getRightLanguage().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
 
-        size = this.page.getRightFS().getPreferredSize();
-        this.page.getRightFS().setBounds((int) round((1510 + insets.left) * ratioW), ((int) round((385 + insets.top) * ratioH)), size.width * 3 / 2 - 20, size.height * 3 / 2 - 20);
-        this.page.getRightFS().setSize((int) round(this.page.getRightFS().getWidth() * ratioW), (int) round(this.page.getRightFS().getHeight() * ratioH));
+        this.page.getRightFS().setIcon( new ImageIcon(newimg));
+        this.page.getRightFS().setBounds((int) round((1525 + insets.left) * ratioW), ((int) round((400 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
+        this.page.getRightFS().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
 
-        size = this.page.getRightTheme().getPreferredSize();
-        this.page.getRightTheme().setBounds((int) round((1510 + insets.left) * ratioW), ((int) round((550 + insets.top) * ratioH)), size.width * 3 / 2 - 20, size.height * 3 / 2 - 20);
-        this.page.getRightTheme().setSize((int) round(this.page.getRightTheme().getWidth() * ratioW), (int) round(this.page.getRightTheme().getHeight() * ratioH));
+        this.page.getRightTheme().setIcon( new ImageIcon(newimg));
+        this.page.getRightTheme().setBounds((int) round((1525 + insets.left) * ratioW), ((int) round((565 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
+        this.page.getRightTheme().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
 
-        size = this.page.getRightSound().getPreferredSize();
-        this.page.getRightSound().setBounds((int) round((1510 + insets.left) * ratioW), ((int) round((715 + insets.top) * ratioH)), size.width * 3 / 2 - 20, size.height * 3 / 2 - 20);
-        this.page.getRightSound().setSize((int) round(this.page.getRightSound().getWidth() * ratioW), (int) round(this.page.getRightSound().getHeight() * ratioH));
+        this.page.getRightSound().setIcon( new ImageIcon(newimg));
+        this.page.getRightSound().setBounds((int) round((1525 + insets.left) * ratioW), ((int) round((730 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
+        this.page.getRightSound().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
 
+        this.page.callResize();
     }
 
     @Override
