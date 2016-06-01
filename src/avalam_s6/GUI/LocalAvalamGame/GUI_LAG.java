@@ -40,12 +40,11 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     private JButton undoB, redoB, retourB, saveB, playB, gauche, droite, fullscreenB, helpB, muteB;
     private Image background, cancel, fullscreen, mute, unmute, help, player_playing, player_waiting, play, pause, redo, retour, save, board, black, white, empty, restricted, w_selected, b_selected, w_possible, b_possible, iaSource, w_iaDest, b_iaDest;
     private final JButton[][] buttonmap;
-    private boolean callResize;
+    private boolean callResize, callPause, callMute;
     private final LAG_AdapterListener listener;
     private JLabel titre;
     private final Font font;
-    private int currentTurn;
-
+    private int currentTurn;    
     private JLabel p1name, p2name, p1score, p2score, p1color, p2color;
 
     ImageIcon wh, bl, em, re, wsel, bsel, wpos, bpos, iaSrc, wIADst, bIADst;
@@ -57,6 +56,8 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
      */
     public GUI_LAG() {
         this.callResize = false;
+        this.callPause = false;
+        this.callMute = false;
         this.listener = new LAG_AdapterListener(this);
         this.buttonmap = new JButton[9][9];
         this.currentTurn = 0;
@@ -199,6 +200,8 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.fullscreenB.addMouseListener(new LAG_UI_MouseListener("fullscreen", this));
         this.add(this.fullscreenB);
 
+        if(SetupManager.getElement("Son").equals("Non"))
+            this.mute = this.unmute;
         this.muteB = new JButton(new ImageIcon(this.mute));
         this.muteB.setBorder(BorderFactory.createEmptyBorder());
         this.muteB.setContentAreaFilled(false);
@@ -486,6 +489,14 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     public Font getLabelFont() {
         return this.font;
     }
+    
+    public void setCallPause(boolean val){
+        this.callPause = val;
+    }
+    
+    public void setMuteCall(boolean val){
+        this.callMute = val;
+    }
 
     @Override
     public void back() {
@@ -659,22 +670,17 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         }
         /* -- BOUTON PAUSE -- */
         Image newimg;
-        if (((Local_Avalam_Game) this.game).isPaused()) {
-            newimg = getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
-        } else {
-            newimg = getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        if(this.callPause){
+            newimg = getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);            
+            getPlayB().setIcon(new ImageIcon(newimg));
+            this.callPause = false;
         }
-        getPlayB().setIcon(new ImageIcon(newimg));
-
         /* -- BOUTON MUTE -- */
-        Image soundImg;
-        if (SoundEngine.isMuted()) {
-            soundImg = this.getUnMute().getScaledInstance((int) round(80 * ratioW), (int) round(80 * ratioH), java.awt.Image.SCALE_SMOOTH);
-        } else {
-            soundImg = this.getMute().getScaledInstance((int) round(80 * ratioW), (int) round(80 * ratioH), java.awt.Image.SCALE_SMOOTH);
+        if(this.callMute){        
+            newimg = this.getMute().getScaledInstance((int) round(80 * ratioW), (int) round(80 * ratioH), java.awt.Image.SCALE_SMOOTH);
+            getMuteB().setIcon(new ImageIcon(newimg));
+            this.callMute = false;
         }
-        getMuteB().setIcon(new ImageIcon(soundImg));
-        
         /* undo redo */
         
         this.undoB.setEnabled(!((Local_Avalam_Game) this.game).getHistory().isEmpty());
@@ -690,6 +696,14 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     private void updateScore() {
         this.p1score.setText("Score : " + ((Local_Avalam_Game) this.game).getScore(1));
         this.p2score.setText("Score : " + ((Local_Avalam_Game) this.game).getScore(2));
+    }
+
+    void setPlay(Image icon) {
+        this.play = icon;
+    }
+
+    void setMute(Image icon) {
+        this.mute = icon;
     }
 
 }
