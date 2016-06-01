@@ -160,6 +160,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.undoB.setContentAreaFilled(false);
         this.undoB.setFocusPainted(false);
         this.undoB.addMouseListener(new LAG_UI_MouseListener("cancel", this));
+        this.undoB.setEnabled(false);
         this.add(this.undoB);
 
         this.retourB = new JButton(new ImageIcon(this.retour));
@@ -174,6 +175,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.redoB.setContentAreaFilled(false);
         this.redoB.setFocusPainted(false);
         this.redoB.addMouseListener(new LAG_UI_MouseListener("redo", this));
+        this.redoB.setEnabled(false);
         this.add(this.redoB);
 
         this.saveB = new JButton(new ImageIcon(this.save));
@@ -672,6 +674,12 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             soundImg = this.getMute().getScaledInstance((int) round(80 * ratioW), (int) round(80 * ratioH), java.awt.Image.SCALE_SMOOTH);
         }
         getMuteB().setIcon(new ImageIcon(soundImg));
+        
+        /* undo redo */
+        
+        this.undoB.setEnabled(!((Local_Avalam_Game) this.game).getHistory().isEmpty());
+        this.redoB.setEnabled(!((Local_Avalam_Game) this.game).getCancelled_moves().isEmpty());
+        
         /* -- Resize -- */
         if (this.callResize) {
             this.listener.componentResized(null);
