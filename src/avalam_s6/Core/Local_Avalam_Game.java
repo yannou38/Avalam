@@ -264,6 +264,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         if (!this.players[current_player].isAI()) { // Le joueur actuel est un vrai joueur
             if(this.players[current_player+1 % NB_PLAYERS].isAI()) { // L'ennemi est un IA
                 AIPlayerHardAB ia = new AIPlayerHardAB("Help",AvalamColor.WHITE,this.players[current_player].getOwner());
+                ia.setGame(this);
                 return ia.play();
             }
         }
