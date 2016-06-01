@@ -42,10 +42,6 @@ public class SoundEngine {
             System.out.println("Error - " + SoundEngine.class.toString());
             Logger.getLogger(SoundEngine.class.getName()).log(Level.SEVERE, null, ex);
         }
-        SoundEngine.play("./ressources/sounds/game_ambient2.wav");
-        if (SetupManager.getElement("Son").equals("Non")) {
-            SoundEngine.toggleMute();
-        }
     }
 
     public static void play(String filePath) {

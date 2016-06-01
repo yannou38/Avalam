@@ -38,6 +38,10 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         this.initFrame(WindowState.MAIN);
         /* ADD KB DISPATCHER */
         getCurrentKeyboardFocusManager().addKeyEventDispatcher(new CustomKeyboardDispatcher(this));
+        SoundEngine.play("./ressources/sounds/game_ambient.wav");
+        if (SetupManager.getElement("Son").equals("Non")) {
+            SoundEngine.toggleMute();
+        }
     }
 
     public void setRenderMode() {
@@ -166,11 +170,6 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).stop();
         this.setGameTitle(s);
-        //((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).deleteGame();
-        
-        //((GUI_FinalScreen) this.panelList[WindowState.VICTORY.getValue()]).setGrid(g);
-        //((GUI_FinalScreen) this.panelList[WindowState.VICTORY.getValue()]).setWinningText(p);
-        //this.setwState(WindowState.VICTORY);
     }
     
     public void setGameTitle(String s) {
