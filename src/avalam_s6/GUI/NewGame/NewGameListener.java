@@ -6,10 +6,12 @@
 package avalam_s6.GUI.NewGame;
 
 import avalam_s6.Core.Globals.SetupManager;
+import avalam_s6.GUI.HomePage.GUI_HomePage;
 import avalam_s6.GUI.Main_Frame;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import static java.lang.Math.round;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -100,13 +102,19 @@ public class NewGameListener implements MouseListener {
     @Override
     public void mouseEntered(MouseEvent e) {
         //replace the icon with another
-        ((JButton) e.getSource()).setIcon(new ImageIcon(this.icon));
+        double ratioW = (double) this.page.getWidth() / (double) 1920;
+        double ratioH = (double) this.page.getHeight() / (double) 1080;
+        Image newimg = this.icon.getScaledInstance(((int) round(icon.getWidth(null) * ratioW)), ((int) round(icon.getHeight(null) * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        ((JButton) e.getSource()).setIcon(new ImageIcon(newimg));
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
         //replace the icon with another
-        ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
+        double ratioW = (double) this.page.getWidth() / (double) 1920;
+        double ratioH = (double) this.page.getHeight() / (double) 1080;
+        Image newimg = this.iconbase.getScaledInstance(((int) round(iconbase.getWidth(null) * ratioW)), ((int) round(iconbase.getHeight(null) * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        ((JButton) e.getSource()).setIcon(new ImageIcon(newimg));
     }
 
 }

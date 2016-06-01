@@ -6,9 +6,11 @@
 package avalam_s6.GUI.NewGame;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.*;
 import static java.lang.Math.round;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -16,7 +18,7 @@ import static java.lang.Math.round;
  */
 public class NewGameAdapterListener implements ComponentListener {
 
-    private GUI_NewGame ng;
+    private final GUI_NewGame ng;
 
     public NewGameAdapterListener(GUI_NewGame newgame) {
         this.ng = newgame;
@@ -26,37 +28,54 @@ public class NewGameAdapterListener implements ComponentListener {
     @Override
     public void componentResized(ComponentEvent e) {
         Insets insets = this.ng.getInsets();
+        Image newimg;
+        Dimension size;
+        
         //1920-1080 => taille de base
         double ratioW = (double) this.ng.getWidth() / (double) 1920;
         double ratioH = (double) this.ng.getHeight() / (double) 1080;
-        Dimension size = this.ng.getRetour().getPreferredSize();
-        this.ng.getRetour().setBounds((int) round((25 + insets.left) * ratioW), ((int) round((934 + insets.top) * ratioH)), size.width, size.height);
-        this.ng.getRetour().setSize((int) round(this.ng.getRetour().getWidth() * ratioW), (int) round(this.ng.getRetour().getHeight() * ratioH));
+        
+        newimg = this.ng.getReturnI().getScaledInstance(((int) round(263 * ratioW)), ((int) round(123 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        this.ng.getRetour().setIcon(new ImageIcon(newimg));
+        this.ng.getRetour().setBounds((int) round((25 + insets.left) * ratioW), ((int) round((934 + insets.top) * ratioH)), (int) round(263 * ratioW), (int) round(123 * ratioH));
+        this.ng.getRetour().setSize((int) round(263 * ratioW), (int) round(123 * ratioH));
 
-        size = this.ng.getStart().getPreferredSize();
-        this.ng.getStart().setBounds((int) round((449 + insets.left) * ratioW), ((int) round((904 + insets.top) * ratioH)), size.width, size.height);
-        this.ng.getStart().setSize((int) round(this.ng.getStart().getWidth() * ratioW), (int) round(this.ng.getStart().getHeight() * ratioH));
-
-        size = this.ng.getPreccolor1().getPreferredSize();
-        this.ng.getPreccolor1().setBounds((int) round((15 + insets.left) * ratioW), ((int) round((389 + insets.top) * ratioH)), size.width, size.height);
-        this.ng.getPreccolor1().setSize((int) round(this.ng.getPreccolor1().getWidth() * ratioW), (int) round(this.ng.getPreccolor1().getHeight() * ratioH));
-        size = this.ng.getP1color().getPreferredSize();
-        this.ng.getP1color().setBounds((int) round((129 + insets.left) * ratioW), ((int) round((394 + insets.top) * ratioH)), size.width, size.height);
-        this.ng.getP1color().setSize((int) round(this.ng.getP1color().getWidth() * ratioW), (int) round(this.ng.getP1color().getHeight() * ratioH));
-        size = this.ng.getSupcolor1().getPreferredSize();
-        this.ng.getSupcolor1().setBounds((int) round((536 + insets.left) * ratioW), ((int) round((387 + insets.top) * ratioH)), size.width, size.height);
-        this.ng.getSupcolor1().setSize((int) round(this.ng.getSupcolor1().getWidth() * ratioW), (int) round(this.ng.getSupcolor1().getHeight() * ratioH));
-
-        size = this.ng.getPreccolor2().getPreferredSize();
-        this.ng.getPreccolor2().setBounds((int) round((1267 + insets.left) * ratioW), ((int) round((389 + insets.top) * ratioH)), size.width, size.height);
-        this.ng.getPreccolor2().setSize((int) round(this.ng.getPreccolor2().getWidth() * ratioW), (int) round(this.ng.getPreccolor2().getHeight() * ratioH));
-        size = this.ng.getP2color().getPreferredSize();
-        this.ng.getP2color().setBounds((int) round((1381 + insets.left) * ratioW), ((int) round((394 + insets.top) * ratioH)), size.width, size.height);
-        this.ng.getP2color().setSize((int) round(this.ng.getP2color().getWidth() * ratioW), (int) round(this.ng.getP2color().getHeight() * ratioH));
-        size = this.ng.getSupcolor2().getPreferredSize();
-        this.ng.getSupcolor2().setBounds((int) round((1788 + insets.left) * ratioW), ((int) round((387 + insets.top) * ratioH)), size.width, size.height);
-        this.ng.getSupcolor2().setSize((int) round(this.ng.getSupcolor2().getWidth() * ratioW), (int) round(this.ng.getSupcolor2().getHeight() * ratioH));
-
+        newimg = this.ng.getStartI().getScaledInstance(((int) round(1012 * ratioW)), ((int) round(141 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        this.ng.getStart().setIcon(new ImageIcon(newimg));
+        this.ng.getStart().setBounds((int) round((449 + insets.left) * ratioW), ((int) round((904 + insets.top) * ratioH)), (int) round(1012 * ratioW), (int) round(141 * ratioH));
+        this.ng.getStart().setSize((int) round(1012 * ratioW), (int) round(141 * ratioH));
+        
+        
+        newimg = this.ng.getPrecI().getScaledInstance(((int) round(117 * ratioW)), ((int) round(117 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        this.ng.getPreccolor1().setIcon(new ImageIcon(newimg));
+        this.ng.getPreccolor1().setBounds((int) round((15 + insets.left) * ratioW), ((int) round((389 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
+        this.ng.getPreccolor1().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
+        
+        newimg = this.ng.getColorImgs()[this.ng.getP1colorselect()].getScaledInstance(((int) round(412 * ratioW)), ((int) round(103 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        this.ng.getP1color().setIcon(new ImageIcon(newimg));
+        this.ng.getP1color().setBounds((int) round((129 + insets.left) * ratioW), ((int) round((394 + insets.top) * ratioH)), (int) round(1012 * ratioW), (int) round(141 * ratioH));
+        this.ng.getP1color().setSize((int) round(412 * ratioW), (int) round(103 * ratioH));
+        
+        newimg = this.ng.getSupI().getScaledInstance(((int) round(117 * ratioW)), ((int) round(117 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        this.ng.getSupcolor1().setIcon(new ImageIcon(newimg));
+        this.ng.getSupcolor1().setBounds((int) round((536 + insets.left) * ratioW), ((int) round((387 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
+        this.ng.getSupcolor1().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
+        
+        newimg = this.ng.getPrecI().getScaledInstance(((int) round(117 * ratioW)), ((int) round(117 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        this.ng.getPreccolor2().setIcon(new ImageIcon(newimg));
+        this.ng.getPreccolor2().setBounds((int) round((1267 + insets.left) * ratioW), ((int) round((389 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
+        this.ng.getPreccolor2().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
+        
+        newimg = this.ng.getColorImgs()[this.ng.getP2colorselect()].getScaledInstance(((int) round(412 * ratioW)), ((int) round(103 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        this.ng.getP2color().setIcon(new ImageIcon(newimg));
+        this.ng.getP2color().setBounds((int) round((1381 + insets.left) * ratioW), ((int) round((394 + insets.top) * ratioH)), (int) round(1012 * ratioW), (int) round(141 * ratioH));
+        this.ng.getP2color().setSize((int) round(412 * ratioW), (int) round(103 * ratioH));
+        
+        newimg = this.ng.getSupI().getScaledInstance(((int) round(117 * ratioW)), ((int) round(117 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        this.ng.getSupcolor2().setIcon(new ImageIcon(newimg));
+        this.ng.getSupcolor2().setBounds((int) round((1788 + insets.left) * ratioW), ((int) round((387 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
+        this.ng.getSupcolor2().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
+        
         size = this.ng.getPrec1().getPreferredSize();
         this.ng.getPrec1().setBounds((int) round((15 + insets.left) * ratioW), ((int) round((577 + insets.top) * ratioH)), size.width, size.height);
         this.ng.getPrec1().setSize((int) round(this.ng.getPrec1().getWidth() * ratioW), (int) round(this.ng.getPrec1().getHeight() * ratioH));

@@ -516,6 +516,54 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         return p2color;
     }
 
+    public int getSelectedGrid() {
+        return selectedGrid;
+    }
+
+    public int getP1select() {
+        return p1select;
+    }
+
+    public int getP2select() {
+        return p2select;
+    }
+
+    public int getP1colorselect() {
+        return p1colorselect;
+    }
+
+    public int getP2colorselect() {
+        return p2colorselect;
+    }
+
+    public Image getPrecI() {
+        return precI;
+    }
+
+    public Image getSupI() {
+        return supI;
+    }
+
+    public Image getReturnI() {
+        return returnI;
+    }
+
+    public Image getStartI() {
+        return startI;
+    }
+
+    public Image[] getAIimgs() {
+        return AIimgs;
+    }
+
+    public Image[] getColorImgs() {
+        return ColorImgs;
+    }
+
+    public Image[] getPawnList() {
+        return pawnList;
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         // Affichage Background

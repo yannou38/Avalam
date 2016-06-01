@@ -44,6 +44,9 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     private Timer t;
     private boolean isGameFinished;
     private boolean isGamePaused;
+    
+    /* Repain IA Activity */
+    private Move lastIAMove;
 
     public Local_Avalam_Game(GuiManager_INTERFACE pGui) throws GridSizeException, GridCharException, IOException {
         this(pGui, new Grid(new Level_Parser("default").readLevel(), "default"), new ControlledPlayer("Jon Doe", AvalamColor.WHITE, Owner.PLAYER_1), new AIPlayerEasy("Bot_Frank", AvalamColor.BLACK, Owner.PLAYER_2), new Stack<>(), new Stack<>(), 0, 0);
@@ -68,6 +71,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         this.isTurnFinished = false;
         this.isGameFinished = winCheck() > 0;
         this.isGamePaused = this.isGameFinished;
+        this.lastIAMove = null;
         Input.resetClick();
         Input.setInputGame(this);
     }
@@ -149,6 +153,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
 
             if (m != null) {
                 if (this.players[this.current_player].isAI()) { // IA
+                    this.lastIAMove = m;
                     this.grid.moveCell(m.getC_src(), m.getC_dst());
                     this.history.add(m);
                     this.isTurnFinished = true;
@@ -283,6 +288,10 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     @Override
     public Timer getTimer() {
         return this.t;
+    }
+    
+    public Move getLastIaMove() {
+        return this.lastIAMove;
     }
 
     @Override
