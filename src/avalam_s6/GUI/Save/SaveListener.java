@@ -70,10 +70,12 @@ public class SaveListener implements MouseListener {
                 }
                 this.page.back();
                 source.setIcon(new ImageIcon(this.iconbase));
+                this.page.resetSlots();
                 break;
             case "return":
                 this.page.back();
                 source.setIcon(new ImageIcon(this.iconbase));
+                this.page.resetSlots();
                 break;
             case "slot":
                 for (int i = 1; i < this.page.getSlotslistener().length + 1; i++) {
@@ -92,6 +94,10 @@ public class SaveListener implements MouseListener {
                 break;
         }
 
+    }
+
+    public Image getIconbase() {
+        return iconbase;
     }
 
     @Override

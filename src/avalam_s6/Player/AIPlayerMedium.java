@@ -58,7 +58,6 @@ public class AIPlayerMedium extends AIPlayer {
                             if (this.game.getGrid().canStack(this.game.getGrid().getCellAt(c0), this.game.getGrid().getCellAt(tabCoord[k]))) {
                                 Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), tabCoord[k], this.game.getGrid().getCellAt(tabCoord[k]).getSize(), this);
                                 value = miniMax(m, 1 + (nbtours / 3));
-                                System.out.println("Je considère le coup " + c0.getY()+ " " + c0.getX() + " "+tabCoord[k].getY() + " " + tabCoord[k].getX()+ " il vaut " +value);
                                 if (value > maxvalue) {
                                     maxvalue = value;
                                     mesCoups.clear();
@@ -67,7 +66,6 @@ public class AIPlayerMedium extends AIPlayer {
                                     mesCoups.add(m);
                                 }
                                 else{
-                                    System.out.println(value);
                                 }
                                 //sinon on ignore, le coups est moins bon
                             }

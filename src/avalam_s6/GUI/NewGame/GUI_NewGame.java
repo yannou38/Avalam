@@ -261,19 +261,17 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         this.name1.setEditable(true);
         this.name1.setFont(localFont.deriveFont(45f));
         this.name1.setBorder(BorderFactory.createEmptyBorder());
-        this.name1.setSize(150, 50);
-        this.name1.setText("Name_1");
+        this.name1.setText("Name 1");
         this.name1.setOpaque(false);
 
         this.name2 = new JTextField();
         this.name2.setFont(localFont.deriveFont(45f));
         this.name2.setBorder(BorderFactory.createEmptyBorder());
-        this.name2.setSize(150, 50);
-        this.name2.setText("Name_2");
+        this.name2.setText("Name 2");
         this.name2.setOpaque(false);
         
         this.grilleName = new JLabel(this.gridNameList[this.selectedGrid]);
-        this.grilleName.setHorizontalAlignment(JTextField.CENTER);
+        this.grilleName.setHorizontalAlignment(JLabel.CENTER);
         this.grilleName.setBorder(BorderFactory.createEmptyBorder());
         this.grilleName.setFont(localFont.deriveFont(1 * 30f));
         this.add(this.grilleName);

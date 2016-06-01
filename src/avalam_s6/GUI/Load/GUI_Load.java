@@ -136,6 +136,14 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         this.callResize();
     }
 
+    public void resetSlots() {
+        this.slotnumber = 0;
+        for (int i = 0; i < this.slots.length; i++) {
+            this.slotslistener[i].setIsSelected(false);
+            this.slots[i].setIcon(new ImageIcon(this.slot));
+        }
+    }
+
     public JButton getHomereturn() {
         return homereturn;
     }
@@ -202,9 +210,5 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
     @Override
     public void callResize() {
         this.callResize = true;
-    }
-
-    public void resetSlotSelection() {
-        this.slotnumber = 0;
     }
 }
