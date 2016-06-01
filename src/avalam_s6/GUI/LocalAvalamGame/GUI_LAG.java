@@ -105,7 +105,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                 b.addMouseListener(new LAG_MouseListener(c));
                 b.setHorizontalTextPosition(JButton.CENTER);
                 b.setVerticalTextPosition(JButton.CENTER);
-                b.setFont(b.getFont().deriveFont(1*25f));
+                b.setFont(b.getFont().deriveFont(1 * 25f));
                 this.buttonmap[j][i] = b;
                 //b.setOpaque(false);
                 this.add(b);
@@ -236,7 +236,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             this.iaSource = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/empty_ia.png"));
             this.w_iaDest = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/" + pWhite.getValue() + "_ia.png"));
             this.b_iaDest = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/" + pBlack.getValue() + "_ia.png"));
-            
+
         } catch (IOException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -278,9 +278,9 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void updateLastIaMove() {
-        Move x = ((Local_Avalam_Game)this.game).getLastIaMove();
+        Move x = ((Local_Avalam_Game) this.game).getLastIaMove();
         if (x != null) {
             this.IASrc = x.getC_src();
             this.IADst = x.getC_dst();
@@ -298,7 +298,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     public void start() {
         this.game.getTimer().start();
-        ((Local_Avalam_Game)this.game).updateTitle();
+        ((Local_Avalam_Game) this.game).updateTitle();
     }
 
     public void stop() {
@@ -314,7 +314,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         //Container mainFrame = this.getParent().getParent().getParent().getParent();
         SaveParser_Reader lParser = new SaveParser_Reader((Main_Frame) mFrame, pSlotName);
         this.game = new Local_Avalam_Game((Main_Frame) mFrame, lParser.getaGrid(), lParser.getaPlayer1(), lParser.getaPlayer2(), lParser.getaUndo(), lParser.getaRedo(), lParser.getaCurrentPlayer(), lParser.getaTurns());
-        ((Local_Avalam_Game)this.game).updateTitle();
+        ((Local_Avalam_Game) this.game).updateTitle();
     }
 
     public JButton getUndoB() {
@@ -452,6 +452,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     public Image getUnMute() {
         return unmute;
     }
+
     public Image getHelp() {
         return help;
     }
@@ -558,11 +559,10 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                         case PLAYER_1:
                             this.buttonmap[i][j].setIcon(wh);
                             this.buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
-                            if (((Local_Avalam_Game)this.game).getPlayers()[0].getColor().getValue().equals("black")
-                                || ((Local_Avalam_Game)this.game).getPlayers()[0].getColor().getValue().equals("purple")
-                                || ((Local_Avalam_Game)this.game).getPlayers()[0].getColor().getValue().equals("blue")
-                            ) {
-                               this.buttonmap[i][j].setForeground(Color.WHITE); 
+                            if (((Local_Avalam_Game) this.game).getPlayers()[0].getColor().getValue().equals("black")
+                                    || ((Local_Avalam_Game) this.game).getPlayers()[0].getColor().getValue().equals("purple")
+                                    || ((Local_Avalam_Game) this.game).getPlayers()[0].getColor().getValue().equals("blue")) {
+                                this.buttonmap[i][j].setForeground(Color.WHITE);
                             } else {
                                 this.buttonmap[i][j].setForeground(Color.BLACK);
                             }
@@ -570,11 +570,10 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                         case PLAYER_2:
                             this.buttonmap[i][j].setIcon(bl);
                             this.buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
-                            if (((Local_Avalam_Game)this.game).getPlayers()[1].getColor().getValue().equals("black")
-                                || ((Local_Avalam_Game)this.game).getPlayers()[1].getColor().getValue().equals("purple")
-                                || ((Local_Avalam_Game)this.game).getPlayers()[1].getColor().getValue().equals("blue")
-                            ) {
-                               this.buttonmap[i][j].setForeground(Color.WHITE); 
+                            if (((Local_Avalam_Game) this.game).getPlayers()[1].getColor().getValue().equals("black")
+                                    || ((Local_Avalam_Game) this.game).getPlayers()[1].getColor().getValue().equals("purple")
+                                    || ((Local_Avalam_Game) this.game).getPlayers()[1].getColor().getValue().equals("blue")) {
+                                this.buttonmap[i][j].setForeground(Color.WHITE);
                             } else {
                                 this.buttonmap[i][j].setForeground(Color.BLACK);
                             }
@@ -595,11 +594,31 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                 this.buttonmap[i][j].setOpaque(false);
             }
         }
-        if (IASrc != null) {
-            
+        if (IASrc != null && !IASrc.equals(Input.getMouseSrcPosition())) {
+            this.buttonmap[IASrc.getX()][IASrc.getY()].setIcon(iaSrc);
         }
-        if (IADst != null) {
-            
+        if (IADst != null && !IADst.equals(Input.getMouseSrcPosition())) {
+            if (gr.getCellAt(IADst).getOwner().getValue() == Owner.PLAYER_1.getValue()) {
+                this.buttonmap[IADst.getX()][IADst.getY()].setIcon(wIADst);
+                this.buttonmap[IADst.getX()][IADst.getY()].setText(Integer.toString(gr.getCellAt(IADst).getSize()));
+                if (((Local_Avalam_Game) this.game).getPlayers()[0].getColor().getValue().equals("black")
+                        || ((Local_Avalam_Game) this.game).getPlayers()[0].getColor().getValue().equals("purple")
+                        || ((Local_Avalam_Game) this.game).getPlayers()[0].getColor().getValue().equals("blue")) {
+                    this.buttonmap[IADst.getX()][IADst.getY()].setForeground(Color.WHITE);
+                } else {
+                    this.buttonmap[IADst.getX()][IADst.getY()].setForeground(Color.BLACK);
+                }
+            } else {
+                this.buttonmap[IADst.getX()][IADst.getY()].setIcon(bIADst);
+                this.buttonmap[IADst.getX()][IADst.getY()].setText(Integer.toString(gr.getCellAt(IADst).getSize()));
+                if (((Local_Avalam_Game) this.game).getPlayers()[1].getColor().getValue().equals("black")
+                        || ((Local_Avalam_Game) this.game).getPlayers()[1].getColor().getValue().equals("purple")
+                        || ((Local_Avalam_Game) this.game).getPlayers()[1].getColor().getValue().equals("blue")) {
+                    this.buttonmap[IADst.getX()][IADst.getY()].setForeground(Color.WHITE);
+                } else {
+                    this.buttonmap[IADst.getX()][IADst.getY()].setForeground(Color.BLACK);
+                } 
+            }
         }
         /* -- BOUTON PAUSE -- */
         Image newimg;
@@ -609,10 +628,10 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             newimg = getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         }
         getPlayB().setIcon(new ImageIcon(newimg));
-        
+
         /* -- BOUTON MUTE -- */
         Image soundImg;
-        if (SoundEngine.isMuted()){
+        if (SoundEngine.isMuted()) {
             soundImg = this.getUnMute().getScaledInstance((int) round(80 * ratioW), (int) round(80 * ratioH), java.awt.Image.SCALE_SMOOTH);
         } else {
             soundImg = this.getMute().getScaledInstance((int) round(80 * ratioW), (int) round(80 * ratioH), java.awt.Image.SCALE_SMOOTH);

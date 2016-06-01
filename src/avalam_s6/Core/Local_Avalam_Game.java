@@ -84,6 +84,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
             this.grid.undoMove(this.cancelled_moves.lastElement());
         }
         this.isGameFinished = false;
+        this.lastIAMove = null;
     }
 
     //TODO: Check user is able to redo (GUI check if cancelled_moves is empty and call or not this function)
