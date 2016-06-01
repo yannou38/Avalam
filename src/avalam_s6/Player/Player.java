@@ -39,4 +39,9 @@ public abstract class Player implements Player_INTERFACE {
     public String getName() {
         return this.name;
     }
+    
+    @Override
+    public Owner getOwner() {
+        return this.owner;
+    }
 }

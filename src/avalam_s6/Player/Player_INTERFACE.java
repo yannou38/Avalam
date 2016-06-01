@@ -8,6 +8,7 @@ package avalam_s6.Player;
 import avalam_s6.Core.Coordinate;
 import avalam_s6.Core.Game_INTERFACE;
 import avalam_s6.Core.Move;
+import avalam_s6.Core.Owner;
 
 /**
  *
@@ -31,4 +32,6 @@ public interface Player_INTERFACE {
     public boolean isAI();
 
     public String getName();
+    
+    public Owner getOwner();
 }

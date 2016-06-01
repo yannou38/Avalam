@@ -20,6 +20,7 @@ import avalam_s6.GUI.GuiManager_INTERFACE;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.Player.AIPlayer;
 import avalam_s6.Player.AIPlayerEasy;
+import avalam_s6.Player.AIPlayerHardAB;
 import avalam_s6.Player.ControlledPlayer;
 import java.io.IOException;
 
@@ -260,7 +261,13 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     }
 
     public Move getHint() {
-        return null; // NYI
+        if (!this.players[current_player].isAI()) { // Le joueur actuel est un vrai joueur
+            if(this.players[current_player+1 % NB_PLAYERS].isAI()) { // L'ennemi est un IA
+                AIPlayerHardAB ia = new AIPlayerHardAB("Help",AvalamColor.WHITE,this.players[current_player].getOwner());
+                return ia.play();
+            }
+        }
+        return null;
     }
 
     @Override
