@@ -40,7 +40,7 @@ public class AIPlayerHardMC extends AIPlayer {
         double value;
         Coordinate[] tabCoord = new Coordinate[8];
         
-        if(profondeur >0){
+        if(profondeur <2){
             return monteCarlo();
         }
         
@@ -62,7 +62,6 @@ public class AIPlayerHardMC extends AIPlayer {
                                 //un coup est possible, on l'évalue
                                 Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), tabCoord[k], this.game.getGrid().getCellAt(tabCoord[k]).getSize(), this);
                                 //On augmente l'horizon avec l'avancement de la partie (l'ia devient de plus en plus forte)
-                                //System.out.println("Ma pronfondeur actuelle est de " + (1+(BUFF / coups)));
                                 value = miniMaxUs(m, profondeur,-99999,99999);
                                 System.out.println("Je considère le coup " + c0.getY()+ " " + c0.getX() + " "+tabCoord[k].getY() + " " + tabCoord[k].getX()+ " il vaut " +value);
                                 if (value > maxvalue) {
@@ -324,6 +323,7 @@ public class AIPlayerHardMC extends AIPlayer {
             Random r = new Random();
             int monrand = r.nextInt(mesCoups.size());
             System.out.println("" + mesCoups.get(monrand).getC_src().getX() + " " + mesCoups.get(monrand).getC_src().getY() + " " + mesCoups.get(monrand).getC_dst().getX() + " " + mesCoups.get(monrand).getC_dst().getY());
+            System.out.println("valeur de "+ max);
             return mesCoups.get(monrand);
         }
         
@@ -393,13 +393,16 @@ public class AIPlayerHardMC extends AIPlayer {
                         }
                     }
                 }
-                if (this.game.getGrid().getCellAt(c[0]).getOwner().getValue() == this.owner.getValue()) {
+                if (this.game.getGrid().getCellAt(c[0]).getOwner().getValue() == Owner.PLAYER_1.getValue()) {
                     score_p1++;
-                } else if (this.game.getGrid().getCellAt(c[0]).getOwner().getValue() != this.owner.getValue()) {
+                } else if (this.game.getGrid().getCellAt(c[0]).getOwner().getValue() == Owner.PLAYER_2.getValue()) {
                     score_p1--;
                 }
+                
             }
         }
+        if(this.owner.getValue() == Owner.PLAYER_2.getValue())
+            score_p1 = -score_p1;
         if (score_p1 > 0) {
             return 1;
         } else if (score_p1 == 0) {
