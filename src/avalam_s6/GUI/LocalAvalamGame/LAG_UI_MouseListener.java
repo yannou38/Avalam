@@ -67,6 +67,7 @@ public class LAG_UI_MouseListener implements MouseListener {
                         game.changeNbTurns(1);
                     }
                 }
+                game.updateTitle();
                 break;
             case "cancel":
                 if (game.getHistory().size() > 0) { // Undo Possible
@@ -82,6 +83,7 @@ public class LAG_UI_MouseListener implements MouseListener {
                         game.changeNbTurns(-1);
                     }
                 }
+                game.updateTitle();
                 break;
             case "save":
                 mainFrame.setwState(WindowState.SAVE);

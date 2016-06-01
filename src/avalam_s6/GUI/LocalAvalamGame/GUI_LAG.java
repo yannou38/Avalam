@@ -282,6 +282,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     public void start() {
         this.game.getTimer().start();
+        ((Local_Avalam_Game)this.game).updateTitle();
     }
 
     public void stop() {
@@ -297,6 +298,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         //Container mainFrame = this.getParent().getParent().getParent().getParent();
         SaveParser_Reader lParser = new SaveParser_Reader((Main_Frame) mFrame, pSlotName);
         this.game = new Local_Avalam_Game((Main_Frame) mFrame, lParser.getaGrid(), lParser.getaPlayer1(), lParser.getaPlayer2(), lParser.getaUndo(), lParser.getaRedo(), lParser.getaCurrentPlayer(), lParser.getaTurns());
+        ((Local_Avalam_Game)this.game).updateTitle();
     }
 
     public JButton getUndoB() {

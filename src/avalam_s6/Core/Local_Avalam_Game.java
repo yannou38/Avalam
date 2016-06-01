@@ -66,11 +66,10 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     private void initGame() {
         this.t = new Timer(100, (ActionListener) this);
         this.isTurnFinished = false;
-        this.isGameFinished = false;
-        this.isGamePaused = false;
+        this.isGameFinished = winCheck() > 0;
+        this.isGamePaused = this.isGameFinished;
         Input.resetClick();
         Input.setInputGame(this);
-        this.updateTitle();
     }
 
     //TODO: Check user is able to undo (GUI check if history is empty and call or not this function)
@@ -80,6 +79,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
             this.cancelled_moves.add(this.history.pop());
             this.grid.undoMove(this.cancelled_moves.lastElement());
         }
+        this.isGameFinished = false;
     }
 
     //TODO: Check user is able to redo (GUI check if cancelled_moves is empty and call or not this function)
@@ -88,6 +88,9 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         if (!this.cancelled_moves.isEmpty()) {
             this.history.add(this.cancelled_moves.pop());
             this.grid.moveCell(this.history.lastElement().getC_src(), this.history.lastElement().getC_dst());
+        }
+        if (winCheck()>0) {
+            this.isGameFinished = true;
         }
     }
 
@@ -103,6 +106,8 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
             } else {
                 ((Main_Frame) this.gui).setGameTitle(this.getCurrentPlayer().getName() + " " + LanguageManager.getElement("Joue"));
             }
+        } else {
+            winningProcedure(winCheck());
         }
     }
 
@@ -169,7 +174,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
      * @return 1 or 2 if player 1 or 2 won, 3 in case of a null match, 0 if game
      * isn't finished.
      */
-    private int winCheck() {
+    public int winCheck() {
         Coordinate[] c = new Coordinate[9];
         for (int i = 0; i < 9; i++) {
             c[i] = new Coordinate();
@@ -258,6 +263,10 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
 
     public boolean isPaused() {
         return this.isGamePaused;
+    }
+    
+    public boolean isFinished() {
+        return this.isGameFinished;
     }
 
     public Move getHint() {
