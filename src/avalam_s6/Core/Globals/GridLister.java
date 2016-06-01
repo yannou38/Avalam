@@ -19,7 +19,7 @@ public class GridLister {
         Path p = Paths.get("./ressources/Levels");
         if (Files.exists(p) && Files.isDirectory(p)) {
             File f = new File("./ressources/Levels");
-            String[] rStr = new String[f.list().length -1]; // Remove README
+            String[] rStr = new String[f.list().length -2]; // Remove README and tutolevel
             int x = 0;
             for (String s : f.list()) {
                 if (!s.equals("Read_Me.txt") && !s.equals("tutolevel")) {

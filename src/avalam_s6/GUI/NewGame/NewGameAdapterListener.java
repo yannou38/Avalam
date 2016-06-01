@@ -84,6 +84,19 @@ public class NewGameAdapterListener implements ComponentListener {
         this.ng.getName2().setBounds((int) round((1432 + insets.left) * ratioW), ((int) round((776 + insets.top) * ratioH)), size.width, size.height);
         this.ng.getName2().setSize((int) round(this.ng.getName2().getWidth() * ratioW), (int) round(this.ng.getName2().getHeight() * ratioH));
 
+        size = this.ng.getPrecgrille().getPreferredSize();
+        this.ng.getPrecgrille().setBounds((int) round((670 + insets.left) * ratioW), ((int) round((229 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getPrecgrille().setSize((int) round(this.ng.getPrecgrille().getWidth() * ratioW), (int) round(this.ng.getPrecgrille().getHeight() * ratioH));
+        
+        size = this.ng.getSupgrille().getPreferredSize();
+        this.ng.getSupgrille().setBounds((int) round((1156 + insets.left) * ratioW), ((int) round((229 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getSupgrille().setSize((int) round(this.ng.getSupgrille().getWidth() * ratioW), (int) round(this.ng.getSupgrille().getHeight() * ratioH));
+        
+        size = this.ng.getGrilleName().getPreferredSize();
+        this.ng.getGrilleName().setBounds((int) round((769 + insets.left) * ratioW), ((int) round((229 + insets.top) * ratioH)), size.width, size.height);
+        this.ng.getGrilleName().setSize((int) round(384 * ratioW), (int) round(100 * ratioH));
+        
+        this.ng.callResize();
     }
 
     @Override

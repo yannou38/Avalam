@@ -7,7 +7,6 @@ package avalam_s6.GUI.NewGame;
 
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.GUI.Main_Frame;
-import avalam_s6.GUI.WindowState;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -69,6 +68,9 @@ public class NewGameListener implements MouseListener {
                     case "supia":
                         this.page.rightAI(playernum);
                         break;
+                    case "supgrille":
+                        this.page.rightGrille();
+                        break;
                 }
                 break;
             case "prec":
@@ -78,6 +80,9 @@ public class NewGameListener implements MouseListener {
                         break;
                     case "precia":
                         this.page.leftAI(playernum);
+                        break;
+                    case "precgrille":
+                        this.page.leftGrille();
                         break;
                 }
                 break;
