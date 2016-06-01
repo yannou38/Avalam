@@ -196,4 +196,8 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
     public void backWindow() {
         ((Gui_INTERFACE) this.panelList[this.wState.getValue()]).back();
     }
+    
+    public void resetHint() {
+        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).setHint(null);
+    }
 }

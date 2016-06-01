@@ -120,12 +120,8 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
      * Turn Logic
      */
     private void playATurn() {
-        this.updateTitle();
         /* Gestion Fin d'un tour */
         if (this.isTurnFinished) {
-            if (!this.isGamePaused && !this.isGameFinished) {
-                this.changeNbTurns(1);
-            }
             int w = winCheck();
             System.gc();
             switch (w) {
@@ -150,7 +146,6 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         }
         //System.out.println("Joueur : "+this.current_player);
         if (!this.isPaused()) {
-            this.updateTitle();
             Move m = this.players[this.current_player].play();
 
             if (m != null) {
@@ -159,12 +154,17 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
                     this.grid.moveCell(m.getC_src(), m.getC_dst());
                     this.history.add(m);
                     this.isTurnFinished = true;
+                    this.changeNbTurns(1);
+                    this.updateTitle();
                 } else if (this.grid.canStack(this.grid.getCellAt(m.getC_src()), this.grid.getCellAt(m.getC_dst()))) {
                     // JOUEUR
                     // MOVE OK
                     this.grid.moveCell(m.getC_src(), m.getC_dst());
                     this.history.add(m);
                     this.isTurnFinished = true;
+                    this.changeNbTurns(1);
+                    this.updateTitle();
+                    this.lastIAMove = null;
                 } else {
                     //TODO                   
                     /* Afficher warning de deplacement */
@@ -278,11 +278,10 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
 
     public Move getHint() {
         if (!this.players[current_player].isAI()) { // Le joueur actuel est un vrai joueur
-            if(this.players[current_player+1 % NB_PLAYERS].isAI()) { // L'ennemi est un IA
-                AIPlayerHardAB ia = new AIPlayerHardAB("Help",AvalamColor.WHITE,this.players[current_player].getOwner());
-                ia.setGame(this);
-                return ia.play();
-            }
+            AIPlayerHardAB ia = new AIPlayerHardAB("Help",AvalamColor.WHITE,this.players[current_player].getOwner());
+            ia.setGame(this);
+            Input.resetClick();
+            return ia.play();
         }
         return null;
     }

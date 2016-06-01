@@ -50,6 +50,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     ImageIcon wh, bl, em, re, wsel, bsel, wpos, bpos, iaSrc, wIADst, bIADst;
     Coordinate IASrc, IADst;
+    Coordinate hintSrc, hintDst;
 
     /**
      * Constructor.
@@ -69,6 +70,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         }
 
         this.font = localFont;
+        this.setHint(null);
         this.initComponents();
     }
 
@@ -461,6 +463,16 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         this.titre.setText(s);
     }
 
+    public void setHint(Move m) {
+        if (m == null) {
+            hintSrc = null;
+            hintDst = null;
+        } else {
+            hintSrc = m.getC_src();
+            hintDst = m.getC_dst();
+        }
+    }
+    
     public Font getLabelFont() {
         return this.font;
     }
@@ -504,7 +516,6 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
         }
         if (this.currentTurn != ((Local_Avalam_Game) this.getGame()).getTurns()) {
-
             if (((Local_Avalam_Game) this.getGame()).getTurns() % 2 == 0) {
                 this.gauche.setIcon(new ImageIcon(this.player_playing.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
                 this.droite.setIcon(new ImageIcon(this.player_waiting.getScaledInstance(((int) round(284 * ratioW)), ((int) round(671 * ratioH)), java.awt.Image.SCALE_SMOOTH)));
@@ -594,6 +605,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                 this.buttonmap[i][j].setOpaque(false);
             }
         }
+        /* Move IA */
         if (IASrc != null && !IASrc.equals(Input.getMouseSrcPosition())) {
             this.buttonmap[IASrc.getX()][IASrc.getY()].setIcon(iaSrc);
         }
@@ -618,6 +630,21 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                 } else {
                     this.buttonmap[IADst.getX()][IADst.getY()].setForeground(Color.BLACK);
                 } 
+            }
+        }
+        /* Hint */
+        if (hintSrc != null) {
+            if(gr.getCellAt(hintSrc).getOwner().getValue() == Owner.PLAYER_1.getValue()) {
+                this.buttonmap[hintSrc.getX()][hintSrc.getY()].setIcon(wsel);
+            } else {
+                this.buttonmap[hintSrc.getX()][hintSrc.getY()].setIcon(bsel);
+            }
+        }
+        if (hintDst != null) {
+            if(gr.getCellAt(hintDst).getOwner().getValue() == Owner.PLAYER_1.getValue()) {
+                this.buttonmap[hintDst.getX()][hintDst.getY()].setIcon(wpos);
+            } else {
+                this.buttonmap[hintDst.getX()][hintDst.getY()].setIcon(bpos);
             }
         }
         /* -- BOUTON PAUSE -- */
