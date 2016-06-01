@@ -9,7 +9,6 @@ import avalam_s6.Core.CellState;
 import avalam_s6.Core.Coordinate;
 import avalam_s6.Core.Local_Avalam_Game;
 import avalam_s6.Core.Owner;
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ComponentEvent;
@@ -117,10 +116,10 @@ public class LAG_AdapterListener implements ComponentListener {
                         newimg = this.page.getRestricted();
                     }
                 }
-                newimg = newimg.getScaledInstance(((int) round(92 * ratioW)), ((int) round(92 * ratioH)), java.awt.Image.SCALE_SMOOTH);
+                newimg = newimg.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH);
                 this.page.getButtonmap()[i][j].setIcon(new ImageIcon(newimg));
-                this.page.getButtonmap()[i][j].setBounds((int) round((650 + i * 92 + insets.left) * ratioW), ((int) round((260 + j * 92 + insets.top) * ratioH)), (int) round(92 * ratioW), (int) round(92 * ratioH));
-                this.page.getButtonmap()[i][j].setSize((int) round(92 * ratioW), (int) round(92 * ratioH));
+                this.page.getButtonmap()[i][j].setBounds((int) round((650 + i * 66 + insets.left) * ratioW), ((int) round((260 + j * 66 + insets.top) * ratioH)), (int) round(66 * ratioW), (int) round(66 * ratioH));
+                this.page.getButtonmap()[i][j].setSize((int) round(66 * ratioW), (int) round(66 * ratioH));
 
             }
         }
