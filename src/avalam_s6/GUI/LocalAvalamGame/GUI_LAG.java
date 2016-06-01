@@ -104,6 +104,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                 b.addMouseListener(new LAG_MouseListener(c));
                 b.setHorizontalTextPosition(JButton.CENTER);
                 b.setVerticalTextPosition(JButton.CENTER);
+                b.setFont(b.getFont().deriveFont(1*25f));
                 this.buttonmap[j][i] = b;
                 //b.setOpaque(false);
                 this.add(b);
@@ -237,7 +238,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     }
 
     private void initPlayerInfos(Player p1, Player p2) {
-        System.out.println("truc");
+        //System.out.println("truc");
         this.p1name.setText(p1.getName());
         this.p2name.setText(p2.getName());
         this.p1color.setIcon(new ImageIcon(this.white));
@@ -532,10 +533,26 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                         case PLAYER_1:
                             this.buttonmap[i][j].setIcon(wh);
                             this.buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
+                            if (((Local_Avalam_Game)this.game).getPlayers()[0].getColor().getValue().equals("black")
+                                || ((Local_Avalam_Game)this.game).getPlayers()[0].getColor().getValue().equals("purple")
+                                || ((Local_Avalam_Game)this.game).getPlayers()[0].getColor().getValue().equals("blue")
+                            ) {
+                               this.buttonmap[i][j].setForeground(Color.WHITE); 
+                            } else {
+                                this.buttonmap[i][j].setForeground(Color.BLACK);
+                            }
                             break;
                         case PLAYER_2:
                             this.buttonmap[i][j].setIcon(bl);
                             this.buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
+                            if (((Local_Avalam_Game)this.game).getPlayers()[1].getColor().getValue().equals("black")
+                                || ((Local_Avalam_Game)this.game).getPlayers()[1].getColor().getValue().equals("purple")
+                                || ((Local_Avalam_Game)this.game).getPlayers()[1].getColor().getValue().equals("blue")
+                            ) {
+                               this.buttonmap[i][j].setForeground(Color.WHITE); 
+                            } else {
+                                this.buttonmap[i][j].setForeground(Color.BLACK);
+                            }
                             break;
                         case NO_OWNER:
                             if (gr.getCellAt(c).getState().getValue() == CellState.RESTRICTED.getValue()) {

@@ -13,6 +13,7 @@ import avalam_s6.Core.Globals.EnumsLister;
 import avalam_s6.Core.Globals.Input;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Core.Grid;
+import avalam_s6.Core.Local_Avalam_Game;
 import avalam_s6.Exceptions.GridCharException;
 import avalam_s6.Exceptions.GridSizeException;
 import avalam_s6.GUI.Gui_INTERFACE;
@@ -91,6 +92,7 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
                 b.setContentAreaFilled(false);
                 b.setHorizontalTextPosition(JButton.CENTER);
                 b.setVerticalTextPosition(JButton.CENTER);
+                b.setFont(b.getFont().deriveFont(1*25f));
                 this.buttonmap[j][i] = b;
                 //b.setOpaque(false);
                 this.add(b);
@@ -487,10 +489,26 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
                     case PLAYER_1:
                         this.buttonmap[i][j].setIcon(wh);
                         this.buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
+                        if (this.ColorList[this.p1colorselect].equals("black")
+                                || this.ColorList[this.p1colorselect].equals("purple")
+                                || this.ColorList[this.p1colorselect].equals("blue")
+                        ) {
+                           this.buttonmap[i][j].setForeground(Color.WHITE); 
+                        } else {
+                            this.buttonmap[i][j].setForeground(Color.BLACK);
+                        }
                         break;
                     case PLAYER_2:
                         this.buttonmap[i][j].setIcon(bl);
                         this.buttonmap[i][j].setText(Integer.toString(gr.getCellAt(c).getSize()));
+                        if (this.ColorList[this.p2colorselect].equals("black")
+                                || this.ColorList[this.p2colorselect].equals("purple")
+                                || this.ColorList[this.p2colorselect].equals("blue")
+                        ) {
+                           this.buttonmap[i][j].setForeground(Color.WHITE); 
+                        } else {
+                            this.buttonmap[i][j].setForeground(Color.BLACK);
+                        }
                         break;
                     case NO_OWNER:
                         if (gr.getCellAt(c).getState().getValue() == CellState.RESTRICTED.getValue()) {
