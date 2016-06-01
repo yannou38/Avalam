@@ -36,9 +36,8 @@ import javax.swing.*;
 public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     private Game_INTERFACE game;
-    private final boolean player1IsPlaying;
     private JButton undoB, redoB, retourB, saveB, playB, gauche, droite, fullscreenB, helpB, muteB;
-    private Image background, cancel, fullscreen, mute, help, player_playing, player_waiting, play, pause, redo, retour, save, board, black, white, empty, restricted, w_selected, b_selected, w_possible, b_possible;
+    private Image background, cancel, fullscreen, mute, help, player_playing, player_waiting, play, pause, redo, retour, save, board, black, white, empty, restricted, w_selected, b_selected, w_possible, b_possible, iaSource, w_iaDest, b_iaDest;
     private final JButton[][] buttonmap;
     private boolean callResize;
     private final LAG_AdapterListener listener;
@@ -48,7 +47,8 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     private JLabel p1name, p2name, p1score, p2score, p1color, p2color;
 
-    ImageIcon wh, bl, em, re, wsel, bsel, wpos, bpos;
+    ImageIcon wh, bl, em, re, wsel, bsel, wpos, bpos, iaSrc, wIADst, bIADst;
+    Coordinate IASrc, IADst;
 
     /**
      * Constructor.
@@ -69,7 +69,6 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
         this.font = localFont;
         this.initComponents();
-        this.player1IsPlaying = true;
     }
 
     private void initComponents() {
@@ -232,6 +231,10 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             this.b_selected = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/" + pBlack.getValue() + "_selected.png"));
             this.w_possible = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/" + pWhite.getValue() + "_possible.png"));
             this.b_possible = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/" + pBlack.getValue() + "_possible.png"));
+            this.iaSource = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/empty_ia.png"));
+            this.w_iaDest = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/" + pWhite.getValue() + "_ia.png"));
+            this.b_iaDest = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/" + pBlack.getValue() + "_ia.png"));
+            
         } catch (IOException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -272,6 +275,12 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         } catch (NoSuchMethodException | SecurityException | ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | GridCharException | IOException | GridSizeException ex) {
             Logger.getLogger(GUI_LAG.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void updateLastIaMove() {
+        Move x = ((Local_Avalam_Game)this.game).getLastIaMove();
+        this.IASrc = x.getC_src();
+        this.IADst = x.getC_dst();
     }
 
     public void deleteGame() {
@@ -459,6 +468,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     @Override
     public void paintComponent(Graphics g) {
+        this.updateLastIaMove();
         g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
         double ratioW = (double) this.getWidth() / (double) 1920;
         double ratioH = (double) this.getHeight() / (double) 1080;
@@ -475,6 +485,9 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             bsel = new ImageIcon(this.b_selected.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
             wpos = new ImageIcon(this.w_possible.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
             bpos = new ImageIcon(this.b_possible.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+            iaSrc = new ImageIcon(this.iaSource.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+            wIADst = new ImageIcon(this.w_iaDest.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+            bIADst = new ImageIcon(this.b_iaDest.getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
             this.p1color.setIcon(wh);
             this.p2color.setIcon(bl);
 
@@ -559,6 +572,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                         case NO_OWNER:
                             if (gr.getCellAt(c).getState().getValue() == CellState.RESTRICTED.getValue()) {
                                 this.buttonmap[i][j].setIcon(re);
+                                this.buttonmap[i][j].setText("");
                             } else {
                                 this.buttonmap[i][j].setIcon(em);
                                 this.buttonmap[i][j].setText("");
