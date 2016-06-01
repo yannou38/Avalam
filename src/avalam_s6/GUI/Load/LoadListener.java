@@ -83,18 +83,20 @@ public class LoadListener implements MouseListener {
                 break;
 
             case "slot":
+                double ratioW = (double) this.page.getWidth() / (double) 1920;
+                double ratioH = (double) this.page.getHeight() / (double) 1080;
+                Image newimg = this.iconbase.getScaledInstance(((int) round(iconbase.getWidth(null) * ratioW)), ((int) round(iconbase.getHeight(null) * ratioH)), java.awt.Image.SCALE_SMOOTH);
                 for (int i = 1; i < this.page.getSlotslistener().length + 1; i++) {
                     this.page.getSlotslistener(i).setIsSelected(false);
-                    this.page.getSlots(i).setIcon(new ImageIcon(this.iconbase));
+                    this.page.getSlots(i).setIcon(new ImageIcon(newimg));
                 }
                 this.isSelected = true;
                 if (this.slotnumber == 6) {
                     this.page.getField().setText("");
                     this.page.getField().requestFocus();
                 }
-                double ratioW = (double) this.page.getWidth() / (double) 1920;
-                double ratioH = (double) this.page.getHeight() / (double) 1080;
-                Image newimg = this.iconselect.getScaledInstance(((int) round(iconbase.getWidth(null) * ratioW)), ((int) round(iconbase.getHeight(null) * ratioH)), java.awt.Image.SCALE_SMOOTH);
+
+                newimg = this.iconselect.getScaledInstance(((int) round(iconselect.getWidth(null) * ratioW)), ((int) round(iconselect.getHeight(null) * ratioH)), java.awt.Image.SCALE_SMOOTH);
                 source.setIcon(new ImageIcon(newimg));
                 this.page.setSlotnumber(this.slotnumber);
                 break;
@@ -115,7 +117,6 @@ public class LoadListener implements MouseListener {
         if (this.isSelected == false) {
             double ratioW = (double) this.page.getWidth() / (double) 1920;
             double ratioH = (double) this.page.getHeight() / (double) 1080;
-            System.out.println((int) round(icon.getHeight(null) * ratioH));
             Image newimg = this.icon.getScaledInstance(((int) round(icon.getWidth(null) * ratioW)), ((int) round(icon.getHeight(null) * ratioH)), java.awt.Image.SCALE_SMOOTH);
             ((JButton) e.getSource()).setIcon(new ImageIcon(newimg));
         }

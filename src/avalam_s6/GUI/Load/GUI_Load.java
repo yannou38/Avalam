@@ -44,6 +44,7 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
     private final LoadAdapterListener listener;
     private boolean callResize;
     private final JLabel[] slotlabels;
+    private final Font font;
 
     public GUI_Load() {
         this.callResize = false;
@@ -52,6 +53,15 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         this.slots = new JButton[6];
         this.slotslistener = new LoadListener[6];
         this.slotlabels = new JLabel[5];
+        Font localFont = new Font("Arial", Font.PLAIN, 60);
+        try {
+            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
+        } catch (IOException | FontFormatException ex) {
+            System.out.println("Error - " + GUI_Save.class.toString());
+            Logger.getLogger(GUI_Save.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        this.font = localFont;
         initComponents();
     }
 
@@ -78,15 +88,6 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         this.saveload.setFocusPainted(false);
         this.saveload.addMouseListener(new LoadListener("load", this, 0));
 
-        Font localFont = new Font("Arial", Font.PLAIN, 60);
-        try {
-            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
-            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
-        } catch (IOException | FontFormatException ex) {
-            System.out.println("Error - " + GUI_Save.class.toString());
-            Logger.getLogger(GUI_Save.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         for (int i = 0; i < this.slots.length; i++) {
             this.slots[i] = new JButton(new ImageIcon(slot));
             this.slots[i].setBorder(BorderFactory.createEmptyBorder());
@@ -100,12 +101,15 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
             int j = i + 1;
             this.slotlabels[i] = new JLabel("Slot " + j + " : vide");
             this.slotlabels[i].setBorder(BorderFactory.createEmptyBorder());
-            this.slotlabels[i].setFont(localFont.deriveFont(1 * 30f));
-            //this.add(this.slotlabels[i]);
+            this.slotlabels[i].setHorizontalAlignment(JLabel.CENTER);
+            this.slotlabels[i].setVerticalAlignment(JLabel.CENTER);
+            this.slotlabels[i].setFont(this.font.deriveFont(30f));
+            this.add(this.slotlabels[i]);
         }
 
         this.field = new JTextField();
-        this.field.setFont(localFont.deriveFont(45f));
+        this.field.setHorizontalAlignment(JLabel.CENTER);
+        this.field.setFont(this.font.deriveFont(30f));
         this.field.setBorder(BorderFactory.createEmptyBorder());
         this.field.setText("Nom de fichier");
         this.field.setOpaque(false);
@@ -125,12 +129,16 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
                 sil = new SaveInfoLister("slot_" + j);
                 if (!sil.getEmptyslot()) {
                     sil = new SaveInfoLister("slot_" + j);
-                    this.slotlabels[i].setFont(this.slotlabels[i].getFont().deriveFont(1 * 30f));
+                    this.slotlabels[i].setFont(this.slotlabels[i].getFont().deriveFont(30f * this.getWidth() / 1920));
                     this.slotlabels[i].setText(sil.getDate() + "    " + sil.getPlayer1() + " VS " + sil.getPlayer2() + "    " + LanguageManager.getElement("Sur") + " " + sil.getGrid());
+                } else {
+                    this.slotlabels[i].setFont(this.slotlabels[i].getFont().deriveFont(30f * this.getWidth() / 1920));
+                    this.slotlabels[i].setText("Slot " + j + " : vide");
+
                 }
 
             } catch (IOException ex) {
-                //ne pas traiter => on laisse le texte par défaut
+                //ne pas traiter
             }
         }
         this.callResize();
@@ -142,6 +150,10 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
             this.slotslistener[i].setIsSelected(false);
             this.slots[i].setIcon(new ImageIcon(this.slot));
         }
+    }
+
+    public Font getTextFont() {
+        return font;
     }
 
     public JButton getHomereturn() {
@@ -179,16 +191,16 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
     public JLabel getSlotlabels(int i) {
         return this.slotlabels[i - 1];
     }
-    
-    public Image getHomeReturnI(){
+
+    public Image getHomeReturnI() {
         return this.homeI;
     }
-    
-    public Image getLoadI(){
+
+    public Image getLoadI() {
         return this.loadI;
     }
-    
-    public Image getSlotI(){
+
+    public Image getSlotI() {
         return this.slot;
     }
 
@@ -209,6 +221,7 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
 
     @Override
     public void callResize() {
+        System.out.println("appel resize");
         this.callResize = true;
     }
 }
