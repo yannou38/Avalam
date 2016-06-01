@@ -35,8 +35,8 @@ public class SettingsListener implements MouseListener {
         this.page = page;
         this.relatedLabel = relatedLabel;
         try {
-            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/options/" + this.name + "_h.png"));
-            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/options/" + this.name + ".png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/options/" + this.name + "_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/options/" + this.name + ".png"));
         } catch (Exception ex) {
             System.out.println("Error - " + SettingsListener.class.toString());
             Logger.getLogger(SettingsListener.class.getName()).log(Level.SEVERE, null, ex);

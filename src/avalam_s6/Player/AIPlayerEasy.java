@@ -30,7 +30,7 @@ public class AIPlayerEasy extends AIPlayer {
      */
     @Override
     public Move play() {
-        System.out.println("Je suis " + this.name + " je vais jouer des coups faciles");
+        //System.out.println("Je suis " + this.name + " je vais jouer des coups faciles");
         ArrayList<Move> mesCoups = new ArrayList<>();
         ArrayList<Move> mesCoupsHighValue = new ArrayList<>();
         ArrayList<Move> mesCoupsOkValue = new ArrayList<>();
@@ -79,7 +79,7 @@ public class AIPlayerEasy extends AIPlayer {
                 }
             }
         }
-        System.out.println(this.game.getGrid().toString());
+        //System.out.println(this.game.getGrid().toString());
         Random r = new Random();
 
         //select a move, from best to worst

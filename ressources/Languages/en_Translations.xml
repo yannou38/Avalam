@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <Langage id="en">
     <Langue>
-        <Français>French</Français>
-        <Anglais>English</Anglais>
+        <fr>French</fr>
+        <en>English</en>
     </Langue>
     <Sur>on</Sur>
     <Oui>Yes</Oui>

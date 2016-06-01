@@ -39,10 +39,10 @@ public class LoadListener implements MouseListener {
         this.slotnumber = number;
         try {
             if (this.name.equals("slot")) {
-                this.iconselect = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/load/" + this.name + "_selected.png"));
+                this.iconselect = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/load/" + this.name + "_selected.png"));
             }
-            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/load/" + this.name + "_h.png"));
-            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/load/" + this.name + ".png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/load/" + this.name + "_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/load/" + this.name + ".png"));
         } catch (Exception ex) {
             System.out.println("Error - " + RulesListener.class.toString());
             Logger.getLogger(RulesListener.class.getName()).log(Level.SEVERE, null, ex);

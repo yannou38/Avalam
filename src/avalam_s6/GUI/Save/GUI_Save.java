@@ -56,10 +56,10 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
 
     private void initComponents() {
         try {
-            this.backgroundsave = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/background_save.png"));
-            this.saveI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/save.png"));
-            this.returnI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/return.png"));
-            this.slot = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/slot.png"));
+            this.backgroundsave = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/save/background_save.png"));
+            this.saveI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/save/save.png"));
+            this.returnI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/save/return.png"));
+            this.slot = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/save/slot.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_Save.class.toString());
             Logger.getLogger(GUI_Save.class.getName()).log(Level.SEVERE, null, ex);
@@ -125,7 +125,7 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
                 if (!sil.getEmptyslot()) {
                     sil = new SaveInfoLister("slot_" + j);
                     this.slotlabels[i].setFont(this.slotlabels[i].getFont().deriveFont(1 * 30f));
-                    this.slotlabels[i].setText(sil.getDate() + "    " + sil.getPlayer1() + " VS " + sil.getPlayer2() + "    "+LanguageManager.getElement("Sur")+ " " + sil.getGrid());
+                    this.slotlabels[i].setText(sil.getDate() + "    " + sil.getPlayer1() + " VS " + sil.getPlayer2() + "    " + LanguageManager.getElement("Sur") + " " + sil.getGrid());
                 }
 
             } catch (IOException ex) {

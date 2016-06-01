@@ -29,8 +29,8 @@ public class Final_MouseListener implements MouseListener {
 
     public Final_MouseListener() {
         try {
-            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/final/home_h.png"));
-            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/final/home.png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/final/home_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/final/home.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + Final_MouseListener.class.toString());
             Logger.getLogger(Final_MouseListener.class.getName()).log(Level.SEVERE, null, ex);

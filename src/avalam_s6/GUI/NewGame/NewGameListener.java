@@ -35,8 +35,8 @@ public class NewGameListener implements MouseListener {
         this.page = page;
         this.type = type;
         try {
-            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/playerselect/" + this.name + "_h.png"));
-            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/playerselect/" + this.name + ".png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/playerselect/" + this.name + "_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/playerselect/" + this.name + ".png"));
         } catch (Exception ex) {
             System.out.println("Error - " + NewGameListener.class.toString());
             Logger.getLogger(NewGameListener.class.getName()).log(Level.SEVERE, null, ex);

@@ -35,8 +35,8 @@ public class GUI_Rules extends JPanel implements Gui_INTERFACE {
 
     private void initComponents() {
         try {
-            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/rules/background.png"));
-            this.returnI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/rules/home.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/rules/background.png"));
+            this.returnI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/rules/home.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_Rules.class.toString());
             Logger.getLogger(GUI_Rules.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,7 +61,7 @@ public class GUI_Rules extends JPanel implements Gui_INTERFACE {
     public Image getReturnI() {
         return returnI;
     }
-    
+
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);

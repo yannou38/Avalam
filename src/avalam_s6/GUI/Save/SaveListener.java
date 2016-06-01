@@ -40,10 +40,10 @@ public class SaveListener implements MouseListener {
         this.isSelected = false;
         try {
             if (this.name.equals("slot")) {
-                this.iconselect = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/" + this.name + "_selected.png"));
+                this.iconselect = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/save/" + this.name + "_selected.png"));
             }
-            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/" + this.name + "_h.png"));
-            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/save/" + this.name + ".png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/save/" + this.name + "_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/save/" + this.name + ".png"));
         } catch (Exception ex) {
             System.out.println("Error - " + RulesListener.class.toString());
             Logger.getLogger(RulesListener.class.getName()).log(Level.SEVERE, null, ex);

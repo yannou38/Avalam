@@ -53,9 +53,9 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
     private JButton preccolor1, preccolor2, supcolor1, supcolor2;
     private JTextField name1;
     private JTextField name2;
-    
+
     /* -- GRID -- */
-    private JButton[][] buttonmap; 
+    private JButton[][] buttonmap;
     private ImageIcon wh, bl, em, re;
     private Image[] pawnList;
     private String[] gridNameList;
@@ -72,12 +72,12 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
     private void initComponents() {
         try {
             // BackGround
-            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/playerselect/background.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/playerselect/background.png"));
             // Buttons
-            this.precI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/playerselect/prec.png"));
-            this.supI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/playerselect/sup.png"));
-            this.returnI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/playerselect/home.png"));
-            this.startI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/playerselect/start.png"));
+            this.precI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/playerselect/prec.png"));
+            this.supI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/playerselect/sup.png"));
+            this.returnI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/playerselect/home.png"));
+            this.startI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/playerselect/start.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_NewGame.class.toString());
             Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
@@ -96,7 +96,7 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
                 this.add(b);
             }
         }
-        
+
         this.prec1 = new JButton(new ImageIcon(this.precI));
         this.prec1.setBorder(BorderFactory.createEmptyBorder());
         this.prec1.setContentAreaFilled(false);
@@ -148,7 +148,7 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         this.AIimgs = new Image[this.AIlistsize];
         for (int i = 0; i < this.AIlistsize; i++) {
             try {
-                this.AIimgs[i] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/playerselect/" + this.AIlist[i] + ".png"));
+                this.AIimgs[i] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/playerselect/" + this.AIlist[i] + ".png"));
             } catch (Exception ex) {
                 System.out.println("Error - " + GUI_NewGame.class.toString());
                 Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
@@ -173,7 +173,7 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         this.ColorImgs = new Image[this.ColorListSize];
         for (int i = 0; i < this.ColorListSize; i++) {
             try {
-                this.ColorImgs[i] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/playerselect/" + this.ColorList[i] + ".png"));
+                this.ColorImgs[i] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/playerselect/" + this.ColorList[i] + ".png"));
             } catch (Exception ex) {
                 System.out.println("Error - " + GUI_NewGame.class.toString());
                 Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
@@ -219,31 +219,30 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         this.selectedGrid = 0;
         this.gridNameList = new String[1];
         this.gridNameList[0] = "default";
-        
+
         this.gridList = new Grid[gridNameList.length];
         try {
-            for(int i=0;i<gridNameList.length;i++) {
+            for (int i = 0; i < gridNameList.length; i++) {
                 Level_Parser lParser = new Level_Parser(gridNameList[i]);
-                gridList[i] = new Grid(lParser.readLevel(),gridNameList[i]);
+                gridList[i] = new Grid(lParser.readLevel(), gridNameList[i]);
             }
         } catch (IOException | GridSizeException | GridCharException ex) {
             System.out.println("Error - " + GUI_NewGame.class.toString());
             Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
         }
         // Grid Content
-        this.pawnList = new Image[ColorList.length+2];
+        this.pawnList = new Image[ColorList.length + 2];
         try {
-            this.pawnList[0] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/empty.png"));
-            this.pawnList[1] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/restricted.png"));
-            for (int i=0;i<ColorList.length;i++) {
-                this.pawnList[2+i] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/" + ColorList[i] + ".png"));;
+            this.pawnList[0] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/empty.png"));
+            this.pawnList[1] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/restricted.png"));
+            for (int i = 0; i < ColorList.length; i++) {
+                this.pawnList[2 + i] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/" + ColorList[i] + ".png"));;
             }
-         } catch (Exception  ex) {
+        } catch (Exception ex) {
             System.out.println("Error - " + GUI_NewGame.class.toString());
             Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         Font localFont = new Font("Arial", Font.PLAIN, 60);
 
         /* Chargement de la police */
@@ -348,7 +347,7 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         p2[2] = this.ColorList[this.p2colorselect];
         return p2;
     }
-    
+
     public String loadGridName() {
         return this.gridNameList[this.selectedGrid];
     }
@@ -472,8 +471,8 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         double ratioH = (double) this.getHeight() / (double) 1080;
         // Resize au besoin
         if (this.callResize) {
-            wh = new ImageIcon(this.pawnList[2+this.p1colorselect].getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
-            bl = new ImageIcon(this.pawnList[2+this.p2colorselect].getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+            wh = new ImageIcon(this.pawnList[2 + this.p1colorselect].getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
+            bl = new ImageIcon(this.pawnList[2 + this.p2colorselect].getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
             em = new ImageIcon(this.pawnList[0].getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
             re = new ImageIcon(this.pawnList[1].getScaledInstance(((int) round(66 * ratioW)), ((int) round(66 * ratioH)), java.awt.Image.SCALE_SMOOTH));
         }

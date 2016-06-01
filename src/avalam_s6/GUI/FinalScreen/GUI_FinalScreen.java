@@ -69,11 +69,11 @@ public class GUI_FinalScreen extends JPanel implements Gui_INTERFACE {
                 throw (ex);
             }
             /* Chargement des images // du theme */
-            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/final/background.jpg"));
-            this.homeI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/final/home.png"));
-            this.black = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/black.png"));
-            this.white = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/white.png"));
-            this.empty = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/empty.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/final/background.jpg"));
+            this.homeI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/final/home.png"));
+            this.black = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/black.png"));
+            this.white = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/white.png"));
+            this.empty = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/empty.png"));
             /* Application Police */
             this.victoryText.setFont(localFont.deriveFont(2 * 30f));
             /* On peut appliquer un ratio a la police (ici 2) */

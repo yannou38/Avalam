@@ -46,12 +46,12 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
     private void initComponents() {
 
         try {
-            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/options/background.png"));
-            this.applyI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/options/apply.png"));
-            this.creditsI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/options/credits.png"));
-            this.returnI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/options/home.png"));
-            this.leftI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/options/left.png"));
-            this.rightI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/options/right.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/options/background.png"));
+            this.applyI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/options/apply.png"));
+            this.creditsI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/options/credits.png"));
+            this.returnI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/options/home.png"));
+            this.leftI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/options/left.png"));
+            this.rightI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/options/right.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_Settings.class.toString());
             Logger.getLogger(GUI_Settings.class.getName()).log(Level.SEVERE, null, ex);
@@ -199,10 +199,10 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
                 this.ThemeSelected = x;
             }
         }
-        
+
     }
-    
-    public void retextLabels(){        
+
+    public void retextLabels() {
         this.LabelFS.setText(LanguageManager.getElement(this.fullScreen[this.fullScreenSelected]));
         this.LabelTheme.setText(this.Theme[this.ThemeSelected]);
         this.LabelSound.setText(LanguageManager.getElement(this.Sound[this.SoundSelected]));

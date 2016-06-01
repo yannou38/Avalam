@@ -26,23 +26,23 @@ import javax.swing.JButton;
  * @author ducruyy
  */
 public class LAG_UI_MouseListener implements MouseListener {
-    
+
     private String name;
     private Image icon;
     private Image iconbase;
     private GUI_LAG page;
-    
+
     public LAG_UI_MouseListener(String buttonname, GUI_LAG page) {
         this.name = buttonname;
         this.page = page;
         try {
-            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/" + this.name + "_h.png"));
-            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/board/" + this.name + ".png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/" + this.name + "_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/" + this.name + ".png"));
         } catch (Exception ex) {
             Logger.getLogger(GUI_HomePage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
@@ -103,15 +103,15 @@ public class LAG_UI_MouseListener implements MouseListener {
         }
 
     }
-    
+
     @Override
     public void mousePressed(MouseEvent e) {
     }
-    
+
     @Override
     public void mouseReleased(MouseEvent e) {
     }
-    
+
     @Override
     public void mouseEntered(MouseEvent e) {
         //replace the icon with another
@@ -121,7 +121,7 @@ public class LAG_UI_MouseListener implements MouseListener {
         double ratioH = (double) lag.getHeight() / (double) 1080;
         Image newimg = this.icon.getScaledInstance(((int) round(icon.getWidth(null) * ratioW)), ((int) round(icon.getHeight(null) * ratioH)), java.awt.Image.SCALE_SMOOTH);
         ((JButton) e.getSource()).setIcon(new ImageIcon(newimg));
-        
+
         if (this.name.equals("play")) {
             if (((Local_Avalam_Game) this.page.getGame()).isPaused()) {
                 newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
@@ -129,10 +129,10 @@ public class LAG_UI_MouseListener implements MouseListener {
                 newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
             }
             this.page.getPlayB().setIcon(new ImageIcon(newimg));
-            
+
         }
     }
-    
+
     @Override
     public void mouseExited(MouseEvent e) {
         //replace the icon with another
@@ -142,7 +142,7 @@ public class LAG_UI_MouseListener implements MouseListener {
         double ratioH = (double) lag.getHeight() / (double) 1080;
         Image newimg = this.iconbase.getScaledInstance(((int) round(iconbase.getWidth(null) * ratioW)), ((int) round(iconbase.getHeight(null) * ratioH)), java.awt.Image.SCALE_SMOOTH);
         ((JButton) e.getSource()).setIcon(new ImageIcon(newimg));
-        
+
         if (this.name.equals("play")) {
             if (((Local_Avalam_Game) this.page.getGame()).isPaused()) {
                 newimg = this.page.getPlay().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
@@ -150,8 +150,8 @@ public class LAG_UI_MouseListener implements MouseListener {
                 newimg = this.page.getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
             }
             this.page.getPlayB().setIcon(new ImageIcon(newimg));
-            
+
         }
     }
-    
+
 }

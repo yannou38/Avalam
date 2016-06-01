@@ -57,10 +57,10 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
 
     private void initComponents() {
         try {
-            this.backgroundload = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/load/background_load.png"));
-            this.homeI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/load/home.png"));
-            this.loadI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/load/load.png"));
-            this.slot = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/load/slot.png"));
+            this.backgroundload = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/load/background_load.png"));
+            this.homeI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/load/home.png"));
+            this.loadI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/load/load.png"));
+            this.slot = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/load/slot.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_Load.class.toString());
             Logger.getLogger(GUI_Load.class.getName()).log(Level.SEVERE, null, ex);
@@ -126,7 +126,7 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
                 if (!sil.getEmptyslot()) {
                     sil = new SaveInfoLister("slot_" + j);
                     this.slotlabels[i].setFont(this.slotlabels[i].getFont().deriveFont(1 * 30f));
-                    this.slotlabels[i].setText(sil.getDate() + "    " + sil.getPlayer1() + " VS " + sil.getPlayer2() + "    "+LanguageManager.getElement("Sur")+" " + sil.getGrid());
+                    this.slotlabels[i].setText(sil.getDate() + "    " + sil.getPlayer1() + " VS " + sil.getPlayer2() + "    " + LanguageManager.getElement("Sur") + " " + sil.getGrid());
                 }
 
             } catch (IOException ex) {
@@ -191,7 +191,7 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
     public void callResize() {
         this.callResize = true;
     }
-    
+
     public void resetSlotSelection() {
         this.slotnumber = 0;
     }

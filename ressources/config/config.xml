@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><config>
-	<Langue>Français</Langue>
-	<FullScreen>Non</FullScreen>
-	<Theme>Default</Theme>
-	<Son>Non</Son>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<config>
+    <Langue>fr</Langue>
+    <FullScreen>Non</FullScreen>
+    <Theme>Default</Theme>
+    <Son>Non</Son>
 </config>

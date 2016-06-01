@@ -40,13 +40,13 @@ public class GUI_HomePage extends JPanel implements Gui_INTERFACE {
     private void initComponents() {
 
         try {
-            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/main_bg.png"));
-            this.playI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/customgame.png"));
-            this.quickI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/quickgame.png"));
-            this.settingsI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/options.png"));
-            this.rulesI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/rules.png"));
-            this.exitI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/quit.png"));
-            this.loadI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/main/load.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/main/main_bg.png"));
+            this.playI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/main/customgame.png"));
+            this.quickI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/main/quickgame.png"));
+            this.settingsI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/main/options.png"));
+            this.rulesI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/main/rules.png"));
+            this.exitI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/main/quit.png"));
+            this.loadI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/main/load.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_HomePage.class.toString());
             Logger.getLogger(GUI_HomePage.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,7 +97,6 @@ public class GUI_HomePage extends JPanel implements Gui_INTERFACE {
         this.add(load);
         this.addComponentListener(this.listener);
 
-        
     }
 
     public JButton getQuick() {
@@ -147,8 +146,6 @@ public class GUI_HomePage extends JPanel implements Gui_INTERFACE {
     public Image getExitI() {
         return exitI;
     }
-    
-    
 
     @Override
     public void back() {
