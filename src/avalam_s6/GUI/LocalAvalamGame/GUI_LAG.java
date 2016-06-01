@@ -38,7 +38,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
 
     private Game_INTERFACE game;
     private JButton undoB, redoB, retourB, saveB, playB, gauche, droite, fullscreenB, helpB, muteB;
-    private Image background, cancel, fullscreen, mute, help, player_playing, player_waiting, play, pause, redo, retour, save, board, black, white, empty, restricted, w_selected, b_selected, w_possible, b_possible, iaSource, w_iaDest, b_iaDest;
+    private Image background, cancel, fullscreen, mute, unmute, help, player_playing, player_waiting, play, pause, redo, retour, save, board, black, white, empty, restricted, w_selected, b_selected, w_possible, b_possible, iaSource, w_iaDest, b_iaDest;
     private final JButton[][] buttonmap;
     private boolean callResize;
     private final LAG_AdapterListener listener;
@@ -281,8 +281,13 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     
     public void updateLastIaMove() {
         Move x = ((Local_Avalam_Game)this.game).getLastIaMove();
-        this.IASrc = x.getC_src();
-        this.IADst = x.getC_dst();
+        if (x != null) {
+            this.IASrc = x.getC_src();
+            this.IADst = x.getC_dst();
+        } else {
+            this.IASrc = null;
+            this.IADst = null;
+        }
     }
 
     public void deleteGame() {
@@ -589,6 +594,12 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
                 this.buttonmap[i][j].setSize((int) round(66 * ratioW), (int) round(66 * ratioH));
                 this.buttonmap[i][j].setOpaque(false);
             }
+        }
+        if (IASrc != null) {
+            
+        }
+        if (IADst != null) {
+            
         }
         /* -- BOUTON PAUSE -- */
         Image newimg;

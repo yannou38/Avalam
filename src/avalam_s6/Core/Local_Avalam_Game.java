@@ -71,6 +71,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         this.isTurnFinished = false;
         this.isGameFinished = winCheck() > 0;
         this.isGamePaused = this.isGameFinished;
+        this.lastIAMove = null;
         Input.resetClick();
         Input.setInputGame(this);
     }
