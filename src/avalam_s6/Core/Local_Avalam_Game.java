@@ -165,6 +165,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
                     this.changeNbTurns(1);
                     this.updateTitle();
                     this.lastIAMove = null;
+                    ((Main_Frame)this.gui).resetHint();
                 } else {
                     //TODO                   
                     /* Afficher warning de deplacement */
