@@ -139,22 +139,22 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
         this.LabelFS = new JLabel(LanguageManager.getElement(this.fullScreen[this.fullScreenSelected]));
         this.LabelFS.setBorder(BorderFactory.createEmptyBorder());
-        this.LabelFS.setFont(localFont.deriveFont(3 * 30f));
+        this.LabelFS.setFont(localFont.deriveFont(2 * 30f));
         this.add(this.LabelFS);
 
         this.LabelLanguage = new JLabel(LanguageManager.getElement(this.language[this.currentLanguage]));
         this.LabelLanguage.setBorder(BorderFactory.createEmptyBorder());
-        this.LabelLanguage.setFont(localFont.deriveFont(3 * 30f));
+        this.LabelLanguage.setFont(localFont.deriveFont(2 * 30f));
         this.add(this.LabelLanguage);
 
         this.LabelSound = new JLabel(LanguageManager.getElement(this.Sound[this.SoundSelected]));
         this.LabelSound.setBorder(BorderFactory.createEmptyBorder());
-        this.LabelSound.setFont(localFont.deriveFont(3 * 30f));
+        this.LabelSound.setFont(localFont.deriveFont(2 * 30f));
         this.add(this.LabelSound);
 
         this.LabelTheme = new JLabel(this.Theme[this.ThemeSelected]);
         this.LabelTheme.setBorder(BorderFactory.createEmptyBorder());
-        this.LabelTheme.setFont(localFont.deriveFont(3 * 30f));
+        this.LabelTheme.setFont(localFont.deriveFont(2 * 30f));
         this.add(this.LabelTheme);
 
         this.add(this.rightLanguage);

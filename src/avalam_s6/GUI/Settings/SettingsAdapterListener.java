@@ -49,25 +49,24 @@ public class SettingsAdapterListener implements ComponentListener {
         this.page.getCredits().setSize((int) round(251 * ratioW), (int) round(111 * ratioH));
 
         //labels
-        size = this.page.getLabelLanguage().getPreferredSize();
-        this.page.getLabelLanguage().setBounds((int) round((1050 + insets.left) * ratioW), ((int) round((220 + insets.top) * ratioH)), size.width * 3 / 2, size.height * 3 / 2);
-        this.page.getLabelLanguage().setSize((int) round(this.page.getLabelLanguage().getWidth() * ratioW), (int) round(this.page.getLabelLanguage().getHeight() * ratioH));
+        this.page.getLabelLanguage().setBounds((int) round((1050 + insets.left) * ratioW), ((int) round((220 + insets.top) * ratioH)), (int) round(640 * ratioW), (int) round(140 * ratioH));
+        this.page.getLabelLanguage().setSize((int) round(640 * ratioW), (int) round(140 * ratioH));
 
         size = this.page.getLabelFS().getPreferredSize();
-        this.page.getLabelFS().setBounds((int) round((1050 + insets.left) * ratioW), ((int) round((380 + insets.top) * ratioH)), size.width * 3 / 2, size.height * 3 / 2);
-        this.page.getLabelFS().setSize((int) round(this.page.getLabelFS().getWidth() * ratioW), (int) round(this.page.getLabelFS().getHeight() * ratioH));
+        this.page.getLabelFS().setBounds((int) round((1050 + insets.left) * ratioW), ((int) round((380 + insets.top) * ratioH)), (int) round(640 * ratioW), (int) round(140 * ratioH));
+        this.page.getLabelFS().setSize((int) round(640 * ratioW), (int) round(140 * ratioH));
 
         size = this.page.getLabelTheme().getPreferredSize();
-        this.page.getLabelTheme().setBounds((int) round((1050 + insets.left) * ratioW), ((int) round((550 + insets.top) * ratioH)), size.width * 3 / 2, size.height * 3 / 2);
-        this.page.getLabelTheme().setSize((int) round(this.page.getLabelTheme().getWidth() * ratioW), (int) round(this.page.getLabelTheme().getHeight() * ratioH));
+        this.page.getLabelTheme().setBounds((int) round((1050 + insets.left) * ratioW), ((int) round((550 + insets.top) * ratioH)), (int) round(640 * ratioW), (int) round(140 * ratioH));
+        this.page.getLabelTheme().setSize((int) round(640 * ratioW), (int) round(140 * ratioH));
 
         size = this.page.getLabelSound().getPreferredSize();
-        this.page.getLabelSound().setBounds((int) round((1050 + insets.left) * ratioW), ((int) round((715 + insets.top) * ratioH)), size.width * 3 / 2, size.height * 3 / 2);
-        this.page.getLabelSound().setSize((int) round(this.page.getLabelSound().getWidth() * ratioW), (int) round(this.page.getLabelSound().getHeight() * ratioH));
+        this.page.getLabelSound().setBounds((int) round((1050 + insets.left) * ratioW), ((int) round((715 + insets.top) * ratioH)), (int) round(640 * ratioW), (int) round(140 * ratioH));
+        this.page.getLabelSound().setSize((int) round(640 * ratioW), (int) round(140 * ratioH));
 
         //left & right
         newimg = this.page.getLeftI().getScaledInstance((int) round(117 * ratioW), (int) round(117 * ratioH), java.awt.Image.SCALE_SMOOTH);
-        this.page.getLeftLanguage().setIcon(new ImageIcon(newimg));        
+        this.page.getLeftLanguage().setIcon(new ImageIcon(newimg));
         this.page.getLeftLanguage().setBounds((int) round((350 + insets.left) * ratioW), ((int) round((235 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
         this.page.getLeftLanguage().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
 
@@ -76,7 +75,7 @@ public class SettingsAdapterListener implements ComponentListener {
         this.page.getLeftFS().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
 
         this.page.getLeftTheme().setIcon(new ImageIcon(newimg));
-        this.page.getLeftTheme().setBounds((int) round((350 + insets.left) * ratioW), ((int) round((565 + insets.top) * ratioH)),(int) round(117 * ratioW), (int) round(117 * ratioH));
+        this.page.getLeftTheme().setBounds((int) round((350 + insets.left) * ratioW), ((int) round((565 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
         this.page.getLeftTheme().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
 
         this.page.getLeftSound().setIcon(new ImageIcon(newimg));
@@ -84,19 +83,19 @@ public class SettingsAdapterListener implements ComponentListener {
         this.page.getLeftSound().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
 
         newimg = this.page.getRightI().getScaledInstance((int) round(117 * ratioW), (int) round(117 * ratioH), java.awt.Image.SCALE_SMOOTH);
-        this.page.getRightLanguage().setIcon( new ImageIcon(newimg));
+        this.page.getRightLanguage().setIcon(new ImageIcon(newimg));
         this.page.getRightLanguage().setBounds((int) round((1525 + insets.left) * ratioW), ((int) round((235 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
         this.page.getRightLanguage().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
 
-        this.page.getRightFS().setIcon( new ImageIcon(newimg));
+        this.page.getRightFS().setIcon(new ImageIcon(newimg));
         this.page.getRightFS().setBounds((int) round((1525 + insets.left) * ratioW), ((int) round((400 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
         this.page.getRightFS().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
 
-        this.page.getRightTheme().setIcon( new ImageIcon(newimg));
+        this.page.getRightTheme().setIcon(new ImageIcon(newimg));
         this.page.getRightTheme().setBounds((int) round((1525 + insets.left) * ratioW), ((int) round((565 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
         this.page.getRightTheme().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
 
-        this.page.getRightSound().setIcon( new ImageIcon(newimg));
+        this.page.getRightSound().setIcon(new ImageIcon(newimg));
         this.page.getRightSound().setBounds((int) round((1525 + insets.left) * ratioW), ((int) round((730 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
         this.page.getRightSound().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
 
