@@ -72,6 +72,8 @@ public class AIPlayerHardAB extends AIPlayer {
                 }
             }
         }
+        if(mesCoups.isEmpty())
+            return null;
         Random r = new Random();
         int monrand = r.nextInt(mesCoups.size());
         System.out.println("Ce coup vaut " + maxvalue);

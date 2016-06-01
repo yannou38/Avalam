@@ -78,6 +78,8 @@ public class AIPlayerHardMC extends AIPlayer {
                 }
             }
         }
+        if(mesCoups.isEmpty())
+            return null;
         Random r = new Random();
         int monrand = r.nextInt(mesCoups.size());
         System.out.println("Ce coup vaut " + maxvalue);
@@ -269,7 +271,7 @@ public class AIPlayerHardMC extends AIPlayer {
             Move m = null;
             Move mInit = null;
             int compteur = 0;
-            for(int k = 0; k<15000;k++)
+            for(int k = 0; k<25000;k++)
             {
                 if(winCheck() == 1337){
                     mInit = coupRandom();
