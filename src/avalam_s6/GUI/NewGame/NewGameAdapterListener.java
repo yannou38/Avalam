@@ -108,13 +108,13 @@ public class NewGameAdapterListener implements ComponentListener {
         
         newimg = this.ng.getPrecI().getScaledInstance(((int) round(117 * ratioW)), ((int) round(117 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         this.ng.getPrecgrille().setIcon(new ImageIcon(newimg));
-        this.ng.getPrecgrille().setBounds((int) round((670 + insets.left) * ratioW), ((int) round((229 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
-        this.ng.getPrecgrille().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
+        this.ng.getPrecgrille().setBounds((int) round((669 + insets.left) * ratioW), ((int) round((231 + insets.top) * ratioH)), (int) round(96 * ratioW), (int) round(102 * ratioH));
+        this.ng.getPrecgrille().setSize((int) round(96 * ratioW), (int) round(102 * ratioH));
         
         newimg = this.ng.getSupI().getScaledInstance(((int) round(117 * ratioW)), ((int) round(117 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         this.ng.getSupgrille().setIcon(new ImageIcon(newimg));
-        this.ng.getSupgrille().setBounds((int) round((1156 + insets.left) * ratioW), ((int) round((229 + insets.top) * ratioH)), (int) round(117 * ratioW), (int) round(117 * ratioH));
-        this.ng.getSupgrille().setSize((int) round(117 * ratioW), (int) round(117 * ratioH));
+        this.ng.getSupgrille().setBounds((int) round((1155 + insets.left) * ratioW), ((int) round((229 + insets.top) * ratioH)), (int) round(96 * ratioW), (int) round(102 * ratioH));
+        this.ng.getSupgrille().setSize((int) round(96 * ratioW), (int) round(102 * ratioH));
         
         this.ng.getName1().setBounds((int) round((180 + insets.left) * ratioW), ((int) round((749 + insets.top) * ratioH)), (int) round(466 * ratioW), (int) round(102 * ratioH));
         this.ng.getName1().setSize((int) round(466 * ratioW), (int) round(102 * ratioH));
