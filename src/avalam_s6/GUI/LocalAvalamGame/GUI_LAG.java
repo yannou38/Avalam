@@ -12,6 +12,7 @@ import avalam_s6.Core.File_IO.SaveParser_Reader;
 import avalam_s6.Core.File_IO.SaveParser_Writer;
 import avalam_s6.Core.Globals.AvalamColor;
 import avalam_s6.Core.Globals.SetupManager;
+import avalam_s6.Core.Globals.SoundEngine;
 import avalam_s6.Exceptions.GridCharException;
 import avalam_s6.Exceptions.GridSizeException;
 import avalam_s6.GUI.GuiManager_INTERFACE;
@@ -38,7 +39,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     private Game_INTERFACE game;
     private final boolean player1IsPlaying;
     private JButton undoB, redoB, retourB, saveB, playB, gauche, droite, fullscreenB, helpB, muteB;
-    private Image background, cancel, fullscreen, mute, help, player_playing, player_waiting, play, pause, redo, retour, save, board, black, white, empty, restricted, w_selected, b_selected, w_possible, b_possible;
+    private Image background, cancel, fullscreen, mute, unmute, help, player_playing, player_waiting, play, pause, redo, retour, save, board, black, white, empty, restricted, w_selected, b_selected, w_possible, b_possible;
     private final JButton[][] buttonmap;
     private boolean callResize;
     private final LAG_AdapterListener listener;
@@ -49,7 +50,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
     private JLabel p1name, p2name, p1score, p2score, p1color, p2color;
 
     ImageIcon wh, bl, em, re, wsel, bsel, wpos, bpos;
-
+    
     /**
      * Constructor.
      */
@@ -87,6 +88,7 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             this.fullscreen = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/fullscreen.png"));
             this.help = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/help.png"));
             this.mute = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/mute.png"));
+            this.unmute = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/unmute.png"));
             this.initPawnColors(AvalamColor.WHITE, AvalamColor.BLACK);
             this.empty = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/empty.png"));
         } catch (Exception ex) {
@@ -433,6 +435,9 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
         return mute;
     }
 
+    public Image getUnMute() {
+        return unmute;
+    }
     public Image getHelp() {
         return help;
     }
@@ -579,6 +584,15 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             newimg = getPause().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         }
         getPlayB().setIcon(new ImageIcon(newimg));
+        
+        /* -- BOUTON MUTE -- */
+        Image soundImg;
+        if (SoundEngine.isMuted()){
+            soundImg = this.getUnMute().getScaledInstance((int) round(80 * ratioW), (int) round(80 * ratioH), java.awt.Image.SCALE_SMOOTH);
+        } else {
+            soundImg = this.getMute().getScaledInstance((int) round(80 * ratioW), (int) round(80 * ratioH), java.awt.Image.SCALE_SMOOTH);
+        }
+        getMuteB().setIcon(new ImageIcon(soundImg));
         /* -- Resize -- */
         if (this.callResize) {
             this.listener.componentResized(null);
