@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
- * @author Seawolf
+ * AI HardAB, with MonteCarlo during the start of the game to increase the odds to do a good move while limiting exec time
+ * @author Team 7
  */
 public class AIPlayerHardMC extends AIPlayer {
 
@@ -24,9 +24,12 @@ public class AIPlayerHardMC extends AIPlayer {
         
     }
     
+    /**
+     * does a montecarlo at first unless a very good move can be spotted, then start to do a minmax when the number of moves is small enough
+     * @return the choosen move
+     */
     @Override
     public Move play() {
-        System.out.println("Je suis " + this.name + " je vais jouer des coups très difficiles ");
         coord = new Coordinate[this.game.getGrid().getHeight()][this.game.getGrid().getWidth()];
         for (int i = 0; i < this.game.getGrid().getWidth(); i++) {
             for (int j = 0; j < this.game.getGrid().getHeight(); j++) {
@@ -40,9 +43,7 @@ public class AIPlayerHardMC extends AIPlayer {
         double value;
         Coordinate[] tabCoord = new Coordinate[8];
         
-        if(profondeur <2){
-            return monteCarlo();
-        }
+        
         
         
         for (int i = 0; i < this.game.getGrid().getWidth(); i++) {
@@ -63,6 +64,10 @@ public class AIPlayerHardMC extends AIPlayer {
                                 Move m = new Move(c0, this.game.getGrid().getCellAt(c0).getSize(), tabCoord[k], this.game.getGrid().getCellAt(tabCoord[k]).getSize(), this);
                                 //On augmente l'horizon avec l'avancement de la partie (l'ia devient de plus en plus forte)
                                 value = miniMaxUs(m, profondeur,-99999,99999);
+                                if(profondeur <2){
+                                    if (value <0.5)
+                                        return monteCarlo();
+                                }
                                 if (value > maxvalue) {
                                     maxvalue = value;
                                     mesCoups.clear();
@@ -81,8 +86,6 @@ public class AIPlayerHardMC extends AIPlayer {
             return null;
         Random r = new Random();
         int monrand = r.nextInt(mesCoups.size());
-        System.out.println("Ce coup vaut " + maxvalue);
-        System.out.println("" + mesCoups.get(monrand).getC_src().getX() + " " + mesCoups.get(monrand).getC_src().getY() + " " + mesCoups.get(monrand).getC_dst().getX() + " " + mesCoups.get(monrand).getC_dst().getY());
         return mesCoups.get(monrand);
 
     }
@@ -251,6 +254,10 @@ public class AIPlayerHardMC extends AIPlayer {
         return (value + maxValue);
     }
         
+        /**
+         * basic MonteCarlo algorithm
+         * @return best move given we play a random game
+         */
         private Move monteCarlo()
         {
             //jouer des parties random, retenir le premier coup
@@ -322,13 +329,13 @@ public class AIPlayerHardMC extends AIPlayer {
                 }
             }
             Random r = new Random();
-            int monrand = r.nextInt(mesCoups.size());
-            System.out.println("" + mesCoups.get(monrand).getC_src().getX() + " " + mesCoups.get(monrand).getC_src().getY() + " " + mesCoups.get(monrand).getC_dst().getX() + " " + mesCoups.get(monrand).getC_dst().getY());
-            System.out.println("valeur de "+ max);
-            return mesCoups.get(monrand);
+            int monrand = r.nextInt(mesCoups.size());return mesCoups.get(monrand);
         }
         
-        
+        /**
+         * random move
+         * @return a random move
+         */
         private Move coupRandom(){
         ArrayList<Move> mesCoups = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];

@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
- * @author Seawolf
+ * medium AI
+ * @author Team 7
  */
 public class AIPlayerMedium extends AIPlayer {
 
@@ -26,12 +26,11 @@ public class AIPlayerMedium extends AIPlayer {
     }
     
      /**
-     *
+     * calculate the average value of upcoming moves
      * @return the best play in an optimistict PoV
      */
     @Override
     public Move play() {
-        System.out.println("Je suis " + this.name + " je vais jouer des coups moyens");
         ArrayList<Move> mesCoups = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];
         double maxvalue = -9999;
@@ -78,8 +77,6 @@ public class AIPlayerMedium extends AIPlayer {
             return null;
         Random r = new Random();
         int monrand = r.nextInt(mesCoups.size());
-        System.out.println("Ce coup vaut " + maxvalue);
-        System.out.println("" + mesCoups.get(monrand).getC_src().getX() + " " + mesCoups.get(monrand).getC_src().getY() + " " + mesCoups.get(monrand).getC_dst().getX() + " " + mesCoups.get(monrand).getC_dst().getY());
         return mesCoups.get(monrand);
 
     }

@@ -20,8 +20,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
- *
- * @author ducruyy
+ * Listener for the loading window
+ * @author Team 7
  */
 public class LoadListener implements MouseListener {
 
@@ -33,6 +33,12 @@ public class LoadListener implements MouseListener {
     private int slotnumber;
     private Image iconselect;
 
+    /**
+     * Constructor
+     * @param buttonname the name of the button to listen
+     * @param page the page associated to this listener
+     * @param number the number of the slot
+     */
     public LoadListener(String buttonname, GUI_Load page, int number) {
         this.name = buttonname;
         this.isSelected = false;
@@ -50,6 +56,10 @@ public class LoadListener implements MouseListener {
         }
     }
 
+    /**
+     * Setter
+     * @param isSelected boolean to set if the slot is selected 
+     */
     public void setIsSelected(Boolean isSelected) {
         this.isSelected = isSelected;
     }

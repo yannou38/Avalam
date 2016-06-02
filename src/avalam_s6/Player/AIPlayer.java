@@ -1,16 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package avalam_s6.Player;
 
 import avalam_s6.Core.*;
 import avalam_s6.Core.Globals.AvalamColor;
 
 /**
- *
- * @author TheDoctor
+ * abstract class, contains all methods used by the AI (heuristics, setters etc ...)
+ * @author Team 7
  */
 public abstract class AIPlayer extends Player {
 
@@ -25,7 +21,7 @@ public abstract class AIPlayer extends Player {
      *
      * @param name The name of the player.
      * @param color The color of the player's pawns.
-     * @param owner
+     * @param owner Player 1 or player 2
      */
     public AIPlayer(String name, AvalamColor color, Owner owner) {
         super(name, color, owner);
@@ -34,10 +30,10 @@ public abstract class AIPlayer extends Player {
 
     /**
      * Max value
-     *
+     * 
      * @param a origin
      * @param b target
-     * @return true if the move a on b would give us a 5 tour, b is opponent
+     * @return true if the move a on b would give us a 5 tour, b is opponent, else false
      */
     protected boolean completeTourUsVsOp(Cell a, Cell b) {
         if (this.owner.getValue() == a.getOwner().getValue()) {
@@ -55,7 +51,7 @@ public abstract class AIPlayer extends Player {
      *
      * @param a origin
      * @param b target
-     * @return true if the move a on b would give us a 5 tour
+     * @return true if the move a on b would give us a 5 tour, else false
      */
     protected boolean completeTourUs(Cell a, Cell b) {
         if (this.owner.getValue() == a.getOwner().getValue()) {
@@ -67,7 +63,10 @@ public abstract class AIPlayer extends Player {
     }
 
     /**
-     * bad value
+     * Bad value
+     * @param a origin
+     * @param b target
+     * @return true if we complete a tour for the other player, else false
      */
     protected boolean completeTourOp(Cell a, Cell b) {
         if (this.owner.getValue() != a.getOwner().getValue()) {
@@ -81,6 +80,9 @@ public abstract class AIPlayer extends Player {
 
     /**
      * meh value
+     * @param a origin
+     * @param b target
+     * @return true if we put a pawn on the other player pawn, else false
      */
     protected boolean suppressAPawn(Cell a, Cell b) {
         if (this.owner.getValue() != b.getOwner().getValue()) {
@@ -94,6 +96,9 @@ public abstract class AIPlayer extends Player {
     /**
      * meh- value, 3 seems to be a strong height if you don't have a 2 tower
      * around
+     * @param a origin
+     * @param b target
+     * @return true if we create a 3tower for the other player, else false
      */
     protected boolean suppressAPawnCreate3Op(Cell a, Cell b) {
         if (this.owner.getValue() != b.getOwner().getValue()) {
@@ -134,9 +139,9 @@ public abstract class AIPlayer extends Player {
     /**
      * best value
      *
-     * @param c0
-     * @param dest
-     * @return
+     * @param c0 origin
+     * @param dest target
+     * @return true if we create a tower for us by moving the pawn
      */
     protected boolean createAloneUs(Coordinate c0, Coordinate dest) {
         Coordinate[] tabCoord = new Coordinate[8];
@@ -197,9 +202,9 @@ public abstract class AIPlayer extends Player {
    /**
      * best value
      *
-     * @param c0
-     * @param dest
-     * @return
+     * @param c0 origin
+     * @param dest target
+     * @return number of alone tower we create for us by doing the move
      */
     protected int nbCreateAloneUs(Coordinate c0, Coordinate dest) {
         Coordinate[] tabCoord = new Coordinate[8];
@@ -231,7 +236,7 @@ public abstract class AIPlayer extends Player {
      *
      * @param c0 origin
      * @param dest destination
-     * @return nb of alone created for us 
+     * @return nb of alone created for the other player
      */
     protected int nbCreateAloneOp(Coordinate c0, Coordinate dest) {
         Coordinate[] tabCoord = new Coordinate[8];
@@ -258,7 +263,11 @@ public abstract class AIPlayer extends Player {
         return nb;
     }
 
-    public int nbCoupsJouables() {
+    /**
+     * calculate the number of moves possible this turn
+     * @return number of moves possible this turn
+     */
+    protected int nbCoupsJouables() {
         int res = 0;
         Coordinate[] tabCoord = new Coordinate[8];
         for (int i = 0; i < this.game.getGrid().getWidth(); i++) {
@@ -285,21 +294,40 @@ public abstract class AIPlayer extends Player {
 
         return res;
     }
-
+    
+    /**
+     * setter
+     * @param game the game
+     */
     public void setGame(Game_INTERFACE game) {
         this.game = game;
     }
 
+    /**
+     * @return true, we are an AI
+     */
     @Override
     public boolean isAI() {
         return true;
     }
     
+    /**
+     * test a coordinate
+     * @param i x
+     * @param j y
+     * @return true if we are in the map range, else false
+     */
     private boolean coordValid(int i, int j)
     {
         return !(i < 0 || j<0 || this.game.getGrid().getHeight()-1 < j || this.game.getGrid().getWidth()-1 < i);
     }
     
+    /**
+     * set a table of Coordinate given a position
+     * @param i x
+     * @param j y
+     * @param tabCoord table of coordinate to set
+     */
     protected void doCoord(int i,int j, Coordinate[] tabCoord){
         Coordinate c1 = setInvalid;
         Coordinate c2 = setInvalid;
@@ -352,9 +380,9 @@ public abstract class AIPlayer extends Player {
     /**
      * best value
      *
-     * @param c0
-     * @param dest
-     * @return
+     * @param c0 origin
+     * @param dest target
+     * @return number of alone for us we created by doing the move
      */
     protected int nbCreateAloneUsV2(Coordinate c0, Coordinate dest) {
         Coordinate[] tabCoord = new Coordinate[8];

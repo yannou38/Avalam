@@ -19,7 +19,7 @@ import javax.swing.*;
 
 /**
  *
- * @author ducruyy
+ * @author Team 7
  */
 public class HomePageListener implements MouseListener {
 
@@ -27,6 +27,10 @@ public class HomePageListener implements MouseListener {
     private Image icon;
     private Image iconbase;
 
+    /**
+     * Constructor
+     * @param buttonname is a string to determine which button is focused
+     */
     public HomePageListener(String buttonname) {
         this.name = buttonname;
         try {

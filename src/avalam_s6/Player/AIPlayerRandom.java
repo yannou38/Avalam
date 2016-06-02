@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package avalam_s6.Player;
 
 import avalam_s6.Core.*;
@@ -11,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
- * @author Seawolf
+ * debug tool
+ * @author Team 7
  */
 public class AIPlayerRandom extends AIPlayer {
 
@@ -26,7 +21,6 @@ public class AIPlayerRandom extends AIPlayer {
      */
     @Override
     public Move play() {
-        System.out.println("Je suis " + this.name + " je vais jouer des coups aléatoires");
         ArrayList<Move> mesCoups = new ArrayList<>();
         Coordinate[] tabCoord = new Coordinate[8];
         for (int i = 0; i < this.game.getGrid().getWidth(); i++) {
