@@ -6,7 +6,6 @@
 package avalam_s6.GUI.HomePage;
 
 import avalam_s6.Core.Globals.SetupManager;
-import avalam_s6.Core.Globals.SoundEngine;
 import avalam_s6.GUI.Gui_INTERFACE;
 import avalam_s6.GUI.Main_Frame;
 import java.awt.*;
@@ -17,12 +16,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
- *
- * @author Team 7
- */
-/*
- * This class contain the home page with the avalam logo, and the diverse buttons to create a game,
+ *This class contain the home page with the avalam logo, and the diverse buttons to create a game,
  * access options, check rules & tutorial, etc
+ * @author Team 7
  */
 public class GUI_HomePage extends JPanel implements Gui_INTERFACE {
 

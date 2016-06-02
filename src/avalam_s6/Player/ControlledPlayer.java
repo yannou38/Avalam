@@ -13,7 +13,7 @@ import avalam_s6.Core.Owner;
 
 /**
  *
- * @author TheDoctor
+ * @author Team 7
  */
 public class ControlledPlayer extends Player {
 

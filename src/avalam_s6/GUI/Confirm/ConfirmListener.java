@@ -21,8 +21,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
- *
- * @author sazeratj
+ * Listener of the confirm page.
+ * @author Team 7
  */
 public class ConfirmListener implements MouseListener {
 
@@ -30,6 +30,10 @@ public class ConfirmListener implements MouseListener {
     private Image icon;
     private Image iconbase;
 
+    /**
+     * Constructor
+     * @param buttonname the name of the button to listen 
+     */
     public ConfirmListener(String buttonname) {
         this.name = buttonname;
         try {

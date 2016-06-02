@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
- * @author Seawolf
+ * debug tool 
+ * @author Team 7
  */
 public class DevourerOfNoobs extends AIPlayer {
 
@@ -28,7 +28,6 @@ public class DevourerOfNoobs extends AIPlayer {
      */
     @Override
     public Move play() {
-        System.out.println("Je suis " + this.name + " , we dark souls 3 now");
         ArrayList<Move> mesCoups = new ArrayList<>();
         ArrayList<Move> mesCoupsHighValue = new ArrayList<>();
         ArrayList<Move> mesCoupsOkValue = new ArrayList<>();
