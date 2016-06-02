@@ -79,6 +79,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     //TODO: Check user is able to undo (GUI check if history is empty and call or not this function)
     @Override
     public void undo() {
+        Input.resetClick();
         if (!this.history.isEmpty()) {
             this.cancelled_moves.add(this.history.pop());
             this.grid.undoMove(this.cancelled_moves.lastElement());
