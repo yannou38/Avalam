@@ -30,8 +30,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- *
- * @author ducruyy
+ * Window to load a game.
+ * @author Team 7
  */
 public class GUI_Load extends JPanel implements Gui_INTERFACE {
 
@@ -46,6 +46,9 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
     private final JTextField[] slotlabels;
     private final Font font;
 
+    /**
+     * Constructor
+     */
     public GUI_Load() {
         this.callResize = false;
         this.listener = new LoadAdapterListener(this);
@@ -65,6 +68,10 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         initComponents();
     }
 
+    /**
+     * Initialises all the components of the page,
+     * Loads all the buttons and images.
+     */
     private void initComponents() {
         try {
             this.backgroundload = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/load/background_load.png"));
@@ -122,6 +129,9 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         this.addComponentListener(listener);
     }
 
+    /**
+     * Loads the text of a save slot.
+     */
     public void loadSlotText() {
         SaveInfoLister sil;
         int j;
@@ -149,6 +159,9 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         this.callResize();
     }
 
+    /**
+     * Resets the slots to an unselected state.
+     */
     public void resetSlots() {
         this.slotnumber = 0;
         for (int i = 0; i < this.slots.length; i++) {
@@ -157,54 +170,109 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         }
     }
 
+    /**
+     * Getter
+     * @return the font of the window.
+     */
     public Font getTextFont() {
         return font;
     }
 
+    /**
+     * Getter
+     * @return the button to return home
+     */
     public JButton getHomereturn() {
         return homereturn;
     }
 
+    /**
+     * Getter
+     * @return load button
+     */
     public JButton getSaveload() {
         return saveload;
     }
 
+    /**
+     * Getter
+     * @param i the number of the desired slot
+     * @return the button associated to a slot
+     */
     public JButton getSlots(int i) {
         return this.slots[i - 1];
     }
 
+    /**
+     * Getter
+     * @return the custom slot TextField
+     */
     public JTextField getField() {
         return field;
     }
 
+    /**
+     * Getter
+     * @return the slot listeners
+     */
     public LoadListener[] getSlotslistener() {
         return slotslistener;
     }
 
+    /**
+     * Setter
+     * @param slotnumber the number of the slot to set
+     */
     public void setSlotnumber(int slotnumber) {
         this.slotnumber = slotnumber;
     }
 
+    /**
+     * Getter
+     * @param i the desired slot
+     * @return the listener of the desired slot
+     */
     public LoadListener getSlotslistener(int i) {
         return slotslistener[i - 1];
     }
 
+    /**
+     * Getter
+     * @return the number of the slot 
+     */
     public int getSlotnumber() {
         return slotnumber;
     }
 
+    /**
+     * Getter
+     * @param i the desired slot
+     * @return the TextField associated to the desired slot
+     */
     public JTextField getSlotlabels(int i) {
         return this.slotlabels[i - 1];
     }
 
+    /**
+     * Getter
+     * @return the image of the return button
+     */
     public Image getHomeReturnI() {
         return this.homeI;
     }
 
+    /**
+     * Getter
+     * @return load image 
+     */
     public Image getLoadI() {
         return this.loadI;
     }
 
+    /**
+     * Getter
+     * @return slot image 
+     */
     public Image getSlotI() {
         return this.slot;
     }
@@ -226,7 +294,6 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
 
     @Override
     public void callResize() {
-        System.out.println("appel resize");
         this.callResize = true;
     }
 }

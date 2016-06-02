@@ -9,39 +9,52 @@ import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.GUI.Gui_INTERFACE;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- *
- * @author sazeratj
+ *This class instanciates a confirmation page usefull during saves and quit.
+ * @author Team 7
+ * 
  */
 public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
 
     private String prevWindow;
-    private String title;
+    private JLabel titre;
+    private String privatedata;
     private JButton yes, no;
     private boolean callResize;
     private final ConfirmAdapterListener listener;
     private Image yesI, noI, background;
 
+    /**
+     * Constructor
+     */
     public GUI_Confirm() {
         this.prevWindow = "HomePage";
-        this.title = "Do you really want to quit ?";
 
         this.callResize = false;
         this.listener = new ConfirmAdapterListener(this);
         this.initComponents();
     }
 
+    /**
+     * initialises all the components,
+     * loads all the buttons and images.
+     */
     private void initComponents() {
         try {
             this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/confirm/confirm.png"));
@@ -63,6 +76,23 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
         this.no.setContentAreaFilled(false);
         this.no.setFocusPainted(false);
         this.no.addMouseListener(new ConfirmListener("no"));
+        
+        
+        Font localFont = new Font("Arial", Font.PLAIN, 60);
+        try {
+            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
+        } catch (IOException | FontFormatException ex) {
+            System.out.println("Error - " + GUI_Confirm.class.toString());
+            Logger.getLogger(GUI_Confirm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        this.titre = new JLabel();
+        this.titre.setHorizontalAlignment(JLabel.CENTER);
+        this.titre.setVerticalAlignment(JLabel.CENTER);
+        this.titre.setBorder(BorderFactory.createEmptyBorder());
+        this.titre.setFont(localFont.deriveFont(1 * 60f));
+        this.add(this.titre);
 
         this.setLayout(null);
         this.add(this.yes);
@@ -71,17 +101,92 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
 
     }
 
+    /**
+     * Executes the action that needed confirmation.
+     */
     void doAction() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
+        if (this.prevWindow.equals("Save")) {
+            mainFrame.save(this.privatedata);
+
+        }
+        mainFrame.backWindow();
+
     }
 
+    /**
+     * Cancels the action that needed confirmation.
+     */
     void cancelAction() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
+        if (this.prevWindow.equals("Save")) {
+            mainFrame.setwState(WindowState.SAVE);
+
+        } else {
+
+            mainFrame.setwState(WindowState.MAIN);
+        }
     }
 
-    private void setConfirmPage(String title, String page) {
+    /**
+     * Setter
+     * Sets the previous page (save or mainpage).
+     * Sets the title of this window.
+     * @param title the title to set
+     * @param page the previous page
+     */
+    public void setConfirmPage(String title, String page) {
         this.prevWindow = page;
-        this.title = title;
+        this.titre.setText(title);
+    }
+
+    /**
+     * Setter
+     * Sets the save filename
+     * @param privatedata name of a save slot
+     */
+    public void setPrivatedata(String privatedata) {
+        this.privatedata = privatedata;
+    }
+
+    /**
+     * Getter
+     * @return yes button
+     */
+    public JButton getYes() {
+        return yes;
+    }
+
+    /**
+     * Getter
+     * @return no button
+     */
+    public JButton getNo() {
+        return no;
+    }
+
+    /**
+     * Getter
+     * @return yes image
+     */
+    public Image getYesI() {
+        return yesI;
+    }
+
+    /**
+     * Getter
+     * @return no image
+     */
+    public Image getNoI() {
+        return noI;
+    }
+
+    /**
+     * Getter
+     * @return title of the page
+     */
+    public JLabel getTitre() {
+        return titre;
     }
 
     @Override

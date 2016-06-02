@@ -12,17 +12,29 @@ import static java.awt.event.KeyEvent.VK_F11;
 import static java.awt.event.KeyEvent.VK_F6;
 
 /**
+ * Manage hotkeys in the software
  *
- * @author sazeratj
+ * @author Team 7
  */
 public class CustomKeyboardDispatcher implements KeyEventDispatcher {
 
     Main_Frame mainframe;
 
+    /**
+     * Constructor.
+     *
+     * @param mf the main frame
+     */
     public CustomKeyboardDispatcher(Main_Frame mf) {
         this.mainframe = mf;
     }
 
+    /**
+     * Manage hotkeys. return true if the key stroke was used else return false.
+     *
+     * @param e The KeyEvent object
+     * @return A boolean that say if the key stroke was catched and used.
+     */
     @Override
     public boolean dispatchKeyEvent(KeyEvent e) {
         if (e.getID() == KeyEvent.KEY_RELEASED && e.getKeyCode() == VK_F11) {

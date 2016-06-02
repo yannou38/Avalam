@@ -5,7 +5,6 @@
  */
 package avalam_s6.GUI.Load;
 
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ComponentEvent;
@@ -14,13 +13,17 @@ import static java.lang.Math.round;
 import javax.swing.ImageIcon;
 
 /**
- *
- * @author dupageuyy
+ * This class resizes the load window.
+ * @author Team 7
  */
 public class LoadAdapterListener implements ComponentListener {
 
     private final GUI_Load page;
 
+    /**
+     * Constructor
+     * @param page the load page associated to this listener 
+     */
     public LoadAdapterListener(GUI_Load page) {
         this.page = page;
     }

@@ -6,15 +6,20 @@
 package avalam_s6.GUI;
 
 /**
+ * Standard interface for all the GUIs
  *
- * @author sazeratj
+ * @author Team 7
  */
 public interface Gui_INTERFACE {
 
     /**
-     * Return to the precedent page
+     * Return to the precedent page.
      */
     public void back();
 
+    /**
+     * Set a boolean to call the resizing function ONCE in the repaint()
+     * function.
+     */
     public void callResize();
 }

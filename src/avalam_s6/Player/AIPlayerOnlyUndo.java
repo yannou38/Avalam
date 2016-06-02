@@ -1,6 +1,5 @@
 /*
  * DEBUG TOOL
- * DELETE IT BEFORE RELEASE
  */
 package avalam_s6.Player;
 
@@ -10,7 +9,7 @@ import avalam_s6.Core.Owner;
 
 /**
  *
- * @author Seawolf
+ * @author Team 7
  */
 public class AIPlayerOnlyUndo extends AIPlayer {
 
@@ -21,8 +20,8 @@ public class AIPlayerOnlyUndo extends AIPlayer {
     @Override
     public Move play() {
         Move m = new Move(null, 1, null, 1, this);
-        boolean lol = true;
-        while (lol) {
+        boolean test = true;
+        while (test) {
             game.undo();
             game.redo();
         }

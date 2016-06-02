@@ -5,18 +5,17 @@
  */
 package avalam_s6.Core;
 
-import avalam_s6.Player.Player;
 import avalam_s6.Player.Player_INTERFACE;
 import javax.swing.Timer;
 
 /**
- *
- * @author TheDoctor
+ * The Game interface. Acts as the Model abstraction in the MVC system.
+ * @author Team 7
  */
 public interface Game_INTERFACE {
 
     /**
-     * Undo the last move. You can undo plural times.
+     * Undo the last move from the history.
      */
     public void undo();
 
@@ -26,22 +25,30 @@ public interface Game_INTERFACE {
      */
     public void redo();
 
+    /**
+     * Add a move to the history so it can be canceled if necessary.
+     * @param m the Move to add to the moves' history.
+     */
     public void addMoveToHistory(Move m);
 
     /**
-     * Get the game's timer.
+     * Gets the game's timer.
      *
      * @return the game's timer.
      */
     public Timer getTimer();
 
     /**
-     * Get the game's grid.
+     * Gets the game's grid.
      *
      * @return the game's grid.
      */
     public Grid getGrid();
 
+    /**
+     * Sets the game's grid.
+     * @param g the new grid.
+     */
     public void setGrid(Grid g);
 
     /**
@@ -51,5 +58,8 @@ public interface Game_INTERFACE {
      */
     public Player_INTERFACE getCurrentPlayer();
 
+    /**
+     * Calls the garbage collector. Used for memory optimisation.
+     */
     public void clean();
 }

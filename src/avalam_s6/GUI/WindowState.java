@@ -6,10 +6,12 @@
 package avalam_s6.GUI;
 
 /**
+ * Enum used to list and change panels (GUIs)
  *
- * @author ducruyy
+ * @author Team 7
  */
 public enum WindowState {
+
     MAIN(0), // Homepage with access to other windows
     BOARD(1), //Game window
     PLAYERSELECT(2), //New Custom Game or Load Game
@@ -22,10 +24,20 @@ public enum WindowState {
 
     private final int id;
 
+    /**
+     * Constructor.
+     *
+     * @param id The id to use
+     */
     WindowState(int id) {
         this.id = id;
     }
 
+    /**
+     * Return the value of the selected element.
+     *
+     * @return The value of the Selected element
+     */
     public int getValue() {
         return this.id;
     }

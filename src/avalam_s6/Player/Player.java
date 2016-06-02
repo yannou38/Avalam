@@ -10,8 +10,8 @@ import avalam_s6.Core.Move;
 import avalam_s6.Core.Owner;
 
 /**
- *
- * @author TheDoctor
+ * 
+ * @author Team 7
  */
 public abstract class Player implements Player_INTERFACE {
 

@@ -17,8 +17,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
+ * This Panel contain the credits, and a button to go back.
  *
- * @author ducruyy
+ * @author Team 7
  */
 public class GUI_Credits extends JPanel implements Gui_INTERFACE {
 
@@ -27,12 +28,18 @@ public class GUI_Credits extends JPanel implements Gui_INTERFACE {
     private boolean callResize;
     private final CreditsAdapterListener listener;
 
+    /**
+     * Constructor.
+     */
     public GUI_Credits() {
         this.callResize = false;
         this.listener = new CreditsAdapterListener(this);
         this.initComponents();
     }
 
+    /**
+     * Initialize the Components.
+     */
     private void initComponents() {
         try {
             this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/credits/background.png"));
@@ -54,14 +61,29 @@ public class GUI_Credits extends JPanel implements Gui_INTERFACE {
 
     }
 
+    /**
+     * Getter.
+     *
+     * @return The return button
+     */
     public JButton getRetour() {
         return this.retour;
     }
 
+    /**
+     * Getter.
+     *
+     * @return The return image
+     */
     public Image getReturnI() {
         return returnI;
     }
 
+    /**
+     * Override of the standard paintComponent() function.
+     *
+     * @param g The graphics object
+     */
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
@@ -71,12 +93,18 @@ public class GUI_Credits extends JPanel implements Gui_INTERFACE {
         }
     }
 
+    /**
+     * Go back to the HomePage.
+     */
     @Override
     public void back() {
         Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
         mainFrame.setwState(WindowState.MAIN);
     }
 
+    /**
+     * Call the resize function once in the next repaint().
+     */
     @Override
     public void callResize() {
         this.callResize = true;

@@ -21,8 +21,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
- *
- * @author sazeratj
+ * Listener of the confirm page.
+ * @author Team 7
  */
 public class ConfirmListener implements MouseListener {
 
@@ -30,6 +30,10 @@ public class ConfirmListener implements MouseListener {
     private Image icon;
     private Image iconbase;
 
+    /**
+     * Constructor
+     * @param buttonname the name of the button to listen 
+     */
     public ConfirmListener(String buttonname) {
         this.name = buttonname;
         try {
@@ -53,17 +57,18 @@ public class ConfirmListener implements MouseListener {
                 page.cancelAction();
                 break;
         }
-        source.setIcon(new ImageIcon(this.iconbase));
+        double ratioW = (double) page.getWidth() / (double) 1920;
+        double ratioH = (double) page.getHeight() / (double) 1080;
+        Image newimg = this.iconbase.getScaledInstance(((int) round(iconbase.getWidth(null) * ratioW)), ((int) round(iconbase.getHeight(null) * ratioH)), java.awt.Image.SCALE_SMOOTH);
+        source.setIcon(new ImageIcon(newimg));
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

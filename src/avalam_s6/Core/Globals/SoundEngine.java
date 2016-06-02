@@ -20,8 +20,8 @@ import javax.sound.sampled.Mixer;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
- *
- * @author TheDoctor
+ * The sound engine. Enables sound playing.
+ * @author Team 7
  */
 public class SoundEngine {
 
@@ -30,6 +30,9 @@ public class SoundEngine {
     private static long clipTime;
     private static boolean isMute;
 
+    /**
+     * Init the sound engine. Doesn't play anything.
+     */
     public static void init() {
         Mixer.Info[] mixInfos = AudioSystem.getMixerInfo();
         SoundEngine.mixer = AudioSystem.getMixer(mixInfos[0]);
@@ -44,6 +47,10 @@ public class SoundEngine {
         }
     }
 
+    /**
+     * Plays a track.
+     * @param filePath The filepath to the track.
+     */
     public static void play(String filePath) {
         if (!SoundEngine.clip.isActive()) {
             try {
@@ -59,10 +66,16 @@ public class SoundEngine {
         }
     }
 
+    /**
+     * Stops the playing track.
+     */
     public static void stop() {
         SoundEngine.clip.stop();
     }
 
+    /**
+     * Mute/Unmute the sound.
+     */
     public static void toggleMute() {
         SoundEngine.clipTime = SoundEngine.clip.getMicrosecondPosition();
         SoundEngine.clip.stop();
@@ -87,6 +100,10 @@ public class SoundEngine {
 
     }
 
+    /**
+     * Tells if the sound is muted or not.
+     * @return true if the sound is muted, false otherwise.
+     */
     public static boolean isMuted() {
         return SoundEngine.isMute;
     }

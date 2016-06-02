@@ -19,7 +19,7 @@ import javax.swing.*;
 
 /**
  *
- * @author ducruyy
+ * @author Team 7
  */
 public class HomePageListener implements MouseListener {
 
@@ -27,6 +27,10 @@ public class HomePageListener implements MouseListener {
     private Image icon;
     private Image iconbase;
 
+    /**
+     * Constructor
+     * @param buttonname is a string to determine which button is focused
+     */
     public HomePageListener(String buttonname) {
         this.name = buttonname;
         try {
@@ -45,7 +49,8 @@ public class HomePageListener implements MouseListener {
         Main_Frame mainFrame = ((Main_Frame) homePage.getParent().getParent().getParent().getParent());
         switch (this.name) {
             case "quit":
-                homePage.back();
+                mainFrame.setConfirmQuitter();
+                mainFrame.setwState(WindowState.YESNO);                
                 break;
             case "quickgame":
                 mainFrame.initGame();

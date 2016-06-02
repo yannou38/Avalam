@@ -6,8 +6,9 @@
 package avalam_s6.GUI;
 
 /**
+ * Standard Interface for the MainFrame
  *
- * @author TheDoctor
+ * @author Team 7
  */
 public interface GuiManager_INTERFACE {
 
@@ -16,5 +17,8 @@ public interface GuiManager_INTERFACE {
      */
     public void render();
 
+    /**
+     * Call the back() function of the current panel.
+     */
     public void backWindow();
 }

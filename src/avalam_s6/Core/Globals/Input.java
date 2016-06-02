@@ -7,12 +7,11 @@ package avalam_s6.Core.Globals;
 
 import avalam_s6.Core.Coordinate;
 import avalam_s6.Core.Game_INTERFACE;
-import avalam_s6.Core.Local_Avalam_Game;
 import avalam_s6.Core.Owner;
 
 /**
- *
- * @author TheDoctor
+ * The Input Engine. Acts as an abstract layer for getting user's mouse inputs.
+ * @author Team 7
  */
 public class Input {
 
@@ -128,6 +127,10 @@ public class Input {
         return Input.dest_size;
     }
 
+    /**
+     * Link a game to the Input engine.
+     * @param g the game to link to the Input Engine.
+     */
     public static void setInputGame(Game_INTERFACE g) {
         Input.game = g;
     }

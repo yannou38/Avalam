@@ -16,8 +16,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
+ * Listener on the credits panel.
  *
- * @author loic
+ * @author Team 7
  */
 public class CreditsListener implements MouseListener {
 
@@ -25,6 +26,11 @@ public class CreditsListener implements MouseListener {
     private Image icon;
     private Image iconbase;
 
+    /**
+     * Contructor.
+     *
+     * @param buttonname the button name. Also used for image loading.
+     */
     public CreditsListener(String buttonname) {
         this.name = buttonname;
         try {
@@ -36,6 +42,11 @@ public class CreditsListener implements MouseListener {
         }
     }
 
+    /**
+     * Handler for the mouse clicked event.
+     *
+     * @param e the mouse event
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         JButton source = (JButton) e.getSource();
@@ -44,17 +55,31 @@ public class CreditsListener implements MouseListener {
         ((JButton) e.getSource()).setIcon(new ImageIcon(this.iconbase));
     }
 
+    /**
+     * Do nothing.
+     *
+     * @param e the mouse event
+     */
     @Override
     public void mousePressed(MouseEvent e) {
     }
 
+    /**
+     * Do nothing.
+     *
+     * @param e the mouse event
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
     }
 
+    /**
+     * Handler for hovering on the button.
+     *
+     * @param e the mouse event
+     */
     @Override
     public void mouseEntered(MouseEvent e) {
-        //replace the icon with another
         JButton source = (JButton) e.getSource();
         GUI_Credits credits = ((GUI_Credits) source.getParent());
         double ratioW = (double) credits.getWidth() / (double) 1920;
@@ -63,9 +88,13 @@ public class CreditsListener implements MouseListener {
         ((JButton) e.getSource()).setIcon(new ImageIcon(newimg));
     }
 
+    /**
+     * Handler for hovering on the button.
+     *
+     * @param e the mouse event
+     */
     @Override
     public void mouseExited(MouseEvent e) {
-        //replace the icon with another
         JButton source = (JButton) e.getSource();
         GUI_Credits credits = ((GUI_Credits) source.getParent());
         double ratioW = (double) credits.getWidth() / (double) 1920;
