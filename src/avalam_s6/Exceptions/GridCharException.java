@@ -6,11 +6,16 @@
 package avalam_s6.Exceptions;
 
 /**
- *
- * @author sazeratj
+ * Exception - Grid contains an illegal character
+ * @author Team 7
  */
 public class GridCharException extends Exception {
 
+    /**
+     * Constructor
+     * @param c Name of the invalid character
+     * @param pos Position of the invalid character
+     */
     public GridCharException(char c, int pos) {
         System.err.println("Grid contains an illegal character: " + c + " [" + pos + "]");
     }

@@ -6,8 +6,10 @@
 package avalam_s6.Core.Globals;
 
 /**
- *
- * @author sazeratj
+ * Color Enumeration used by the Avalam Game.
+ * We didn't use standards colors here because it do not provide any getter by the name.
+ * To save a player's color it requires the color name and the Default Java Colors do not allow it :)
+ * @author Team 7
  */
 public enum AvalamColor {
     WHITE("white"),
@@ -21,10 +23,18 @@ public enum AvalamColor {
 
     private final String value;
 
+    /**
+     * Constructor
+     * @param v Value of the enumerate
+     */
     private AvalamColor(String v) {
         this.value = v;
     }
 
+    /**
+     * Getter
+     * @return The value of the enumerate 
+     */
     public String getValue() {
         return this.value;
     }
