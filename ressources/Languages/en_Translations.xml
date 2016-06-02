@@ -12,4 +12,6 @@
     <Fin>won!</Fin>
     <Egalité>It's a Draw!</Egalité>
     <Joue>plays</Joue>
+    <Quit>Do you want to quit ?</Quit>
+    <Save>Do you want to save ?</Save>
 </Langage>

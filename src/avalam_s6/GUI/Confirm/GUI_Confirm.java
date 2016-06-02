@@ -9,15 +9,20 @@ import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.GUI.Gui_INTERFACE;
 import avalam_s6.GUI.Main_Frame;
 import avalam_s6.GUI.WindowState;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.io.File;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -27,7 +32,8 @@ import javax.swing.JPanel;
 public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
 
     private String prevWindow;
-    private String title;
+    private JLabel titre;
+    private String privatedata;
     private JButton yes, no;
     private boolean callResize;
     private final ConfirmAdapterListener listener;
@@ -35,7 +41,6 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
 
     public GUI_Confirm() {
         this.prevWindow = "HomePage";
-        this.title = "Do you really want to quit ?";
 
         this.callResize = false;
         this.listener = new ConfirmAdapterListener(this);
@@ -63,6 +68,23 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
         this.no.setContentAreaFilled(false);
         this.no.setFocusPainted(false);
         this.no.addMouseListener(new ConfirmListener("no"));
+        
+        
+        Font localFont = new Font("Arial", Font.PLAIN, 60);
+        try {
+            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
+        } catch (IOException | FontFormatException ex) {
+            System.out.println("Error - " + GUI_Confirm.class.toString());
+            Logger.getLogger(GUI_Confirm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        this.titre = new JLabel();
+        this.titre.setHorizontalAlignment(JLabel.CENTER);
+        this.titre.setVerticalAlignment(JLabel.CENTER);
+        this.titre.setBorder(BorderFactory.createEmptyBorder());
+        this.titre.setFont(localFont.deriveFont(1 * 60f));
+        this.add(this.titre);
 
         this.setLayout(null);
         this.add(this.yes);
@@ -72,16 +94,53 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
     }
 
     void doAction() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
+        if (this.prevWindow.equals("Save")) {
+            mainFrame.save(this.privatedata);
+
+        }
+        mainFrame.backWindow();
+
     }
 
     void cancelAction() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
+        if (this.prevWindow.equals("Save")) {
+            mainFrame.setwState(WindowState.SAVE);
+
+        } else {
+
+            mainFrame.setwState(WindowState.MAIN);
+        }
     }
 
-    private void setConfirmPage(String title, String page) {
+    public void setConfirmPage(String title, String page) {
         this.prevWindow = page;
-        this.title = title;
+        this.titre.setText(title);
+    }
+
+    public void setPrivatedata(String privatedata) {
+        this.privatedata = privatedata;
+    }
+
+    public JButton getYes() {
+        return yes;
+    }
+
+    public JButton getNo() {
+        return no;
+    }
+
+    public Image getYesI() {
+        return yesI;
+    }
+
+    public Image getNoI() {
+        return noI;
+    }
+
+    public JLabel getTitre() {
+        return titre;
     }
 
     @Override

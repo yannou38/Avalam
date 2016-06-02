@@ -12,4 +12,6 @@
     <Fin>a gagné!</Fin>
     <Egalité>Match Nul!</Egalité>
     <Joue>joue</Joue>
+    <Quit>Voulez vous vraiment quitter ?</Quit>
+    <Save>Voulez vous vraiment sauvegarder ?</Save>
 </Langage>

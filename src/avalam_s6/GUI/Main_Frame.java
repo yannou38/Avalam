@@ -6,6 +6,7 @@
 package avalam_s6.GUI;
 
 import avalam_s6.Core.Globals.EnumsLister;
+import avalam_s6.Core.Globals.LanguageManager;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Core.Globals.SoundEngine;
 import avalam_s6.GUI.Confirm.GUI_Confirm;
@@ -201,5 +202,14 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
     
     public void resetHint() {
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).setHint(null);
+    }
+    
+    public void setConfirmQuitter(){
+        ((GUI_Confirm) this.panelList[WindowState.YESNO.getValue()]).setConfirmPage(LanguageManager.getElement("Quit"),"HomePage");
+    }
+    
+    public void setConfirmSauver(String slot){
+        ((GUI_Confirm) this.panelList[WindowState.YESNO.getValue()]).setConfirmPage(LanguageManager.getElement("Save"),"Save");
+        ((GUI_Confirm) this.panelList[WindowState.YESNO.getValue()]).setPrivatedata(slot);
     }
 }
