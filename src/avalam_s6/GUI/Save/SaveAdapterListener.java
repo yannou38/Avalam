@@ -5,7 +5,6 @@
  */
 package avalam_s6.GUI.Save;
 
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ComponentEvent;
@@ -14,13 +13,17 @@ import static java.lang.Math.round;
 import javax.swing.ImageIcon;
 
 /**
- *
- * @author dupageuyy
+ * The resize system for the save GUI.
+ * @author Team 7
  */
 public class SaveAdapterListener implements ComponentListener {
 
     private final GUI_Save page;
 
+    /**
+     * Constructor.
+     * @param page the Save_GUI this listener is linked to.
+     */
     public SaveAdapterListener(GUI_Save page) {
         this.page = page;
     }

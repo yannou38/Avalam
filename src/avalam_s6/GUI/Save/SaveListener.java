@@ -22,8 +22,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
- *
- * @author ducruyy
+ * The system for getting user input on the save page.
+ * @author Team 7
  */
 public class SaveListener implements MouseListener {
 
@@ -35,6 +35,12 @@ public class SaveListener implements MouseListener {
     private BufferedImage iconselect;
     private Boolean isSelected;
 
+    /**
+     * Constructor.
+     * @param buttonname the name of the button.
+     * @param page the Save_GUI this listener is linked to.
+     * @param number the number of the selected slot.
+     */
     public SaveListener(String buttonname, GUI_Save page, int number) {
         this.name = buttonname;
         this.page = page;
@@ -52,8 +58,20 @@ public class SaveListener implements MouseListener {
         }
     }
 
+    /**
+     * Sets the state of the selected slot flag.
+     * @param isSelected the new value of the flag.
+     */
     public void setIsSelected(Boolean isSelected) {
         this.isSelected = isSelected;
+    }
+
+    /**
+     * Gets the non hovered image of the save button.
+     * @return the non hovered image of the save button.
+     */
+    public Image getIconbase() {
+        return iconbase;
     }
 
     @Override
@@ -100,10 +118,6 @@ public class SaveListener implements MouseListener {
                 break;
         }
 
-    }
-
-    public Image getIconbase() {
-        return iconbase;
     }
 
     @Override

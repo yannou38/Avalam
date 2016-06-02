@@ -20,8 +20,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
- *
- * @author ducruyy
+ * The listener for user interactions with the settings gui.
+ * @author Team 7
  */
 public class SettingsListener implements MouseListener {
 
@@ -31,6 +31,12 @@ public class SettingsListener implements MouseListener {
     private Image iconbase;
     private String relatedLabel;
 
+    /**
+     * Constructor.
+     * @param buttonname the name of the observed button.
+     * @param relatedLabel the label to wich the button is related.
+     * @param page the gui this listener is linked to.
+     */
     public SettingsListener(String buttonname, String relatedLabel, GUI_Settings page) {
         this.name = buttonname;
         this.page = page;
@@ -44,6 +50,11 @@ public class SettingsListener implements MouseListener {
         }
     }
 
+    /**
+     * Constructor.
+     * @param buttonname the name of the observed button.
+     * @param page the gui this listener is linked to.
+     */
     public SettingsListener(String buttonname, GUI_Settings page) {
         this(buttonname, null, page);
     }
