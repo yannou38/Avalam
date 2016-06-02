@@ -9,8 +9,8 @@ import avalam_s6.GUI.Main_Frame;
 import javax.swing.SwingUtilities;
 
 /**
- *
- * @author TheDoctor
+ * Starting point of the program.
+ * @author Team 7
  */
 public class Avalam_S6 {
 

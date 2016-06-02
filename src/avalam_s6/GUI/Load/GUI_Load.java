@@ -7,7 +7,7 @@ package avalam_s6.GUI.Load;
 
 import avalam_s6.Core.Globals.LanguageManager;
 import avalam_s6.GUI.Save.*;
-import avalam_s6.Core.Globals.SaveInfoLister;
+import avalam_s6.Core.File_IO.SaveInfoLister;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.GUI.Gui_INTERFACE;
 import avalam_s6.GUI.Main_Frame;

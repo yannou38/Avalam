@@ -6,9 +6,9 @@
 package avalam_s6.Core;
 
 /**
- * Define the state of the cell.
+ * Define the state of the cell (tower, empty, restricted or full).
  *
- * @author TheDoctor
+ * @author Team 7
  */
 public enum CellState {
     TOWER(2), // Tower 1-4
@@ -18,10 +18,18 @@ public enum CellState {
 
     private final int value;
 
+    /**
+     * Constructor.
+     * @param v the value of the cell's state.
+     */
     private CellState(int v) {
         this.value = v;
     }
 
+    /**
+     * Cell state value getter.
+     * @return the value of the cell's state.
+     */
     public int getValue() {
         return this.value;
     }

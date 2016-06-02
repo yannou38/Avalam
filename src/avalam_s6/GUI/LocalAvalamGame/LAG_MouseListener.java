@@ -7,24 +7,32 @@ package avalam_s6.GUI.LocalAvalamGame;
 
 import avalam_s6.Core.Coordinate;
 import avalam_s6.Core.Globals.Input;
-import avalam_s6.Core.Local_Avalam_Game;
-import avalam_s6.GUI.Main_Frame;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JButton;
 
 /**
+ * Listener for the button map
  *
- * @author TheDoctor
+ * @author Team 7
  */
 public class LAG_MouseListener implements MouseListener {
 
     private final Coordinate c;
 
+    /**
+     * Constructor
+     *
+     * @param c coordinate of the button in the buttonmap
+     */
     public LAG_MouseListener(Coordinate c) {
         this.c = c;
     }
 
+    /**
+     * Save the location of the click
+     *
+     * @param e the mouse event (unused)
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         if (!Input.isButtonClicked()) {
@@ -38,21 +46,41 @@ public class LAG_MouseListener implements MouseListener {
         }
     }
 
+    /**
+     * Do nothing.
+     *
+     * @param e the mouse event
+     */
     @Override
     public void mousePressed(MouseEvent e) {
 
     }
 
+    /**
+     * Do nothing.
+     *
+     * @param e the mouse event
+     */
     @Override
     public void mouseReleased(MouseEvent e) {
 
     }
 
+    /**
+     * Do nothing.
+     *
+     * @param e the mouse event
+     */
     @Override
     public void mouseEntered(MouseEvent e) {
 
     }
 
+    /**
+     * Do nothing.
+     *
+     * @param e the mouse event
+     */
     @Override
     public void mouseExited(MouseEvent e) {
 

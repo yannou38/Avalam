@@ -8,14 +8,20 @@ package avalam_s6.Core;
 import java.util.ArrayList;
 
 /**
- *
- * @author TheDoctor
+ * The Cell system. A Cell contains a Tower of pawns and a cell state.
+ * @author Team 7
  */
 public class Cell {
 
-    private ArrayList<Owner> contenu;
+    private final ArrayList<Owner> contenu;
     private CellState etat;
 
+    /**
+     * Constructor.
+     * @param size the size of the tower inside the cell.
+     * @param owner the owner of the cell's content 
+     * (see Owner Enum for details).
+     */
     public Cell(int size, int owner) {
         this.contenu = new ArrayList<>();
         if (owner == 0) {
@@ -38,9 +44,9 @@ public class Cell {
     }
 
     /**
-     * Add a pawn on top of the tower
+     * Add a pawn on top of the tower.
      *
-     * @param p the pawn added to the top of tower
+     * @param p the pawn added to the top of tower.
      */
     public void add(Owner p) {
         if (this.contenu.size() < 5) {
@@ -55,11 +61,10 @@ public class Cell {
     }
 
     /**
-     * Remove an element at I (Undo function can undo in the right order) Towers
-     * are not shuffled by undoing.
-     *
-     * @param i
-     * @return
+     * Remove the element at the i index of the tower (it doesn't remove all 
+     * tower at once because the undo function wouldn't work otherwise).
+     * @param i the index of the element to remove.
+     * @return the owner of the pawn removed.
      */
     public Owner removeAt(int i) {
         if (this.contenu.size() > 0) {
@@ -75,18 +80,18 @@ public class Cell {
     }
 
     /**
-     * Get the height of the tower
+     * Get the height of the tower.
      *
-     * @return height of the tower
+     * @return the height of the tower.
      */
     public int getSize() {
         return this.contenu.size();
     }
 
     /**
-     * Get the peek of the tower
+     * Get the owner of the tower.
      *
-     * @return peek of tower
+     * @return the owner of the tower.
      */
     public Owner getOwner() {
         if (!this.contenu.isEmpty()) {
@@ -96,9 +101,9 @@ public class Cell {
     }
 
     /**
-     * Getter
+     * Cell's state getter.
      *
-     * @return state
+     * @return the cell's state.
      */
     public CellState getState() {
         return etat;

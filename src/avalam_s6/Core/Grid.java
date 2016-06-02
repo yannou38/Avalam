@@ -8,20 +8,19 @@ package avalam_s6.Core;
 import avalam_s6.Exceptions.GridCharException;
 
 /**
- *
- * @author TheDoctor
+ * The grid system. Contains a table of Cells.
+ * @author Team 7
  */
 public class Grid {
 
     private Cell[][] grille;
     private String gridName;
-
-    //TODO: Check length before calling constructor
+    
     /**
-     * Constructor
+     * Constructor.
      *
      * @param textGrid the text version of the grid. SIZE MUST BE 81.
-     * @param name the name of the grid
+     * @param name the name of the grid.
      * @throws avalam_s6.Exceptions.GridCharException Illegal Character in the
      * grid
      */
@@ -70,10 +69,10 @@ public class Grid {
     }
 
     /**
-     * tells if two cells can be merged in one.
+     * Tells if two cell's towers can be merged in one.
      *
-     * @param src the source cell
-     * @param dst the destination cell
+     * @param src the source cell.
+     * @param dst the destination cell.
      * @return true if it is possible to add src on top of dst.
      */
     public boolean canStack(Cell src, Cell dst) {
@@ -81,12 +80,11 @@ public class Grid {
                 && ((dst.getState().getValue() == CellState.TOWER.getValue()));
     }
 
-    //TODO: Check src is able to move on dst
     /**
-     * Move cell src to cell dst. SRC MUST BE ABLE TO MOVE ON DST
+     * Move cell src to cell dst. SRC MUST BE ABLE TO MOVE ON DST.
      *
-     * @param src source cell
-     * @param dst destination cell
+     * @param src the source cell.
+     * @param dst the destination cell.
      */
     public void moveCell(Coordinate src, Coordinate dst) {
         while (getCellAt(src).getState() != CellState.EMPTY) {
@@ -97,7 +95,7 @@ public class Grid {
     /**
      * Undo the move m.
      *
-     * @param m the move to cancel
+     * @param m the move to cancel.
      */
     public void undoMove(Move m) {
         while (getCellAt(m.getC_src()).getSize() != m.getH_src()) { // While current src size is not old src size
@@ -107,33 +105,37 @@ public class Grid {
     }
 
     /**
-     * Getter
+     * Width's getter.
      *
-     * @return width
+     * @return the width of the grid.
      */
     public int getWidth() {
         return this.grille.length;
     }
 
     /**
-     * Getter
+     * Height's getter.
      *
-     * @return height
+     * @return the height of the grid.
      */
     public int getHeight() {
         return this.grille[0].length;
     }
 
     /**
-     * Get the cell at a coordinate
+     * Get the cell at the c coordinate.
      *
-     * @param c coordiante of the cell
-     * @return cell at coordinate c
+     * @param c coordinate of the cell to get.
+     * @return the cell at coordinate c.
      */
     public Cell getCellAt(Coordinate c) {
         return this.grille[c.getX()][c.getY()];
     }
 
+    /**
+     * Grid's name getter.
+     * @return the name of the grid.
+     */
     public String getName() {
         return this.gridName;
     }

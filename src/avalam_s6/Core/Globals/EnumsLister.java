@@ -17,31 +17,42 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- *
- * @author sazeratj
+ * Read data contained into Data/Enums.xml
+ * @author Team 7
  */
 public class EnumsLister {
 
-    private static String aCurrentShortcut;
     private static Document aDoc;
 
+    /**
+     * Initialize the parser
+     */
     public static void init() {
         try {
             File xmlFile = new File("./ressources/Data/Enums.xml");
             EnumsLister.aDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(xmlFile);
             //optional, but recommended by W3C
             aDoc.getDocumentElement().normalize();
-            aCurrentShortcut = aDoc.getDocumentElement().getAttribute("id");
         } catch (ParserConfigurationException | SAXException | IOException ex) {
             System.out.println("Error - " + EnumsLister.class.toString());
             Logger.getLogger(EnumsLister.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    /**
+     * Get the element contained into an xml tag
+     * @param s Name of the xml tag
+     * @return Content of the xml tag
+     */
     public static String getElement(String s) {
         return (aDoc.getElementsByTagName(s).item(0).getTextContent());
     }
 
+    /**
+     * Get the elements contained into an xml tag
+     * @param s name of the xml tag
+     * @return List of the childrens's content
+     */
     public static String[] getChildrensOf(String s) {
         if (aDoc.getElementsByTagName(s).item(0).hasChildNodes()) {
             NodeList lChilds = aDoc.getElementsByTagName(s).item(0).getChildNodes();
@@ -65,6 +76,11 @@ public class EnumsLister {
         }
     }
 
+    /**
+     * Get the element's tag name contained into an xml tag
+     * @param s name of the xml tag
+     * @return List of the childrens's name
+     */
     public static String[] getChildrensNameOf(String s) {
         if (aDoc.getElementsByTagName(s).item(0).hasChildNodes()) {
             NodeList lChilds = aDoc.getElementsByTagName(s).item(0).getChildNodes();
@@ -87,9 +103,4 @@ public class EnumsLister {
             return null;
         }
     }
-
-    public static String getFolderShortcut() {
-        return EnumsLister.aCurrentShortcut;
-    }
-
 }

@@ -17,19 +17,27 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author sazeratj
+ * Export a Game into a SaveFile.
+ * @author Team 7
  */
 public class SaveParser_Writer {
 
     private final Local_Avalam_Game aGame;
     private final String aPath;
 
+    /**
+     * Constructor
+     * @param pGame The Game to save
+     * @param pName The Name of the Save File
+     */
     public SaveParser_Writer(Local_Avalam_Game pGame, String pName) {
         this.aGame = pGame;
         this.aPath = "./ressources/Saves/" + pName;
     }
 
+    /**
+     * Save the Game
+     */
     public void save() {
         try {
             File lFile = new File(aPath);

@@ -7,8 +7,6 @@ package avalam_s6.GUI.Confirm;
 
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.GUI.Credits.CreditsListener;
-import avalam_s6.GUI.Gui_INTERFACE;
-import avalam_s6.GUI.Main_Frame;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
