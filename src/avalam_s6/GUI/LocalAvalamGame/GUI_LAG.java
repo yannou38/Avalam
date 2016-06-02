@@ -669,7 +669,11 @@ public class GUI_LAG extends JPanel implements Gui_INTERFACE {
             }
         }
         if (hintSrc != null && hintDst != null && hintSrc.getX() == Input.getMouseSrcPosition().getX() && hintSrc.getY() == Input.getMouseSrcPosition().getY() && (Math.abs(hintDst.getX() - Input.getMouseDestPosition().getX()) <= 1 || Math.abs(hintDst.getY() - Input.getMouseDestPosition().getY()) > 1)) {
-            this.buttonmap[hintDst.getX()][hintDst.getY()].setIcon(bIADst);
+            if(gr.getCellAt(hintDst).getOwner().getValue() == Owner.PLAYER_1.getValue()) {
+                this.buttonmap[hintDst.getX()][hintDst.getY()].setIcon(wIADst);
+            } else {
+                this.buttonmap[hintDst.getX()][hintDst.getY()].setIcon(bIADst);
+            }
         }
         /* -- BOUTON PAUSE -- */
         Image newimg;

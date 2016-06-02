@@ -277,7 +277,8 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     public boolean isFinished() {
         return this.isGameFinished;
     }
-
+    
+    @SuppressWarnings("unchecked")
     public Move getHint() {
         Stack<Move> backup = (Stack<Move>)this.history.clone();
         Stack<Move> backup2 = (Stack<Move>)this.cancelled_moves.clone();
