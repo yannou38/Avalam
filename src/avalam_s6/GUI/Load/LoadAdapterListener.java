@@ -71,19 +71,31 @@ public class LoadAdapterListener implements ComponentListener {
 
         this.page.getSlotlabels(1).setBounds((int) round((359 + insets.left) * ratioW), ((int) round((219 + insets.top) * ratioH)), (int) round(1200 * ratioW), (int) round(109 * ratioH));
         this.page.getSlotlabels(1).setSize((int) round(1200 * ratioW), (int) round(109 * ratioH));
-
+        this.page.getSlotlabels(1).setFont(this.page.getTextFont().deriveFont(45f * this.page.getWidth() / 1920));
+        this.page.getSlotlabels(1).setText(this.page.getSlotlabels(1).getText());
+        
         this.page.getSlotlabels(2).setBounds((int) round((359 + insets.left) * ratioW), ((int) round((324 + insets.top) * ratioH)), (int) round(1200 * ratioW), (int) round(109 * ratioH));
         this.page.getSlotlabels(2).setSize((int) round(1200 * ratioW), (int) round(109 * ratioH));
-
+        this.page.getSlotlabels(2).setFont(this.page.getTextFont().deriveFont(45f * this.page.getWidth() / 1920));
+        this.page.getSlotlabels(2).setText(this.page.getSlotlabels(2).getText());
+        
         this.page.getSlotlabels(3).setBounds((int) round((359 + insets.left) * ratioW), ((int) round((429 + insets.top) * ratioH)), (int) round(1200 * ratioW), (int) round(109 * ratioH));
         this.page.getSlotlabels(3).setSize((int) round(1200 * ratioW), (int) round(109 * ratioH));
-
+        this.page.getSlotlabels(3).setFont(this.page.getTextFont().deriveFont(45f * this.page.getWidth() / 1920));
+        this.page.getSlotlabels(3).setText(this.page.getSlotlabels(3).getText());
+        
         this.page.getSlotlabels(4).setBounds((int) round((359 + insets.left) * ratioW), ((int) round((535 + insets.top) * ratioH)), (int) round(1200 * ratioW), (int) round(109 * ratioH));
         this.page.getSlotlabels(4).setSize((int) round(1200 * ratioW), (int) round(109 * ratioH));
-
+        this.page.getSlotlabels(4).setFont(this.page.getTextFont().deriveFont(45f * this.page.getWidth() / 1920));
+        this.page.getSlotlabels(4).setText(this.page.getSlotlabels(4).getText());
+        
         this.page.getSlotlabels(5).setBounds((int) round((359 + insets.left) * ratioW), ((int) round((641 + insets.top) * ratioH)), (int) round(1200 * ratioW), (int) round(109 * ratioH));
         this.page.getSlotlabels(5).setSize((int) round(1200 * ratioW), (int) round(109 * ratioH));
-
+        this.page.getSlotlabels(5).setFont(this.page.getTextFont().deriveFont(45f * this.page.getWidth() / 1920));
+        this.page.getSlotlabels(5).setText(this.page.getSlotlabels(5).getText());
+        
+        this.page.getField().setFont(this.page.getTextFont().deriveFont(45f * this.page.getWidth() / 1920));
+        this.page.getField().setText(this.page.getField().getText());
         this.page.getField().setBounds((int) round((359 + insets.left) * ratioW), ((int) round((747 + insets.top) * ratioH)), (int) round(1200 * ratioW), (int) round(109 * ratioH));
         this.page.getField().setSize((int) round(1200 * ratioW), (int) round(109 * ratioH));
 
