@@ -13,12 +13,16 @@ import static java.lang.Math.round;
 import javax.swing.ImageIcon;
 
 /**
- *
- * @author sazeratj
+ * Resizes a confirmation page.
+ * @author Team 7
  */
 public class ConfirmAdapterListener implements ComponentListener {
     private final GUI_Confirm co;
 
+    /**
+     * Constructor
+     * @param confirm the confirmation page to resize.
+     */
     public ConfirmAdapterListener(GUI_Confirm confirm) {
         this.co = confirm;
     }

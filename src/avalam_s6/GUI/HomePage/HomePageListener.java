@@ -19,7 +19,7 @@ import javax.swing.*;
 
 /**
  *
- * @author ducruyy
+ * @author Team 7
  */
 public class HomePageListener implements MouseListener {
 
