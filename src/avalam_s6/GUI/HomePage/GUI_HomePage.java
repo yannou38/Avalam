@@ -18,10 +18,10 @@ import javax.swing.*;
 
 /**
  *
- * @author ducruyy
+ * @author Team 7
  */
 /*
- * This class contain the home page with the avalam logo, and the diverse buttons to create a game,*
+ * This class contain the home page with the avalam logo, and the diverse buttons to create a game,
  * access options, check rules & tutorial, etc
  */
 public class GUI_HomePage extends JPanel implements Gui_INTERFACE {
@@ -31,12 +31,20 @@ public class GUI_HomePage extends JPanel implements Gui_INTERFACE {
     private boolean callResize;
     private final HomePageAdapterListener listener;
 
+    /**
+     * Constructor
+     * Initialises the page
+     */
     public GUI_HomePage() {
         this.callResize = false;
         this.listener = new HomePageAdapterListener(this);
         initComponents();
     }
-
+    
+    /**
+     * Initialises each component of the HomePage
+     * All images are loaded with this function
+     */
     private void initComponents() {
 
         try {
@@ -98,66 +106,116 @@ public class GUI_HomePage extends JPanel implements Gui_INTERFACE {
         this.addComponentListener(this.listener);
 
     }
-
+    /**
+     * Getter
+     * @return QuickGame button
+     */
     public JButton getQuick() {
         return this.quick;
     }
 
+    /**
+     * Getter
+     * @return CustomGame button
+     */
     public JButton getPlay() {
         return this.play;
     }
 
+    /**
+     * Getter
+     * @return Settings button 
+     */
     public JButton getSettings() {
         return this.settings;
     }
 
+    /**
+     * Getter
+     * @return Rules button
+     */
     public JButton getRules() {
         return this.rules;
     }
 
+    /**
+     * Getter
+     * @return Exit button
+     */
     public JButton getExit() {
         return this.exit;
     }
 
+    /**
+    * Getter
+    * @return Return LoadGame button
+    */
     public JButton getLoad() {
         return load;
     }
 
+    /**
+     * Getter
+     * @return QuickGame image
+     */
     public Image getQuickI() {
         return quickI;
     }
 
+    /**
+     * Getter
+     * @return CustomGame image
+     */
     public Image getPlayI() {
         return playI;
     }
 
+    /**
+     * Getter
+     * @return Settings image
+     */
     public Image getSettingsI() {
         return settingsI;
     }
 
+    /**
+     * Getter
+     * @return Rules image
+     */
     public Image getRulesI() {
         return rulesI;
     }
 
+    /**
+     * Getter
+     * @return LoadGame image
+     */
     public Image getLoadI() {
         return loadI;
     }
 
+    /**
+     * Getter
+     * @return Exit image
+     */
     public Image getExitI() {
         return exitI;
     }
 
+    
     @Override
     public void back() {
         Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
         mainFrame.dispose();
     }
 
+    
     @Override
     public void callResize() {
         this.callResize = true;
     }
 
+   
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);

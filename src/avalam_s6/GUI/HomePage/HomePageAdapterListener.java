@@ -14,12 +14,16 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author ducruyy
+ * @author Team 7
  */
 public class HomePageAdapterListener implements ComponentListener {
 
     private final GUI_HomePage hm;
 
+    /**
+     * Constructor
+     * @param homepage the homepage to listen 
+     */
     public HomePageAdapterListener(GUI_HomePage homepage) {
         this.hm = homepage;
     }
