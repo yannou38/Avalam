@@ -14,11 +14,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author sazeratj
+ * Generate a config file if it not exists.
+ * The class do not override existing files.
+ * If user encounters any problem with config file he can delete it.
+ * @author Team 7
  */
 public class ConfigGenerator {
 
+    /**
+     * Generate a Config file (./ressources/config/config.xml)
+     */
     public static void generate() {
         if (!Files.exists(Paths.get("./ressources/config/config.xml"))) {
             try (PrintWriter writer = new PrintWriter("./ressources/config/config.xml", "UTF-8")) {

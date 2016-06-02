@@ -26,7 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- *This class instanciates a confirmation page usefull during saves and quit.
+ * This class instanciates a confirmation page usefull during saves and quit.
  * @author Team 7
  * 
  */

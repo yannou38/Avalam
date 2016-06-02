@@ -17,8 +17,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
- *
- * @author ducruyy
+ * Interface showing rules of the game int othe current language.
+ * @author Team 7
  */
 public class GUI_Rules extends JPanel implements Gui_INTERFACE {
 
@@ -27,12 +27,18 @@ public class GUI_Rules extends JPanel implements Gui_INTERFACE {
     private boolean callResize;
     private final RulesAdapterListener listener;
 
+    /**
+     * Constructor.
+     */
     public GUI_Rules() {
         this.callResize = false;
         this.listener = new RulesAdapterListener(this);
         this.initComponents();
     }
 
+    /**
+     * Initialize content of the GUI_Rules.
+     */
     private void initComponents() {
         try {
             this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/rules/background.png"));
@@ -54,10 +60,18 @@ public class GUI_Rules extends JPanel implements Gui_INTERFACE {
 
     }
 
+    /**
+     * Getter
+     * @return HomePage Button
+     */
     public JButton getRetour() {
         return this.retour;
     }
 
+    /**
+     * Getter
+     * @return HomePage Button's Image
+     */
     public Image getReturnI() {
         return returnI;
     }

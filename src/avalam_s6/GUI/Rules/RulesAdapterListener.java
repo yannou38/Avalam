@@ -5,7 +5,6 @@
  */
 package avalam_s6.GUI.Rules;
 
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.*;
@@ -13,13 +12,17 @@ import static java.lang.Math.round;
 import javax.swing.ImageIcon;
 
 /**
- *
- * @author loic
+ * Resizes Rules Page
+ * @author Team 7
  */
 public class RulesAdapterListener implements ComponentListener {
 
     private final GUI_Rules ru;
 
+    /**
+     * Constructor
+     * @param credits The Rules Page
+     */
     public RulesAdapterListener(GUI_Rules credits) {
         this.ru = credits;
     }

@@ -6,8 +6,6 @@
 package avalam_s6.GUI.Rules;
 
 import avalam_s6.Core.Globals.SetupManager;
-import avalam_s6.GUI.Main_Frame;
-import avalam_s6.GUI.WindowState;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -18,8 +16,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
- *
- * @author loic
+ * Listener of the Rules Page
+ * @author Team 7
  */
 public class RulesListener implements MouseListener {
 
@@ -27,6 +25,10 @@ public class RulesListener implements MouseListener {
     private Image icon;
     private Image iconbase;
 
+    /**
+     * Constructor
+     * @param buttonname Name of the button on which action is provided.
+     */
     public RulesListener(String buttonname) {
         this.name = buttonname;
         try {

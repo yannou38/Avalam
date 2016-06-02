@@ -11,11 +11,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- *
- * @author sazeratj
+ * Directory Parser, List every themes.
+ * @author Team 7
  */
 public class ThemesLister {
 
+    /**
+     * List Themes (./ressources/Themes/...)
+     * @return List with every theme name.
+     */
     public static String[] listThemes() {
         Path p = Paths.get("./ressources/Themes");
         if (Files.exists(p) && Files.isDirectory(p)) {

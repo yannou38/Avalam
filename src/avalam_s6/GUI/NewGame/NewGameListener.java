@@ -18,8 +18,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
- *
- * @author loic
+ * Listener for the NewGame window
+ * @author Team 7
  */
 public class NewGameListener implements MouseListener {
 
@@ -30,6 +30,13 @@ public class NewGameListener implements MouseListener {
     private GUI_NewGame page;
     private final String type;
 
+    /**
+     * Constructor
+     * @param buttonname
+     * @param playernumber
+     * @param page
+     * @param type 
+     */
     public NewGameListener(String buttonname, int playernumber, GUI_NewGame page, String type) {
         this.name = buttonname;
         this.playernum = playernumber;

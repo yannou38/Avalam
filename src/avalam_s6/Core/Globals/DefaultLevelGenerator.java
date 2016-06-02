@@ -14,11 +14,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author sazeratj
+ * Generate a default level file if it not exists.
+ * The class do not override existing files.
+ * If user encounters any problem with default level file he can delete it.
+ * @author Team 7
  */
 public class DefaultLevelGenerator {
 
+    /**
+     * Generate a default Level (./ressources/Levels/default)
+     */
     public static void generate() {
         if (!Files.exists(Paths.get("./ressources/Levels/default"))) {
             try (PrintWriter writer = new PrintWriter("./ressources/Levels/default", "UTF-8")) {

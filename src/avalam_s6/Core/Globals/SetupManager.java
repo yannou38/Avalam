@@ -21,13 +21,20 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 /**
- *
- * @author sazeratj
+ * General Manager that edit every setup.
+ * Every class trying to change any setup will asks/tells it to the SetupManager.
+ * Example : To set FullScreen on, asks SetupManager.setElement("FullScreen","Oui") (Oui means Yes).
+ * @author team 7
  */
 public class SetupManager {
 
     private static Document aDoc;
 
+    /**
+     * Load last user's setup (or default one if config file get deleted).
+     * Parameters are load locally to get a quicker access and to override file if required.
+     * Generate every file required, Load LanguageManager and SoundEngine.
+     */
     public static void load() {
         ConfigGenerator.generate();
         try {
@@ -45,6 +52,11 @@ public class SetupManager {
         SoundEngine.init();
     }
 
+    /**
+     * Save local setups into the config.xml
+     * @throws TransformerConfigurationException Basic exception for Transformer
+     * @throws TransformerException Basic exception for Transformer
+     */
     private static void save() throws TransformerConfigurationException, TransformerException {
         // write the content into xml file
         Transformer transformer = TransformerFactory.newInstance().newTransformer();
@@ -53,10 +65,21 @@ public class SetupManager {
         transformer.transform(source, result);
     }
 
+    /**
+     * Getter.
+     * Example : LanguageManager.get("Langue") return the current language (saved as shortcut).
+     * @param s Setup asked
+     * @return State of the Setup
+     */
     public static String getElement(String s) {
         return (aDoc.getElementsByTagName(s).item(0).getTextContent());
     }
 
+    /**
+     * Setter
+     * @param name Setup Name
+     * @param value Setup Value
+     */
     public static void setElement(String name, String value) {
         aDoc.getElementsByTagName(name).item(0).setTextContent(value);
         try {

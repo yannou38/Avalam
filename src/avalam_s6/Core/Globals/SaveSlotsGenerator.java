@@ -11,11 +11,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author sazeratj
+ * Generate SaveSlot files if they don't exist.
+ * The class do not override existing files.
+ * If user encounters any problem with any SaveSlot file he can delete it.
+ * @author Team 7
  */
 public class SaveSlotsGenerator {
 
+    /**
+     * Generate SaveSlot Files (./ressources/Saves/slot_x).
+     */
     public static void generate() {
         for (int i = 1; i < 6; i++) {
             File lFile = new File("./ressources/Saves/slot_" + i);

@@ -17,8 +17,9 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
- *
- * @author sazeratj
+ * Global Dictionnary that translates through xml files the words for every class.
+ * Class that displays labels calls LanguageManager and 'asks' for a translation into the current language.
+ * @author Team 7
  */
 public class LanguageManager {
 
@@ -26,11 +27,19 @@ public class LanguageManager {
     private static String aCurrentShortcut;
     private static Document aDoc;
 
+    /**
+     * Setter
+     * @param s Language asked by the user. 
+     */
     public static void setLanguage(String s) {
         LanguageManager.aCurrentLanguage = s;
         LanguageManager.applyLanguage();
     }
 
+    /**
+     * Load the dictionnary of the current language into a local Document (quicker acces).
+     * This will enable the class to modify the dictionnary locally then overright the existing one.
+     */
     private static void applyLanguage() {
         try {
             File xmlFile = new File("./ressources/Languages/" + LanguageManager.aCurrentLanguage + "_Translations.xml");
@@ -44,10 +53,21 @@ public class LanguageManager {
         }
     }
 
+    /**
+     * Getter.
+     * Example : getElement("Oui") return "Oui" if current language is french or "Yes" if it's in english ...
+     * @param s Word's name into xml files (French tags ... 'Cause we're french :D).
+     * @return The word's translation.
+     */
     public static String getElement(String s) {
         return (aDoc.getElementsByTagName(s).item(0).getTextContent());
     }
 
+    /**
+     * Getter
+     * @param s name of the xml tag
+     * @return List of the children's content
+     */
     public static String[] getChildrensOf(String s) {
         if (aDoc.getElementsByTagName(s).item(0).hasChildNodes()) {
             NodeList lChilds = aDoc.getElementsByTagName(s).item(0).getChildNodes();
@@ -71,6 +91,11 @@ public class LanguageManager {
         }
     }
 
+    /**
+     * Getter
+     * @param s name of the xml tag
+     * @return List of the children's name
+     */
     public static String[] getChildrensNameOf(String s) {
         if (aDoc.getElementsByTagName(s).item(0).hasChildNodes()) {
             NodeList lChilds = aDoc.getElementsByTagName(s).item(0).getChildNodes();
@@ -94,6 +119,10 @@ public class LanguageManager {
         }
     }
 
+    /**
+     * Getter
+     * @return Language Shortcut
+     */
     public static String getFolderShortcut() {
         return LanguageManager.aCurrentShortcut;
     }

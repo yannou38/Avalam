@@ -17,17 +17,28 @@ import static java.lang.Math.round;
 import javax.swing.ImageIcon;
 
 /**
+ * The board listener.
  *
- * @author ducruyy
+ * @author Team 7
  */
 public class LAG_AdapterListener implements ComponentListener {
 
     private final GUI_LAG page;
 
+    /**
+     * Constructor
+     *
+     * @param page the board GUI object
+     */
     public LAG_AdapterListener(GUI_LAG page) {
         this.page = page;
     }
 
+    /**
+     * Resize and place the component where they should be.
+     *
+     * @param e the component event
+     */
     @Override
     public void componentResized(ComponentEvent e) {
 
@@ -129,14 +140,13 @@ public class LAG_AdapterListener implements ComponentListener {
 
         this.page.getP2name().setBounds((int) round((1616 + insets.left) * ratioW), ((int) round((257 + insets.top) * ratioH)), (int) round(284 * ratioW), 50);
         this.page.getP2name().setSize((int) round(284 * ratioW), 50);
-        
+
         this.page.getP1score().setBounds((int) round((20 + insets.left) * ratioW), ((int) round((457 + insets.top) * ratioH)), (int) round(284 * ratioW), 50);
         this.page.getP1score().setSize((int) round(284 * ratioW), 50);
 
         this.page.getP2score().setBounds((int) round((1616 + insets.left) * ratioW), ((int) round((457 + insets.top) * ratioH)), (int) round(284 * ratioW), 50);
         this.page.getP2score().setSize((int) round(284 * ratioW), 50);
-        
-        
+
         newimg = this.page.getWhite().getScaledInstance(((int) round(80 * ratioW)), ((int) round(80 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         this.page.getP1color().setIcon(new ImageIcon(newimg));
         this.page.getP1color().setBounds((int) round((122 + insets.left) * ratioW), ((int) round((367 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
@@ -146,20 +156,35 @@ public class LAG_AdapterListener implements ComponentListener {
         this.page.getP2color().setIcon(new ImageIcon(newimg));
         this.page.getP2color().setBounds((int) round((1718 + insets.left) * ratioW), ((int) round((367 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
         this.page.getP2color().setSize((int) round(80 * ratioW), (int) round(80 * ratioH));
-        
+
         System.out.println(this.page.getP1name().getText());
 
         this.page.callResize();
     }
 
+    /**
+     * Do nothing.
+     *
+     * @param e the component event
+     */
     @Override
     public void componentMoved(ComponentEvent e) {
     }
 
+    /**
+     * Do nothing.
+     *
+     * @param e the component event
+     */
     @Override
     public void componentShown(ComponentEvent e) {
     }
 
+    /**
+     * Do nothing.
+     *
+     * @param e the component event
+     */
     @Override
     public void componentHidden(ComponentEvent e) {
     }

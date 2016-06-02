@@ -25,8 +25,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author sazeratj
+ * File Parser reading saves and creating Game's attributes.
+ * @author Team 7
  */
 public class SaveParser_Reader {
 
@@ -43,6 +43,11 @@ public class SaveParser_Reader {
     private int aTurns;
     /* -------------------------------- */
     
+    /**
+     * Constructor
+     * @param pMainFrame MainFrame (required to build a Game)
+     * @param pName Name of the Save
+     */
     public SaveParser_Reader(GuiManager_INTERFACE pMainFrame, String pName) {
         this.aPath = "./ressources/Saves/" + pName;
         this.aMainFrame = pMainFrame;
@@ -50,6 +55,9 @@ public class SaveParser_Reader {
     }
 
 @SuppressWarnings("unchecked")
+    /**
+     * Save into attributes ever game's parameters
+     */
     private void load() {
         try {
             BufferedReader br = new BufferedReader(new FileReader(aPath));
@@ -137,38 +145,66 @@ public class SaveParser_Reader {
         }
     }
 
-    /*public Local_Avalam_Game generateGame() {
-        return new Local_Avalam_Game((Main_Frame)aMainFrame,aGrid,aPlayer1,aPlayer2,aUndo,aRedo,aCurrentPlayer,aTurns);
-    }*/
-
+    /**
+     * Getter
+     * @return The MainFrame
+     */
     public GuiManager_INTERFACE getaMainFrame() {
         return aMainFrame;
     }
 
+    /**
+     * Getter
+     * @return The Game's Grid
+     */
     public Grid getaGrid() {
         return aGrid;
     }
 
+    /**
+     * Getter
+     * @return The Game's Player 1
+     */
     public Player getaPlayer1() {
         return aPlayer1;
     }
 
+    /**
+     * Getter
+     * @return The Game's player 2 
+     */
     public Player getaPlayer2() {
         return aPlayer2;
     }
 
+    /**
+     * Getter
+     * @return The Undo History 
+     */
     public Stack<Move> getaUndo() {
         return aUndo;
     }
 
+    /**
+     * Getter
+     * @return the Redo Hitory 
+     */
     public Stack<Move> getaRedo() {
         return aRedo;
     }
 
+    /**
+     * Getter
+     * @return The current player's position into Game's players table.
+     */
     public int getaCurrentPlayer() {
         return aCurrentPlayer;
     }
 
+    /**
+     * Getter
+     * @return The Amount of turns ever played 
+     */
     public int getaTurns() {
         return aTurns;
     }

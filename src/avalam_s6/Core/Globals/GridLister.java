@@ -11,10 +11,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- *
- * @author sazeratj
+ * Directory Parser, List the Files contained into ./ressources/Levels .
+ * @author Team 7
  */
-public class GridLister { 
+public class GridLister {
+    /**
+     * List the Levels Files
+     * @return Table filled with Grid's names
+     */
     public static String[] listGrids() {
         Path p = Paths.get("./ressources/Levels");
         if (Files.exists(p) && Files.isDirectory(p)) {
