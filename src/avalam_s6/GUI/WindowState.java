@@ -18,7 +18,8 @@ public enum WindowState {
     SAVE(5), //Save/Load window
     LOAD(6), //Save/Load window
     RULES(7), //Rules Page
-    TUTORIAL(8); //Tutorial window
+    TUTORIAL(8), //Tutorial window
+    YESNO(9); // Confirm Window
 
     private final int id;
 

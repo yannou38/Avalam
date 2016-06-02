@@ -8,6 +8,7 @@ package avalam_s6.GUI;
 import avalam_s6.Core.Globals.EnumsLister;
 import avalam_s6.Core.Globals.SetupManager;
 import avalam_s6.Core.Globals.SoundEngine;
+import avalam_s6.GUI.Confirm.GUI_Confirm;
 import avalam_s6.GUI.HomePage.GUI_HomePage;
 import avalam_s6.GUI.LocalAvalamGame.GUI_LAG;
 import avalam_s6.GUI.NewGame.GUI_NewGame;
@@ -84,7 +85,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
                 pElement.setVisible(false);
             }
         }
-        this.panelList = new JPanel[8];
+        this.panelList = new JPanel[9];
         this.panelList[WindowState.MAIN.getValue()] = new GUI_HomePage();
         this.panelList[WindowState.BOARD.getValue()] = new GUI_LAG();
         this.panelList[WindowState.PLAYERSELECT.getValue()] = new GUI_NewGame();
@@ -93,7 +94,8 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         this.panelList[WindowState.SAVE.getValue()] = new GUI_Save();
         this.panelList[WindowState.LOAD.getValue()] = new GUI_Load();
         this.panelList[WindowState.RULES.getValue()] = new GUI_Rules();
-        for (JPanel pElement : this.panelList) {
+        this.panelList[WindowState.YESNO.getValue()] = new GUI_Confirm(); 
+       for (JPanel pElement : this.panelList) {
             //this.add(pElement);
             pElement.setVisible(false);
         }

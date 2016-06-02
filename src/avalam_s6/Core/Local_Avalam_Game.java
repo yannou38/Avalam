@@ -278,11 +278,16 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     }
 
     public Move getHint() {
+        Stack<Move> backup = this.history;
+        Stack<Move> backup2 = this.cancelled_moves;
         if (!this.players[current_player].isAI()) { // Le joueur actuel est un vrai joueur
             AIPlayerHardAB ia = new AIPlayerHardAB("Help",AvalamColor.WHITE,this.players[current_player].getOwner());
             ia.setGame(this);
             Input.resetClick();
-            return ia.play();
+            Move m  = ia.play();
+            this.history = backup;
+            this.cancelled_moves = backup2;
+            return m;
         }
         return null;
     }
