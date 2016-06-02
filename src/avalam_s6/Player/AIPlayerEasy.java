@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
- * @author Seawolf
+ * easy AI
+ * @author Team 7
  */
 public class AIPlayerEasy extends AIPlayer {
 

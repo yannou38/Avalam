@@ -5,14 +5,12 @@
  */
 package avalam_s6.Player;
 
-import avalam_s6.Core.Coordinate;
-import avalam_s6.Core.Game_INTERFACE;
 import avalam_s6.Core.Move;
 import avalam_s6.Core.Owner;
 
 /**
  *
- * @author TheDoctor
+ * @author Team 7
  */
 public interface Player_INTERFACE {
 
@@ -31,7 +29,15 @@ public interface Player_INTERFACE {
      */
     public boolean isAI();
 
+    /**
+     * getter
+     * @return name of the player
+     */
     public String getName();
     
+    /**
+     * getter
+     * @return owner
+     */
     public Owner getOwner();
 }

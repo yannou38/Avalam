@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- *
- * @author Seawolf
+ * hard AI
+ * @author Team 7
  */
 public class AIPlayerHard extends AIPlayer {
 
@@ -22,9 +22,13 @@ public class AIPlayerHard extends AIPlayer {
         
     }
     
+    /**
+     * does simple moves at first, then start to do a minmax when the number of moves is small enough
+     * possible to beat early
+     * @return the choosen move
+     */
     @Override
     public Move play() {
-        System.out.println("Je suis " + this.name + " je vais jouer des coups difficiles ");
         coord = new Coordinate[this.game.getGrid().getHeight()][this.game.getGrid().getWidth()];
         for (int i = 0; i < this.game.getGrid().getWidth(); i++) {
             for (int j = 0; j < this.game.getGrid().getHeight(); j++) {
@@ -73,8 +77,6 @@ public class AIPlayerHard extends AIPlayer {
             return null;
         Random r = new Random();
         int monrand = r.nextInt(mesCoups.size());
-        System.out.println("Ce coup vaut " + maxvalue);
-        System.out.println("" + mesCoups.get(monrand).getC_src().getX() + " " + mesCoups.get(monrand).getC_src().getY() + " " + mesCoups.get(monrand).getC_dst().getX() + " " + mesCoups.get(monrand).getC_dst().getY());
         return mesCoups.get(monrand);
 
     }
