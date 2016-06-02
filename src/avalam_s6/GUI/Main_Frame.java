@@ -25,14 +25,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
+ * Main class that manage and displays all the GUIs
  *
- * @author sazeratj
+ * @author Team 7
  */
 public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable {
 
     private WindowState wState;
     private JPanel[] panelList;
 
+    /**
+     * Mainframe constructor.
+     */
     public Main_Frame() {
         SetupManager.load();
         EnumsLister.init();
@@ -44,8 +48,12 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         if (SetupManager.getElement("Son").equals("Non")) {
             SoundEngine.toggleMute();
         }
+
     }
 
+    /**
+     * Set the software to fullscreen or not, depending of the setup.
+     */
     public void setRenderMode() {
         if (SetupManager.getElement("FullScreen").equals("Oui")) {
             GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(this);
@@ -58,6 +66,9 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         //this.requestFocus();
     }
 
+    /**
+     * Change the fullscreen setup, then call setRenderMode().
+     */
     public void toggleWRM() {
         if (SetupManager.getElement("FullScreen").equals("Oui")) {
             SetupManager.setElement("FullScreen", "Non");
@@ -67,18 +78,29 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         this.setRenderMode();
         this.resetSettings();
     }
-    
+
+    /**
+     * Toogle mute in the sound engine.
+     */
     public void toggleMute() {
         SoundEngine.toggleMute();
         this.resetSettings();
         ((GUI_Settings) this.panelList[WindowState.SETTINGS.getValue()]).callResize();
     }
-    
-    private void resetSettings(){
+
+    /**
+     * Change the setup labels to the actual setup.
+     */
+    private void resetSettings() {
         ((GUI_Settings) this.panelList[WindowState.SETTINGS.getValue()]).initOptions();
         ((GUI_Settings) this.panelList[WindowState.SETTINGS.getValue()]).retextLabels();
     }
 
+    /**
+     * Create the panels array and toogle fullscreen and sound based on setup.
+     *
+     * @param wState the basic window displayed
+     */
     public void initFrame(WindowState wState) {
         this.wState = wState;
         if (this.panelList != null) {
@@ -95,18 +117,24 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         this.panelList[WindowState.SAVE.getValue()] = new GUI_Save();
         this.panelList[WindowState.LOAD.getValue()] = new GUI_Load();
         this.panelList[WindowState.RULES.getValue()] = new GUI_Rules();
-        this.panelList[WindowState.YESNO.getValue()] = new GUI_Confirm(); 
-       for (JPanel pElement : this.panelList) {
+        this.panelList[WindowState.YESNO.getValue()] = new GUI_Confirm();
+        for (JPanel pElement : this.panelList) {
             //this.add(pElement);
             pElement.setVisible(false);
         }
         ((GUI_HomePage) this.panelList[WindowState.MAIN.getValue()]).callResize();
         this.setwState(WindowState.MAIN);
         this.setRenderMode();
-        if ((SoundEngine.isMuted() && SetupManager.getElement("Son").equals("Oui")) || (!SoundEngine.isMuted() && SetupManager.getElement("Son").equals("Non")))
+        if ((SoundEngine.isMuted() && SetupManager.getElement("Son").equals("Oui")) || (!SoundEngine.isMuted() && SetupManager.getElement("Son").equals("Non"))) {
             SoundEngine.toggleMute();
+        }
     }
 
+    /**
+     * Change the actual viewed panel.
+     *
+     * @param wState the panel you want to see (WindowState enum)
+     */
     public void setwState(WindowState wState) {
         this.panelList[this.wState.getValue()].setVisible(false);
         this.remove(this.panelList[this.wState.getValue()]);
@@ -116,41 +144,60 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         this.add(this.panelList[this.wState.getValue()]);
     }
 
+    /**
+     * Repaint the frame.
+     */
     @Override
     public void render() {
         this.repaint();
     }
 
+    /**
+     * Run the frame.
+     */
     @Override
     public void run() {
         this.pack();
         this.setVisible(true);
     }
 
+    /**
+     * Initialize a game with standard parameters.
+     */
     public void initGame() {
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).initGame(this);
     }
-    
+
+    /**
+     * Start the game timer and set the window to display the board.
+     */
     public void startGame() {
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).start();
         this.setwState(WindowState.BOARD);
     }
 
     /**
-     * Initialize the Game with custom parameters
+     * Initialize the Game with custom parameters.
+     *
      * @param p1 Player_1 [Class, Name, Color]
      * @param p2 Player_2 [Class, Name, Color]
-     * @param gridName  Name of the Grid
+     * @param gridName Name of the Grid
      */
     public void initGame(String[] p1, String[] p2, String gridName) {
         p1[0] = createClass(p1[0]);
         p2[0] = createClass(p2[0]);
         //System.out.println(p1[0]+" - "+p2[0]);
-        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).initGame(this,p1[0], p1[1], p1[2], p2[0], p2[1], p2[2], gridName);
+        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).initGame(this, p1[0], p1[1], p1[2], p2[0], p2[1], p2[2], gridName);
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).start();
         this.setwState(WindowState.BOARD);
     }
-    
+
+    /**
+     * Return the AI/Player class corresponding to the param.
+     *
+     * @param xmlChoice The name picked in the xml file
+     * @return The Class name of the Player/AI
+     */
     public String createClass(String xmlChoice) {
         switch (xmlChoice) {
             case "player":
@@ -169,24 +216,52 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         return null;
     }
 
+    /**
+     * Stop the game and change the panel title.
+     *
+     * @param s The panel title
+     */
     public void setVictory(String s) {
-        
+
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).stop();
         this.setGameTitle(s);
     }
-    
+
+    /**
+     * Change the title of the game panel.
+     *
+     * @param s The panel title
+     */
     public void setGameTitle(String s) {
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).setTitle(s);
     }
 
+    /**
+     * Save the game in a file.
+     *
+     * @param pSlotName The file name (without path)
+     */
     public void save(String pSlotName) {
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).save(pSlotName);
     }
 
+    /**
+     * Load the game from a file.
+     *
+     * @param pSlotName The file name (without path)
+     */
     public void load(String pSlotName) {
-        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).load(this,pSlotName);
+        ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).load(this, pSlotName);
     }
 
+    /**
+     * Change the settings according to the params. Will reload all the panels.
+     *
+     * @param Language The new language
+     * @param FS The fullscreen mode
+     * @param Theme The new theme
+     * @param Sound The sound mode
+     */
     public void changeSettings(String Language, String FS, String Theme, String Sound) {
         SetupManager.setElement("Langue", Language);
         SetupManager.setElement("FullScreen", FS);
@@ -195,21 +270,35 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         this.initFrame(WindowState.SETTINGS);
     }
 
+    /**
+     * Call the back() function of the current panel.
+     */
     @Override
     public void backWindow() {
         ((Gui_INTERFACE) this.panelList[this.wState.getValue()]).back();
     }
-    
+
+    /**
+     * Reset the hint displayed on the board.
+     */
     public void resetHint() {
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).setHint(null);
     }
-    
-    public void setConfirmQuitter(){
-        ((GUI_Confirm) this.panelList[WindowState.YESNO.getValue()]).setConfirmPage(LanguageManager.getElement("Quit"),"HomePage");
+
+    /**
+     * Change the confirm panel text fot exit confirmation.
+     */
+    public void setConfirmQuitter() {
+        ((GUI_Confirm) this.panelList[WindowState.YESNO.getValue()]).setConfirmPage(LanguageManager.getElement("Quit"), "HomePage");
     }
-    
-    public void setConfirmSauver(String slot){
-        ((GUI_Confirm) this.panelList[WindowState.YESNO.getValue()]).setConfirmPage(LanguageManager.getElement("Save"),"Save");
+
+    /**
+     * Change the confirm panel text fot save confirmation.
+     *
+     * @param slot The file name to save
+     */
+    public void setConfirmSauver(String slot) {
+        ((GUI_Confirm) this.panelList[WindowState.YESNO.getValue()]).setConfirmPage(LanguageManager.getElement("Save"), "Save");
         ((GUI_Confirm) this.panelList[WindowState.YESNO.getValue()]).setPrivatedata(slot);
     }
 }
