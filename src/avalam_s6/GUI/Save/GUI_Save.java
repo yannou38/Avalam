@@ -29,8 +29,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- *
- * @author ducruyy
+ * The save GUI.
+ * @author Team 7
  */
 public class GUI_Save extends JPanel implements Gui_INTERFACE {
 
@@ -45,6 +45,9 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
     private final JTextField[] slotlabels;
     private final Font font;
 
+    /**
+     * Constructor.
+     */
     public GUI_Save() {
         this.listener = new SaveAdapterListener(this);
         this.callResize = false;
@@ -64,6 +67,9 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
         initComponents();
     }
 
+    /**
+     * Init components that are constructor independent.
+     */
     private void initComponents() {
         try {
             this.backgroundsave = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/save/background_save.png"));
@@ -121,6 +127,9 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
         this.addComponentListener(listener);
     }
 
+    /**
+     * Sets the text in the save slots.
+     */
     public void loadSlotText() {
         SaveInfoLister sil;
         int j;
@@ -148,6 +157,9 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
         this.callResize();
     }
     
+    /**
+     * Resets the look of the slots (avoid unwanted hovers and selections).
+     */
     public void resetSlots() {
         this.slotnumber = 0;
         for (int i = 0; i < this.slots.length; i++) {
@@ -156,54 +168,109 @@ public class GUI_Save extends JPanel implements Gui_INTERFACE {
         }
     }
 
+    /**
+     * Font's getter.
+     * @return the text font.
+     */
     public Font getTextFont() {
         return font;
     }
 
+    /**
+     * Return/Home Button getter.
+     * @return the Return/Home button.
+     */
     public JButton getHomereturn() {
         return homereturn;
     }
 
+    /**
+     * Save button getter.
+     * @return the save button.
+     */
     public JButton getSaveload() {
         return saveload;
     }
 
+    /**
+     * Gets the number of the selected slot.
+     * @return the selected slot's number.
+     */
     public int getSlotnumber() {
         return slotnumber;
     }
 
+    /**
+     * Sets the selected slots number.
+     * @param slotnumber the selected slot's number.
+     */
     public void setSlotnumber(int slotnumber) {
         this.slotnumber = slotnumber;
     }
 
+    /**
+     * Gets a slot.
+     * @param i the index of the slot to get.
+     * @return the chosen slot.
+     */
     public JButton getSlots(int i) {
         return this.slots[i - 1];
     }
 
+    /**
+     * Gets the listener of a slot.
+     * @param i the id of the slot's whose listener we're seeking for.
+     * @return the listener of the chosen slot.
+     */
     public SaveListener getSlotslistener(int i) {
         return slotslistener[i - 1];
     }
 
+    /**
+     * Gets all slots listener.
+     * @return the slots listeners.
+     */
     public SaveListener[] getSlotslistener() {
         return slotslistener;
     }
 
+    /**
+     * Gets the field.
+     * @return the field.
+     */
     public JTextField getField() {
         return field;
     }
 
+    /**
+     * Gets a slot's label.
+     * @param i the id of the slot whose label we're seeking for.
+     * @return the label of the chosen slot.
+     */
     public JTextField getSlotlabels(int i) {
         return this.slotlabels[i - 1];
     }
     
+    /**
+     * Gets the image of the return/home button.
+     * @return the image of the return/home button.
+     */
     public Image getHomeReturnI() {
         return this.returnI;
     }
 
+    /**
+     * Gets the image of the save button.
+     * @return the image of the save button.
+     */
     public Image getLoadI() {
         return this.saveI;
     }
 
+    /**
+     * Gets the slots' image.
+     * @return the image of the slots.
+     */
     public Image getSlotI() {
         return this.slot;
     }

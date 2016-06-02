@@ -20,8 +20,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
- *
- * @author ducruyy
+ * The Settings gui.
+ * @author Team 7
  */
 public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
@@ -36,6 +36,9 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
     private final SettingsAdapterListener listener;
     private Boolean callResize;
 
+    /**
+     * Constructor.
+     */
     public GUI_Settings() {
         this.callResize = false;
         this.listener = new SettingsAdapterListener(this);
@@ -43,6 +46,9 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
         initComponents();
     }
 
+    /**
+     * Inits the components that are not constructor dependent.
+     */
     private void initComponents() {
 
         try {
@@ -168,6 +174,9 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
         this.addComponentListener(listener);
     }
 
+    /**
+     * Gets the current options set in the config files.
+     */
     public void initOptions() {
 
         this.language = LanguageManager.getChildrensNameOf("Langue");
@@ -203,6 +212,9 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     }
 
+    /**
+     * Change the labels' text (called when changes has been made).
+     */
     public void retextLabels() {
         this.LabelFS.setText(LanguageManager.getElement(this.fullScreen[this.fullScreenSelected]));
         this.LabelTheme.setText(this.Theme[this.ThemeSelected]);
@@ -210,7 +222,10 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
         this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.currentLanguage]));
     }
 
-    void leftLanguage() {
+    /**
+     * Changes the language when the language's left arrow has been clicked.
+     */
+    public void leftLanguage() {
         this.currentLanguage = (this.currentLanguage - 1);
         if (this.currentLanguage == -1) {
             this.currentLanguage = this.language.length - 1;
@@ -219,7 +234,10 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
         this.callResize();
     }
 
-    void leftFS() {
+    /**
+     * Changes the resolution when the FullScreen left arrow has been clicked.
+     */
+    public void leftFS() {
         this.fullScreenSelected = (this.fullScreenSelected - 1);
         if (this.fullScreenSelected == -1) {
             this.fullScreenSelected = 1;
@@ -228,7 +246,10 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
         this.callResize();
     }
 
-    void leftTheme() {
+    /**
+     * Changes the theme when the theme's left arrow has been clicked.
+     */
+    public void leftTheme() {
         this.ThemeSelected = (this.ThemeSelected - 1);
         if (this.ThemeSelected == -1) {
             this.ThemeSelected = this.Theme.length;
@@ -237,7 +258,10 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
         this.callResize();
     }
 
-    void leftSound() {
+    /**
+     * Mutes or unmutes the sound when the sound left arrow has been clicked.
+     */
+    public void leftSound() {
         this.SoundSelected = (this.SoundSelected - 1);
         if (this.SoundSelected == -1) {
             this.SoundSelected = 1;
@@ -246,125 +270,233 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
         this.callResize();
     }
 
-    void rightLanguage() {
+    /**
+     * Changes the language when the language's right arrow has been clicked.
+     */
+    public void rightLanguage() {
         this.currentLanguage = (this.currentLanguage + 1) % 2;
         this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.currentLanguage]));
         this.callResize();
     }
 
-    void rightFS() {
+    /**
+     * Changes the resolution when the FullScreen right arrow has been clicked.
+     */
+    public void rightFS() {
         this.fullScreenSelected = (this.fullScreenSelected + 1) % 2;
         this.LabelFS.setText(LanguageManager.getElement(this.fullScreen[this.fullScreenSelected]));
         this.callResize();
     }
 
-    void rightTheme() {
+    /**
+     * Changes the theme when the theme's right arrow has been clicked.
+     */    
+    public void rightTheme() {
         this.ThemeSelected = (this.ThemeSelected + 1) % this.Theme.length;
         this.LabelTheme.setText(this.Theme[this.ThemeSelected]);
         this.callResize();
     }
 
-    void rightSound() {
+    /**
+     * Mutes or unmutes the sound when the sound left arrow has been clicked.
+     */
+    public void rightSound() {
         this.SoundSelected = (this.SoundSelected + 1) % 2;
         this.LabelSound.setText(LanguageManager.getElement(this.Sound[this.SoundSelected]));
         this.callResize();
     }
 
+    /**
+     * Gets the apply button.
+     * @return the apply button.
+     */
     public JButton getApply() {
         return this.apply;
     }
 
+    /**
+     * Gets the return button.
+     * @return the return button.
+    */
     public JButton getRetour() {
         return this.retour;
     }
 
+    /**
+     * Gets the credits button.
+     * @return the credits button.
+     */
     public JButton getCredits() {
         return this.credits;
     }
 
+    /**
+     * Gets the Sound label.
+     * @return the sound label.
+     */
     public JLabel getLabelSound() {
         return this.LabelSound;
     }
 
+    /**
+     * Gets the language label.
+     * @return the language label.
+     */
     public JLabel getLabelLanguage() {
         return this.LabelLanguage;
     }
 
+    /**
+     * Gets Fullscreen label.
+     * @return the Fullscreen label.
+     */
     public JLabel getLabelFS() {
         return this.LabelFS;
     }
 
+    /**
+     * Gets the theme label.
+     * @return the theme label.
+     */
     public JLabel getLabelTheme() {
         return this.LabelTheme;
     }
 
+    /**
+     * Gets the left language arrow.
+     * @return the left language arrow.
+     */
     public JButton getLeftLanguage() {
         return this.leftLanguage;
     }
 
+    /**
+     * Gets the right language arrow.
+     * @return the right language arrow.
+     */
     public JButton getRightLanguage() {
         return this.rightLanguage;
     }
 
+    /**
+     * Gets the right Fullscreen arrow.
+     * @return the right Fullscreen arrow.
+     */
     public JButton getRightFS() {
         return this.rightFS;
     }
 
+    /**
+     * Gets the left theme arrow.
+     * @return the left theme arrow.
+     */
     public JButton getLeftTheme() {
         return this.leftTheme;
     }
 
+    /**
+     * Gets the right theme arrow.
+     * @return the right theme arrow.
+     */
     public JButton getRightTheme() {
         return this.rightTheme;
     }
 
+    /**
+     * Gets the left sound arrow.
+     * @return the left sound arrow.
+     */
     public JButton getLeftSound() {
         return this.leftSound;
     }
 
+    /**
+     * Gets the right sound arrow.
+     * @return the right sound arrow.
+     */
     public JButton getRightSound() {
         return this.rightSound;
     }
 
+    /**
+     * Gets the left fullscreen arrow.
+     * @return the left fullscreen arrow.
+     */
     public JButton getLeftFS() {
         return this.leftFS;
     }
 
+    /**
+     * Gets the selected language.
+     * @return the selected language.
+     */
     public String getSelectedLanguage() {
         return this.language[this.currentLanguage];
     }
 
+    /**
+     * Gets the selected screen configuration.
+     * @return the selected screen configuration.
+     */
     public String getSelectedFS() {
         return this.fullScreen[this.fullScreenSelected];
 
     }
 
+    /**
+     * Gets the selected theme.
+     * @return the selected theme.
+     */
     public String getSelectedTheme() {
         return this.Theme[this.ThemeSelected];
 
     }
 
+    /**
+     * Gets the selected sound setting.
+     * @return the selected sound setting.
+     */
     public String getSelectedSound() {
         return this.Sound[this.SoundSelected];
 
     }
-    
+
+    /**
+     * Gets apply button image.
+     * @return the apply button image.
+     */    
     Image getApplyI() {
         return this.applyI;
     }
 
+    /**
+     * Gets the return button image.
+     * @return the return button image.
+     */
     Image getRetourI() {
         return this.returnI;
     }
 
+    /**
+     * Gets the credits button image.
+     * @return the credits button image.
+     */
     Image getCreditsI() {
         return this.creditsI;
     }
 
+    /**
+     * Gets the left arrow image.
+     * @return the left arrow image.
+     */
     Image getLeftI() {
         return this.leftI;
     }
     
+    /**
+     * Gets the right arrow image.
+     * @return the right arrow image.
+     */
     Image getRightI() {
         return this.rightI;
     }

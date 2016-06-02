@@ -11,13 +11,17 @@ import static java.lang.Math.round;
 import javax.swing.ImageIcon;
 
 /**
- *
- * @author ducruyy
+ * The resize system for the settings gui.
+ * @author Team 7
  */
 public class SettingsAdapterListener implements ComponentListener {
 
     private final GUI_Settings page;
 
+    /**
+     * Constructor.
+     * @param settings the gui this listener is linked to.
+     */
     public SettingsAdapterListener(GUI_Settings settings) {
         this.page = settings;
     }
