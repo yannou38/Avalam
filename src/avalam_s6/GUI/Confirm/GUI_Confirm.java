@@ -26,8 +26,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- *
- * @author sazeratj
+ *This class instanciates a confirmation page usefull during saves and quit.
+ * @author Team 7
+ * 
  */
 public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
 
@@ -39,6 +40,9 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
     private final ConfirmAdapterListener listener;
     private Image yesI, noI, background;
 
+    /**
+     * Constructor
+     */
     public GUI_Confirm() {
         this.prevWindow = "HomePage";
 
@@ -47,6 +51,10 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
         this.initComponents();
     }
 
+    /**
+     * initialises all the components,
+     * loads all the buttons and images.
+     */
     private void initComponents() {
         try {
             this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/confirm/confirm.png"));
@@ -93,6 +101,9 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
 
     }
 
+    /**
+     * Executes the action that needed confirmation.
+     */
     void doAction() {
         Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
         if (this.prevWindow.equals("Save")) {
@@ -103,6 +114,9 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
 
     }
 
+    /**
+     * Cancels the action that needed confirmation.
+     */
     void cancelAction() {
         Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
         if (this.prevWindow.equals("Save")) {
@@ -114,31 +128,63 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
         }
     }
 
+    /**
+     * Setter
+     * Sets the previous page (save or mainpage).
+     * Sets the title of this window.
+     * @param title the title to set
+     * @param page the previous page
+     */
     public void setConfirmPage(String title, String page) {
         this.prevWindow = page;
         this.titre.setText(title);
     }
 
+    /**
+     * Setter
+     * Sets the save filename
+     * @param privatedata name of a save slot
+     */
     public void setPrivatedata(String privatedata) {
         this.privatedata = privatedata;
     }
 
+    /**
+     * Getter
+     * @return yes button
+     */
     public JButton getYes() {
         return yes;
     }
 
+    /**
+     * Getter
+     * @return no button
+     */
     public JButton getNo() {
         return no;
     }
 
+    /**
+     * Getter
+     * @return yes image
+     */
     public Image getYesI() {
         return yesI;
     }
 
+    /**
+     * Getter
+     * @return no image
+     */
     public Image getNoI() {
         return noI;
     }
 
+    /**
+     * Getter
+     * @return title of the page
+     */
     public JLabel getTitre() {
         return titre;
     }
