@@ -43,7 +43,7 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
     private int slotnumber;
     private final LoadAdapterListener listener;
     private boolean callResize;
-    private final JLabel[] slotlabels;
+    private final JTextField[] slotlabels;
     private final Font font;
 
     public GUI_Load() {
@@ -52,7 +52,7 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         this.slotnumber = 0;
         this.slots = new JButton[6];
         this.slotslistener = new LoadListener[6];
-        this.slotlabels = new JLabel[5];
+        this.slotlabels = new JTextField[5];
         Font localFont = new Font("Arial", Font.PLAIN, 60);
         try {
             localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
@@ -99,11 +99,13 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         }
         for (int i = 0; i < this.slotlabels.length; i++) {
             int j = i + 1;
-            this.slotlabels[i] = new JLabel("Slot " + j + " : vide");
-            this.slotlabels[i].setBorder(BorderFactory.createEmptyBorder());
+            this.slotlabels[i] = new JTextField();
             this.slotlabels[i].setHorizontalAlignment(JLabel.CENTER);
-            this.slotlabels[i].setVerticalAlignment(JLabel.CENTER);
             this.slotlabels[i].setFont(this.font.deriveFont(30f));
+            this.slotlabels[i].setBorder(BorderFactory.createEmptyBorder());
+            this.slotlabels[i].setText("Slot " + j + " : vide");
+            this.slotlabels[i].setOpaque(false);
+            this.slotlabels[i].setEditable(false);
             this.add(this.slotlabels[i]);
         }
 
@@ -136,6 +138,9 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
                     this.slotlabels[i].setText("Slot " + j + " : vide");
 
                 }
+
+                this.field.setFont(this.font.deriveFont(45f * this.getWidth() / 1920));
+                this.field.setText(this.field.getText());
 
             } catch (IOException ex) {
                 //ne pas traiter
@@ -188,7 +193,7 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         return slotnumber;
     }
 
-    public JLabel getSlotlabels(int i) {
+    public JTextField getSlotlabels(int i) {
         return this.slotlabels[i - 1];
     }
 
