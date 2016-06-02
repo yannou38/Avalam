@@ -226,7 +226,6 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
 
     @Override
     public void callResize() {
-        System.out.println("appel resize");
         this.callResize = true;
     }
 }
