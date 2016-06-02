@@ -13,8 +13,8 @@ import static java.lang.Math.round;
 import javax.swing.ImageIcon;
 
 /**
- *
- * @author loic
+ * This class resizes the NewGame window.
+ * @author Team 7
  */
 public class NewGameAdapterListener implements ComponentListener {
 

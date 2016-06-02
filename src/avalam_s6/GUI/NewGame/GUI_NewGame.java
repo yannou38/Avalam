@@ -28,8 +28,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
- *
- * @author ducruyy
+ * Custom game window
+ * @author Team 7
  */
 public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
 
@@ -65,6 +65,9 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
     private JButton supgrille;
     private JButton precgrille;
 
+    /**
+     * Constructor
+     */
     public GUI_NewGame() {
         this.callResize = false;
         this.listener = new NewGameAdapterListener(this);
@@ -72,6 +75,10 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         this.initComponents();
     }
 
+    /**
+     * Initialises all the components of the window,
+     * Loads the images and buttons.
+     */
     private void initComponents() {
         try {
             // BackGround
@@ -301,6 +308,10 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
 
     }
 
+    /**
+     * Decrements the color when user clicked on the left arrow
+     * @param numplayer the number of the player affected by the change
+     */
     void leftColorAI(int numplayer) {
         if (numplayer == 1) {
             this.p1colorselect = (this.p1colorselect - 1);
@@ -333,6 +344,10 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         }
     }
 
+    /**
+     * Increments the color when user clicked on the right arrow
+     * @param numplayer the number of the player affected by the change
+     */
     void rightColorAI(int numplayer) {
         if (numplayer == 1) {
             this.p1colorselect = (this.p1colorselect + 1) % this.ColorListSize;
@@ -353,6 +368,10 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         }
     }
 
+    /**
+     * Loads the settings of the player 1.
+     * @return a string array containing all the settings for player 1.
+     */
     public String[] loadP1Settings() {
         String[] p1 = new String[3];
         p1[0] = this.AIlist[this.p1select];
@@ -361,6 +380,10 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         return p1;
     }
 
+    /**
+     * Loads the settings of the player 2.
+     * @return a string array containing all the settings for player 2.
+     */
     public String[] loadP2Settings() {
         String[] p2 = new String[3];
         p2[0] = this.AIlist[this.p2select];
@@ -369,10 +392,18 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         return p2;
     }
 
+    /**
+     * Loads the name of the selected grid.
+     * @return 
+     */
     public String loadGridName() {
         return this.gridNameList[this.selectedGrid];
     }
 
+    /**
+     * Changes the value of the AI/PLAYER field when the left arrow is clicked
+     * @param numplayer the number of the player affected by the change
+     */
     public void leftAI(int numplayer) {
         if (numplayer == 1) {
             this.p1select = (this.p1select - 1);
@@ -391,6 +422,10 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         }
     }
 
+    /**
+     * Changes the value of the AI/PLAYER field when the right arrow is clicked
+     * @param numplayer the number of the player affected by the change
+     */
     public void rightAI(int numplayer) {
         if (numplayer == 1) {
             this.p1select = (this.p1select + 1) % this.AIlistsize;
@@ -405,6 +440,9 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
     
     
 
+    /**
+     * Handles a click on the left arrow on the Grid section
+     */
     public void leftGrille() {
         this.selectedGrid = (this.selectedGrid - 1);
             if (this.selectedGrid == -1) {
@@ -414,150 +452,274 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
             this.callResize = true;
     }
 
+    /**
+     * Handles a click on the right arrow on the Grid section
+     */
     public void rightGrille() {
             this.selectedGrid = (this.selectedGrid + 1) % this.gridList.length;
             this.grilleName.setText(this.gridNameList[this.selectedGrid]);
             this.callResize = true;
     }
 
+    /**
+     * Getter
+     * @return the return button
+     */
     public JButton getRetour() {
         return this.retour;
     }
 
+    /**
+     * Getter
+     * @return the name of the grid (in JLabel)
+     */
     public JLabel getGrilleName() {
         return grilleName;
     }
 
+    /**
+     * Getter
+     * @return the next grid
+     */
     public JButton getSupgrille() {
         return supgrille;
     }
 
+    /**
+     * Getter
+     * @return the previous grid
+     */
     public JButton getPrecgrille() {
         return precgrille;
     }
     
-    
-
+    /**
+     * Getter
+     * @return the start button
+     */
     public JButton getStart() {
         return this.start;
     }
 
+    /**
+     * Getter
+     * @return the left button for the difficulty select of player 1 
+     */
     public JButton getLeftP1() {
         return this.prec1;
     }
 
+    /**
+     * Getter
+     * @return the right button for the difficulty select of player 1 
+     */
     public JButton getRightP1() {
         return this.sup1;
     }
 
+    /**
+     * Getter
+     * @return the left button for the difficulty select of player 2 
+     */
     public JButton getLeftP2() {
         return this.prec2;
     }
 
+    /**
+     * Getter
+     * @return the right button for the difficulty select of player 1 
+     */
     public JButton getRightP2() {
         return this.sup2;
     }
 
+    /**
+     * Getter
+     * @return the left button for the color select of player 1 
+     */
     public JButton getPreccolor1() {
         return this.preccolor1;
     }
 
+    /**
+     * Getter
+     * @return the left button for the color select of player 2
+     */
     public JButton getPreccolor2() {
         return this.preccolor2;
     }
 
+    /**
+     * Getter
+     * @return the right button for the color select of player 1 
+     */
     public JButton getSupcolor1() {
         return this.supcolor1;
     }
 
+    /**
+     * Getter
+     * @return the right button for the color select of player 2 
+     */
     public JButton getSupcolor2() {
         return this.supcolor2;
     }
 
+    /**
+     * Getter
+     * @return the name of the first player 
+     */
     public JTextField getName1() {
         return this.name1;
     }
 
+    /**
+     * Getter
+     * @return the name of the second player
+     */
     public JTextField getName2() {
         return this.name2;
     }
 
+    /**
+     * Getter
+     * @return the button of the first player  (humain, easyai, mediumai, etc)
+     */
     public JButton getP1button() {
         return p1button;
     }
 
+    /**
+     * Getter
+     * @return the button of the second player (humain, easyai, mediumai, etc)
+     */
     public JButton getP2button() {
         return p2button;
     }
 
+    /**
+     * Getter
+     * @return the image of the button of previous player type for the first player
+     */
     public JButton getPrec1() {
         return prec1;
     }
-
+    /**
+     * Getter
+     * @return the image of the button of next player type for the first player
+     */
     public JButton getSup1() {
         return sup1;
     }
-
+    /**
+     * Getter
+     * @return the image of the button of previous player type for the second player
+     */
     public JButton getPrec2() {
         return prec2;
     }
-
+    /**
+     * Getter
+     * @return the image of the button of next player type for the second player
+     */
     public JButton getSup2() {
         return sup2;
     }
-
+    /**
+     * Getter
+     * @return the image of the button of the first player color
+     */
     public JButton getP1color() {
         return p1color;
     }
-
+    /**
+     * Getter
+     * @return the image of the button of the second player color
+     */
     public JButton getP2color() {
         return p2color;
     }
-
+    /**
+     * Getter
+     * @return the image of the selected grid
+     */
     public int getSelectedGrid() {
         return selectedGrid;
     }
-
+    /**
+     * Getter
+     * @return the selection of the first player
+     */
     public int getP1select() {
         return p1select;
     }
-
+    /**
+     * Getter
+     * @return the selection of the second player
+     */
     public int getP2select() {
         return p2select;
     }
-
+    /**
+     * Getter
+     * @return the color of the first player
+     */
     public int getP1colorselect() {
         return p1colorselect;
     }
-
+    /**
+     * Getter
+     * @return the color of the second player
+     */
     public int getP2colorselect() {
         return p2colorselect;
     }
-
+    /**
+     * Getter
+     * @return the previous player type
+     */
     public Image getPrecI() {
         return precI;
     }
-
+    /**
+     * Getter
+     * @return the next player type
+     */
     public Image getSupI() {
         return supI;
     }
-
+    /**
+     * Getter
+     * @return the image of the return button
+     */
     public Image getReturnI() {
         return returnI;
     }
-
+    /**
+     * Getter
+     * @return the image of the start button
+     */
     public Image getStartI() {
         return startI;
     }
-
+    /**
+     * Getter
+     * @return the image of the AI type
+     */
     public Image[] getAIimgs() {
         return AIimgs;
     }
-
+    /**
+     * Getter
+     * @return the image of the color of the player
+     */
     public Image[] getColorImgs() {
         return ColorImgs;
     }
-
+    /**
+     * Getter
+     * @return the list of pawn on the game area
+     */
     public Image[] getPawnList() {
         return pawnList;
     }

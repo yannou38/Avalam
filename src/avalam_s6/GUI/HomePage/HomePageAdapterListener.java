@@ -13,7 +13,7 @@ import static java.lang.Math.round;
 import javax.swing.ImageIcon;
 
 /**
- *
+ * This class resizes the HomePage window.
  * @author Team 7
  */
 public class HomePageAdapterListener implements ComponentListener {
