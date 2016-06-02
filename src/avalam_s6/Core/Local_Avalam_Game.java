@@ -74,11 +74,13 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         this.lastIAMove = null;
         Input.resetClick();
         Input.setInputGame(this);
+        ((Main_Frame)this.gui).resetHint();
     }
 
     //TODO: Check user is able to undo (GUI check if history is empty and call or not this function)
     @Override
     public void undo() {
+        ((Main_Frame)this.gui).resetHint();
         Input.resetClick();
         if (!this.history.isEmpty()) {
             this.cancelled_moves.add(this.history.pop());
@@ -91,6 +93,8 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     //TODO: Check user is able to redo (GUI check if cancelled_moves is empty and call or not this function)
     @Override
     public void redo() {
+        ((Main_Frame)this.gui).resetHint();
+        Input.resetClick();
         if (!this.cancelled_moves.isEmpty()) {
             this.history.add(this.cancelled_moves.pop());
             this.grid.moveCell(this.history.lastElement().getC_src(), this.history.lastElement().getC_dst());
