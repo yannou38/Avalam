@@ -58,11 +58,11 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
         this.yes.setFocusPainted(false);
         this.yes.addMouseListener(new ConfirmListener("yes"));
 
-        this.yes = new JButton(new ImageIcon(this.yesI));
-        this.yes.setBorder(BorderFactory.createEmptyBorder());
-        this.yes.setContentAreaFilled(false);
-        this.yes.setFocusPainted(false);
-        this.yes.addMouseListener(new ConfirmListener("no"));
+        this.no = new JButton(new ImageIcon(this.noI));
+        this.no.setBorder(BorderFactory.createEmptyBorder());
+        this.no.setContentAreaFilled(false);
+        this.no.setFocusPainted(false);
+        this.no.addMouseListener(new ConfirmListener("no"));
 
         this.setLayout(null);
         this.add(this.yes);
