@@ -13,6 +13,9 @@ Like <es>Espagnol<es> into fr_Translations.xml
 
 Translate other xml tags.
 
+You have to add into themes a new subdirectory.
+Fill it with correct textures (copy paste from english // Create new pictures if you want it to be translated).
+
 The game will find it automatically :)
 
 Enjoy,
