@@ -8,8 +8,8 @@ package avalam_s6.Core;
 import avalam_s6.Player.Player;
 
 /**
- *
- * @author sazeratj
+ * The moves' system.
+ * @author Team 7
  */
 public class Move {
 
@@ -19,6 +19,14 @@ public class Move {
     private final int h_dst;//Height of the tower b
     private final Player playedBy; //Move played by ...
 
+    /**
+     * Constructor.
+     * @param a the source's coordinate.
+     * @param b the source's tower height.
+     * @param c the destination's coordinate.
+     * @param d the destination's height.
+     * @param e the player who plays the move.
+     */
     public Move(Coordinate a, int b, Coordinate c, int d, Player e) {
         this.c_src = a;
         this.c_dst = c;
@@ -27,6 +35,11 @@ public class Move {
         this.playedBy = e;
     }
 
+    /**
+     * Tells if the move is valid.
+     * @param grid the grid on which the move is applied.
+     * @return true if the move is valid, false otherwise.
+     */
     public boolean isValid(Grid grid) {
         if (this.c_src.isValid() && this.c_dst.isValid()) {
             if ((Math.abs(this.c_src.getX() - this.c_dst.getX()) <= 1) && (Math.abs(this.c_src.getY() - this.c_dst.getY()) <= 1)) { //adjacence d'une case
@@ -40,54 +53,53 @@ public class Move {
 
     }
 
-    @Override
-    public String toString() {
-        return (this.c_src + " " + this.h_src + " " + this.c_dst + " " + this.h_dst + " | " + this.playedBy.getName());
-    }
-
     /**
-     * Getter
+     * Source's coordinate getter.
      *
-     * @return Source Coordinate
+     * @return the source's coordinate.
      */
     public Coordinate getC_src() {
         return this.c_src;
     }
 
     /**
-     * Getter
+     * Destination's coordinate getter.
      *
-     * @return Destination Coordinate
+     * @return the destination's coordinate.
      */
     public Coordinate getC_dst() {
         return this.c_dst;
     }
 
     /**
-     * Getter
+     * Source's height getter.
      *
-     * @return Source height
+     * @return the source's tower height.
      */
     public int getH_src() {
         return this.h_src;
     }
 
     /**
-     * Getter
+     * Destination's height getter.
      *
-     * @return Destination height
+     * @return the destination's tower height.
      */
     public int getH_dst() {
         return this.h_dst;
     }
 
     /**
-     * Getter
+     * Player getter.
      *
-     * @return Player which played the move
+     * @return the player who played the move.
      */
     public Player getPlayedBy() {
         return this.playedBy;
     }
 
+    @Override
+    public String toString() {
+        return (this.c_src + " " + this.h_src + " " + this.c_dst + " " + this.h_dst + " | " + this.playedBy.getName());
+    }
 }

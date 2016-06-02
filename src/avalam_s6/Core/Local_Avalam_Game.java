@@ -25,8 +25,8 @@ import avalam_s6.Player.ControlledPlayer;
 import java.io.IOException;
 
 /**
- *
- * @author sazeratj
+ * The game. Implements Game_INTERFACE. This class basically is the game engine.
+ * @author Team 7
  */
 public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     /* - LAG Builder - */
@@ -45,13 +45,34 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     private boolean isGameFinished;
     private boolean isGamePaused;
     
-    /* Repain IA Activity */
+    /* Repaint IA Activity */
     private Move lastIAMove;
 
+    /**
+     * Default Constructor. Creates a Player vs easy AI game on the 
+     * default board.
+     * @param pGui the graphical user interface the game is linked to.
+     * @throws GridSizeException if the Grid doesn't match the 9*9 
+     * size requirements.
+     * @throws GridCharException if the grid is invalid because of a 
+     * non-tolerated character.
+     * @throws IOException if there is any problem while reading the grid.
+     */
     public Local_Avalam_Game(GuiManager_INTERFACE pGui) throws GridSizeException, GridCharException, IOException {
         this(pGui, new Grid(new Level_Parser("default").readLevel(), "default"), new ControlledPlayer("Jon Doe", AvalamColor.WHITE, Owner.PLAYER_1), new AIPlayerEasy("Bot_Frank", AvalamColor.BLACK, Owner.PLAYER_2), new Stack<>(), new Stack<>(), 0, 0);
     }
 
+    /**
+     * Constructor.
+     * @param pGui the gui the game is linked to.
+     * @param pGrid the grid of the game.
+     * @param pPlayer1 the first player.
+     * @param pPlayer2 the second player.
+     * @param pUndo the history of moves.
+     * @param pRedo the history of canceled moves.
+     * @param pCurrent the id of the current player (one or two).
+     * @param pTurns the current turn's number.
+     */
     public Local_Avalam_Game(GuiManager_INTERFACE pGui, Grid pGrid, Player pPlayer1, Player pPlayer2, Stack<Move> pUndo, Stack<Move> pRedo, int pCurrent, int pTurns) {
         this.gui = pGui;
         this.grid = pGrid;
@@ -66,6 +87,9 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         this.initGame();
     }
 
+    /**
+     * init the game. Init all components that are not constructor dependent.
+     */
     private void initGame() {
         this.t = new Timer(100, (ActionListener) this);
         this.isTurnFinished = false;
@@ -76,39 +100,10 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         Input.setInputGame(this);
         ((Main_Frame)this.gui).resetHint();
     }
-
-    //TODO: Check user is able to undo (GUI check if history is empty and call or not this function)
-    @Override
-    public void undo() {
-        ((Main_Frame)this.gui).resetHint();
-        Input.resetClick();
-        if (!this.history.isEmpty()) {
-            this.cancelled_moves.add(this.history.pop());
-            this.grid.undoMove(this.cancelled_moves.lastElement());
-        }
-        this.isGameFinished = false;
-        this.lastIAMove = null;
-    }
-
-    //TODO: Check user is able to redo (GUI check if cancelled_moves is empty and call or not this function)
-    @Override
-    public void redo() {
-        ((Main_Frame)this.gui).resetHint();
-        Input.resetClick();
-        if (!this.cancelled_moves.isEmpty()) {
-            this.history.add(this.cancelled_moves.pop());
-            this.grid.moveCell(this.history.lastElement().getC_src(), this.history.lastElement().getC_dst());
-        }
-        if (winCheck()>0) {
-            this.isGameFinished = true;
-        }
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        this.playATurn();
-    }
-
+    
+    /**
+     * Update the game's title (tells game's state).
+     */
     public void updateTitle() {
         if (!this.isGameFinished) {
             if (this.isGamePaused) {
@@ -122,7 +117,8 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     }
 
     /**
-     * Turn Logic
+     * This is the turn's logic. It gets a move from the player and updates the 
+     * game's status. It is regularly called by the timer.
      */
     private void playATurn() {
         /* Gestion Fin d'un tour */
@@ -149,7 +145,6 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         if (this.players[this.current_player].isAI()) {
             ((AIPlayer) this.players[this.current_player]).setGame(this);
         }
-        //System.out.println("Joueur : "+this.current_player);
         if (!this.isPaused()) {
             Move m = this.players[this.current_player].play();
 
@@ -171,9 +166,6 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
                     this.updateTitle();
                     this.lastIAMove = null;
                     ((Main_Frame)this.gui).resetHint();
-                } else {
-                    //TODO                   
-                    /* Afficher warning de deplacement */
                 }
                 this.cancelled_moves.clear();
             }
@@ -182,7 +174,7 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     }
 
     /**
-     * Tells if a game has been won.
+     * Tells if the game has been won.
      *
      * @return 1 or 2 if player 1 or 2 won, 3 in case of a null match, 0 if game
      * isn't finished.
@@ -218,7 +210,6 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
                     if (this.grid.getCellAt(c[0]).getState().getValue() != CellState.RESTRICTED.getValue() || this.grid.getCellAt(c[0]).getState().getValue() != CellState.EMPTY.getValue()) {
                         if (c[i].isValid() && this.grid.getCellAt(c[i]).getState().getValue() != CellState.RESTRICTED.getValue() && this.grid.getCellAt(c[i]).getState().getValue() != CellState.EMPTY.getValue()) {
                             if (this.grid.canStack(this.grid.getCellAt(c[0]), this.grid.getCellAt(c[i]))) {
-//                                System.out.println("x = "+ x+ ", y = "+y+", c[0] = "+ c[0]+", cell = "+this.grid.getCellAt(c[0]).getState().getValue()+"c["+i+"] = "+c[i]+", cell = "+this.grid.getCellAt(c[i]).getState().getValue()+".");
                                 return 0;
                             }
                         }
@@ -258,11 +249,18 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         this.history.add(m);
     }
 
+    /**
+     * Changes the current turn's number. Updates the current player.
+     * @param n the quantity of turns to add (can be negative for undo).
+     */
     public void changeNbTurns(int n) {
         this.nbTurns += n;
         this.current_player = this.nbTurns % NB_PLAYERS;
     }
 
+    /**
+     * Toggles the pause state of the game.
+     */
     public void togglePause() {
         this.isGamePaused = !this.isGamePaused;
         this.updateTitle();
@@ -274,14 +272,26 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         }
     }
 
+    /**
+     * Tells if the game is paused.
+     * @return true if the game is paused, false otherwise.
+     */
     public boolean isPaused() {
         return this.isGamePaused;
     }
     
+    /**
+     * Tells if the game is finished.
+     * @return true if the game is finished, false otherwise.
+     */
     public boolean isFinished() {
         return this.isGameFinished;
     }
     
+    /**
+     * Gets a hint from an efficient AI.
+     * @return a possible efficient move.
+     */
     @SuppressWarnings("unchecked")
     public Move getHint() {
         Stack<Move> backup = (Stack<Move>)this.history.clone();
@@ -298,50 +308,59 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         return null;
     }
 
-    @Override
-    public Timer getTimer() {
-        return this.t;
-    }
-    
+    /**
+     * Gets the last move played by the AI.
+     * @return the last AI's move.
+     */
     public Move getLastIaMove() {
         return this.lastIAMove;
     }
 
-    @Override
-    public Grid getGrid() {
-        return this.grid;
-    }
-
-    @Override
-    public void setGrid(Grid g) {
-        this.grid = g;
-    }
-
-    @Override
-    public Player getCurrentPlayer() {
-        return this.players[this.current_player];
-    }
-
+    /**
+     * Current player's getter.
+     * @return the current player's id.
+     */
     public int getCurrent() {
         return this.current_player;
     }
 
+    /**
+     * Moves' history getter.
+     * @return the moves' history.
+     */
     public Stack<Move> getHistory() {
         return this.history;
     }
 
+    /**
+     * Canceled moves' history.
+     * @return the canceled moves' history.
+     */
     public Stack<Move> getCancelled_moves() {
         return this.cancelled_moves;
     }
 
+    /**
+     * Players' getter.
+     * @return the players.
+     */
     public Player[] getPlayers() {
         return this.players;
     }
 
+    /**
+     * Turn's number getter.
+     * @return the current turn's number.
+     */
     public int getTurns() {
         return this.nbTurns;
     }
 
+    /**
+     * Score getter.
+     * @param pnumber the id of the player whose score we are seeking for.
+     * @return the score of the chose player.
+     */
     public int getScore(int pnumber) {
         Coordinate[] c = new Coordinate[9];
         for (int i = 0; i < 9; i++) {
@@ -398,6 +417,51 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
     }
 
     @Override
+    public void undo() {
+        ((Main_Frame)this.gui).resetHint();
+        Input.resetClick();
+        if (!this.history.isEmpty()) {
+            this.cancelled_moves.add(this.history.pop());
+            this.grid.undoMove(this.cancelled_moves.lastElement());
+        }
+        this.isGameFinished = false;
+        this.lastIAMove = null;
+    }
+
+    @Override
+    public void redo() {
+        ((Main_Frame)this.gui).resetHint();
+        Input.resetClick();
+        if (!this.cancelled_moves.isEmpty()) {
+            this.history.add(this.cancelled_moves.pop());
+            this.grid.moveCell(this.history.lastElement().getC_src(), this.history.lastElement().getC_dst());
+        }
+        if (winCheck()>0) {
+            this.isGameFinished = true;
+        }
+    }
+
+    @Override
+    public Timer getTimer() {
+        return this.t;
+    }
+    
+    @Override
+    public Grid getGrid() {
+        return this.grid;
+    }
+
+    @Override
+    public void setGrid(Grid g) {
+        this.grid = g;
+    }
+
+    @Override
+    public Player getCurrentPlayer() {
+        return this.players[this.current_player];
+    }
+
+    @Override
     public void clean() {
         this.players[0] = null;
         this.players[1] = null;
@@ -406,5 +470,10 @@ public class Local_Avalam_Game implements Game_INTERFACE, ActionListener {
         this.grid = null;
 
         System.gc();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        this.playATurn();
     }
 }
