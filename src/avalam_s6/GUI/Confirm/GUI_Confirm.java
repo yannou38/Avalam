@@ -25,25 +25,26 @@ import javax.swing.JPanel;
  * @author sazeratj
  */
 public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
+
     private String prevWindow;
     private String title;
-    private JButton yes,no;
+    private JButton yes, no;
     private boolean callResize;
     private final ConfirmAdapterListener listener;
     private Image yesI, noI, background;
-    
+
     public GUI_Confirm() {
         this.prevWindow = "HomePage";
         this.title = "Do you really want to quit ?";
-        
+
         this.callResize = false;
         this.listener = new ConfirmAdapterListener(this);
         this.initComponents();
     }
-    
+
     private void initComponents() {
         try {
-            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/credits/confirm.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/confirm/confirm.png"));
             this.yesI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/confirm/yes.png"));
             this.noI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/confirm/no.png"));
         } catch (Exception ex) {
@@ -56,7 +57,7 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
         this.yes.setContentAreaFilled(false);
         this.yes.setFocusPainted(false);
         this.yes.addMouseListener(new ConfirmListener("yes"));
-        
+
         this.yes = new JButton(new ImageIcon(this.yesI));
         this.yes.setBorder(BorderFactory.createEmptyBorder());
         this.yes.setContentAreaFilled(false);
@@ -69,12 +70,20 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
         this.addComponentListener(this.listener);
 
     }
-    
+
+    void doAction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    void cancelAction() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     private void setConfirmPage(String title, String page) {
         this.prevWindow = page;
         this.title = title;
     }
-    
+
     @Override
     public void paintComponent(Graphics g) {
         g.drawImage(this.background, 0, 0, this.getWidth(), this.getHeight(), null);
@@ -98,4 +107,5 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
     public void callResize() {
         this.callResize = true;
     }
+
 }
