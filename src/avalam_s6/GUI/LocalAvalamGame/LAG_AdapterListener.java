@@ -157,8 +157,6 @@ public class LAG_AdapterListener implements ComponentListener {
         this.page.getP2color().setBounds((int) round((1718 + insets.left) * ratioW), ((int) round((367 + insets.top) * ratioH)), (int) round(80 * ratioW), (int) round(80 * ratioH));
         this.page.getP2color().setSize((int) round(80 * ratioW), (int) round(80 * ratioH));
 
-        System.out.println(this.page.getP1name().getText());
-
         this.page.callResize();
     }
 

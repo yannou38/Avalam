@@ -185,7 +185,6 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
     public void initGame(String[] p1, String[] p2, String gridName) {
         p1[0] = createClass(p1[0]);
         p2[0] = createClass(p2[0]);
-        //System.out.println(p1[0]+" - "+p2[0]);
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).initGame(this, p1[0], p1[1], p1[2], p2[0], p2[1], p2[2], gridName);
         ((GUI_LAG) this.panelList[WindowState.BOARD.getValue()]).start();
         this.setwState(WindowState.BOARD);
