@@ -27,8 +27,9 @@ import javax.swing.JPanel;
 
 /**
  * This class instanciates a confirmation page usefull during saves and quit.
+ *
  * @author Team 7
- * 
+ *
  */
 public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
 
@@ -52,8 +53,7 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
     }
 
     /**
-     * initialises all the components,
-     * loads all the buttons and images.
+     * initialises all the components, loads all the buttons and images.
      */
     private void initComponents() {
         try {
@@ -76,8 +76,7 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
         this.no.setContentAreaFilled(false);
         this.no.setFocusPainted(false);
         this.no.addMouseListener(new ConfirmListener("no"));
-        
-        
+
         Font localFont = new Font("Arial", Font.PLAIN, 60);
         try {
             localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
@@ -86,7 +85,7 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
             System.out.println("Error - " + GUI_Confirm.class.toString());
             Logger.getLogger(GUI_Confirm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         this.titre = new JLabel();
         this.titre.setHorizontalAlignment(JLabel.CENTER);
         this.titre.setVerticalAlignment(JLabel.CENTER);
@@ -109,6 +108,8 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
         if (this.prevWindow.equals("Save")) {
             mainFrame.save(this.privatedata);
 
+        } else {
+            mainFrame.dispose();
         }
         mainFrame.backWindow();
 
@@ -129,9 +130,9 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
     }
 
     /**
-     * Setter
-     * Sets the previous page (save or mainpage).
-     * Sets the title of this window.
+     * Setter Sets the previous page (save or mainpage). Sets the title of this
+     * window.
+     *
      * @param title the title to set
      * @param page the previous page
      */
@@ -141,8 +142,8 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
     }
 
     /**
-     * Setter
-     * Sets the save filename
+     * Setter Sets the save filename
+     *
      * @param privatedata name of a save slot
      */
     public void setPrivatedata(String privatedata) {
@@ -151,6 +152,7 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
 
     /**
      * Getter
+     *
      * @return yes button
      */
     public JButton getYes() {
@@ -159,6 +161,7 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
 
     /**
      * Getter
+     *
      * @return no button
      */
     public JButton getNo() {
@@ -167,6 +170,7 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
 
     /**
      * Getter
+     *
      * @return yes image
      */
     public Image getYesI() {
@@ -175,6 +179,7 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
 
     /**
      * Getter
+     *
      * @return no image
      */
     public Image getNoI() {
@@ -183,6 +188,7 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
 
     /**
      * Getter
+     *
      * @return title of the page
      */
     public JLabel getTitre() {
@@ -202,7 +208,7 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
     public void back() {
         Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
         if (this.prevWindow.equals("HomePage")) {
-            mainFrame.dispose();
+            mainFrame.setwState(WindowState.MAIN);
         } else if (this.prevWindow.equals("Save")) {
             mainFrame.setwState(WindowState.SAVE);
         }

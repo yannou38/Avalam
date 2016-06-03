@@ -21,6 +21,7 @@ import javax.swing.*;
 
 /**
  * The Settings gui.
+ *
  * @author Team 7
  */
 public class GUI_Settings extends JPanel implements Gui_INTERFACE {
@@ -210,6 +211,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
             }
         }
 
+        this.callResize();
     }
 
     /**
@@ -253,7 +255,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
     public void leftTheme() {
         this.ThemeSelected = (this.ThemeSelected - 1);
         if (this.ThemeSelected == -1) {
-            this.ThemeSelected = this.Theme.length-1;
+            this.ThemeSelected = this.Theme.length - 1;
         }
         this.LabelTheme.setText(this.Theme[this.ThemeSelected]);
         this.callResize();
@@ -291,7 +293,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Changes the theme when the theme's right arrow has been clicked.
-     */    
+     */
     public void rightTheme() {
         this.ThemeSelected = (this.ThemeSelected + 1) % this.Theme.length;
         this.LabelTheme.setText(this.Theme[this.ThemeSelected]);
@@ -309,6 +311,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the apply button.
+     *
      * @return the apply button.
      */
     public JButton getApply() {
@@ -317,14 +320,16 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the return button.
+     *
      * @return the return button.
-    */
+     */
     public JButton getRetour() {
         return this.retour;
     }
 
     /**
      * Gets the credits button.
+     *
      * @return the credits button.
      */
     public JButton getCredits() {
@@ -333,6 +338,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the Sound label.
+     *
      * @return the sound label.
      */
     public JLabel getLabelSound() {
@@ -341,6 +347,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the language label.
+     *
      * @return the language label.
      */
     public JLabel getLabelLanguage() {
@@ -349,6 +356,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets Fullscreen label.
+     *
      * @return the Fullscreen label.
      */
     public JLabel getLabelFS() {
@@ -357,6 +365,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the theme label.
+     *
      * @return the theme label.
      */
     public JLabel getLabelTheme() {
@@ -365,6 +374,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the left language arrow.
+     *
      * @return the left language arrow.
      */
     public JButton getLeftLanguage() {
@@ -373,6 +383,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the right language arrow.
+     *
      * @return the right language arrow.
      */
     public JButton getRightLanguage() {
@@ -381,6 +392,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the right Fullscreen arrow.
+     *
      * @return the right Fullscreen arrow.
      */
     public JButton getRightFS() {
@@ -389,6 +401,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the left theme arrow.
+     *
      * @return the left theme arrow.
      */
     public JButton getLeftTheme() {
@@ -397,6 +410,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the right theme arrow.
+     *
      * @return the right theme arrow.
      */
     public JButton getRightTheme() {
@@ -405,6 +419,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the left sound arrow.
+     *
      * @return the left sound arrow.
      */
     public JButton getLeftSound() {
@@ -413,6 +428,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the right sound arrow.
+     *
      * @return the right sound arrow.
      */
     public JButton getRightSound() {
@@ -421,6 +437,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the left fullscreen arrow.
+     *
      * @return the left fullscreen arrow.
      */
     public JButton getLeftFS() {
@@ -429,6 +446,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the selected language.
+     *
      * @return the selected language.
      */
     public String getSelectedLanguage() {
@@ -437,6 +455,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the selected screen configuration.
+     *
      * @return the selected screen configuration.
      */
     public String getSelectedFS() {
@@ -446,6 +465,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the selected theme.
+     *
      * @return the selected theme.
      */
     public String getSelectedTheme() {
@@ -455,6 +475,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the selected sound setting.
+     *
      * @return the selected sound setting.
      */
     public String getSelectedSound() {
@@ -464,14 +485,16 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets apply button image.
+     *
      * @return the apply button image.
-     */    
+     */
     Image getApplyI() {
         return this.applyI;
     }
 
     /**
      * Gets the return button image.
+     *
      * @return the return button image.
      */
     Image getRetourI() {
@@ -480,6 +503,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the credits button image.
+     *
      * @return the credits button image.
      */
     Image getCreditsI() {
@@ -488,24 +512,26 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
     /**
      * Gets the left arrow image.
+     *
      * @return the left arrow image.
      */
     Image getLeftI() {
         return this.leftI;
     }
-    
+
     /**
      * Gets the right arrow image.
+     *
      * @return the right arrow image.
      */
     Image getRightI() {
         return this.rightI;
     }
-    
+
     @Override
     public void back() {
         Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
-        
+
         mainFrame.setwState(WindowState.MAIN);
     }
 
@@ -522,6 +548,5 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
     @Override
     public void callResize() {
         this.callResize = true;
-        this.repaint();
     }
 }

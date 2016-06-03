@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 
 /**
  * The resize system for the settings gui.
+ *
  * @author Team 7
  */
 public class SettingsAdapterListener implements ComponentListener {
@@ -20,6 +21,7 @@ public class SettingsAdapterListener implements ComponentListener {
 
     /**
      * Constructor.
+     *
      * @param settings the gui this listener is linked to.
      */
     public SettingsAdapterListener(GUI_Settings settings) {
@@ -28,8 +30,6 @@ public class SettingsAdapterListener implements ComponentListener {
 
     @Override
     public void componentResized(ComponentEvent e) {
-
-        Dimension size;
         Image newimg;
         Insets insets = this.page.getInsets();
         //1280*720 => taille de base
@@ -56,15 +56,12 @@ public class SettingsAdapterListener implements ComponentListener {
         this.page.getLabelLanguage().setBounds((int) round((1050 + insets.left) * ratioW), ((int) round((220 + insets.top) * ratioH)), (int) round(640 * ratioW), (int) round(140 * ratioH));
         this.page.getLabelLanguage().setSize((int) round(640 * ratioW), (int) round(140 * ratioH));
 
-        size = this.page.getLabelFS().getPreferredSize();
         this.page.getLabelFS().setBounds((int) round((1050 + insets.left) * ratioW), ((int) round((380 + insets.top) * ratioH)), (int) round(640 * ratioW), (int) round(140 * ratioH));
         this.page.getLabelFS().setSize((int) round(640 * ratioW), (int) round(140 * ratioH));
 
-        size = this.page.getLabelTheme().getPreferredSize();
         this.page.getLabelTheme().setBounds((int) round((1050 + insets.left) * ratioW), ((int) round((550 + insets.top) * ratioH)), (int) round(640 * ratioW), (int) round(140 * ratioH));
         this.page.getLabelTheme().setSize((int) round(640 * ratioW), (int) round(140 * ratioH));
 
-        size = this.page.getLabelSound().getPreferredSize();
         this.page.getLabelSound().setBounds((int) round((1050 + insets.left) * ratioW), ((int) round((715 + insets.top) * ratioH)), (int) round(640 * ratioW), (int) round(140 * ratioH));
         this.page.getLabelSound().setSize((int) round(640 * ratioW), (int) round(140 * ratioH));
 

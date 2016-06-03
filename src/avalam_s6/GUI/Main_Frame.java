@@ -85,7 +85,6 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
     public void toggleMute() {
         SoundEngine.toggleMute();
         this.resetSettings();
-        ((GUI_Settings) this.panelList[WindowState.SETTINGS.getValue()]).callResize();
     }
 
     /**
@@ -94,6 +93,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
     private void resetSettings() {
         ((GUI_Settings) this.panelList[WindowState.SETTINGS.getValue()]).initOptions();
         ((GUI_Settings) this.panelList[WindowState.SETTINGS.getValue()]).retextLabels();
+        ((GUI_Settings) this.panelList[WindowState.SETTINGS.getValue()]).callResize();
     }
 
     /**
@@ -119,7 +119,6 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         this.panelList[WindowState.RULES.getValue()] = new GUI_Rules();
         this.panelList[WindowState.YESNO.getValue()] = new GUI_Confirm();
         for (JPanel pElement : this.panelList) {
-            //this.add(pElement);
             pElement.setVisible(false);
         }
         ((GUI_HomePage) this.panelList[WindowState.MAIN.getValue()]).callResize();
