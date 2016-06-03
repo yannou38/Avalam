@@ -220,6 +220,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
         this.LabelTheme.setText(this.Theme[this.ThemeSelected]);
         this.LabelSound.setText(LanguageManager.getElement(this.Sound[this.SoundSelected]));
         this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.currentLanguage]));
+        this.callResize();
     }
 
     /**
@@ -252,7 +253,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
     public void leftTheme() {
         this.ThemeSelected = (this.ThemeSelected - 1);
         if (this.ThemeSelected == -1) {
-            this.ThemeSelected = this.Theme.length;
+            this.ThemeSelected = this.Theme.length-1;
         }
         this.LabelTheme.setText(this.Theme[this.ThemeSelected]);
         this.callResize();
@@ -504,6 +505,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
     @Override
     public void back() {
         Main_Frame mainFrame = ((Main_Frame) this.getParent().getParent().getParent().getParent());
+        
         mainFrame.setwState(WindowState.MAIN);
     }
 
@@ -520,5 +522,6 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
     @Override
     public void callResize() {
         this.callResize = true;
+        this.repaint();
     }
 }
