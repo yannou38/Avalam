@@ -69,7 +69,7 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
         this.slotlabels = new JTextField[5];
         Font localFont = new Font("Arial", Font.PLAIN, 60);
         try {
-            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
+            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
         } catch (IOException | FontFormatException ex) {
             System.out.println("Error - " + GUI_Save.class.toString());
@@ -85,10 +85,10 @@ public class GUI_Load extends JPanel implements Gui_INTERFACE {
      */
     private void initComponents() {
         try {
-            this.backgroundload = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/load/background_load.png"));
-            this.homeI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/load/home.png"));
-            this.loadI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/load/load.png"));
-            this.slot = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/load/slot.png"));
+            this.backgroundload = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/load/background_load.png"));
+            this.homeI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/load/home.png"));
+            this.loadI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/load/load.png"));
+            this.slot = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/load/slot.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_Load.class.toString());
             Logger.getLogger(GUI_Load.class.getName()).log(Level.SEVERE, null, ex);

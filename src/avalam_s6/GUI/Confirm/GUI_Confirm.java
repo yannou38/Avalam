@@ -68,9 +68,9 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
      */
     private void initComponents() {
         try {
-            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/confirm/confirm.png"));
-            this.yesI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/confirm/yes.png"));
-            this.noI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/confirm/no.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/confirm/confirm.png"));
+            this.yesI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/confirm/yes.png"));
+            this.noI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/confirm/no.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_Confirm.class.toString());
             Logger.getLogger(GUI_Confirm.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,7 +90,7 @@ public class GUI_Confirm extends JPanel implements Gui_INTERFACE {
 
         Font localFont = new Font("Arial", Font.PLAIN, 60);
         try {
-            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
+            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
         } catch (IOException | FontFormatException ex) {
             System.out.println("Error - " + GUI_Confirm.class.toString());

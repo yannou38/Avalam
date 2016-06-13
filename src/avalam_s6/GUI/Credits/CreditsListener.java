@@ -45,8 +45,8 @@ public class CreditsListener implements MouseListener {
     public CreditsListener(String buttonname) {
         this.name = buttonname;
         try {
-            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/credits/" + this.name + "_h.png"));
-            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/credits/" + this.name + ".png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/credits/" + this.name + "_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/credits/" + this.name + ".png"));
         } catch (Exception ex) {
             System.out.println("Error - " + CreditsListener.class.toString());
             Logger.getLogger(CreditsListener.class.getName()).log(Level.SEVERE, null, ex);

@@ -64,12 +64,12 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
     private void initComponents() {
 
         try {
-            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/options/background.png"));
-            this.applyI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/options/apply.png"));
-            this.creditsI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/options/credits.png"));
-            this.returnI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/options/home.png"));
-            this.leftI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/options/left.png"));
-            this.rightI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/options/right.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/options/background.png"));
+            this.applyI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/options/apply.png"));
+            this.creditsI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/options/credits.png"));
+            this.returnI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/options/home.png"));
+            this.leftI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/options/left.png"));
+            this.rightI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/options/right.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_Settings.class.toString());
             Logger.getLogger(GUI_Settings.class.getName()).log(Level.SEVERE, null, ex);
@@ -148,7 +148,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
 
         Font localFont = new Font("Arial", Font.PLAIN, 60);
         try {
-            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
+            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
         } catch (IOException | FontFormatException ex) {
             System.out.println("Error - " + GUI_Settings.class.toString());
@@ -215,12 +215,7 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
             this.SoundSelected = 0;
         }
 
-        this.Theme = ThemesLister.listThemes();
-        for (int x = 0; x < this.Theme.length; x++) {
-            if (this.Theme[x].equals(SetupManager.getElement("Theme"))) {
-                this.ThemeSelected = x;
-            }
-        }
+        this.initThemes();
 
         this.callResize();
     }
@@ -245,6 +240,8 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
             this.currentLanguage = this.language.length - 1;
         }
         this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.currentLanguage]));
+        this.initThemes();
+        this.retextLabels();
         this.callResize();
     }
 
@@ -290,6 +287,8 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
     public void rightLanguage() {
         this.currentLanguage = (this.currentLanguage + 1) % 2;
         this.LabelLanguage.setText(LanguageManager.getElement(this.language[this.currentLanguage]));
+        this.initThemes();
+        this.retextLabels();
         this.callResize();
     }
 
@@ -318,6 +317,18 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
         this.SoundSelected = (this.SoundSelected + 1) % 2;
         this.LabelSound.setText(LanguageManager.getElement(this.Sound[this.SoundSelected]));
         this.callResize();
+    }
+
+    /**
+     * Initialize the theme list in the settings.
+     */
+    private void initThemes() {
+        this.Theme = ThemesLister.listThemes();
+        for (int x = 0; x < this.Theme.length; x++) {
+            if (this.Theme[x].equals(SetupManager.getElement("Theme"))) {
+                this.ThemeSelected = x;
+            }
+        }
     }
 
     /**

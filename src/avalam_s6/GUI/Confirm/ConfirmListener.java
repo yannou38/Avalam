@@ -46,8 +46,8 @@ public class ConfirmListener implements MouseListener {
     public ConfirmListener(String buttonname) {
         this.name = buttonname;
         try {
-            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/confirm/" + this.name + "_h.png"));
-            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/confirm/" + this.name + ".png"));
+            this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/confirm/" + this.name + "_h.png"));
+            this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/confirm/" + this.name + ".png"));
         } catch (Exception ex) {
             System.out.println("Error - " + CreditsListener.class.toString());
             Logger.getLogger(CreditsListener.class.getName()).log(Level.SEVERE, null, ex);

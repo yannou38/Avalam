@@ -28,13 +28,13 @@ import java.nio.file.Paths;
 public class ThemesLister {
 
     /**
-     * List Themes (./ressources/Themes/...)
+     * List Themes (./ressources/Themes/...) depending of current language.
      * @return List with every theme name.
      */
     public static String[] listThemes() {
-        Path p = Paths.get("./ressources/Themes");
+        Path p = Paths.get("./ressources/Themes/"+SetupManager.getElement("Langue"));
         if (Files.exists(p) && Files.isDirectory(p)) {
-            File f = new File("./ressources/Themes");
+            File f = new File("./ressources/Themes/"+SetupManager.getElement("Langue"));
             int x = f.list().length;
             for (String s : f.list()) {
                 if (s.contains(".")) {

@@ -56,23 +56,23 @@ public class LAG_UI_MouseListener implements MouseListener {
         this.page = page;
         if ("play".equals(this.name)) {
             try {
-                this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/pause_h.png"));
-                this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/pause.png"));
+                this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/board/pause_h.png"));
+                this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/board/pause.png"));
             } catch (Exception ex) {
                 Logger.getLogger(GUI_HomePage.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if ("mute".equals(this.name)) {
             String muteS = SetupManager.getElement("Son").equals("Non") ? "unmute" : "mute";
             try {
-                this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/" + muteS + "_h.png"));
-                this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/" + muteS + ".png"));
+                this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/board/" + muteS + "_h.png"));
+                this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/board/" + muteS + ".png"));
             } catch (Exception ex) {
                 Logger.getLogger(GUI_HomePage.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             try {
-                this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/" + this.name + "_h.png"));
-                this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/" + this.name + ".png"));
+                this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/board/" + this.name + "_h.png"));
+                this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/board/" + this.name + ".png"));
             } catch (Exception ex) {
                 Logger.getLogger(GUI_HomePage.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -136,11 +136,11 @@ public class LAG_UI_MouseListener implements MouseListener {
                 SoundEngine.toggleMute();
                 try {
                     if (SoundEngine.isMuted()) {
-                        this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/unmute_h.png"));
-                        this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/unmute.png"));
+                        this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/board/unmute_h.png"));
+                        this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/board/unmute.png"));
                     } else {
-                        this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/mute_h.png"));
-                        this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/mute.png"));
+                        this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/board/mute_h.png"));
+                        this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/board/mute.png"));
                     }
                 } catch (IOException ex) {
                     Logger.getLogger(LAG_UI_MouseListener.class.getName()).log(Level.SEVERE, null, ex);
@@ -155,11 +155,11 @@ public class LAG_UI_MouseListener implements MouseListener {
                 game.togglePause();
                 try {
                     if (((Local_Avalam_Game) this.page.getGame()).isPaused()) {
-                        this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/play_h.png"));
-                        this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/play.png"));
+                        this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/board/play_h.png"));
+                        this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/board/play.png"));
                     } else {
-                        this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/pause_h.png"));
-                        this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/pause.png"));
+                        this.icon = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/board/pause_h.png"));
+                        this.iconbase = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/board/pause.png"));
                     }
                 } catch (IOException ex) {
                     Logger.getLogger(LAG_UI_MouseListener.class.getName()).log(Level.SEVERE, null, ex);

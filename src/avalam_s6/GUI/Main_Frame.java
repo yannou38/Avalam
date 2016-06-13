@@ -52,7 +52,8 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         SetupManager.load();
         EnumsLister.init();
         /* FUNCTION CALL */
-        this.initFrame(WindowState.MAIN);
+        this.setTitle("Avalam");
+        this.initFrame();
         /* ADD KB DISPATCHER */
         getCurrentKeyboardFocusManager().addKeyEventDispatcher(new CustomKeyboardDispatcher(this));
         SoundEngine.play("./ressources/sounds/game_ambient.wav");
@@ -117,8 +118,8 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
      *
      * @param wState the basic window displayed
      */
-    public void initFrame(WindowState wState) {
-        this.wState = wState;
+    public void initFrame() {
+        this.wState = WindowState.MAIN;
         if (this.panelList != null) {
             for (JPanel pElement : this.panelList) {
                 pElement.setVisible(false);
@@ -157,6 +158,8 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         this.panelList[this.wState.getValue()].setVisible(true);
         ((Gui_INTERFACE) this.panelList[this.wState.getValue()]).callResize();
         this.add(this.panelList[this.wState.getValue()]);
+
+        this.setTitle("Avalam - " + this.wState.getName());
     }
 
     /**
@@ -173,6 +176,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
     @Override
     public void run() {
         this.pack();
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
@@ -281,7 +285,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         SetupManager.setElement("FullScreen", FS);
         SetupManager.setElement("Theme", Theme);
         SetupManager.setElement("Son", Sound);
-        this.initFrame(WindowState.SETTINGS);
+        this.initFrame();
     }
 
     /**

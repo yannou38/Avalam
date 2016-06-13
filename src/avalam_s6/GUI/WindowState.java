@@ -23,25 +23,27 @@ package avalam_s6.GUI;
  */
 public enum WindowState {
 
-    MAIN(0), // Homepage with access to other windows
-    BOARD(1), //Game window
-    PLAYERSELECT(2), //New Custom Game or Load Game
-    SETTINGS(3), //Setting window
-    ABOUT(4), //Credits
-    SAVE(5), //Save/Load window
-    LOAD(6), //Save/Load window
-    RULES(7), //Rules Page
-    YESNO(8); // Confirm Window
+    MAIN(0,"Home"), // Homepage with access to other windows
+    BOARD(1, "Game in progress"), //Game window
+    PLAYERSELECT(2,"Creating a custom game"), //New Custom Game or Load Game
+    SETTINGS(3,"Settings"), //Setting window
+    ABOUT(4,"Credits"), //Credits
+    SAVE(5,"Save your game"), //Save/Load window
+    LOAD(6,"Load a game"), //Save/Load window
+    RULES(7,"Rules"), //Rules Page
+    YESNO(8,"Confirm"); // Confirm Window
 
     private final int id;
+    private final String name;
 
     /**
      * Constructor.
      *
      * @param id The id to use
      */
-    WindowState(int id) {
+    WindowState(int id,String name) {
         this.id = id;
+        this.name =name;
     }
 
     /**
@@ -52,5 +54,16 @@ public enum WindowState {
     public int getValue() {
         return this.id;
     }
+    
+    /**
+     * Return the name of the selected element.
+     * 
+     * @return The name of the selected element
+     */
+    public String getName() {
+        return this.name;
+    }
+    
+    
 
 }

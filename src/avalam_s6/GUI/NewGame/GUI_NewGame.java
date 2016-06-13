@@ -93,12 +93,12 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
     private void initComponents() {
         try {
             // BackGround
-            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/playerselect/background.png"));
+            this.background = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/playerselect/background.png"));
             // Buttons
-            this.precI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/playerselect/prec.png"));
-            this.supI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/playerselect/sup.png"));
-            this.returnI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/playerselect/home.png"));
-            this.startI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/playerselect/start.png"));
+            this.precI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/playerselect/prec.png"));
+            this.supI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/playerselect/sup.png"));
+            this.returnI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/playerselect/home.png"));
+            this.startI = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/playerselect/start.png"));
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_NewGame.class.toString());
             Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
@@ -170,7 +170,7 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         this.AIimgs = new Image[this.AIlistsize];
         for (int i = 0; i < this.AIlistsize; i++) {
             try {
-                this.AIimgs[i] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/playerselect/" + this.AIlist[i] + ".png"));
+                this.AIimgs[i] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/playerselect/" + this.AIlist[i] + ".png"));
             } catch (Exception ex) {
                 System.out.println("Error - " + GUI_NewGame.class.toString());
                 Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
@@ -195,7 +195,7 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         this.ColorImgs = new Image[this.ColorListSize];
         for (int i = 0; i < this.ColorListSize; i++) {
             try {
-                this.ColorImgs[i] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/playerselect/" + this.ColorList[i] + ".png"));
+                this.ColorImgs[i] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/playerselect/" + this.ColorList[i] + ".png"));
             } catch (Exception ex) {
                 System.out.println("Error - " + GUI_NewGame.class.toString());
                 Logger.getLogger(GUI_NewGame.class.getName()).log(Level.SEVERE, null, ex);
@@ -254,10 +254,10 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         // Grid Content
         this.pawnList = new Image[ColorList.length + 2];
         try {
-            this.pawnList[0] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/empty.png"));
-            this.pawnList[1] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/restricted.png"));
+            this.pawnList[0] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/board/empty.png"));
+            this.pawnList[1] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/board/restricted.png"));
             for (int i = 0; i < ColorList.length; i++) {
-                this.pawnList[2 + i] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/" + SetupManager.getElement("Langue") + "/board/" + ColorList[i] + ".png"));;
+                this.pawnList[2 + i] = ImageIO.read(new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/board/" + ColorList[i] + ".png"));;
             }
         } catch (Exception ex) {
             System.out.println("Error - " + GUI_NewGame.class.toString());
@@ -268,7 +268,7 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
 
         /* Chargement de la police */
         try {
-            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
+            localFont = Font.createFont(Font.TRUETYPE_FONT, new File("./ressources/Themes/" + SetupManager.getElement("Langue") + "/" + SetupManager.getElement("Theme") + "/font/Gamaliel.otf"));
             GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(localFont);
         } catch (IOException | FontFormatException ex) {
             System.out.println("Error - " + GUI_NewGame.class.toString());
