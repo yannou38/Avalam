@@ -1,7 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* 
+ * Copyright (C) 2016 Yann Ducruy <yann.ducruy@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package avalam_s6.GUI;
 
@@ -55,14 +66,19 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
      * Set the software to fullscreen or not, depending of the setup.
      */
     public void setRenderMode() {
+        this.dispose();
         if (SetupManager.getElement("FullScreen").equals("Oui")) {
+            this.setUndecorated(true);
             GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(this);
         } else {
+            this.setUndecorated(false);
             GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(null);
             this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         }
+        this.pack();
         this.setMinimumSize(new Dimension(960, 540));
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setVisible(true);
         //this.requestFocus();
     }
 
