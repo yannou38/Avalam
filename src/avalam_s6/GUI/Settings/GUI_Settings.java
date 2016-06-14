@@ -323,7 +323,9 @@ public class GUI_Settings extends JPanel implements Gui_INTERFACE {
      * Initialize the theme list in the settings.
      */
     private void initThemes() {
-        this.Theme = ThemesLister.listThemes();
+        this.Theme = ThemesLister.listThemes(this.language[this.currentLanguage]);
+
+        this.ThemeSelected = 0;
         for (int x = 0; x < this.Theme.length; x++) {
             if (this.Theme[x].equals(SetupManager.getElement("Theme"))) {
                 this.ThemeSelected = x;

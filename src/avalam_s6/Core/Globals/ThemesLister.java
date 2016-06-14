@@ -29,12 +29,13 @@ public class ThemesLister {
 
     /**
      * List Themes (./ressources/Themes/...) depending of current language.
+     * @param language : the current language in the options screen
      * @return List with every theme name.
      */
-    public static String[] listThemes() {
-        Path p = Paths.get("./ressources/Themes/"+SetupManager.getElement("Langue"));
+    public static String[] listThemes(String language) {
+        Path p = Paths.get("./ressources/Themes/"+language);
         if (Files.exists(p) && Files.isDirectory(p)) {
-            File f = new File("./ressources/Themes/"+SetupManager.getElement("Langue"));
+            File f = new File("./ressources/Themes/"+language);
             int x = f.list().length;
             for (String s : f.list()) {
                 if (s.contains(".")) {

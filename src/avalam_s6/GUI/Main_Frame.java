@@ -56,7 +56,7 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         this.initFrame();
         /* ADD KB DISPATCHER */
         getCurrentKeyboardFocusManager().addKeyEventDispatcher(new CustomKeyboardDispatcher(this));
-        SoundEngine.play("./ressources/sounds/game_ambient.wav");
+        SoundEngine.play("./ressources/Themes/"+SetupManager.getElement("Langue")+"/"+SetupManager.getElement("Theme")+"/sounds/game_ambient.wav");
         if (SetupManager.getElement("Son").equals("Non")) {
             SoundEngine.toggleMute();
         }

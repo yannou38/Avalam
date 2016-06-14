@@ -47,8 +47,8 @@ public class ConfirmAdapterListener implements ComponentListener {
         double ratioH = (double) this.co.getHeight() / (double) 1080;
         
         
-        this.co.getTitre().setBounds(0, (int) round(40 * ratioH), this.co.getWidth(), 90);
-        this.co.getTitre().setSize(this.co.getWidth(), 90);
+        this.co.getTitre().setBounds(0, (int) round(10 * ratioH), this.co.getWidth(), 70);
+        this.co.getTitre().setSize(this.co.getWidth(), 70);
         
         newimg = this.co.getYesI().getScaledInstance(((int) round(252 * ratioW)), ((int) round(111 * ratioH)), java.awt.Image.SCALE_SMOOTH);
         this.co.getYes().setIcon(new ImageIcon(newimg));
