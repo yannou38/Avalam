@@ -52,7 +52,6 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
         SetupManager.load();
         EnumsLister.init();
         /* FUNCTION CALL */
-        this.setTitle("Avalam");
         this.initFrame();
         /* ADD KB DISPATCHER */
         getCurrentKeyboardFocusManager().addKeyEventDispatcher(new CustomKeyboardDispatcher(this));
@@ -116,7 +115,6 @@ public class Main_Frame extends JFrame implements GuiManager_INTERFACE, Runnable
     /**
      * Create the panels array and toogle fullscreen and sound based on setup.
      *
-     * @param wState the basic window displayed
      */
     public void initFrame() {
         this.wState = WindowState.MAIN;

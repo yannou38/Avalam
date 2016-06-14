@@ -240,7 +240,11 @@ public class GUI_NewGame extends JPanel implements Gui_INTERFACE {
         // Grid
         this.selectedGrid = 0;
         this.gridNameList = GridLister.listGrids();
-
+        for(int i=0;i<this.gridNameList.length;i++){
+            if(this.gridNameList[i].equals("default")){
+                this.selectedGrid = i;
+            }
+        }
         this.gridList = new Grid[gridNameList.length];
         try {
             for (int i = 0; i < gridNameList.length; i++) {
