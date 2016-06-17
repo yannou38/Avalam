@@ -47,10 +47,10 @@ public class LoadAdapterListener implements ComponentListener {
 
         Image newimg;
 
-        newimg = this.page.getHomeReturnI().getScaledInstance((int) round(251 * ratioW), (int) round(111 * ratioH), java.awt.Image.SCALE_SMOOTH);
+        newimg = this.page.getHomeReturnI().getScaledInstance((int) round(263 * ratioW), (int) round(123 * ratioH), java.awt.Image.SCALE_SMOOTH);
         this.page.getHomereturn().setIcon(new ImageIcon(newimg));
-        this.page.getHomereturn().setBounds((int) round((30 + insets.left) * ratioW), ((int) round((930 + insets.top) * ratioH)), (int) round(251 * ratioW), (int) round(111 * ratioH));
-        this.page.getHomereturn().setSize((int) round(251 * ratioW), (int) round(111 * ratioH));
+        this.page.getHomereturn().setBounds((int) round((30 + insets.left) * ratioW), ((int) round((930 + insets.top) * ratioH)), (int) round(263 * ratioW), (int) round(123 * ratioH));
+        this.page.getHomereturn().setSize((int) round(263 * ratioW), (int) round(123 * ratioH));
 
         newimg = this.page.getLoadI().getScaledInstance((int) round(1012 * ratioW), (int) round(141 * ratioH), java.awt.Image.SCALE_SMOOTH);
         this.page.getSaveload().setIcon(new ImageIcon(newimg));
