@@ -21,4 +21,4 @@ The team:
    [ucdp]: <https://github.com/UCDP-Brony>
 
 ### Version
-1.1
+1.2
