@@ -22,3 +22,6 @@ The team:
 
 ### Version
 1.2
+
+### Notes
+Run the project from netbeans, as there's a small problem with the ressource folder when you use the .jar (if you still want to use the .jar, open it like an archive) and extract the ressource folder next to the .jar, then execute the .jar)
