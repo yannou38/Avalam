@@ -6,14 +6,13 @@ Features customisable interface, fullscreen, language management, sound, custom 
 Currently maintained by Yann Ducruy.
 
 The team:
-  - [Loïc Chevalier] [chev]
+  - [Loïc Chevalier] 
   - [Yann Ducruy] [yann]
   - [Pierre Mehaye] [wolf]
   - [Alexandre Moulin] [niid]
   - [Jeremy Sazerat] [brod]
   - [Joachim Woerly-Moussier] [ucdp]
-
-   [chev]: <https://github.com/Granhyt>
+    
    [yann]: <https://github.com/yannou38>
    [wolf]: <https://github.com/Mehaye-Pierre>
    [niid]: <https://github.com/Niid>
